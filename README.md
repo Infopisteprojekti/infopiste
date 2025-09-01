@@ -1,1 +1,3 @@
 # infopiste
+
+Tervetuloa repoon.

@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "eslint"
+    "test": "eslint",
+    "start": "node server.js"
   },
   "author": "infopiste-tiimi",
   "license": "MIT",

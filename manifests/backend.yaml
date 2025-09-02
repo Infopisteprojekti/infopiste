@@ -16,4 +16,4 @@ spec:
         - name: backend
           image: candylia/infopiste-backend:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 1234

@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: switch directory
-        run: cd frontend
       - name: install
-        run: npm install
+        run: |
+          cd frontend
+          npm install
       - name: lint
         run: npm run lint

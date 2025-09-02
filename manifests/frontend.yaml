@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infopiste-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infopiste
+  template:
+    metadata:
+      labels:
+        app: infopiste
+    spec:
+      containers:
+        - name: frontend
+          image: candylia/infopiste-frontend:latest
+          ports:
+            - containerPort: 80

@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: infopiste
+      app: infopiste-frontend
   template:
     metadata:
       labels:
-        app: infopiste
+        app: infopiste-frontend
     spec:
       containers:
         - name: frontend

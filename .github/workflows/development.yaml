@@ -9,14 +9,15 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: install
-        run: |
-          cd frontend
-          npm install
+        run: npm install
       - name: lint
         run: npm run lint

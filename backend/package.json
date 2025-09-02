@@ -2,10 +2,18 @@
   "name": "infop-back",
   "version": "1.0.0",
   "description": "infopisteen backend",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint"
   },
   "author": "infopiste-tiimi",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^9.34.0",
+    "eslint-config-xo": "^0.49.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

@@ -1,0 +1,20 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+
+metadata:
+  name: infopiste-frontend
+  namespace: ohtuprojekti-staging
+  labels:
+    app: infopiste-frontend
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: staging
+      from:
+        kind: DockerImage
+        name: ohtuinfopiste/infopiste-frontend:staging
+      importPolicy:
+        scheduled: true
+      referencePolicy:
+        type: Local

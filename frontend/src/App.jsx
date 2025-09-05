@@ -1,6 +1,5 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Floorplan from "./assets/exactum-3.svg?react";
-import "./App.css";
 
 function App() {
   // const [count, setCount] = useState(0);

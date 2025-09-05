@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: candylia/infopiste-frontend:v1.2
+          image: ohtuinfopiste/infopiste-frontend:v1.2
           ports:
             - containerPort: 8080

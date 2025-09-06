@@ -1,10 +1,10 @@
-FROM node:20-alpine as build
+FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
@@ -12,12 +12,8 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-RUN mkdir -p /var/cache/nginx /var/run /etc/nginx/conf.d \
-    && chgrp -R 0 /var/cache/nginx /var/run /etc/nginx/conf.d /usr/share/nginx/html \
-    && chmod -R g=u /var/cache/nginx /var/run /etc/nginx/conf.d /usr/share/nginx/html
-
-EXPOSE 8080
+EXPOSE 80

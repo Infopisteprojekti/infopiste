@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import axios from "axios";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState(null);
 
-  const apiCall = async () => {
-    const response = await fetch('http://localhost:1234');
-    const text = await response.text();
-    setData(text);
+  const apiCall = () => {
+    axios.get("/api/hello")
+      .then((response) => {
+        setData(response.data.message);
+      })
   };
 
   return (
@@ -28,10 +30,8 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <button onClick={apiCall}>
-          Fetch from server
-        </button>
-        <p>{data ? `Server responds with ${data}` : ''}</p>
+        <button onClick={apiCall}>Fetch from server</button>
+        <p>{data ? `Server responds with ${data}` : ""}</p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
@@ -40,7 +40,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

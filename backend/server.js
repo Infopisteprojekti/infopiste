@@ -1,11 +1,36 @@
-import express from 'express';
+require('dotenv').config()
+const express = require('express');
 const app = express();
-import cors from 'cors';
+const cors = require('cors');
+const path = require('path');
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
 
-app.use(cors());
+const dbUrl = process.env.MONGO_DB_URL
 
-app.get('/', (req, res) => {
-  res.send('no moikkelis moi');
+const infoSchema = new mongoose.Schema({
+  fileName: String,
+  file: Buffer,
+})
+
+const PORT = process.env.PORT || 1234
+
+app.use(cors())
+app.use(express.json())
+
+app.get("/api/hello", async (req, res) => {
+  res.json({ message: 'hello from backend server'})
 });
 
-app.listen(1234, () => console.log('app is listening http://localhost:1234'));
+app.listen(PORT, async () => {
+  console.log(`Backend server running on http://localhost:${PORT}`)
+  try {
+    console.log('Connecting to the database in', dbUrl)
+    await mongoose.connect(dbUrl)
+    console.log('Connected to MongoDB')
+  } catch (error) {
+    console.error('Failed to connect to the database', error)
+  }
+})
+
+module.exports = mongoose.model("Info", infoSchema);

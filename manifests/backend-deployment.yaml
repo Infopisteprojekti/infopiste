@@ -22,3 +22,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 1234
+          env:
+            - name: MONGO_DB_URL
+              valueFrom:
+              configMapKeyRef:
+                name: infopiste-config
+                key: MONGO_DB_URL

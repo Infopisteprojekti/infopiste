@@ -21,4 +21,4 @@ spec:
           image: infopiste-frontend:staging
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3000

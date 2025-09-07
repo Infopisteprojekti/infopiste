@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 1234
 
-CMD ["npm", "run", "prod"]
+CMD ["node", "server.js"]

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "infopisteen backend",
   "main": "server.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "eslint",
     "start": "node server.js",
@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
   }
 }

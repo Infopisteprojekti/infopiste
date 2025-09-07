@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infopiste-backend
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: "*"
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"infopiste-backend\")].image","pause":"false"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infopiste-backend
+  template:
+    metadata:
+      labels:
+        app: infopiste-backend
+    spec:
+      containers:
+        - name: backend
+          image: infopiste-backend:staging
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1234
+          env:
+            - name: MONGO_DB_URL
+              valueFrom:
+              configMapKeyRef:
+                name: infopiste-config
+                key: MONGO_DB_URL

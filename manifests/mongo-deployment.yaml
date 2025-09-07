@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infopiste-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infopiste-mongo
+  template:
+    metadata:
+      labels:
+        app: infopiste-mongo
+    spec:
+      containers:
+        - name: infopiste-mongo
+          image: mongo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: test_user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: test_password
+          volumeMounts:
+            - mountPath: /data/db
+              name: infopiste-volume
+      volumes:
+        - name: infopiste-volume
+          persistentVolumeClaim:
+            claimName: infopiste-claim

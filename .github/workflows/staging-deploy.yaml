@@ -41,7 +41,7 @@ jobs:
           sudo mv oc /usr/local/bin/
 
       - name: Log in to OpenShift
-        uses: redhat-actions/oc-login@v2
+        uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
           openshift_token: ${{ env.OPENSHIFT_TOKEN }}

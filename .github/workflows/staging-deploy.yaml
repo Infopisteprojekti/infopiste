@@ -31,8 +31,8 @@ jobs:
 
       - name: Build and push images
         run: |
-          docker-compose -f docker-compose.yaml build
-          docker-compose -f docker-compose.yaml push
+          docker compose -f docker-compose.yaml build
+          docker compose -f docker-compose.yaml push
 
       - name: Install OpenShift
         run: |

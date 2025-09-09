@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Test deployment 2</h1>
+        <Floorplan />
       </div>
     </>
   );

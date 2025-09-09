@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infopiste-backend
+  namespace: ohtuprojekti-staging
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
     image.openshift.io/triggers: >-
@@ -18,7 +19,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: infopiste-backend:staging
+          image: ohtuprojekti-staging/infopiste-backend:staging
           imagePullPolicy: Always
           ports:
             - containerPort: 1234

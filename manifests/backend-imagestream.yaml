@@ -17,12 +17,12 @@ spec:
       importPolicy:
         scheduled: true
       referencePolicy:
-        type: Source
+        type: Local
     - name: mongo
       from:
         kind: DockerImage
-        name: ohtuinfopiste/infopiste-backend:mongo
+        name: mongo:8
       importPolicy:
         scheduled: true
       referencePolicy:
-        type: Source
+        type: Local

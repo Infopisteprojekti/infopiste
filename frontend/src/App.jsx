@@ -5,7 +5,9 @@ function App() {
     <>
       <div>
         <Floorplan />
-        <p>Testi</p>
+      </div>
+      <div>
+        <h1>Test deployment</h1>
       </div>
     </>
   );

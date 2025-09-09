@@ -1,0 +1,3044 @@
+[
+  {
+    "id": "A309",
+    "type": "classroom",
+    "capacity": 19,
+    "reservations": [
+      {
+        "id": "220d9b0f-d322-4486-b492-457c3890921f",
+        "subject": "Sharable eco-centric archive",
+        "organizer": {
+          "emailAddress": {
+            "name": "Irvin Kunze",
+            "address": "Destinee_Hahn54@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "e130564d-5482-4c1f-9c30-dbbc151d9514",
+        "subject": "Reduced modular structure",
+        "organizer": {
+          "emailAddress": {
+            "name": "Brooke Rowe",
+            "address": "Jeremy.Keebler10@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "8e36c314-2eca-4dc2-9e8c-e5136dd08631",
+        "subject": "User-centric empowering interface",
+        "organizer": {
+          "emailAddress": {
+            "name": "Garrett Windler-Fritsch",
+            "address": "Edd_Monahan5@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "ac3b5aa8-1d52-409a-b083-a2b6e251ee4a",
+        "subject": "Organic interactive contingency",
+        "organizer": {
+          "emailAddress": {
+            "name": "Stacy Nader",
+            "address": "Moises_Torphy64@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "1a028ba3-b35b-4ada-9915-43f6eac8973b",
+        "subject": "Adaptive motivating challenge",
+        "organizer": {
+          "emailAddress": {
+            "name": "Van Hilpert",
+            "address": "Hilbert38@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "8eb919f2-8ebb-4b54-8ccd-e88cabce5619",
+        "subject": "Multi-tiered intermediate definition",
+        "organizer": {
+          "emailAddress": {
+            "name": "Allan Senger",
+            "address": "Joyce_Emmerich8@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "abf85c47-10fd-4b62-8248-ba4fb89635c0",
+        "subject": "Automated actuating solution",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jay Kulas",
+            "address": "Hortense_Morissette@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "21a09f96-a78f-46fe-b311-01a15d0d41ba",
+        "subject": "Reduced secondary database",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nora Zboncak",
+            "address": "Oren42@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "e8d5e60e-15ff-49a7-b45a-ccc17087e512",
+        "subject": "Proactive bifurcated architecture",
+        "organizer": {
+          "emailAddress": {
+            "name": "Barry Quigley",
+            "address": "Wyatt94@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "86e17070-11ab-49f5-a4d3-f0f0e8f18f8a",
+        "subject": "Monitored mobile matrices",
+        "organizer": {
+          "emailAddress": {
+            "name": "Andres Wiegand IV",
+            "address": "Drake.Kohler58@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "4da2edfb-96ed-4006-bcf2-96fdd7640ddf",
+        "subject": "Organic resilient throughput",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dexter Christiansen V",
+            "address": "Margarete.Herzog@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      },
+      {
+        "id": "d88e620c-9b32-4059-b66e-58c69df2e747",
+        "subject": "Open-architected encompassing migration",
+        "organizer": {
+          "emailAddress": {
+            "name": "Becky Champlin",
+            "address": "Lucinda47@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A309"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A310",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A311",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A312",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A313",
+    "type": "classroom",
+    "capacity": 32,
+    "reservations": [
+      {
+        "id": "ca1de04c-b235-4795-97b0-4be881783460",
+        "subject": "Enhanced encompassing artificial intelligence",
+        "organizer": {
+          "emailAddress": {
+            "name": "Lee Schamberger",
+            "address": "Kale.Rodriguez12@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "95f93123-2242-4e18-86f1-6fdd42ae894c",
+        "subject": "Fundamental heuristic instruction set",
+        "organizer": {
+          "emailAddress": {
+            "name": "Bridget Green",
+            "address": "Jayden.Bechtelar13@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "ac9765ed-f1bf-421b-99d2-c322da85e6d7",
+        "subject": "Multi-tiered dynamic portal",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dean Hoppe",
+            "address": "Lindsey_Weimann33@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "c243b09c-e5d1-4d26-bc23-bbab8452e967",
+        "subject": "Decentralized maximized instruction set",
+        "organizer": {
+          "emailAddress": {
+            "name": "Alejandro Waters",
+            "address": "Theresa_Cremin@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "fd1ed896-05c0-4568-8e55-b7372276e59a",
+        "subject": "Programmable cohesive toolset",
+        "organizer": {
+          "emailAddress": {
+            "name": "Janis Zieme",
+            "address": "Annalise_Ebert20@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "91c78768-22df-454a-8602-ba033a01c2a3",
+        "subject": "Exclusive radical solution",
+        "organizer": {
+          "emailAddress": {
+            "name": "Gregg Doyle",
+            "address": "Adonis.Durgan@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "d5469496-864f-4c2d-87ec-6048a42df824",
+        "subject": "Universal clear-thinking local area network",
+        "organizer": {
+          "emailAddress": {
+            "name": "Leah Simonis",
+            "address": "Brielle_Swift@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "802b1936-45b4-497a-aeb3-0490795c11b7",
+        "subject": "Managed dedicated protocol",
+        "organizer": {
+          "emailAddress": {
+            "name": "Morris McLaughlin",
+            "address": "Terrance.Wiegand@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "cabd373f-f0be-429e-80b4-eff7dd5d0931",
+        "subject": "Quality-focused executive parallelism",
+        "organizer": {
+          "emailAddress": {
+            "name": "Flora Schiller",
+            "address": "Sheldon.Feest87@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "f5c67adf-c66b-4315-b443-00f66a3fc16e",
+        "subject": "Multi-tiered mission-critical capacity",
+        "organizer": {
+          "emailAddress": {
+            "name": "David O'Hara",
+            "address": "Darian.Ernser@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      },
+      {
+        "id": "26cb2d33-8991-4e42-8efd-ca81654b713a",
+        "subject": "Streamlined impactful initiative",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ronald Pagac",
+            "address": "Shakira86@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A313"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A314",
+    "type": "classroom",
+    "capacity": 17,
+    "reservations": [
+      {
+        "id": "d0d25b2d-d804-49fa-94a8-c1c8f5ae1eb1",
+        "subject": "Reactive asymmetric matrices",
+        "organizer": {
+          "emailAddress": {
+            "name": "Lynne Swaniawski DVM",
+            "address": "Breana.Bailey@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "74f672cb-31aa-44f2-96f6-a64f6e330a5d",
+        "subject": "Versatile composite strategy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Randal Rowe",
+            "address": "Alexandro_Morissette48@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "194c4701-6794-4bdc-8071-3f279b805815",
+        "subject": "Centralized full-range benchmark",
+        "organizer": {
+          "emailAddress": {
+            "name": "Mike Dooley",
+            "address": "Louie_Bartell@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "5d1e8d7a-8b10-432d-83f5-2ca78b3ffa3a",
+        "subject": "Advanced demand-driven implementation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Orlando Kautzer",
+            "address": "Xavier43@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "9e39ab2b-e23f-42d7-93d7-85926f4a5c2f",
+        "subject": "Exclusive asynchronous capacity",
+        "organizer": {
+          "emailAddress": {
+            "name": "Fernando Keeling",
+            "address": "Mekhi.Cummings@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "c9d31408-e017-4e58-a02f-f0fad787a204",
+        "subject": "Diverse needs-based utilisation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Maryann Stroman",
+            "address": "Rodrigo61@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "eba3a6a1-af0f-46dc-99be-65accc6d1805",
+        "subject": "Innovative next generation function",
+        "organizer": {
+          "emailAddress": {
+            "name": "Donna Farrell",
+            "address": "Marcelina.Kohler@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "89cdbf03-0ae3-4e0e-a517-444c849b4612",
+        "subject": "Digitized intangible orchestration",
+        "organizer": {
+          "emailAddress": {
+            "name": "Leslie Windler",
+            "address": "Kathlyn60@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "e53c4d6a-1979-42bd-a310-a983697f2b66",
+        "subject": "Quality-focused zero trust attitude",
+        "organizer": {
+          "emailAddress": {
+            "name": "Muriel Goodwin",
+            "address": "Sofia.Hand35@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      },
+      {
+        "id": "c38ea855-afa8-4b70-88f2-b3817c5ace36",
+        "subject": "Visionary user-facing intranet",
+        "organizer": {
+          "emailAddress": {
+            "name": "Johnnie Borer",
+            "address": "Reyes.Quitzon30@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A314"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A315",
+    "type": "meeting_room",
+    "capacity": 10,
+    "reservations": [
+      {
+        "id": "798e7fd3-e1d6-4edc-bc41-62b5fad2de79",
+        "subject": "Digitized impactful functionalities",
+        "organizer": {
+          "emailAddress": {
+            "name": "Heather Balistreri",
+            "address": "Katheryn_Kemmer-Hahn43@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "9a20c70f-0bf3-4214-91b0-8fd949862e73",
+        "subject": "Integrated static parallelism",
+        "organizer": {
+          "emailAddress": {
+            "name": "Al Kshlerin",
+            "address": "Noelia.Leuschke1@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "187d1725-b766-47ce-8fc5-b74d0e7aaea9",
+        "subject": "Operative cloud-native policy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Merle Bogan",
+            "address": "Antonette_Will35@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "a221ac40-1f4c-4963-819c-a80fc4f99bca",
+        "subject": "Future-proofed user-facing conglomeration",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jennifer Moore I",
+            "address": "Clint81@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "7dbca28f-e022-4bd3-88db-89849bdac270",
+        "subject": "Realigned zero trust archive",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ramona Luettgen",
+            "address": "Cindy0@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "3f5524ef-57be-4966-bb09-5c197a19889a",
+        "subject": "Extended static installation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Antoinette Schaden",
+            "address": "Joseph.Corkery43@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "a6ac16d6-9925-4500-ad48-4f46dd2c7721",
+        "subject": "Open-source high-level parallelism",
+        "organizer": {
+          "emailAddress": {
+            "name": "Christopher Collins",
+            "address": "Vern.Bednar26@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "4c7c1701-e286-45e0-aaf8-e064bf4a397f",
+        "subject": "Grass-roots clear-thinking budgetary management",
+        "organizer": {
+          "emailAddress": {
+            "name": "Edna Macejkovic",
+            "address": "Ryley_Bernhard54@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "da76a808-c70c-4342-a5c8-3eed37fc017e",
+        "subject": "Open-source bottom-line moderator",
+        "organizer": {
+          "emailAddress": {
+            "name": "Gilbert Wintheiser",
+            "address": "Edmund_Mayert@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "c5de4f23-2ea2-4791-aec8-f6faa2e62088",
+        "subject": "Total attitude-oriented parallelism",
+        "organizer": {
+          "emailAddress": {
+            "name": "Shari Lindgren",
+            "address": "Janis49@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "bd13257b-a95d-47fa-82a5-a12d3d4ab843",
+        "subject": "Front-line national task-force",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ramiro Ondricka",
+            "address": "Marcos46@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      },
+      {
+        "id": "60be4d4e-cc0f-4b4d-b4d1-b813074944b0",
+        "subject": "Sustainable needs-based matrix",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dr. Conrad Fisher",
+            "address": "Zelda.Lebsack@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A315"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A316",
+    "type": "meeting_room",
+    "capacity": 5,
+    "reservations": [
+      {
+        "id": "656c9e79-a9b3-4816-97af-9b8a1457024f",
+        "subject": "Open-architected content-based methodology",
+        "organizer": {
+          "emailAddress": {
+            "name": "Deanna Abshire",
+            "address": "Alfredo_Hayes@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "619158d7-bf24-4666-9eb9-4dfd0a0409a1",
+        "subject": "Monitored exuding artificial intelligence",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nora Block",
+            "address": "Marcella_Hettinger@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "1e182064-7901-485b-aadb-6a44c7cdde65",
+        "subject": "Immersive methodical orchestration",
+        "organizer": {
+          "emailAddress": {
+            "name": "Gerald Keeling",
+            "address": "Ezequiel_Balistreri@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "4a953f7b-2708-4f60-9062-0c74e1f5e9df",
+        "subject": "User-friendly fresh-thinking framework",
+        "organizer": {
+          "emailAddress": {
+            "name": "Krystal Lueilwitz",
+            "address": "Robbie.Gutmann19@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "5927a76f-e999-4360-8783-feb8d2c1c4ef",
+        "subject": "Multi-tiered zero tolerance initiative",
+        "organizer": {
+          "emailAddress": {
+            "name": "Laurence Grant",
+            "address": "Gertrude86@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "f31d7de0-e78a-4e07-8bbb-245c43f0fad4",
+        "subject": "Reduced sustainable policy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ms. Norma Oberbrunner",
+            "address": "Ashton.Blick40@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "cf1f8418-cb01-4643-a4ce-6e573af95a1e",
+        "subject": "Monitored maximized middleware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ms. Megan Ratke",
+            "address": "Josue.Ryan49@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "04b1d03b-5154-4d5c-be6e-6f1a76ab02ba",
+        "subject": "Robust well-modulated open architecture",
+        "organizer": {
+          "emailAddress": {
+            "name": "Bobbie Nolan",
+            "address": "Verna.Kemmer@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      },
+      {
+        "id": "3a7e3a94-2ab5-4a6b-93e4-50184d065016",
+        "subject": "Innovative interactive matrix",
+        "organizer": {
+          "emailAddress": {
+            "name": "Joy Leannon-Pagac",
+            "address": "Ollie1@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A316"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A317",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A318",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A319",
+    "type": "classroom",
+    "capacity": 28,
+    "reservations": [
+      {
+        "id": "4afd0ecc-7641-4337-bb70-ffcf8f153329",
+        "subject": "Persevering cloud-native projection",
+        "organizer": {
+          "emailAddress": {
+            "name": "Gordon Gerlach",
+            "address": "Efrain_Toy6@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "f838a14c-7860-4273-a0df-cd3f3ffbf946",
+        "subject": "Business-focused mobile website",
+        "organizer": {
+          "emailAddress": {
+            "name": "Phyllis Welch IV",
+            "address": "Nikko_Kreiger@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "9c7005e3-a35d-4b16-a07a-146ef0c56cef",
+        "subject": "Grass-roots scalable core",
+        "organizer": {
+          "emailAddress": {
+            "name": "Fredrick Fisher",
+            "address": "Barry.Ernser3@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "698c45ef-e6c7-4739-825d-311f86cd5bca",
+        "subject": "Synchronised interactive database",
+        "organizer": {
+          "emailAddress": {
+            "name": "Angel Runolfsson",
+            "address": "Juana.Wiza30@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "bd645bd2-5ecf-4c69-aa18-b2c9f0494bc1",
+        "subject": "Operative exuding task-force",
+        "organizer": {
+          "emailAddress": {
+            "name": "Moses Koepp MD",
+            "address": "Sadye.Schoen@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "bb8f762c-b60d-40bf-b73b-d8f08bd2c862",
+        "subject": "Decentralized eco-centric definition",
+        "organizer": {
+          "emailAddress": {
+            "name": "Matthew Friesen",
+            "address": "Rita_Anderson@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "b61c46a5-05fa-4aa3-96c1-446f182f16bb",
+        "subject": "Grass-roots full-range customer loyalty",
+        "organizer": {
+          "emailAddress": {
+            "name": "Kara Grant",
+            "address": "Leif_Blanda29@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "0f4ab954-9df1-42fb-be39-ba60947f6d3a",
+        "subject": "Configurable 24 hour help-desk",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nina Kerluke",
+            "address": "Mitchel_McKenzie63@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      },
+      {
+        "id": "3eb03343-17b9-4a1f-9dcd-e839bb815e98",
+        "subject": "Horizontal tertiary monitoring",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jackie Franey",
+            "address": "Imani.Weber82@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A319"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A335",
+    "type": "office",
+    "capacity": 2,
+    "reservations": []
+  },
+  {
+    "id": "A336",
+    "type": "meeting_room",
+    "capacity": 5,
+    "reservations": [
+      {
+        "id": "2212aeda-1443-4885-85dc-4ef558fe1688",
+        "subject": "Sustainable neutral software",
+        "organizer": {
+          "emailAddress": {
+            "name": "Perry Monahan",
+            "address": "Chaz.Fay16@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "102e3513-8930-4633-af98-668bb286da81",
+        "subject": "Cross-platform executive benchmark",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dana Tremblay",
+            "address": "Heaven.Schiller@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "40b8ddd7-5c72-4de7-916c-e31e68f1a16c",
+        "subject": "Visionary leading edge encryption",
+        "organizer": {
+          "emailAddress": {
+            "name": "Gretchen Bernhard",
+            "address": "Missouri.Quitzon@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "c9ccc82a-9b23-4ebe-bc9a-e9a27b435336",
+        "subject": "Operative composite approach",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dr. Gilberto Oberbrunner",
+            "address": "Dianna.Nienow26@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "94adcc31-b560-440e-8380-a5ee5efdd391",
+        "subject": "Visionary encompassing portal",
+        "organizer": {
+          "emailAddress": {
+            "name": "Santos Flatley-Bauch",
+            "address": "Alanna_Sawayn@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "c9c0d999-d99f-4c7b-9639-ee583ffacb90",
+        "subject": "Progressive neutral frame",
+        "organizer": {
+          "emailAddress": {
+            "name": "Clay Pollich",
+            "address": "Dortha17@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "0c9bdcf8-7629-44e9-9950-0619eea3de3b",
+        "subject": "Sharable zero trust adapter",
+        "organizer": {
+          "emailAddress": {
+            "name": "Louis Kohler-Stamm",
+            "address": "Annalise_Schumm-Stehr@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "374122fc-f74c-4543-b245-a13c25d21749",
+        "subject": "Customizable logistical instruction set",
+        "organizer": {
+          "emailAddress": {
+            "name": "Mabel Kuhlman",
+            "address": "Elmore45@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      },
+      {
+        "id": "58dfe537-b77d-45d6-857c-23f2997a385a",
+        "subject": "Persevering composite database",
+        "organizer": {
+          "emailAddress": {
+            "name": "Constance Grant DVM",
+            "address": "Bryon.Schmeler@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A336"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A337",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A338",
+    "type": "office",
+    "capacity": 2,
+    "reservations": []
+  },
+  {
+    "id": "A339",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A340",
+    "type": "meeting_room",
+    "capacity": 11,
+    "reservations": [
+      {
+        "id": "7517e043-3e77-4c27-869f-c6d203589e88",
+        "subject": "Advanced leading edge help-desk",
+        "organizer": {
+          "emailAddress": {
+            "name": "Clarence Kirlin",
+            "address": "Modesto.Mohr@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "c2c3a9e6-10d8-4c35-80fa-e49a5dfeb44f",
+        "subject": "Realigned optimal middleware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Emmett Block",
+            "address": "Everardo37@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "7837acc9-edc0-403a-a66e-ee5b43256d1b",
+        "subject": "Focused immersive emulation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Hugo Carroll",
+            "address": "Everette_Oberbrunner@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "650dc197-1f31-49b0-aa81-294fdf4f6500",
+        "subject": "Multi-tiered data-driven microservice",
+        "organizer": {
+          "emailAddress": {
+            "name": "Miss Linda Senger",
+            "address": "Francis.Harber@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "cd674e1e-a807-462a-af8b-1619fa1586dd",
+        "subject": "Immersive demand-driven array",
+        "organizer": {
+          "emailAddress": {
+            "name": "Janie Oberbrunner",
+            "address": "Cheyenne.Shields41@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "38bf3eee-aa6c-48a6-9bd2-d8d66e4d7849",
+        "subject": "Automated discrete ability",
+        "organizer": {
+          "emailAddress": {
+            "name": "Wallace Rempel",
+            "address": "Quinton26@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "ab1f2934-8622-46ce-9161-0a9230df23de",
+        "subject": "Balanced actuating local area network",
+        "organizer": {
+          "emailAddress": {
+            "name": "Miss Amelia Anderson",
+            "address": "Ladarius27@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "06dc33de-175d-413c-a077-56829cc22456",
+        "subject": "Balanced actuating function",
+        "organizer": {
+          "emailAddress": {
+            "name": "Courtney Gerlach PhD",
+            "address": "Darby82@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "2b5a41f2-ffca-49d4-8796-659d3ebd8c0d",
+        "subject": "Total zero trust definition",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ora Streich",
+            "address": "Wilfredo.Stamm@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "c3b3ab30-29d0-4b57-be57-0140a6824af0",
+        "subject": "Persevering local instruction set",
+        "organizer": {
+          "emailAddress": {
+            "name": "Bethany Heaney III",
+            "address": "Michaela90@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "f4043aa9-0b5a-4852-b1de-a16bc10b5408",
+        "subject": "User-friendly local interface",
+        "organizer": {
+          "emailAddress": {
+            "name": "Lauren Mohr",
+            "address": "Aurore.Boyer@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "c546aa52-a29b-4bcd-a7b9-20479d32f179",
+        "subject": "Centralized asymmetric array",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dr. Julian Nienow",
+            "address": "Marvin89@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "5a73b85e-050c-4b5a-b6c7-6e419f60582a",
+        "subject": "Monitored explicit functionalities",
+        "organizer": {
+          "emailAddress": {
+            "name": "Silvia Howell",
+            "address": "Lydia64@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      },
+      {
+        "id": "65262b30-89d9-45c8-919e-6422691fc9d1",
+        "subject": "Profit-focused static product",
+        "organizer": {
+          "emailAddress": {
+            "name": "Tina Swift Sr.",
+            "address": "Aliza93@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A340"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A341",
+    "type": "meeting_room",
+    "capacity": 11,
+    "reservations": [
+      {
+        "id": "a609e637-0dd9-45c8-adac-96f893a9209c",
+        "subject": "Ergonomic needs-based approach",
+        "organizer": {
+          "emailAddress": {
+            "name": "Christie Douglas",
+            "address": "Grant.Kub83@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A341"
+        }
+      },
+      {
+        "id": "8f01028a-0fd4-4122-9183-5faf26810aa6",
+        "subject": "Integrated AI-powered firmware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Billie Miller-Rempel",
+            "address": "Dashawn_Daugherty@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A341"
+        }
+      },
+      {
+        "id": "3dd366f2-c5b6-49dc-bd0b-26868f2a622f",
+        "subject": "Triple-buffered zero trust complexity",
+        "organizer": {
+          "emailAddress": {
+            "name": "Martha Johnson",
+            "address": "Kip_Kozey57@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A341"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A342",
+    "type": "classroom",
+    "capacity": 25,
+    "reservations": [
+      {
+        "id": "cb972469-8407-44b0-a9f2-71a868e30d9e",
+        "subject": "Sharable high-level portal",
+        "organizer": {
+          "emailAddress": {
+            "name": "Kim Glover",
+            "address": "Elmore.McKenzie61@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A342"
+        }
+      },
+      {
+        "id": "aace02e7-9aae-4fb4-8e03-e432d8a3cc56",
+        "subject": "Virtual motivating task-force",
+        "organizer": {
+          "emailAddress": {
+            "name": "Paula Pouros III",
+            "address": "Margarete.Mayer50@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A342"
+        }
+      },
+      {
+        "id": "643ce5ce-d2f6-4507-a135-ce4ddc2bfa58",
+        "subject": "Operative clear-thinking encoding",
+        "organizer": {
+          "emailAddress": {
+            "name": "Saul Wilderman",
+            "address": "Newton.West85@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A342"
+        }
+      },
+      {
+        "id": "a4d20b7d-62d8-43b8-897d-db1dab5eb16e",
+        "subject": "User-friendly neutral middleware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Miss Edith Gusikowski",
+            "address": "Adella.Wolf@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A342"
+        }
+      },
+      {
+        "id": "82f31a96-6c3d-4a67-b4c8-59f6e503630e",
+        "subject": "Reverse-engineered coherent artificial intelligence",
+        "organizer": {
+          "emailAddress": {
+            "name": "Muriel Keeling",
+            "address": "Fausto_Mraz11@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A342"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A343",
+    "type": "meeting_room",
+    "capacity": 5,
+    "reservations": [
+      {
+        "id": "8dd0c7f7-fc38-4fd1-9b50-63d5d0433128",
+        "subject": "Integrated fault-tolerant strategy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jerome Breitenberg Jr.",
+            "address": "Elian_Cruickshank@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A343"
+        }
+      },
+      {
+        "id": "3d2d08ce-ede3-4446-8682-b248cba28166",
+        "subject": "Face to face zero administration time-frame",
+        "organizer": {
+          "emailAddress": {
+            "name": "Angelina Huel Sr.",
+            "address": "Bernard.Homenick-Ryan62@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A343"
+        }
+      },
+      {
+        "id": "eeac155a-529d-4623-834a-9b5d37c21e5a",
+        "subject": "Public-key empowering analyzer",
+        "organizer": {
+          "emailAddress": {
+            "name": "Derrick Bode",
+            "address": "Assunta.Abshire12@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A343"
+        }
+      },
+      {
+        "id": "832e55c5-fb9e-4047-b3be-65f775e9cc56",
+        "subject": "Horizontal scalable throughput",
+        "organizer": {
+          "emailAddress": {
+            "name": "Patrick Sporer",
+            "address": "Greyson_Klein@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A343"
+        }
+      },
+      {
+        "id": "834b73fb-f67e-48b4-b713-00f3ad82b9bc",
+        "subject": "Persevering executive model",
+        "organizer": {
+          "emailAddress": {
+            "name": "Mrs. Stacy Harber",
+            "address": "Jared8@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A343"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A344",
+    "type": "meeting_room",
+    "capacity": 6,
+    "reservations": [
+      {
+        "id": "3058da6f-be84-40b1-a489-9269fbec93a9",
+        "subject": "Open-architected interactive firmware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Curtis Denesik",
+            "address": "Maeve34@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "5b075e08-b71f-4893-8761-1d338c09100d",
+        "subject": "Automated high-level software",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jeanette Kirlin",
+            "address": "Esta9@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "b4a77c45-e07e-4983-b5d8-810f691ae929",
+        "subject": "Innovative tangible model",
+        "organizer": {
+          "emailAddress": {
+            "name": "Louis Hagenes",
+            "address": "Noemi.Gutkowski@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "0572f323-c690-407d-ae18-e6d2ecfa5f45",
+        "subject": "Robust user-facing complexity",
+        "organizer": {
+          "emailAddress": {
+            "name": "Pat Howell",
+            "address": "Willy37@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "35c697b3-0472-4560-99e2-9a6b680ba05f",
+        "subject": "Open-source transitional paradigm",
+        "organizer": {
+          "emailAddress": {
+            "name": "Rickey Koch",
+            "address": "Vita_Boehm48@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "e3d80f84-7d43-424c-a732-5f5f72e7bf01",
+        "subject": "Face to face composite algorithm",
+        "organizer": {
+          "emailAddress": {
+            "name": "Patsy Koss",
+            "address": "Alejandrin_Altenwerth@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "6ee59ef8-74f2-4944-a6f0-912784514ff5",
+        "subject": "Triple-buffered 24 hour projection",
+        "organizer": {
+          "emailAddress": {
+            "name": "Blake Willms",
+            "address": "Dessie_Pouros99@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "fd7938b8-f95c-4265-b6c7-c95c33840a87",
+        "subject": "Persevering systematic benchmark",
+        "organizer": {
+          "emailAddress": {
+            "name": "Sergio Raynor",
+            "address": "Jada96@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "ef758b4b-0065-4575-a34f-679f3ab91a19",
+        "subject": "Enhanced sustainable adapter",
+        "organizer": {
+          "emailAddress": {
+            "name": "Jake Collier Jr.",
+            "address": "Fanny.Little28@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "56ffc315-48cd-4d5a-850b-065bc4c47bbf",
+        "subject": "Programmable mission-critical synergy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nora Goodwin",
+            "address": "Korbin_Marks51@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "85472edb-1ccc-41ad-89a7-80a16482bc21",
+        "subject": "Team-oriented interactive implementation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Maria Shields",
+            "address": "Bertha.Gerhold@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "1b4a5f44-e0bb-4dff-91da-a2afe705db70",
+        "subject": "Multi-tiered user-facing migration",
+        "organizer": {
+          "emailAddress": {
+            "name": "Krista Wiza",
+            "address": "Finn_Olson26@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "09de771a-d36d-4e38-831e-dc0d7581c923",
+        "subject": "Balanced maximized software",
+        "organizer": {
+          "emailAddress": {
+            "name": "Ann Schuppe",
+            "address": "Lauryn_Balistreri@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "22adfa21-d99c-4bd0-8bd4-a5f092b237e3",
+        "subject": "Robust impactful synergy",
+        "organizer": {
+          "emailAddress": {
+            "name": "Margie Crona",
+            "address": "Nicola.King98@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      },
+      {
+        "id": "94e4e1ae-2f7f-4a43-a412-16c22a312ed5",
+        "subject": "Optional neutral moratorium",
+        "organizer": {
+          "emailAddress": {
+            "name": "Drew Klocko V",
+            "address": "Yvonne97@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A344"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A345",
+    "type": "meeting_room",
+    "capacity": 8,
+    "reservations": [
+      {
+        "id": "674cef2d-b414-4eab-b4b0-6a2d3a6910e4",
+        "subject": "Visionary context-sensitive customer loyalty",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dr. Wallace Kuvalis",
+            "address": "Viola27@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "5fa62fd4-1019-4e7d-b7bb-25a158f7d6c9",
+        "subject": "Integrated methodical middleware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dr. Catherine Armstrong",
+            "address": "Myah95@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "c2009780-6b7b-43d9-933a-d64da773a5f7",
+        "subject": "Organized uniform project",
+        "organizer": {
+          "emailAddress": {
+            "name": "Mona Kulas",
+            "address": "Dejuan_Harvey@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "26eb681f-a491-4f2a-93bc-a9e153f6ba33",
+        "subject": "Integrated data-driven access",
+        "organizer": {
+          "emailAddress": {
+            "name": "Wallace Hayes",
+            "address": "Rex_Cronin61@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "c6f6c7ee-1edc-43cd-b4f0-289a0f0209ea",
+        "subject": "Adaptive intermediate implementation",
+        "organizer": {
+          "emailAddress": {
+            "name": "Beatrice Labadie",
+            "address": "Callie_Dach61@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-22T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-22T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "4cdf87c2-8816-4dd1-b14d-2b195c3a3bd2",
+        "subject": "Phased client-driven hardware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Michele Breitenberg",
+            "address": "Tremayne39@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      },
+      {
+        "id": "7dd65793-c751-43f4-8274-058857f6437c",
+        "subject": "Reactive 24/7 hardware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Floyd Doyle",
+            "address": "Royal.Swift72@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A345"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A346",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A347",
+    "type": "meeting_room",
+    "capacity": 4,
+    "reservations": [
+      {
+        "id": "84baf4a0-10fc-4c84-b246-c81016eac751",
+        "subject": "Secured coherent interface",
+        "organizer": {
+          "emailAddress": {
+            "name": "Mable McClure",
+            "address": "Angus_Bartoletti72@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "435476f0-20a0-4d88-a823-5931f0cc422b",
+        "subject": "Secured value-added neural-net",
+        "organizer": {
+          "emailAddress": {
+            "name": "Doris Ebert",
+            "address": "Grover.OHara94@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-17T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-17T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "2552cb35-1a1f-4c69-8e82-6daadee18bc9",
+        "subject": "Self-enabling radical architecture",
+        "organizer": {
+          "emailAddress": {
+            "name": "Claire Auer",
+            "address": "Lilian12@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "f14a5e18-9a45-4d3d-99cb-39d6f726f5de",
+        "subject": "Centralized radical encoding",
+        "organizer": {
+          "emailAddress": {
+            "name": "Irving Sanford",
+            "address": "Garrison_Leffler@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "4eb9a098-8513-4f67-900b-883b23743aad",
+        "subject": "Business-focused discrete website",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nelson Leannon",
+            "address": "Thalia_Lindgren-Koch67@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-21T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-21T18:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "28da5ee3-0bdf-4e98-9037-a8b4916cbf47",
+        "subject": "Managed systematic neural-net",
+        "organizer": {
+          "emailAddress": {
+            "name": "Damon Beier II",
+            "address": "Jolie.Beahan@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      },
+      {
+        "id": "c8f70462-fc49-4bfe-88c8-812840b098f7",
+        "subject": "Organic sustainable workforce",
+        "organizer": {
+          "emailAddress": {
+            "name": "Francis Dicki",
+            "address": "Allan_Gleason94@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A347"
+        }
+      }
+    ]
+  },
+  {
+    "id": "A348",
+    "type": "classroom",
+    "capacity": 30,
+    "reservations": [
+      {
+        "id": "afbe8182-9790-437f-966b-9463f2503c31",
+        "subject": "AI-driven attitude-oriented projection",
+        "organizer": {
+          "emailAddress": {
+            "name": "Terry Paucek",
+            "address": "Rosanna84@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T14:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "33c21f0d-5d8e-4e01-94ae-793cf4718827",
+        "subject": "Optimized maximized ability",
+        "organizer": {
+          "emailAddress": {
+            "name": "Nick Becker",
+            "address": "Dax_Deckow@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-18T16:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-18T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "801e1be4-59ef-4b1a-a670-3c746db414e9",
+        "subject": "Phased exuding projection",
+        "organizer": {
+          "emailAddress": {
+            "name": "Bryan Leuschke II",
+            "address": "Norris.Bashirian72@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "b1678d2c-b8b6-42a8-ba5e-917cc7e46eea",
+        "subject": "Compatible systematic encryption",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dora Friesen",
+            "address": "Elenor74@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-19T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-19T15:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "25c312da-488a-43d4-9b05-581c3ac8ba5c",
+        "subject": "Persevering reciprocal framework",
+        "organizer": {
+          "emailAddress": {
+            "name": "Johnnie Ward",
+            "address": "Stewart82@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-20T10:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-20T11:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "69151fc7-3e52-49f0-83f2-19d7fa1f6484",
+        "subject": "AI-driven homogeneous software",
+        "organizer": {
+          "emailAddress": {
+            "name": "Zachary Goyette",
+            "address": "Eddie23@gmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T08:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "da264b7f-0578-45bd-8fcd-8d46574f5180",
+        "subject": "Enhanced human-resource help-desk",
+        "organizer": {
+          "emailAddress": {
+            "name": "Pat Hartmann",
+            "address": "America.Schinner13@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-23T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-23T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "ff3c33a6-e18e-4e25-b92f-e211e367913e",
+        "subject": "Secured 24/7 firmware",
+        "organizer": {
+          "emailAddress": {
+            "name": "Dwight Nader",
+            "address": "Vernie.Lemke39@yahoo.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T09:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T12:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      },
+      {
+        "id": "8195d633-c4c3-457f-8e35-287ee67ec056",
+        "subject": "Diverse actuating model",
+        "organizer": {
+          "emailAddress": {
+            "name": "Miss Anne Schmitt",
+            "address": "Wilburn.Emard@hotmail.com"
+          }
+        },
+        "start": {
+          "dateTime": "2025-09-24T13:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "end": {
+          "dateTime": "2025-09-24T17:00:00",
+          "timeZone": "Europe/Helsinki"
+        },
+        "location": {
+          "displayName": "A348"
+        }
+      }
+    ]
+  }
+]

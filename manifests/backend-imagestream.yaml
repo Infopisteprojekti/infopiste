@@ -17,7 +17,7 @@ spec:
       importPolicy:
         scheduled: true
       referencePolicy:
-        type: Local
+        type: Source
     - name: mongo
       from:
         kind: DockerImage
@@ -25,4 +25,4 @@ spec:
       importPolicy:
         scheduled: true
       referencePolicy:
-        type: Local
+        type: Source

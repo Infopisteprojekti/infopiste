@@ -12,9 +12,9 @@ RUN npm run build
 
 FROM nginx:alpine
 
-# Without this, the frontend breaks due to `mkdir() "/var/cache/nginx/client_temp" failed (13: Permission denied)`. 
-# Therefore, write permissions are needed for /var/cache/nginx.
-RUN mkdir -p /var/cache/nginx && chown -R 1000:1000 /var/cache/nginx
+RUN mkdir -p /var/cache/nginx
+
+RUN sed -i 's/user  nginx;/#user nginx;/' /etc/nginx/nginx.conf
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

@@ -5,6 +5,7 @@ function App() {
     <>
       <div>
         <Floorplan />
+        <p>Testi</p>
       </div>
     </>
   );

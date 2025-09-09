@@ -21,4 +21,10 @@ spec:
           image: infopiste-frontend:staging
           imagePullPolicy: Always
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+          volumes:
+            - name: nginx-cache
+              emptyDir: {}

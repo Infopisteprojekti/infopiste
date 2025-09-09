@@ -10,14 +10,10 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
-
-RUN mkdir -p /var/cache/nginx
-
-RUN sed -i 's/user  nginx;/#user nginx;/' /etc/nginx/nginx.conf
+FROM quay.io/nginxinc/nginx-unprivileged:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080

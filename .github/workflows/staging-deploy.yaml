@@ -29,5 +29,5 @@ jobs:
 
       - name: Build and push images
         run: |
-          docker compose -f docker-compose.yaml build
+          docker compose -f docker-compose.yaml build --no-cache
           docker compose -f docker-compose.yaml push

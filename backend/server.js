@@ -1,36 +1,40 @@
-require('dotenv').config()
-const express = require('express');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
 const app = express();
-const cors = require('cors');
-const path = require('path');
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
+import cors from 'cors';
+import mongoose from 'mongoose';
+mongoose.set('strictQuery', false);
 
-const dbUrl = process.env.MONGO_DB_URL
+const dbUrl = process.env.MONGO_DB_URL;
 
-const infoSchema = new mongoose.Schema({
-  fileName: String,
-  file: Buffer,
-})
+// A const infoSchema = new mongoose.Schema({
+// A   fileName: String,
+// A   file: Buffer,
+// A });
 
-const PORT = process.env.PORT || 1234
+const PORT = process.env.PORT || 1234;
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
-app.get("/api/hello", async (req, res) => {
-  res.json({ message: 'hello from backend server'})
+app.get('/', (req, res) => res.send('infonäyttö back'));
+
+app.get('/api/hello', async (req, res) => {
+  res.json({message: 'hello from backend server'});
 });
 
 app.listen(PORT, async () => {
-  console.log(`Backend server running on http://localhost:${PORT}`)
-  try {
-    console.log('Connecting to the database in', dbUrl)
-    await mongoose.connect(dbUrl)
-    console.log('Connected to MongoDB')
-  } catch (error) {
-    console.error('Failed to connect to the database', error)
-  }
-})
+  console.log(`Backend server running on http://localhost:${PORT}`);
 
-module.exports = mongoose.model("Info", infoSchema);
+  try {
+    console.log('Connecting to the database in', dbUrl);
+    await mongoose.connect(dbUrl);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Failed to connect to the database', error);
+  }
+});
+
+// A module.exports = mongoose.model("Info", infoSchema);

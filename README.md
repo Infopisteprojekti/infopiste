@@ -1,6 +1,7 @@
 # Infopiste
 
-[![CI](https://github.com/Infopisteprojekti/infopiste/actions/workflows/development.yaml/badge.svg)](https://github.com/Infopisteprojekti/infopiste/actions/workflows/development.yaml)
+[![front](https://github.com/Infopisteprojekti/infopiste/actions/workflows/front.yaml/badge.svg)](https://github.com/Infopisteprojekti/infopiste/actions/workflows/front.yaml)
+[![back](https://github.com/Infopisteprojekti/infopiste/actions/workflows/back.yaml/badge.svg)](https://github.com/Infopisteprojekti/infopiste/actions/workflows/back.yaml)
 
 Application in development with the goal of showing useful information relevant to Exactum on an info screen.
 

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-const db = "mongodb://localhost:1234/info";
+const db = 'mongodb://localhost:1234/info';
 
 mongoose.set('strictQuery', false);
 mongoose.connect(db);
@@ -10,4 +10,5 @@ const infoSchema = new mongoose.Schema({
   file: Buffer,
 });
 
-module.exports = mongoose.model('Info', infoSchema);
+// A module.exports = mongoose.model('Info', infoSchema);
+export default mongoose.model('Info', infoSchema);

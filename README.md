@@ -1,5 +1,7 @@
 # Infopiste
 
+[![CI](https://github.com/Infopisteprojekti/infopiste/actions/workflows/development.yaml/badge.svg)](https://github.com/Infopisteprojekti/infopiste/actions/workflows/development.yaml)
+
 Application in development with the goal of showing useful information relevant to Exactum on an info screen.
 
 ## Definition of Done

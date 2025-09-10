@@ -1,4 +1,4 @@
-name: Development
+name: Frontend tests
 
 on:
   push:

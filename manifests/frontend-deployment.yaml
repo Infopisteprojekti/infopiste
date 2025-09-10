@@ -3,10 +3,6 @@ kind: Deployment
 metadata:
   name: infopiste-frontend
   namespace: ohtuprojekti-staging
-  annotations:
-    alpha.image.policy.openshift.io/resolve-names: "*"
-    image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"infopiste-frontend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"frontend\")].image","pause":"false"}]
 spec:
   replicas: 1
   selector:
@@ -19,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: infopiste-frontend:staging
+          image: image-registry.openshift-image-registry.svc:5000/ohtuprojekti-staging/infopiste-frontend:staging
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

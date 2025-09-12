@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infopiste-backend
+  namespace: ohtuprojekti-staging
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
     image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"infopiste-backend\")].image","pause":"false"}]
+      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"backend\")].image","pause":"false"}]
 spec:
   replicas: 1
   selector:

@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      MONGO_DB_URL: mongodb://test_user:test_password@mongo:27017
+      PORT: 1234
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  mongo:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test_user
+      MONGO_INITDB_ROOT_PASSWORD: test_password
+
+volumes:
+  mongo_data:

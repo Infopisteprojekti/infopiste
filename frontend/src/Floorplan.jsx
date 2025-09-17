@@ -16,7 +16,7 @@ const Floorplan = () => {
                     child.classList.add('room');
 
                     const handler = () => {
-                        const status = getRoomStatus(roomId);
+                        const status = getRoomStatus();
                         alert(`Room ${roomId} status: ${status}`);
                     };
 
@@ -33,10 +33,10 @@ const Floorplan = () => {
         }
     });
 
-    return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>
+    return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;
 };
 
-const getRoomStatus = room => {
+const getRoomStatus = () => {
     return 'unknown';
 };
 

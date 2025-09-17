@@ -1,0 +1,384 @@
+[
+  {
+    "id": "A309",
+    "type": "classroom",
+    "capacity": 15,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T15:17:00Z",
+        "end_time": "2025-09-17T18:22:00Z",
+        "host": "Dr. Merle Hettinger",
+        "title": "Centralized zero trust capability"
+      },
+      {
+        "start_time": "2025-09-19T16:07:00Z",
+        "end_time": "2025-09-19T20:48:00Z",
+        "host": "Jana Stoltenberg",
+        "title": "Versatile static moderator"
+      }
+    ]
+  },
+  {
+    "id": "A310",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A311",
+    "type": "classroom",
+    "capacity": 39,
+    "reservations": []
+  },
+  {
+    "id": "A312",
+    "type": "meeting_room",
+    "capacity": 10,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T15:03:00Z",
+        "end_time": "2025-09-17T16:33:00Z",
+        "host": "Dr. Bob Runte",
+        "title": "Intuitive systemic paradigm"
+      },
+      {
+        "start_time": "2025-09-18T15:53:00Z",
+        "end_time": "2025-09-18T18:34:00Z",
+        "host": "Levi Davis",
+        "title": "Diverse cloud-native challenge"
+      }
+    ]
+  },
+  {
+    "id": "A313",
+    "type": "meeting_room",
+    "capacity": 5,
+    "reservations": [
+      {
+        "start_time": "2025-09-19T16:23:00Z",
+        "end_time": "2025-09-19T20:34:00Z",
+        "host": "Kenny Leffler",
+        "title": "Reduced impactful hierarchy"
+      },
+      {
+        "start_time": "2025-09-20T11:27:00Z",
+        "end_time": "2025-09-20T14:10:00Z",
+        "host": "Lois Ankunding",
+        "title": "Advanced systematic challenge"
+      }
+    ]
+  },
+  {
+    "id": "A314",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A315",
+    "type": "meeting_room",
+    "capacity": 9,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T11:20:00Z",
+        "end_time": "2025-09-17T15:28:00Z",
+        "host": "Camille Wuckert",
+        "title": "Customer-focused executive collaboration"
+      },
+      {
+        "start_time": "2025-09-17T16:34:00Z",
+        "end_time": "2025-09-17T18:16:00Z",
+        "host": "Deborah Harris",
+        "title": "Immersive data-driven database"
+      },
+      {
+        "start_time": "2025-09-18T16:24:00Z",
+        "end_time": "2025-09-18T17:49:00Z",
+        "host": "Don Olson",
+        "title": "Intuitive contextually-based project"
+      }
+    ]
+  },
+  {
+    "id": "A316",
+    "type": "meeting_room",
+    "capacity": 5,
+    "reservations": [
+      {
+        "start_time": "2025-09-19T12:29:00Z",
+        "end_time": "2025-09-19T13:34:00Z",
+        "host": "Wanda Hagenes",
+        "title": "Operative leading edge collaboration"
+      },
+      {
+        "start_time": "2025-09-20T12:59:00Z",
+        "end_time": "2025-09-20T14:11:00Z",
+        "host": "Anna Mills Sr.",
+        "title": "Multi-tiered user-facing complexity"
+      },
+      {
+        "start_time": "2025-09-20T16:05:00Z",
+        "end_time": "2025-09-20T17:10:00Z",
+        "host": "Micheal McKenzie",
+        "title": "Networked client-driven emulation"
+      }
+    ]
+  },
+  {
+    "id": "A317",
+    "type": "meeting_room",
+    "capacity": 4,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T11:38:00Z",
+        "end_time": "2025-09-17T12:41:00Z",
+        "host": "Amanda Hayes",
+        "title": "Proactive context-sensitive website"
+      },
+      {
+        "start_time": "2025-09-17T14:49:00Z",
+        "end_time": "2025-09-17T15:09:00Z",
+        "host": "Dale Bernhard",
+        "title": "Secured eco-centric encoding"
+      },
+      {
+        "start_time": "2025-09-18T14:35:00Z",
+        "end_time": "2025-09-18T16:40:00Z",
+        "host": "Alicia Bergstrom",
+        "title": "Phased bottom-line structure"
+      }
+    ]
+  },
+  {
+    "id": "A318",
+    "type": "meeting_room",
+    "capacity": 6,
+    "reservations": [
+      {
+        "start_time": "2025-09-19T12:49:00Z",
+        "end_time": "2025-09-19T13:16:00Z",
+        "host": "Rene Gerhold",
+        "title": "Ergonomic context-sensitive benchmark"
+      },
+      {
+        "start_time": "2025-09-20T16:38:00Z",
+        "end_time": "2025-09-20T20:36:00Z",
+        "host": "Rachel Weber",
+        "title": "Exclusive context-sensitive policy"
+      }
+    ]
+  },
+  {
+    "id": "A319",
+    "type": "meeting_room",
+    "capacity": 12,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T14:20:00Z",
+        "end_time": "2025-09-17T16:43:00Z",
+        "host": "Dwight Bartoletti DDS",
+        "title": "Integrated stable utilisation"
+      }
+    ]
+  },
+  {
+    "id": "A335",
+    "type": "office",
+    "capacity": 2,
+    "reservations": []
+  },
+  {
+    "id": "A336",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A337",
+    "type": "classroom",
+    "capacity": 34,
+    "reservations": []
+  },
+  {
+    "id": "A338",
+    "type": "classroom",
+    "capacity": 16,
+    "reservations": [
+      {
+        "start_time": "2025-09-18T11:10:00Z",
+        "end_time": "2025-09-18T12:31:00Z",
+        "host": "Mr. Thomas Welch",
+        "title": "Enhanced eco-centric matrix"
+      },
+      {
+        "start_time": "2025-09-19T16:25:00Z",
+        "end_time": "2025-09-19T19:59:00Z",
+        "host": "Roosevelt Bechtelar",
+        "title": "Business-focused scalable function"
+      },
+      {
+        "start_time": "2025-09-20T12:09:00Z",
+        "end_time": "2025-09-20T15:57:00Z",
+        "host": "Paulette Friesen",
+        "title": "Multi-tiered discrete microservice"
+      },
+      {
+        "start_time": "2025-09-20T15:59:00Z",
+        "end_time": "2025-09-20T16:03:00Z",
+        "host": "Sheila Kautzer",
+        "title": "AI-driven actuating complexity"
+      }
+    ]
+  },
+  {
+    "id": "A339",
+    "type": "office",
+    "capacity": 2,
+    "reservations": []
+  },
+  {
+    "id": "A340",
+    "type": "office",
+    "capacity": 1,
+    "reservations": []
+  },
+  {
+    "id": "A341",
+    "type": "classroom",
+    "capacity": 31,
+    "reservations": [
+      {
+        "start_time": "2025-09-20T09:20:00Z",
+        "end_time": "2025-09-20T10:22:00Z",
+        "host": "Randal Crooks",
+        "title": "Organic contextually-based matrices"
+      }
+    ]
+  },
+  {
+    "id": "A342",
+    "type": "classroom",
+    "capacity": 21,
+    "reservations": [
+      {
+        "start_time": "2025-09-17T10:32:00Z",
+        "end_time": "2025-09-17T13:48:00Z",
+        "host": "Duane Bins",
+        "title": "Future-proofed composite capability"
+      },
+      {
+        "start_time": "2025-09-18T16:01:00Z",
+        "end_time": "2025-09-18T17:03:00Z",
+        "host": "Joe Grimes-Kirlin",
+        "title": "Customizable radical portal"
+      }
+    ]
+  },
+  {
+    "id": "A343",
+    "type": "classroom",
+    "capacity": 18,
+    "reservations": [
+      {
+        "start_time": "2025-09-18T08:07:00Z",
+        "end_time": "2025-09-18T12:09:00Z",
+        "host": "Sonja Kunde",
+        "title": "Organized mobile monitoring"
+      },
+      {
+        "start_time": "2025-09-20T08:09:00Z",
+        "end_time": "2025-09-20T11:32:00Z",
+        "host": "Rosie Breitenberg",
+        "title": "Visionary methodical initiative"
+      }
+    ]
+  },
+  {
+    "id": "A344",
+    "type": "classroom",
+    "capacity": 27,
+    "reservations": [
+      {
+        "start_time": "2025-09-19T09:27:00Z",
+        "end_time": "2025-09-19T13:39:00Z",
+        "host": "Morris Lowe",
+        "title": "Open-source executive benchmark"
+      },
+      {
+        "start_time": "2025-09-19T13:40:00Z",
+        "end_time": "2025-09-19T14:05:00Z",
+        "host": "Mr. Dexter Ritchie Jr.",
+        "title": "User-centric dynamic architecture"
+      },
+      {
+        "start_time": "2025-09-20T11:45:00Z",
+        "end_time": "2025-09-20T14:47:00Z",
+        "host": "Allen Heller",
+        "title": "Integrated actuating challenge"
+      },
+      {
+        "start_time": "2025-09-20T14:46:00Z",
+        "end_time": "2025-09-20T15:37:00Z",
+        "host": "Ms. Tammy Becker",
+        "title": "Compatible motivating leverage"
+      }
+    ]
+  },
+  {
+    "id": "A345",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A346",
+    "type": "classroom",
+    "capacity": 18,
+    "reservations": [
+      {
+        "start_time": "2025-09-18T10:51:00Z",
+        "end_time": "2025-09-18T13:23:00Z",
+        "host": "Connie Toy",
+        "title": "Reactive impactful model"
+      },
+      {
+        "start_time": "2025-09-18T13:42:00Z",
+        "end_time": "2025-09-18T17:29:00Z",
+        "host": "Tanya Stark",
+        "title": "Reduced holistic alliance"
+      },
+      {
+        "start_time": "2025-09-19T08:16:00Z",
+        "end_time": "2025-09-19T09:34:00Z",
+        "host": "Tina Nitzsche",
+        "title": "Persevering static complexity"
+      },
+      {
+        "start_time": "2025-09-19T16:14:00Z",
+        "end_time": "2025-09-19T19:38:00Z",
+        "host": "Simon Goyette",
+        "title": "Streamlined disintermediate model"
+      }
+    ]
+  },
+  {
+    "id": "A347",
+    "type": "office",
+    "capacity": 4,
+    "reservations": []
+  },
+  {
+    "id": "A348",
+    "type": "meeting_room",
+    "capacity": 11,
+    "reservations": [
+      {
+        "start_time": "2025-09-18T16:20:00Z",
+        "end_time": "2025-09-18T20:56:00Z",
+        "host": "Ada Runolfsdottir",
+        "title": "Open-source logistical approach"
+      }
+    ]
+  }
+]
+

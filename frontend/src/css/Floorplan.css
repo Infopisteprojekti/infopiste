@@ -1,0 +1,14 @@
+:root {
+    --roomOccupied: #ffffff;
+    --roomAvailable: #ffffff;
+    --roomUnavailable: #ffffff;
+    --roomHover: #cccccc;
+}
+
+.room {
+    transition: fill 200ms ease-out;
+}
+
+.room:hover {
+    fill: var(--roomHover);
+}

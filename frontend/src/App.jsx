@@ -1,4 +1,5 @@
-import Floorplan from './assets/exactum-3.svg?react';
+import Floorplan from './Floorplan';
+import './css/reset.css';
 
 function App() {
   return (

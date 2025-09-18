@@ -2,7 +2,7 @@ name: Frontend tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, frontend-test]
   pull_request:
     branches: [main]
 
@@ -21,3 +21,23 @@ jobs:
         run: npm install
       - name: lint
         run: npm run lint
+
+  frontend-tests:
+    name: Run frontend tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Run frontend tests
+        run: npm test
+        working-directory: ./frontend

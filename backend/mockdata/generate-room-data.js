@@ -1,9 +1,21 @@
+/* Script for generating mock room reservation data.
+ *
+ * Generates data for rooms A309-319 and A335-348.
+ *
+ * Usage: run 'node generate-room-data.js'.
+ *
+ * Fixed seed for reproducible data.
+ */
+
 import { faker } from '@faker-js/faker';
 import fs from 'fs';
 
 const DATE_RANGE = { min: 17, max: 24 };
 const RESERVATION_LIMIT_PER_DAY = 3;
 const OUTPUT_FILE = 'room_data_mock.json';
+const SEED = 42;
+
+faker.seed(SEED);
 
 function generateReservations(day, roomId) {
   const reservations = [];

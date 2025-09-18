@@ -18,7 +18,8 @@ const dbUrl = process.env.MONGO_DB_URL;
 
 const PORT = process.env.PORT || 1234;
 
-const rooms = generateRooms();
+// Temporary solution by using mock data
+const ROOMS = generateRooms();
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +28,19 @@ app.get('/', (req, res) => res.send('infonäyttö back'));
 
 app.get('/api/hello', async (req, res) => {
   res.json({message: 'hello from backend server'});
+});
+
+app.get('/api/rooms', async (req, res) => {
+  res.json(ROOMS);
+});
+
+app.get('/api/rooms/:id', async (req, res) => {
+  const room = ROOMS.find(r => r.id === req.params.id);
+  if (!room) {
+    return res.status(404).json({error: 'Room not found'});
+  }
+
+  res.json(room);
 });
 
 app.listen(PORT, async () => {

@@ -8,6 +8,7 @@
  */
 
 import {faker} from '@faker-js/faker';
+import {fileURLToPath} from 'url';
 import fs from 'fs';
 
 const DATE_RANGE = {min: 17, max: 24};
@@ -110,7 +111,11 @@ function generateRooms() {
   return roomIds.map(id => generateRoom(id));
 }
 
-console.log('Generating room data');
-const data = generateRooms();
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(data, null, 2));
-console.log(`Done! Wrote data to ${OUTPUT_FILE}`);
+export {generateRooms};
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  console.log('Generating room data');
+  const data = generateRooms();
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(data, null, 2));
+  console.log(`Done! Wrote data to ${OUTPUT_FILE}`);
+}

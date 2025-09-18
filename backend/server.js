@@ -5,6 +5,8 @@ import express from 'express';
 const app = express();
 import cors from 'cors';
 import mongoose from 'mongoose';
+import {generateRooms} from './mockdata/generate-room-data.js';
+
 mongoose.set('strictQuery', false);
 
 const dbUrl = process.env.MONGO_DB_URL;
@@ -15,6 +17,8 @@ const dbUrl = process.env.MONGO_DB_URL;
 // A });
 
 const PORT = process.env.PORT || 1234;
+
+const rooms = generateRooms();
 
 app.use(cors());
 app.use(express.json());

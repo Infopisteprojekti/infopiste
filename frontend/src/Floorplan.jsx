@@ -14,6 +14,7 @@ const Floorplan = () => {
                 const roomId = child?.id;
                 if (roomId) {
                     child.classList.add('room');
+                    room.setAttribute('data-room-id', roomId)
 
                     const handler = () => {
                         const status = getRoomStatus();

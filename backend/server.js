@@ -43,6 +43,24 @@ app.get('/api/rooms/:id', async (req, res) => {
   res.json(room);
 });
 
+app.get('/api/rooms/:id/reservations', async (req, res) => {
+  const {id} = req.params;
+  const {date} = req.query;
+
+  const room = ROOMS.find(r => r.id === id);
+  if (!room) {
+    return res.status(404).json({error: 'Room not found'});
+  }
+
+  let {reservations} = room;
+  if (date) {
+    reservations = reservations.filter(r =>
+      r.start.dateTime.startsWith(date));
+  }
+
+  res.json(reservations);
+});
+
 app.listen(PORT, async () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 

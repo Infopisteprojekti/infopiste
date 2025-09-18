@@ -1,34 +1,53 @@
 import { faker } from '@faker-js/faker';
 import fs from 'fs';
 
-const DATE_RANGE = { min: 17, max: 20 };
-const RESERVATION_LIMIT = 4;
+const DATE_RANGE = { min: 17, max: 24 };
+const RESERVATION_LIMIT_PER_DAY = 3;
 const OUTPUT_FILE = 'room_data_mock.json';
 
-function formatTime(hour, minute) {
-  return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-}
+function generateReservations(day, roomId) {
+  const reservations = [];
+  const numReservations = faker.number.int({
+    min: 0,
+    max: RESERVATION_LIMIT_PER_DAY,
+  });
+  let currentHour = faker.number.int({ min: 8, max: 11 });
+  const maxHour = 18;
 
-function generateReservation() {
-  const startHour = faker.number.int({ min: 8, max: 16 });
-  const startMinute = faker.number.int({ min: 0, max: 59 });
+  for (let i = 0; i < numReservations; i++) {
+    const durationHours = faker.number.int({ min: 1, max: 4 });
+    const start = `2025-09-${day.toString().padStart(2, '0')}T${String(currentHour).padStart(2, '0')}:00:00`;
+    const endHour = currentHour + durationHours;
 
-  const duration = faker.number.int({ min: 1, max: 4 });
-  const endHour = startHour + duration;
-  const endMinute = faker.number.int({ min: 0, max: 59 });
+    if (endHour > maxHour) break;
 
-  const day = faker.number.int(DATE_RANGE);
-  const dayStr = day.toString().padStart(2, '0');
+    const end = `2025-09-${day.toString().padStart(2, '0')}T${String(endHour).padStart(2, '0')}:00:00`;
 
-  const startTime = formatTime(startHour, startMinute);
-  const endTime = formatTime(endHour, endMinute);
-
-  return {
-    start_time: `2025-09-${dayStr}T${startTime}:00Z`,
-    end_time: `2025-09-${dayStr}T${endTime}:00Z`,
-    host: faker.person.fullName(),
-    title: faker.company.catchPhrase(),
-  };
+    reservations.push({
+      id: faker.string.uuid(),
+      subject: faker.company.catchPhrase(),
+      organizer: {
+        emailAddress: {
+          name: faker.person.fullName(),
+          address: faker.internet.email(),
+        },
+      },
+      start: {
+        dateTime: start,
+        timeZone: 'Europe/Helsinki',
+      },
+      end: {
+        dateTime: end,
+        timeZone: 'Europe/Helsinki',
+      },
+      location: {
+        displayName: roomId,
+      },
+    });
+    currentHour = endHour + faker.number.int({ min: 0, max: 2 });
+    if (currentHour >= maxHour) break;
+  }
+  return reservations;
 }
 
 function generateRoom(roomId) {
@@ -37,14 +56,9 @@ function generateRoom(roomId) {
 
   const reservations = [];
   if (type !== 'office') {
-    const numReservations = faker.number.int({
-      min: 0,
-      max: RESERVATION_LIMIT,
-    });
-    for (let i = 0; i < numReservations; i++) {
-      reservations.push(generateReservation(roomId));
+    for (let day = DATE_RANGE.min; day <= DATE_RANGE.max; day++) {
+      reservations.push(...generateReservations(day, roomId));
     }
-    reservations.sort((a, b) => a.start_time.localeCompare(b.start_time));
   }
 
   let capacity;

@@ -1,14 +1,12 @@
-import Floorplan from './Floorplan';
-import './css/reset.css';
+import Menu from "./components/Menu"
 
-function App() {
+const  App = () => {
+
   return (
-    <>
-      <div>
-        <Floorplan />
-      </div>
-    </>
-  );
+    <div>
+      <Menu />
+    </div>
+  )
 }
 
-export default App;
+export default App

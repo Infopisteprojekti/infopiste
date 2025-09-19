@@ -5,9 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "eslint",
+    "lint": "eslint",
     "start": "node server",
-    "prod": "NODE_ENV=production node server"
+    "prod": "NODE_ENV=production node server",
+    "test": "NODE_ENV=test node --test"
   },
   "author": "infopiste-tiimi",
   "license": "MIT",

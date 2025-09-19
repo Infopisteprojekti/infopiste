@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,4 +20,6 @@ jobs:
       - name: install
         run: npm install
       - name: lint
-        run: npm test
+        run: npm run lint
+      - name: backend tests
+        run: npm run test

@@ -15,6 +15,9 @@ const PORT = process.env.PORT || 1234;
 const ROOMS = generateRooms();
 
 const app = express();
+
+export default app;
+
 app.use(cors());
 app.use(express.json());
 
@@ -57,14 +60,17 @@ app.get('/api/rooms/:id/reservations', async (req, res) => {
   res.json(reservations);
 });
 
-app.listen(PORT, async () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, async () => {
+    console.log(`Backend server running on http://localhost:${PORT}`);
 
-  try {
-    console.log('Connecting to the database in', dbUrl);
-    await mongoose.connect(dbUrl);
-    console.log('Connected to MongoDB');
-  } catch (error) {
-    console.error('Failed to connect to the database', error);
-  }
-});
+    try {
+      console.log('Connecting to the database in', dbUrl);
+      await mongoose.connect(dbUrl);
+      console.log('Connected to MongoDB');
+    } catch (error) {
+      console.error('Failed to connect to the database', error);
+    }
+  });
+}
+

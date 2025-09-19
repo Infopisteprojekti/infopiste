@@ -16,7 +16,7 @@ const ROOMS = generateRooms();
 
 const app = express();
 
-export default app
+export default app;
 
 app.use(cors());
 app.use(express.json());
@@ -60,7 +60,7 @@ app.get('/api/rooms/:id/reservations', async (req, res) => {
   res.json(reservations);
 });
 
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, async () => {
     console.log(`Backend server running on http://localhost:${PORT}`);
 

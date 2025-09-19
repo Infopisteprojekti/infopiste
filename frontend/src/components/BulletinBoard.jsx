@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import fileService from '../services/files'
+import { Link } from 'react-router-dom'
 
+import fileService from '../services/files'
 import FileForm from './FileForm'
 
 const BulletinBoard = () => {
@@ -25,9 +26,9 @@ const BulletinBoard = () => {
       <ul>
         {files.map(file =>
           <li key={file.id}>
-            <a href={`/${file.path}`} target="_blank" rel="noopener noreferrer">
+            <Link to={`/files/${file.id}`}>
               {file.originalName}
-            </a>
+            </Link>
           </li>
         )}
       </ul>

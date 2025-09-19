@@ -20,6 +20,16 @@ router.get('/', async (request, response) => {
   }
 })
 
+router.get('/:id', async (request, response) => {
+  try {
+    const file = await File.findById(request.params.id)
+    response.status(200).json(file)
+  } catch (error) {
+    response.status(500).json({ error: 'failed to get file' })
+  }
+})
+
+
 router.post('/', upload.single('file'), async (request, response) => {
   try {
     const file = new File({

@@ -25,6 +25,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/files', filesRouter)
+app.use('/api/uploads', express.static('uploads'))
 
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')

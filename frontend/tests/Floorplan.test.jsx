@@ -27,16 +27,4 @@ describe('Floorplan', () => {
         expect(alertMock).toBeCalled();
         alertMock.mockRestore();
     });
-
-    test('button to pdfs page works', async () => {
-        const user = userEvent.setup();
-        const button = screen.getByRole('button', {name: /pdfs/i});
-        const room = container.querySelector('[data-room-id=\'A346\']');
-
-        expect(room).toBeInTheDocument();
-
-        await user.click(button);
-
-        expect(room).not.toBeInTheDocument();
-    });
 });

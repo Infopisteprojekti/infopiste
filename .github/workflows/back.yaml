@@ -2,12 +2,12 @@ name: Backend tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, backend-tests]
   pull_request:
     branches: [main]
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,3 +21,5 @@ jobs:
         run: npm install
       - name: lint
         run: npm lint
+      - name: backend tests
+        run: npm test

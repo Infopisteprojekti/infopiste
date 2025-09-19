@@ -1,34 +1,30 @@
 import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
-const app = express();
 import cors from 'cors';
 import mongoose from 'mongoose';
 import {generateRooms} from './mockdata/generate-room-data.js';
 
+dotenv.config();
+
 mongoose.set('strictQuery', false);
-
 const dbUrl = process.env.MONGO_DB_URL;
-
-// A const infoSchema = new mongoose.Schema({
-// A   fileName: String,
-// A   file: Buffer,
-// A });
 
 const PORT = process.env.PORT || 1234;
 
 // Temporary solution by using mock data
 const ROOMS = generateRooms();
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('infonäyttö back'));
+app.get('/', (req, res) => res.send('infonäyttö backend'));
 
 app.get('/api/hello', async (req, res) => {
   res.json({message: 'hello from backend server'});
 });
+
+app.get('/health', (req, res) => res.status(200).json({status: 'ok'}));
 
 app.get('/api/rooms', async (req, res) => {
   res.json(ROOMS);
@@ -72,5 +68,3 @@ app.listen(PORT, async () => {
     console.error('Failed to connect to the database', error);
   }
 });
-
-// A module.exports = mongoose.model("Info", infoSchema);

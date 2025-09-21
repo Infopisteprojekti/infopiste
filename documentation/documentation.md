@@ -23,11 +23,11 @@ It currently offers the test endpoint `/api/hello`.
 
 The application is also running on the staging server at https://infopiste-frontend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/.
 
-To communicate with the backend remotely, the following url with the wanted endpoint can be used: https://infopiste-backend-route-ohtuprojekti-staging.apps.ocp-test-0.k8s.it.helsinki.fi/
+To communicate with the backend remotely, the following url with the wanted endpoint can be used: https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/
 
 For example:
 
-`$ curl https://infopiste-backend-route-ohtuprojekti-staging.apps.ocp-test-0.k8s.it.helsinki.fi/health`
+`$ curl https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/`
 
 Whenever new content is pushed to the `main` branch, it takes a maximum of 15 minutes for the staging server to be updated.
 

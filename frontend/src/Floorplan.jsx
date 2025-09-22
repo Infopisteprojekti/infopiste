@@ -1,5 +1,6 @@
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useRef, useEffect } from 'react';
+import { Plus, Minus, RotateCcw } from 'lucide-react';
 import FloorplanSVG from './assets/exactum-3.svg?react';
 import './css/Floorplan.css';
 
@@ -40,9 +41,15 @@ const Floorplan = () => {
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
           <div className="floorplan-toolbar">
-            <button onClick={() => zoomIn()}>Zoom In ➕</button>
-            <button onClick={() => zoomOut()}>Zoom Out ➖</button>
-            <button onClick={() => resetTransform()}>Reset</button>
+            <button onClick={() => zoomIn()}>
+              Zoom In <Plus size={16} strokeWidth={2} />
+            </button>
+            <button onClick={() => zoomOut()}>
+              Zoom Out <Minus size={16} strokeWidth={2} />
+            </button>
+            <button onClick={() => resetTransform()}>
+              Reset <RotateCcw size={16} strokeWidth={2} />
+            </button>
           </div>
 
           <TransformComponent

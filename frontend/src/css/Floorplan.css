@@ -25,6 +25,10 @@
 }
 
 .floorplan-toolbar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   background: white;
   border: 1px solid #dddddd;
   border-radius: 8px;

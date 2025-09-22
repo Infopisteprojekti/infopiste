@@ -84,38 +84,38 @@ const Floorplan = () => {
         };
     }, []);
 
-  return (
-    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
-      {({ zoomIn, zoomOut, resetTransform }) => (
-        <>
-          <div className="floorplan-toolbar">
-            <button onClick={() => zoomIn()}>
-              Zoom In <Plus size={16} strokeWidth={2} />
-            </button>
-            <button onClick={() => zoomOut()}>
-              Zoom Out <Minus size={16} strokeWidth={2} />
-            </button>
-            <button onClick={() => resetTransform()}>
-              Reset <RotateCcw size={16} strokeWidth={2} />
-            </button>
-          </div>
+    return (
+        <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+            {({ zoomIn, zoomOut, resetTransform }) => (
+                <>
+                    <div className="floorplan-toolbar">
+                        <button onClick={() => zoomIn()}>
+                            Zoom In <Plus size={16} strokeWidth={2} />
+                        </button>
+                        <button onClick={() => zoomOut()}>
+                            Zoom Out <Minus size={16} strokeWidth={2} />
+                        </button>
+                        <button onClick={() => resetTransform()}>
+                            Reset <RotateCcw size={16} strokeWidth={2} />
+                        </button>
+                    </div>
 
-          <TransformComponent
-            wrapperStyle={{
-              width: '100%',
-              height: '100vh',
-            }}
-            contentStyle={{
-              width: '100%',
-              height: '100%',
-            }}
-          >
-            <FloorplanSVG ref={floorplanRef} />
-          </TransformComponent>
-        </>
-      )}
-    </TransformWrapper>
-  );
+                    <TransformComponent
+                        wrapperStyle={{
+                            width: '100%',
+                            height: '100vh',
+                        }}
+                        contentStyle={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                    >
+                        <FloorplanSVG ref={floorplanRef} />
+                    </TransformComponent>
+                </>
+            )}
+        </TransformWrapper>
+    );
 };
 
 export default Floorplan;

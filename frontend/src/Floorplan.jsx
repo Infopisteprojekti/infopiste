@@ -3,6 +3,7 @@ import FloorplanSVG from './assets/exactum-3.svg?react';
 import './css/Floorplan.css';
 
 const baseUrl = 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
+const statuses = ['unavailable', 'available', 'reserved'];
 
 const Floorplan = () => {
     const floorplanRef = useRef(null);
@@ -14,34 +15,43 @@ const Floorplan = () => {
         return start < now && end > now;
     };
 
+    const addStatus = (room, child, status) => {
+        room._status = status;
+        child.classList.remove(...statuses);
+        child.classList.add(status);
+    };
+
     useEffect(() => {
         const floorplan = floorplanRef.current;
+        let rooms = [];
         if (floorplan) {
-            fetch(`${baseUrl}/api/rooms`).then(response => response.json().then(data => {
-                const rooms = floorplan.querySelectorAll('g');
-                for (const room of rooms) {
-                    const child = room.querySelector('*');
-                    const roomId = child?.id;
-                    if (roomId) {
+            const fetchStatuses = async () => {
+                try {
+                    const response = await fetch(`${baseUrl}/api/rooms`);
+                    const data = await response.json();
+
+                    rooms = Array.from(floorplan.querySelectorAll('g'));
+                    for (const room of rooms) {
+                        const child = room.querySelector('*');
+                        const roomId = child?.id;
+                        if (!roomId) continue;
+
                         child.classList.add('room');
                         room.setAttribute('data-room-id', roomId);
 
                         const roomData = data.find(e => e.id === roomId);
-                        if (roomData) {
-                            room._status = 'available';
-                            if (roomData.type === 'office') {
-                                child.classList.add('unavailable');
-                                room._status = 'unavailable';
-                            }
+                        if (!roomData || roomData.type === 'office') {
+                            addStatus(room, child, 'unavailable');
+                        }
+                        else {
                             const reservations = roomData.reservations;
                             const activeReservations = reservations.filter(e => checkActive(e));
                             if (activeReservations.length > 0) {
-                                child.classList.add('reserved');
-                                room._status = 'reserved';
+                                addStatus(room, child, 'reserved');
                             }
-                        }
-                        else {
-                            child.classList.add('unavailable');
+                            else {
+                                addStatus(room, child, 'available');
+                            }
                         }
 
                         const handler = () => {
@@ -54,14 +64,22 @@ const Floorplan = () => {
                         }
                     }
                 }
+                catch (error) {
+                    console.log(error);
+                }
+            };
 
-                return () => {
-                    for (const room of rooms) {
-                        room.removeEventListener('click', room._clickHandler);
-                    }
-                };
-            }));
+            fetchStatuses();
         }
+
+        return () => {
+            for (const room of rooms) {
+                if (room._clickHandler) {
+                    room.removeEventListener('click', room._clickHandler);
+                    delete room._clickHandler;
+                }
+            }
+        };
     }, []);
 
     return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;

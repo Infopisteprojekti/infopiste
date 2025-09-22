@@ -1,5 +1,5 @@
 :root {
-    --roomOccupied: #dd8787;
+    --roomReserved: #dd8787;
     --roomAvailable: #c2dea6;
     --roomUnavailable: #dcdcdc;
     --roomHover: #b3b3b3;
@@ -24,7 +24,7 @@
 }
 
 .room.reserved {
-    fill: var(--roomOccupied);
+    fill: var(--roomReserved);
 }
 
 .room:hover {

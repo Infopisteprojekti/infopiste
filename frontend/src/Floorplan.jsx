@@ -1,44 +1,77 @@
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useRef, useEffect } from 'react';
+import { Plus, Minus, RotateCcw } from 'lucide-react';
 import FloorplanSVG from './assets/exactum-3.svg?react';
 import './css/Floorplan.css';
 
 const Floorplan = () => {
-    const floorplanRef = useRef(null);
+  const floorplanRef = useRef(null);
 
-    useEffect(() => {
-        const floorplan = floorplanRef.current;
-        if (floorplan) {
-            const rooms = floorplan.querySelectorAll('g');
-            for (const room of rooms) {
-                const child = room.querySelector('*');
-                const roomId = child?.id;
-                if (roomId) {
-                    child.classList.add('room');
-                    room.setAttribute('data-room-id', roomId);
+  useEffect(() => {
+    const floorplan = floorplanRef.current;
+    if (floorplan) {
+      const rooms = floorplan.querySelectorAll('g');
+      for (const room of rooms) {
+        const child = room.querySelector('*');
+        const roomId = child?.id;
+        if (roomId) {
+          child.classList.add('room');
+          room.setAttribute('data-room-id', roomId);
 
-                    const handler = () => {
-                        const status = getRoomStatus();
-                        alert(`Room ${roomId} status: ${status}`);
-                    };
+          const handler = () => {
+            const status = getRoomStatus();
+            alert(`Room ${roomId} status: ${status}`);
+          };
 
-                    room.addEventListener('click', handler);
-                    room._clickHandler = handler;
-                }
-            }
-
-            return () => {
-                for (const room of rooms) {
-                    room.removeEventListener('click', room._clickHandler);
-                }
-            };
+          room.addEventListener('click', handler);
+          room._clickHandler = handler;
         }
-    });
+      }
 
-    return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;
+      return () => {
+        for (const room of rooms) {
+          room.removeEventListener('click', room._clickHandler);
+        }
+      };
+    }
+  });
+
+  return (
+    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+      {({ zoomIn, zoomOut, resetTransform }) => (
+        <>
+          <div className="floorplan-toolbar">
+            <button onClick={() => zoomIn()}>
+              Zoom In <Plus size={16} strokeWidth={2} />
+            </button>
+            <button onClick={() => zoomOut()}>
+              Zoom Out <Minus size={16} strokeWidth={2} />
+            </button>
+            <button onClick={() => resetTransform()}>
+              Reset <RotateCcw size={16} strokeWidth={2} />
+            </button>
+          </div>
+
+          <TransformComponent
+            wrapperStyle={{
+              width: '100%',
+              height: '100vh',
+            }}
+            contentStyle={{
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            <FloorplanSVG ref={floorplanRef} />
+          </TransformComponent>
+        </>
+      )}
+    </TransformWrapper>
+  );
 };
 
 const getRoomStatus = () => {
-    return 'unknown';
+  return 'unknown';
 };
 
 export default Floorplan;

@@ -6,11 +6,24 @@ import userEvent from '@testing-library/user-event';
 
 // Mock ResizeObserver
 class ResizeObserver {
-  constructor(callback) {}
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  constructor(callback) { }
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 }
+
+// Mock the svg asset in tests
+vi.mock('../src/assets/exactum-3.svg?react', () => {
+  return {
+    default: ({ ref }) => (
+      <svg ref={ref}>
+        <g>
+          <rect id="A346" />
+        </g>
+      </svg>
+    )
+  }
+})
 
 global.ResizeObserver = ResizeObserver;
 
@@ -27,7 +40,7 @@ describe('Floorplan', () => {
   });
 
   test('room status is shown when room is clicked', async () => {
-    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
     const user = userEvent.setup();
 
     const room = container.querySelector('[data-room-id=\'A346\']');

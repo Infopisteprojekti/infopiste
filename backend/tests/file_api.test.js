@@ -1,12 +1,13 @@
-const supertest = require('supertest');
-const mongoose = require('mongoose');
-const { test, describe, after, beforeEach } = require('node:test');
-const app = require('../app');
-const api = supertest(app);
-const helper = require('./test_helper');
-const assert = require('assert');
+import supertest from 'supertest';
+import mongoose from 'mongoose';
+import { test, describe, after, beforeEach } from 'node:test';
+import app from '../app.js';
+import helper from './test_helper.js';
+import assert from 'assert';
 
-const File = require('../models/file');
+import File from '../models/file.js';
+
+const api = supertest(app);
 
 describe.skip('when there are initially some files saved', () => {
   beforeEach(async () => {

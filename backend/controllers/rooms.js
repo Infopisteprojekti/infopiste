@@ -1,6 +1,7 @@
-const router = require('express').Router();
-const { generateRooms } = require('../mockdata/generate-room-data.js');
+import { Router } from 'express';
+import { generateRooms } from '../mockdata/generate-room-data.js';
 
+const router = Router();
 const ROOMS = generateRooms();
 
 router.get('/', async (request, response) => {
@@ -35,4 +36,4 @@ router.get('/:id/reservations', async (request, response) => {
   response.json(reservations);
 });
 
-module.exports = router;
+export default router;

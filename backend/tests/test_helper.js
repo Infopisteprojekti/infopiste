@@ -1,4 +1,4 @@
-const File = require('../models/file');
+import File from '../models/file.js';
 
 const initialFiles = [
   {
@@ -17,11 +17,9 @@ const initialFiles = [
   },
 ];
 
-filesInDb = async () => {
+const filesInDb = async () => {
   const files = await File.find({});
   return files.map(file => file.toJSON());
 };
 
-module.exports = {
-  initialFiles, filesInDb,
-};
+export { initialFiles, filesInDb };

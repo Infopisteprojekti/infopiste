@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const schema = mongoose.Schema({
   originalName: String,
@@ -18,4 +18,4 @@ schema.set('toJSON', {
   },
 });
 
-module.exports = mongoose.model('File', schema);
+export default mongoose.model('File', schema);

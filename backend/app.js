@@ -1,12 +1,15 @@
-const config = require('./utils/config');
-const express = require('express');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+
+import config from './utils/config.js';
+import logger from './utils/logger.js';
+import middleware from './utils/middleware.js';
+
+import filesRouter from './controllers/files.js';
+import roomsRouter from './controllers/rooms.js';
+
 const app = express();
-const cors = require('cors');
-const filesRouter = require('./controllers/files');
-const roomsRouter = require('./controllers/rooms');
-const middleware = require('./utils/middleware');
-const logger = require('./utils/logger');
-const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', false);
 
@@ -33,11 +36,6 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-if (process.env.NODE_ENV === 'test') {
-  const testingRouter = require('./controllers/testing');
-  app.use('/api/testing', testingRouter);
-}
-
 app.use(middleware.unknownEndpoint);
 
-module.exports = app;
+export default app;

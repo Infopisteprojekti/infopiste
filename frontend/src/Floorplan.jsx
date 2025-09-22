@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import FloorplanSVG from './assets/exactum-3.svg?react';
 import './css/Floorplan.css';
 
-const baseUrl = 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
+const baseUrl = process.env.NODE_ENV === 'test' ? 'http://localhost:1234' : 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
 const Floorplan = () => {
     const floorplanRef = useRef(null);

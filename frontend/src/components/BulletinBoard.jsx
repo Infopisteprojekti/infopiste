@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import fileService from '../services/files'
-import FileForm from './FileForm'
+import fileService from '../services/files';
+import FileForm from './FileForm';
 
 const BulletinBoard = () => {
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    initializeFiles()
-  }, [])
+    initializeFiles();
+  }, []);
 
   const initializeFiles = async () => {
-    const files = await fileService.getAll()
-    setFiles(files)
-  }
+    const files = await fileService.getAll();
+    setFiles(files);
+  };
 
   const handleFileUpload = () => {
-    initializeFiles()
-  }
+    initializeFiles();
+  };
 
   return (
     <div>
@@ -34,7 +34,7 @@ const BulletinBoard = () => {
       </ul>
       <FileForm onFileUpload={handleFileUpload} />
     </div>
-  )
-}
+  );
+};
 
-export default BulletinBoard
+export default BulletinBoard;

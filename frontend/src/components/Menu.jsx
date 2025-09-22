@@ -1,12 +1,12 @@
-import { Routes, Route, Link } from "react-router-dom"
-import Floorplan from "./Floorplan"
-import BulletinBoard from "./BulletinBoard"
-import File from "./File"
+import { Routes, Route, Link } from 'react-router-dom';
+import Floorplan from './Floorplan';
+import BulletinBoard from './BulletinBoard';
+import File from './File';
 
 const Menu = () => {
   const padding = {
     paddingRight: 5
-  }
+  };
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Menu = () => {
         <Route path="/files/:id" element={<File />} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

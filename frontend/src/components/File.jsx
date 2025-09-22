@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-import fileService from "../services/files"
+import fileService from '../services/files';
 
 const File = () => {
-  const { id } = useParams()
-  const [file, setFile] = useState(null)
+  const { id } = useParams();
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
-    initializeFile()
-  }, [id])
-  
   const initializeFile = async () => {
-    const returnedFile = await fileService.getById(id)
-    setFile(returnedFile)
-  }
+    const returnedFile = await fileService.getById(id);
+    setFile(returnedFile);
+  };
+
+  initializeFile();
+  }, [id]);
+  
+
 
 
   return (
@@ -33,7 +35,7 @@ const File = () => {
         <p>loading...</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default File
+export default File;

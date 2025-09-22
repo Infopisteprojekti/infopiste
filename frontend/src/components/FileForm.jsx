@@ -1,39 +1,39 @@
-import { useState, useRef } from 'react'
-import fileService from '../services/files'
+import { useState, useRef } from 'react';
+import fileService from '../services/files';
 
 const FileForm = ({ onFileUpload }) => {
-  const [file, setFile] = useState(null)
-  const fileInputRef = useRef(null)
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleFileChange = event => {
-    setFile(event.target.files[0])
-  }
+    setFile(event.target.files[0]);
+  };
 
   const handleUpload = async event => {
-    event.preventDefault()
+    event.preventDefault();
 
     if(!file) {
-      alert('select a file first')
-      return
+      alert('select a file first');
+      return;
     }
 
-    const formData = new FormData()
-    formData.append('file', file)
+    const formData = new FormData();
+    formData.append('file', file);
 
     try {
-      const uploadedFile = await fileService.upload(formData)
-      console.log('file uploaded successfully', uploadedFile)
-      setFile(null)
+      const uploadedFile = await fileService.upload(formData);
+      console.log('file uploaded successfully', uploadedFile);
+      setFile(null);
 
       if (fileInputRef.current) {
-        fileInputRef.current.value = null
+        fileInputRef.current.value = null;
       }
 
-      onFileUpload()
+      onFileUpload();
     } catch (error) {
-      console.error('error uploading file:', error)
+      console.error('error uploading file:', error);
     }
-  }
+  };
 
   return (
     <div>
@@ -45,7 +45,7 @@ const FileForm = ({ onFileUpload }) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default FileForm
+export default FileForm;

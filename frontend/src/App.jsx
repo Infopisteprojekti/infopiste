@@ -1,4 +1,4 @@
-import Menu from "./components/Menu"
+import Menu from './components/Menu';
 //import './css/reset.css'
 
 const  App = () => {
@@ -6,7 +6,7 @@ const  App = () => {
     <div>
       <Menu />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

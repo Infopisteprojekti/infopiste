@@ -29,6 +29,10 @@ app.use('/api/files', filesRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/uploads', express.static('uploads'));
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing');
   app.use('/api/testing', testingRouter);

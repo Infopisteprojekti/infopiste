@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Floorplan from '../src/Floorplan';
+import Floorplan from '../src/components/Floorplan';
 import '../src/css/Floorplan.css';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';

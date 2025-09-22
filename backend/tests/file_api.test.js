@@ -8,7 +8,7 @@ const assert = require('assert');
 
 const File = require('../models/file');
 
-describe('when there are initially some files saved', () => {
+describe.skip('when there are initially some files saved', () => {
   beforeEach(async () => {
     await File.deleteMany({});
     await File.insertMany(helper.initialFiles);

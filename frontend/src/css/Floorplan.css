@@ -1,12 +1,33 @@
 :root {
-  --roomOccupied: #ffffff;
-  --roomAvailable: #ffffff;
-  --roomUnavailable: #ffffff;
-  --roomHover: #cccccc;
+    --roomReserved: #f59796;
+    --roomAvailable: #b7e7b7;
+    --roomUnavailable: #d4d4d4;
+    --roomHover: #7ab6ea;
 }
 
 .room {
-  transition: fill 200ms ease-out;
+    cursor: pointer;
+    user-select: none;
+    transition: fill 200ms ease-out;
+    font-size: 24px;
+}
+
+.room ~ svg > text {
+    pointer-events: none;
+    font-family: sans-serif;
+    font-size: 28px;
+}
+
+.room.available {
+    fill: var(--roomAvailable);
+}
+
+.room.unavailable {
+    fill: var(--roomUnavailable);
+}
+
+.room.reserved {
+    fill: var(--roomReserved);
 }
 
 .room:hover {

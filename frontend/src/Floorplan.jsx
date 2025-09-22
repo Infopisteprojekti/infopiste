@@ -38,9 +38,15 @@ const Floorplan = () => {
   // return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;
 
   return (
-    <TransformWrapper>
-      <TransformComponent>
-        <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;
+    <TransformWrapper initialScale={1}>
+      <TransformComponent
+        wrapperStyle={{
+          width: '100%',
+          height: '100%',
+        }}
+        contentStyle={{ width: '100%', height: '100%' }}
+      >
+        <FloorplanSVG ref={floorplanRef} />
       </TransformComponent>
     </TransformWrapper>
   );

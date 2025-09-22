@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const filesRouter = require('./controllers/files')
+const roomsRouter = require('./controllers/rooms')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
@@ -25,6 +26,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/files', filesRouter)
+app.use('/api/rooms', roomsRouter)
 app.use('/api/uploads', express.static('uploads'))
 
 if (process.env.NODE_ENV === 'test') {

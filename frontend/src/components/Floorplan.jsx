@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
-import FloorplanSVG from './assets/exactum-3.svg?react';
-import './css/Floorplan.css';
+import FloorplanSVG from '../assets/exactum-3.svg?react';
+import '../css/Floorplan.css';
 
 const Floorplan = () => {
     const floorplanRef = useRef(null);

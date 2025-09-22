@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { generateRooms } = require('../mockdata/generate-room-data.js')
 
-// const ROOMS = generateRooms()
+const ROOMS = generateRooms()
 
 router.get('/', async (request, response) => {
   response.status(200).json(ROOMS)

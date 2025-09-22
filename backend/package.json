@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "infopisteen backend",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "NODE_ENV=test node --test",
     "start": "NODE_ENV=production node index.js",

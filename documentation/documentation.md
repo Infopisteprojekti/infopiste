@@ -25,6 +25,24 @@ The application is also running on the staging server at https://infopiste-front
 
 Whenever new content is pushed to the `main` branch, it takes a maximum of 15 minutes for the staging server to be updated.
 
+## Running the application in development mode
+
+Development mode allows the application to be developed while running the containers.
+
+Run the application in development mode with command:
+
+`docker compose -f docker-compose.dev.yaml up -d`
+
+The frontend can then be accessed at `http://localhost:5173`.
+
+Shut down the application with command:
+
+`docker compose down`
+
+Delete volumes with command:
+
+`docker compose down -v`
+
 ## Structure and technologies used
 
 The frontend and backend are separated into different directories, `root/frontend/` and `root/backend/`. Additionally, the backend includes the `database` directory.

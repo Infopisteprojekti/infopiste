@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom"
-import Floorplan from "../assets/exactum-3.svg?react"
+import Floorplan from "./Floorplan"
 import BulletinBoard from "./BulletinBoard"
 import File from "./File"
 

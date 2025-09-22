@@ -4,7 +4,7 @@ import './css/reset.css';
 function App() {
   return (
     <>
-      <div>
+      <div style={{ marginTop: '40px' }}>
         <Floorplan />
       </div>
     </>

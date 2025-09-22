@@ -35,19 +35,30 @@ const Floorplan = () => {
     }
   });
 
-  // return <FloorplanSVG ref={floorplanRef}></FloorplanSVG>;
-
   return (
-    <TransformWrapper initialScale={1}>
-      <TransformComponent
-        wrapperStyle={{
-          width: '100%',
-          height: '100%',
-        }}
-        contentStyle={{ width: '100%', height: '100%' }}
-      >
-        <FloorplanSVG ref={floorplanRef} />
-      </TransformComponent>
+    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+      {({ zoomIn, zoomOut, resetTransform }) => (
+        <>
+          <div className="floorplan-toolbar">
+            <button onClick={() => zoomIn()}>Zoom In ➕</button>
+            <button onClick={() => zoomOut()}>Zoom Out ➖</button>
+            <button onClick={() => resetTransform()}>Reset</button>
+          </div>
+
+          <TransformComponent
+            wrapperStyle={{
+              width: '100%',
+              height: '100vh',
+            }}
+            contentStyle={{
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            <FloorplanSVG ref={floorplanRef} />
+          </TransformComponent>
+        </>
+      )}
     </TransformWrapper>
   );
 };

@@ -12,7 +12,7 @@ The backend can be found at the `[backend/](../backend/) directory.
 
 It includes both development environment and production `Dockerfile`s. 
 
-Mock room data is currently generated in `[mockdata/generate-room-data.js](../backend/mockdata/generate-room-data.js).
+Mock room data is currently generated in [mockdata/generate-room-data.js](../backend/mockdata/generate-room-data.js).
 
 The functionality is in [server.js](../backend/server.js).
 
@@ -47,7 +47,7 @@ has the following output:
 
 Please note that to run the application with Docker or locally, you need to create a `.env` file in the [backend](../backend/) directory. 
 
-Ths environment file should include the values `PORT` (optional), and `MONGO_DB_URL`. 
+Ths environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`. 
 
 Since the `docker-compose.yaml` maps MongoDB's internal port (`27017`), the value of `MONGO_DB_URL` depends on if the application is run locally or in Docker.
 
@@ -85,7 +85,7 @@ The tests can be foudn in the [tests](../backend/tests) directory.
 
 Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/rooms/:id`, and `/api/rooms/:id/reservations`.
 
-The tests are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests are executed. 
+The tests, as well as lint, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests are executed. 
 
 The app can also be tested locally by running
 

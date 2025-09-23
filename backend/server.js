@@ -16,8 +16,6 @@ const ROOMS = generateRooms();
 
 const app = express();
 
-export default app;
-
 app.use(cors());
 app.use(express.json());
 
@@ -74,3 +72,4 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
+export default app;

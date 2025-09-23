@@ -14,7 +14,11 @@ The frontend has various necessary configuration files in the root directory, [f
 
 It also includes both development environment and production `Dockerfile`s.
 
-The actual functionality can be found in [src/](../frontend/src/). [assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the rest of the directory contains the functionality of the application. [Floorplan.jsx](../frontend/src/Floorplan.jsx) contains all the logic for fetching rooms and the data related to them, while [App.jsx](../frontend/src/App.jsx) wraps the `Floorplan` component using a style, and [main.jsx](../frontend/src/main.jsx) wraps the `App` component with `StrictMode`.
+The actual functionality can be found in [src/](../frontend/src/).
+
+[assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the rest of the directory contains the functionality of the application.
+
+[Floorplan.jsx](../frontend/src/Floorplan.jsx) contains all the logic for fetching rooms and the data related to them, while [App.jsx](../frontend/src/App.jsx) wraps the `Floorplan` component using a style, and [main.jsx](../frontend/src/main.jsx) wraps the `App` component with `StrictMode`.
 
 `main.jsx` is then used in [index.html](../frontend/index.html) to render the components.
 

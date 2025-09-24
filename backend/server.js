@@ -1,15 +1,22 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+
+import logger from './utils/logger.js';
+import { PORT, MONGO_DB_URL } from './utils/config.js';
 import {generateRooms} from './mockdata/generate-room-data.js';
 
-dotenv.config();
-
 mongoose.set('strictQuery', false);
-const dbUrl = process.env.MONGO_DB_URL;
 
-const PORT = process.env.PORT || 1234;
+logger.info('Connecting to', MONGO_DB_URL);
+
+mongoose.connect(MONGO_DB_URL)
+  .then(() => {
+    logger.info('connected to MongoDB');
+  })
+  .catch(error => {
+    logger.error('error connection to MongoDB:', error.message);
+  });
 
 // Temporary solution by using mock data
 const ROOMS = generateRooms();
@@ -60,17 +67,7 @@ app.get('/api/rooms/:id/reservations', async (req, res) => {
   res.json(reservations);
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, async () => {
-    console.log(`Backend server running on http://localhost:${PORT}`);
-
-    try {
-      console.log('Connecting to the database in', dbUrl);
-      await mongoose.connect(dbUrl);
-      console.log('Connected to MongoDB');
-    } catch (error) {
-      console.error('Failed to connect to the database', error);
-    }
-  });
-}
+app.listen(PORT, () => {
+  logger.info(`Server running on port ${PORT}`);
+});
 

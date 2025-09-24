@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import supertest from 'supertest';
-import app from '../server.js';
+import app from '../app.js';
 
 const api = supertest(app);
 

@@ -30,10 +30,10 @@ app.use('/api/rooms', roomsRouter);
 app.get('/', (req, res) => res.send('infonäyttö backend'));
 
 app.get('/api/hello', async (req, res) => {
-  res.json({message: 'hello from backend server'});
+  res.json({ message: 'hello from backend server' });
 });
 
-app.get('/health', (req, res) => res.status(200).json({status: 'ok'}));
+app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 app.use(unknownEndpoint);
 

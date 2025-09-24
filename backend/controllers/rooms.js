@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { generateRooms } from '../mockdata/generate-room-data.js';
 
 const router = Router();
-const ROOMS = generateRooms();
+const rooms = generateRooms();
 
 router.get('/', async (request, response) => {
-  response.status(200).json(ROOMS);
+  response.status(200).json(rooms);
 });
 
 router.get('/:id', async (request, response) => {
-  const room = ROOMS.find(r => r.id === request.params.id);
+  const room = rooms.find(r => r.id === request.params.id);
   if (!room) {
     return response.status(404).json({ error: 'room not found' });
   }
@@ -21,7 +21,7 @@ router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
   const { date } = request.query;
 
-  const room = ROOMS.find(r => r.id === id);
+  const room = rooms.find(r => r.id === id);
   if (!room) {
     return response.status(404).json({ error: 'room not found' });
   }

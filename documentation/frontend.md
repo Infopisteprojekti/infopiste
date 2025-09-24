@@ -32,7 +32,7 @@ Whenever new content is pushed to the `main` branch, the frontend image is rebui
 
 ## Docker
 
-The frontend can also be ran with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's `Dockerfile`, and then maps it to port 3000. To run the file, execute the following command:
+The frontend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's `Dockerfile`, and then maps it to port 3000. To run the file, execute the following command:
 
 `$ docker compose up`
 
@@ -48,6 +48,12 @@ in the [frontend](../frontend/) directory of the project. This is equivalent to 
 
 The application will then be available at `localhost:5173`.
 
+Note that dependencies should be installed with
+
+`$ npm install`
+
+before attempting to start the frontend.
+
 # Testing
 
 The tests can be found in the [tests](../frontend/tests/) directory. 
@@ -56,7 +62,7 @@ The tests can be found in the [tests](../frontend/tests/) directory.
 
 [Floorplan.test.jsx](../frontend/tests/Floorplan.test.jsx) tests the functionality of the `Floorplan` component. These tests use mocks in place of using the actual component, due to the complexity of creating unit tests for a component that fetches data from the backend.
 
-The tests are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed. 
+The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed. 
 
 The app can also be tested locally by running 
 

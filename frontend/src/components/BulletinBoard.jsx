@@ -1,7 +1,7 @@
 const BulletinBoard = () => {
   return (
     <div>
-      <br></br>
+      <br />
       <h1>Files</h1>
     </div>
   );

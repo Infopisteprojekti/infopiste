@@ -1,7 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import Floorplan from './components/Floorplan';
 import BulletinBoard from './components/BulletinBoard';
-import './css/reset.css';
 
 function App() {
 

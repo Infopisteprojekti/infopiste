@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 import logger from './utils/logger.js';
 import { PORT, MONGO_DB_URL } from './utils/config.js';
+import { requestLogger, unknownEndpoint } from './utils/middleware.js';
 
 import roomsRouter from './controllers/rooms.js';
 
@@ -22,6 +23,7 @@ mongoose.connect(MONGO_DB_URL)
 
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);
 
 app.use('/api/rooms', roomsRouter);
 
@@ -36,5 +38,7 @@ app.get('/health', (req, res) => res.status(200).json({status: 'ok'}));
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
 });
+
+app.use(unknownEndpoint);
 
 export default app;

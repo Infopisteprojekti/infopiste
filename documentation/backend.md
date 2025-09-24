@@ -32,7 +32,7 @@ A `reservation` is an object containing:
 - `organizer`: the responsible person for the reservation
 - `start`: start time for the reservation
 - `end`: end time for the reservation
-- `location`: the `room` `id` where the reservation takes place.
+- `location`: the `id` of the `room` where the reservation takes place.
 
 `/api/rooms/:id` returns a specific room with the given id.
 
@@ -59,7 +59,7 @@ has the following output:
 
 Please note that to run the application with Docker or locally, you need to create a `.env` file in the [backend](../backend/) directory. 
 
-Ths environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`. 
+The environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`. 
 
 Since the `docker-compose.yaml` maps MongoDB's internal port (`27017`), the value of `MONGO_DB_URL` depends on if the application is run locally or in Docker.
 
@@ -73,7 +73,7 @@ In Docker:
 
 ## Docker
 
-The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
+The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
 
 `$ docker compose up`
 
@@ -97,13 +97,13 @@ Note that MongoDB should be running locally for this to work. Otherwise, connect
 
 # Testing
 
-The tests can be foud in the [tests](../backend/tests) directory. 
+The tests can be found in the [tests](../backend/tests) directory. 
 
 [info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
 
 Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/rooms/:id`, and `/api/rooms/:id/reservations`.
 
-The tests, as well as lint, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed. 
+The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed. 
 
 The app can also be tested locally by running
 

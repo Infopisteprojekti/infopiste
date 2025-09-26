@@ -10,7 +10,7 @@ The application is a single-page app.
 
 # Frontend structure
 
-The frontend has various necessary configuration files in the root directory, [frontend/](../frontend/). 
+The frontend has various necessary configuration files in the root directory, [frontend/](../frontend/).
 
 It also includes both development environment and production `Dockerfile`s.
 
@@ -44,9 +44,7 @@ in the root of the project.
 
 Alternatively, the frontend can be accessed by running
 
-```bash
-$ npm run dev
-```
+`$ npm run dev`
 
 in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host`.
 
@@ -68,21 +66,33 @@ This assumes the [backend](./backend) is running locally on the default port 123
 
 # Testing
 
-The tests can be found in the [tests](../frontend/tests/) directory. 
+The unit tests can be found in the [tests](../frontend/tests/) directory.
 
-[testSetup.js](../frontend/tests/testSetup.js) simply ensures that each test starts with a clean slate. 
+[testSetup.js](../frontend/tests/testSetup.js) simply ensures that each test starts with a clean slate.
 
 [Floorplan.test.jsx](../frontend/tests/Floorplan.test.jsx) tests the functionality of the `Floorplan` component. These tests use mocks in place of using the actual component, due to the complexity of creating unit tests for a component that fetches data from the backend.
 
-The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed. 
+End-to-end tests can be found in the [e2e](../frontend/e2e/) directory.
 
-The app can also be tested locally by running 
+These tests are used to test the end-to-end functionality of the application, which includes the communication between the frontend and backend.
+
+The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed.
+
+The unit tests can be run locally with
 
 ```bash
 $ npm run test
 ```
 
-This is equivalent to running `npx vitest run`. 
+This is equivalent to running `npx vitest run`.
+
+The end-to-end tests can be run locally with
+
+`$ npm run e2e`.
+
+This is equivalent to running `npx playwright test`.
+
+Note that to run either the unit tests or end-to-end tests, the application must be running locally. See [Docker](#docker) or [Local development](#local-development).
 
 ESLint is used for linting. The linting can be checked with
 

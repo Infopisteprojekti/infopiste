@@ -79,4 +79,51 @@ test.describe('Infopiste', () => {
     
     expect(zoomedOutScale).toBeLessThan(defaultScale);
   });
+
+  test('room statuses are correct', async ({ page }) => {
+    await page.route('**/api/rooms', route => {
+      route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            id: 'A344',
+            type: 'meeting',
+            reservations: []
+          },
+          {
+            id: 'A345',
+            type: 'meeting',
+            reservations: [
+              {
+                id: 1,
+                subject: 'Best Meeting',
+                organizer: 'Some Person',
+                start: { dateTime: new Date(Date.now() - 1000 * 60 * 60).toISOString() },
+                end: { dateTime: new Date(Date.now() + 1000 * 60 * 60).toISOString() },
+                location: 'A345'
+              }
+            ]
+          },
+          {
+            id: 'A346',
+            type: 'office',
+            reservations: []
+          }
+        ])
+      });
+    });
+
+    await page.goto('http://localhost:5173');
+
+    const floorplan = page.getByTestId('floorplan-svg').first();
+    await floorplan.waitFor();
+
+    const roomA344 = floorplan.locator('#A344');
+    const roomA345 = floorplan.locator('#A345');
+    const roomA346 = floorplan.locator('#A346');
+
+    await expect(roomA344).toHaveClass(/available/);
+    await expect(roomA345).toHaveClass(/reserved/);
+    await expect(roomA346).toHaveClass(/unavailable/);
+  });
 });

@@ -24,4 +24,14 @@ test.describe('Infopiste', () => {
     await page.getByText('Zoom Out').click();
     await page.getByText('Reset').click();
   });
+
+  test('floorplan is rendered', async ({ page }) => {
+    await page.goto('http://localhost:5173');
+
+    const floorplanWrapper = page.getByTestId('floorplan-wrapper');
+    await floorplanWrapper.waitFor({ state: 'attached' });
+
+    const rooms = await page.locator('svg g').count();
+    expect(rooms).toBeGreaterThan(0);
+  });
 });

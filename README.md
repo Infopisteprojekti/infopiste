@@ -11,8 +11,8 @@ Application in development with the goal of showing useful information relevant 
 
 [Documentation](documentation/documentation.md#infopiste-application)
 
-[Running the app](documentation/documentation.md#running-the-application)
+[Frontend documentation](documentation/frontend.md)
 
-[Tech stack](documentation/documentation.md#structure-and-technologies-used)
+[Backend documentation](documentation/backend.md)
 
-[Scrum process](documentation/documentation.md#scrum-process)
+[CI/CD Description](documentation/deployment.md)

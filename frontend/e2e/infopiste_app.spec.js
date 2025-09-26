@@ -28,10 +28,13 @@ test.describe('Infopiste', () => {
   test('floorplan is rendered', async ({ page }) => {
     await page.goto('http://localhost:5173');
 
-    const floorplanWrapper = page.getByTestId('floorplan-wrapper');
-    await floorplanWrapper.waitFor({ state: 'attached' });
+    const floorplanWrapper = page.getByTestId('floorplan-svg').first();
+    await floorplanWrapper.waitFor({ state: 'attached', timeout: 10000 });
 
-    const rooms = await page.locator('svg g').count();
-    expect(rooms).toBeGreaterThan(0);
+    const roomsLocator = page.locator('svg g');
+    await roomsLocator.first().waitFor({ state: 'attached', timeout: 10000 });
+
+    const roomsCount = await roomsLocator.count();
+    expect(roomsCount).toBeGreaterThan(0);
   });
 });

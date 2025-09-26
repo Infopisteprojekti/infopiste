@@ -52,7 +52,7 @@ const Floorplan = () => {
           </div>
 
           <TransformComponent
-            data-testid='floorplan-wrapper'
+            data-testid='floorplan-transform-wrapper'
             wrapperStyle={{ width: '100%', height: '100vh' }}
             contentStyle={{ width: '100%', height: '100%' }}
           >

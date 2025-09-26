@@ -7,11 +7,11 @@
  * Fixed seed for reproducible data.
  */
 
-import {faker} from '@faker-js/faker';
-import {fileURLToPath} from 'url';
+import { faker } from '@faker-js/faker';
+import { fileURLToPath } from 'url';
 import fs from 'fs';
 
-const DATE_RANGE = {min: 17, max: 24};
+const DATE_RANGE = { min: 17, max: 24 };
 const RESERVATION_LIMIT_PER_DAY = 3;
 const OUTPUT_FILE = 'room_data_mock.json';
 const SEED = 42;
@@ -24,11 +24,11 @@ function generateReservations(day, roomId) {
     min: 0,
     max: RESERVATION_LIMIT_PER_DAY,
   });
-  let currentHour = faker.number.int({min: 8, max: 11});
+  let currentHour = faker.number.int({ min: 8, max: 11 });
   const maxHour = 18;
 
   for (let i = 0; i < numReservations; i++) {
-    const durationHours = faker.number.int({min: 1, max: 4});
+    const durationHours = faker.number.int({ min: 1, max: 4 });
     const start = `2025-09-${day.toString().padStart(2, '0')}T${String(currentHour).padStart(2, '0')}:00:00`;
     const endHour = currentHour + durationHours;
 
@@ -59,7 +59,7 @@ function generateReservations(day, roomId) {
         displayName: roomId,
       },
     });
-    currentHour = endHour + faker.number.int({min: 0, max: 2});
+    currentHour = endHour + faker.number.int({ min: 0, max: 2 });
     if (currentHour >= maxHour) {
       break;
     }
@@ -81,11 +81,11 @@ function generateRoom(roomId) {
 
   let capacity;
   if (type === 'office') {
-    capacity = faker.number.int({min: 1, max: 4});
+    capacity = faker.number.int({ min: 1, max: 4 });
   } else if (type === 'meeting_room') {
-    capacity = faker.number.int({min: 4, max: 12});
+    capacity = faker.number.int({ min: 4, max: 12 });
   } else {
-    capacity = faker.number.int({min: 15, max: 40});
+    capacity = faker.number.int({ min: 15, max: 40 });
   }
 
   return {
@@ -98,8 +98,8 @@ function generateRoom(roomId) {
 
 function generateRooms() {
   const idRanges = [
-    {min: 309, max: 319},
-    {min: 335, max: 348},
+    { min: 309, max: 319 },
+    { min: 335, max: 348 },
   ];
   const roomIds = [];
   for (const range of idRanges) {
@@ -111,7 +111,7 @@ function generateRooms() {
   return roomIds.map(id => generateRoom(id));
 }
 
-export {generateRooms};
+export { generateRooms };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   console.log('Generating room data');

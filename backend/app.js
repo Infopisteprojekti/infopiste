@@ -3,8 +3,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 import logger from './utils/logger.js';
-import { MONGO_DB_URL } from './utils/config.js';
+import { MONGO_DB_URL, MS_SETTINGS, SKIP_GRAPH } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
+import { initializeGraphForAppOnlyAuth } from './services/graph_auth.js';
 
 import roomsRouter from './controllers/rooms.js';
 
@@ -13,17 +14,20 @@ const app = express();
 mongoose.set('strictQuery', false);
 logger.info('Connecting to', MONGO_DB_URL);
 
-mongoose.connect(MONGO_DB_URL)
+mongoose
+  .connect(MONGO_DB_URL)
   .then(() => {
     logger.info('connected to MongoDB');
   })
-  .catch(error => {
+  .catch((error) => {
     logger.error('error connection to MongoDB:', error.message);
   });
 
 app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
+
+initializeGraphForAppOnlyAuth(MS_SETTINGS, SKIP_GRAPH);
 
 app.use('/api/rooms', roomsRouter);
 

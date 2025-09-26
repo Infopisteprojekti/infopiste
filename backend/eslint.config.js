@@ -1,18 +1,20 @@
+import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
- 
-export default [
+
+export default defineConfig([
   {
     languageOptions: {
       ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: globals.node,
     },
+    extends: [js.configs.recommended],
     rules: {
       indent: ['error', 2],
       'linebreak-style': ['error', 'unix'],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
-      eqeqeq: 'error',
-      'no-trailing-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
       'arrow-spacing': ['error', { before: true, after: true }],
       'no-console': 0,
@@ -20,4 +22,4 @@ export default [
     },
     ignores: ['node_modules', 'eslint.config.js'],
   },
-]
+]);

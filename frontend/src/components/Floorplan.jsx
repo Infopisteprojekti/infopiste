@@ -1,8 +1,8 @@
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useRef, useEffect } from 'react';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
-import FloorplanSVG from './assets/exactum-3.svg?react';
-import './css/Floorplan.css';
+import FloorplanSVG from '../assets/exactum-3.svg?react';
+import '../css/Floorplan.css';
 
 const baseUrl = 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 const statuses = ['unavailable', 'available', 'reserved'];

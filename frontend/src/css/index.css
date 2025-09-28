@@ -2,4 +2,27 @@ html,
 body,
 #root {
   background-color: #ffffff;
+  font-family: sans-serif;
+}
+
+.navbar {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  background-color: #eeeeee;
+  gap: 16px;
+  z-index: 200;
+}
+
+.navbar-button {
+  font-size: 24px;
+  padding: 16px 32px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: #cccccc;
 }

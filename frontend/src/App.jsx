@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <div>
-        <Link style={{ marginRight: 10} }to="/">Floorplan</Link>
+        <Link style={{ marginRight: 10 }} to="/">Floorplan</Link>
         <Link to="/board">Bulletin Board</Link>
       </div>
       <div>

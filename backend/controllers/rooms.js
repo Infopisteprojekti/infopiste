@@ -9,7 +9,7 @@ router.get('/', async (request, response) => {
 });
 
 router.get('/:id', async (request, response) => {
-  const room = rooms.find((r) => r.id === request.params.id);
+  const room = rooms.find(r => r.id === request.params.id);
   if (!room) {
     return response.status(404).json({ error: 'room not found' });
   }
@@ -21,7 +21,7 @@ router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
   const { date } = request.query;
 
-  const room = rooms.find((r) => r.id === id);
+  const room = rooms.find(r => r.id === id);
   if (!room) {
     return response.status(404).json({ error: 'room not found' });
   }
@@ -29,9 +29,7 @@ router.get('/:id/reservations', async (request, response) => {
   let { reservations } = room;
 
   if (date) {
-    reservations = reservations.filter((r) =>
-      r.start.dateTime.startsWith(date)
-    );
+    reservations = reservations.filter(r => r.start.dateTime.startsWith(date));
   }
 
   response.json(reservations);

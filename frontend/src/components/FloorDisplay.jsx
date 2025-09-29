@@ -4,7 +4,7 @@ import Floor2SVG from '../assets/exactum-2.svg?react';
 import Floor3SVG from '../assets/exactum-3.svg?react';
 import '../css/Floorplan.css';
 
-const baseUrl = 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const statuses = ['unavailable', 'available', 'reserved'];
 
 const floors = {
@@ -55,7 +55,8 @@ const FloorDisplay = ({ floor }) => {
           else {
             const reservations = roomData.reservations;
             const activeReservations = reservations.filter(e => checkActive(e));
-            addStatus(room, child, activeReservations.length > 0 ? 'reserved' : 'available');
+            const status = activeReservations.length > 0 ? 'reserved' : 'available';
+            addStatus(room, child, status);
           }
 
           const handler = () => {

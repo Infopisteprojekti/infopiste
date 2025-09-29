@@ -34,7 +34,9 @@ Whenever new content is pushed to the `main` branch, the frontend image is rebui
 
 The frontend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's `Dockerfile`, and then maps it to port 3000. To run the file, execute the following command:
 
-`$ docker compose up`
+```console
+$ docker compose up
+```
 
 in the root of the project.
 
@@ -42,17 +44,27 @@ in the root of the project.
 
 Alternatively, the frontend can be accessed by running
 
-`$ npm run dev` 
+```console
+$ npm run dev
+```
 
 in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host`.
 
 The application will then be available at `localhost:5173`.
 
-Note that dependencies should be installed with
+Note that before attempting to start the frontend, dependencies should be installed with
 
-`$ npm install`
+```console
+$ npm install
+```
 
-before attempting to start the frontend.
+and an `.env` file created in the root directory with the following contents:
+
+```env
+VITE_API_BASE_URL=http://localhost:1234
+```
+
+This assumes the [backend](./backend) is running locally on the default port 1234. 
 
 # Testing
 
@@ -66,13 +78,17 @@ The tests, as well as linting are included in the CI/CD pipeline. Whenever new c
 
 The app can also be tested locally by running 
 
-`$ npm run test`.
+```console
+$ npm run test
+```
 
 This is equivalent to running `npx vitest run`. 
 
 ESLint is used for linting. The linting can be checked with
 
-`$ npm run lint`
+```console
+$ npm run lint
+```
 
 in the `frontend/` directory.
 

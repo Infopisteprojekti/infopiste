@@ -28,6 +28,8 @@ export default defineConfig([
       semi: ['error', 'always'],
       'object-curly-spacing': ['error', 'always'],
       'arrow-spacing': ['error', { before: true, after: true }],
+      eqeqeq: ['error', 'always'],
+      'no-trailing-spaces': ['error', { 'ignoreComments': true }],
       'no-console': 0,
       'no-unused-vars': 0,
     }

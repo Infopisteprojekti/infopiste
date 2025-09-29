@@ -108,7 +108,7 @@ function generateRooms() {
     }
   }
 
-  return roomIds.map(id => generateRoom(id));
+  return roomIds.map((id) => generateRoom(id));
 }
 
 export { generateRooms };

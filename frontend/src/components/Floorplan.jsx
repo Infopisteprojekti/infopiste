@@ -4,13 +4,14 @@ import { Plus, Minus, RotateCcw } from 'lucide-react';
 import FloorplanSVG from '../assets/exactum-3.svg?react';
 import '../css/Floorplan.css';
 
-const baseUrl = 'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
+const baseUrl =
+  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 const statuses = ['unavailable', 'available', 'reserved'];
 
 const Floorplan = () => {
   const floorplanRef = useRef(null);
 
-  const checkActive = reservation => {
+  const checkActive = (reservation) => {
     const now = new Date();
     const start = new Date(reservation.start.dateTime);
     const end = new Date(reservation.end.dateTime);
@@ -41,17 +42,17 @@ const Floorplan = () => {
             child.classList.add('room');
             room.setAttribute('data-room-id', roomId);
 
-            const roomData = data.find(e => e.id === roomId);
+            const roomData = data.find((e) => e.id === roomId);
             if (!roomData || roomData.type === 'office') {
               addStatus(room, child, 'unavailable');
-            }
-            else {
+            } else {
               const reservations = roomData.reservations;
-              const activeReservations = reservations.filter(e => checkActive(e));
+              const activeReservations = reservations.filter((e) =>
+                checkActive(e)
+              );
               if (activeReservations.length > 0) {
                 addStatus(room, child, 'reserved');
-              }
-              else {
+              } else {
                 addStatus(room, child, 'available');
               }
             }
@@ -65,8 +66,7 @@ const Floorplan = () => {
               room._clickHandler = handler;
             }
           }
-        }
-        catch (error) {
+        } catch (error) {
           console.log(error);
         }
       };
@@ -90,13 +90,13 @@ const Floorplan = () => {
         <>
           <div className="floorplan-toolbar">
             <button onClick={() => zoomIn()}>
-                            Zoom In <Plus size={16} strokeWidth={2} />
+              Zoom In <Plus size={16} strokeWidth={2} />
             </button>
             <button onClick={() => zoomOut()}>
-                            Zoom Out <Minus size={16} strokeWidth={2} />
+              Zoom Out <Minus size={16} strokeWidth={2} />
             </button>
             <button onClick={() => resetTransform()}>
-                            Reset <RotateCcw size={16} strokeWidth={2} />
+              Reset <RotateCcw size={16} strokeWidth={2} />
             </button>
           </div>
 

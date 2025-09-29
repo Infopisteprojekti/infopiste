@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import prettier from 'eslint-plugin-prettier/recommended';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
@@ -9,19 +10,11 @@ export default defineConfig([
       sourceType: 'module',
       globals: globals.node,
     },
-    extends: [js.configs.recommended],
+    extends: [js.configs.recommended, prettier],
     rules: {
-      indent: ['error', 2],
-      'linebreak-style': ['error', 'unix'],
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
-      'object-curly-spacing': ['error', 'always'],
-      'arrow-spacing': ['error', { before: true, after: true }],
       eqeqeq: ['error', 'always'],
-      'no-trailing-spaces': ['error', { 'ignoreComments': true }],
       'no-console': 0,
       'no-unused-vars': 0,
     },
-    ignores: ['node_modules', 'eslint.config.js'],
   },
 ]);

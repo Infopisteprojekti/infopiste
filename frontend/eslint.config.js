@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import prettier from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -12,6 +13,7 @@ export default defineConfig([
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
+      prettier,
     ],
     languageOptions: {
       globals: globals.browser,
@@ -22,16 +24,9 @@ export default defineConfig([
       },
     },
     rules: {
-      indent: ['error', 2],
-      'linebreak-style': ['error', 'unix'],
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
-      'object-curly-spacing': ['error', 'always'],
-      'arrow-spacing': ['error', { before: true, after: true }],
       eqeqeq: ['error', 'always'],
-      'no-trailing-spaces': ['error', { 'ignoreComments': true }],
       'no-console': 0,
       'no-unused-vars': 0,
-    }
+    },
   },
 ]);

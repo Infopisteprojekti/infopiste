@@ -3,11 +3,12 @@ import Floorplan from './components/Floorplan';
 import BulletinBoard from './components/BulletinBoard';
 
 function App() {
-
   return (
     <div>
       <div>
-        <Link style={{ marginRight: 10 }} to="/">Floorplan</Link>
+        <Link style={{ marginRight: 10 }} to="/">
+          Floorplan
+        </Link>
         <Link to="/board">Bulletin Board</Link>
       </div>
       <div>
@@ -25,6 +26,6 @@ function App() {
       </div>
     </div>
   );
-};
+}
 
 export default App;

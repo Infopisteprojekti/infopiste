@@ -13,11 +13,12 @@ const app = express();
 mongoose.set('strictQuery', false);
 logger.info('Connecting to', MONGO_DB_URL);
 
-mongoose.connect(MONGO_DB_URL)
+mongoose
+  .connect(MONGO_DB_URL)
   .then(() => {
     logger.info('connected to MongoDB');
   })
-  .catch(error => {
+  .catch((error) => {
     logger.error('error connection to MongoDB:', error.message);
   });
 

@@ -4,9 +4,10 @@ test.describe('Infopiste', () => {
   test('home page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173');
 
-    // There is no proper home page yet - no title or headings.
-    // Once those are added, this should be changed to something more accurate.
     await expect(page.getByText('A348')).toBeVisible();
+
+    const title = await page.title();
+    expect(title).toBe('infonäyttö')
   });
 
   test('zoom buttons exist', async ({ page }) => {

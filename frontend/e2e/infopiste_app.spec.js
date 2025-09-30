@@ -130,4 +130,22 @@ test.describe('Infopiste', () => {
     await expect(roomA345).toHaveClass(/reserved/);
     await expect(roomA346).toHaveClass(/unavailable/);
   });
+
+  test('floor can be changed', async ({ page }) => {
+    await page.goto('http://localhost:5173');
+
+    const floor3Room = page.locator('#A344');
+    await expect(floor3Room).toBeVisible();
+
+    await page.getByText('Floor 2').click();
+    const floor2Room = page.locator('#A244');
+    await expect(floor2Room).toBeVisible();
+
+    await page.getByText('Floor 1').click();
+    const floor1Room = page.locator('#A144');
+    await expect(floor1Room).toBeVisible();
+
+    await page.getByText('Floor 3').click();
+    await expect(floor3Room).toBeVisible();
+  });
 });

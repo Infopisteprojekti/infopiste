@@ -34,7 +34,7 @@ Whenever new content is pushed to the `main` branch, the frontend image is rebui
 
 The frontend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's `Dockerfile`, and then maps it to port 3000. To run the file, execute the following command:
 
-```console
+```bash
 $ docker compose up
 ```
 
@@ -44,7 +44,7 @@ in the root of the project.
 
 Alternatively, the frontend can be accessed by running
 
-```console
+```bash
 $ npm run dev
 ```
 
@@ -54,7 +54,7 @@ The application will then be available at `localhost:5173`.
 
 Note that before attempting to start the frontend, dependencies should be installed with
 
-```console
+```bash
 $ npm install
 ```
 
@@ -78,7 +78,7 @@ The tests, as well as linting are included in the CI/CD pipeline. Whenever new c
 
 The app can also be tested locally by running 
 
-```console
+```bash
 $ npm run test
 ```
 
@@ -86,7 +86,7 @@ This is equivalent to running `npx vitest run`.
 
 ESLint is used for linting. The linting can be checked with
 
-```console
+```bash
 $ npm run lint
 ```
 

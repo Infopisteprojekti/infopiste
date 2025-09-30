@@ -48,7 +48,7 @@ Whenever new content is pushed to the main branch, the backend image is rebuilt,
 
 The endpoints can be accessed by adding the wanted endpoint to the end of the url; for example,
 
-```console
+```bash
 $ curl https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/health
 ```
 
@@ -77,7 +77,7 @@ In Docker:
 
 The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
 
-```console
+```bash
 $ docker compose up
 ```
 
@@ -85,7 +85,7 @@ in the root of the project.
 
 The backend is then running on port 1234, and can be accessed as follows:
 
-```console
+```bash
 $ curl http://localhost:1234/health
 ```
 
@@ -93,7 +93,7 @@ $ curl http://localhost:1234/health
 
 Alternatively, the backend can be accessed by running
 
-```console
+```bash
 $ npm run start
 ```
 
@@ -115,13 +115,13 @@ The tests, as well as linting, are included in the CI/CD pipeline. Whenever new 
 
 The app can also be tested locally by running
 
-```console
+```bash
 $ npm run test
 ```
 
 ESLint is used for linting. The linting can be checked with
 
-```console
+```bash
 $ npm run lint
 ```
 

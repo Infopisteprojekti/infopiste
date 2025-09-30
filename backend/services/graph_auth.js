@@ -29,7 +29,7 @@ export function initializeGraphForAppOnlyAuth(settings, skip = false) {
     _clientSecretCredential = new ClientSecretCredential(
       _settings.tenantId,
       _settings.clientId,
-      _settings.clientSecret,
+      _settings.clientSecret
     );
   }
 
@@ -38,7 +38,7 @@ export function initializeGraphForAppOnlyAuth(settings, skip = false) {
       _clientSecretCredential,
       {
         scopes: ['https://graph.microsoft.com/.default'],
-      },
+      }
     );
 
     _appClient = Client.initWithMiddleware({
@@ -50,7 +50,7 @@ export function initializeGraphForAppOnlyAuth(settings, skip = false) {
 export function getAppClient() {
   if (!_appClient) {
     throw new Error(
-      'Graph client not initialized. Call initializeGraphForAppOnlyAuth first.',
+      'Graph client not initialized. Call initializeGraphForAppOnlyAuth first.'
     );
   }
   return _appClient;

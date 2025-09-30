@@ -6,9 +6,9 @@ export const MONGO_DB_URL =
     : process.env.MONGO_DB_URL;
 
 export const MS_SETTINGS = {
-  clientId: process.env.clientId,
-  clientSecret: process.env.clientSecret,
-  tenantId: process.env.tenantId,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  tenantId: process.env.TENANT_ID,
 };
 
 export const SKIP_GRAPH = process.env.SKIP_GRAPH === 'true';

@@ -4,9 +4,8 @@ import App from './App.jsx';
 import './css/reset.css';
 import './css/index.css';
 
-
 createRoot(document.getElementById('root')).render(
   <Router>
     <App />
-  </Router>,
+  </Router>
 );

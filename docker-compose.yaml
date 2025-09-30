@@ -17,6 +17,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:8080"
+    environment:
+      VITE_API_BASE_URL: https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi
     depends_on:
       - backend
   mongo:

@@ -4,7 +4,6 @@ import Floor2SVG from '../assets/exactum-2.svg?react';
 import Floor3SVG from '../assets/exactum-3.svg?react';
 import '../css/Floorplan.css';
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const statuses = {
   UNAVAILABLE: 'unavailable',
   AVAILABLE: 'available',
@@ -12,10 +11,14 @@ const statuses = {
   UNKNOWN: 'unknown'
 };
 
+const baseUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
+
 const floors = {
   1: Floor1SVG,
   2: Floor2SVG,
-  3: Floor3SVG
+  3: Floor3SVG,
 };
 
 const FloorDisplay = ({ floor }) => {
@@ -26,7 +29,7 @@ const FloorDisplay = ({ floor }) => {
     const floorplan = floorplanRef.current;
     let rooms = [];
 
-    const checkActive = reservation => {
+    const checkActive = (reservation) => {
       const now = new Date();
       const start = new Date(reservation.start.dateTime);
       const end = new Date(reservation.end.dateTime);
@@ -53,14 +56,25 @@ const FloorDisplay = ({ floor }) => {
           child.classList.add('room');
           room.setAttribute('data-room-id', roomId);
 
-          const roomData = data.find(e => e.id === roomId);
+          const roomData = data.find((e) => e.id === roomId);
           if (!roomData || roomData.type === 'office') {
+<<<<<<< HEAD
             addStatus(room, child, statuses.UNAVAILABLE);
           }
           else {
             const reservations = roomData.reservations;
             const activeReservations = reservations.filter(e => checkActive(e));
             const status = activeReservations.length > 0 ? statuses.RESERVED : statuses.AVAILABLE;
+=======
+            addStatus(room, child, 'unavailable');
+          } else {
+            const reservations = roomData.reservations;
+            const activeReservations = reservations.filter((e) =>
+              checkActive(e),
+            );
+            const status =
+              activeReservations.length > 0 ? 'reserved' : 'available';
+>>>>>>> 0ac410b (Add backend url through docker environment variable)
             addStatus(room, child, status);
           }
 
@@ -73,8 +87,7 @@ const FloorDisplay = ({ floor }) => {
             room._clickHandler = handler;
           }
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
       }
     };

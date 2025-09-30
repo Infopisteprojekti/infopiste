@@ -148,4 +148,11 @@ test.describe('Infopiste', () => {
     await page.getByText('Floor 3').click();
     await expect(floor3Room).toBeVisible();
   });
+
+  test('bulletin board view can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173');
+
+    await page.getByText('Bulletin Board').click();
+    await expect(page.getByText('Files')).toBeVisible();
+  })
 });

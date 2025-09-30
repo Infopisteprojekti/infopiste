@@ -6,21 +6,21 @@ function App() {
 
   return (
     <div>
-      <div>
-        <Link style={{ marginRight: 10} }to="/">Floorplan</Link>
-        <Link to="/board">Bulletin Board</Link>
+      <div className='navbar'>
+          <Link className='navbar-button' to='/'>Floorplan</Link>
+          <Link className='navbar-button' to='/board'>Bulletin Board</Link>
       </div>
       <div>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
-              <div style={{ marginTop: 40 }}>
+              <div>
                 <Floorplan />
               </div>
             }
           />
-          <Route path="/board" element={<BulletinBoard />} />
+          <Route path='/board' element={<BulletinBoard />} />
         </Routes>
       </div>
     </div>

@@ -5,7 +5,12 @@ import Floor3SVG from '../assets/exactum-3.svg?react';
 import '../css/Floorplan.css';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const statuses = ['unavailable', 'available', 'reserved'];
+const statuses = {
+  UNAVAILABLE: 'unavailable',
+  AVAILABLE: 'available',
+  RESERVED: 'reserved',
+  UNKNOWN: 'unknown'
+};
 
 const floors = {
   1: Floor1SVG,
@@ -30,7 +35,7 @@ const FloorDisplay = ({ floor }) => {
 
     const addStatus = (room, child, status) => {
       room._status = status;
-      child.classList.remove(...statuses);
+      child.classList.remove(...Object.values(statuses));
       child.classList.add(status);
     };
 
@@ -50,17 +55,17 @@ const FloorDisplay = ({ floor }) => {
 
           const roomData = data.find(e => e.id === roomId);
           if (!roomData || roomData.type === 'office') {
-            addStatus(room, child, 'unavailable');
+            addStatus(room, child, statuses.UNAVAILABLE);
           }
           else {
             const reservations = roomData.reservations;
             const activeReservations = reservations.filter(e => checkActive(e));
-            const status = activeReservations.length > 0 ? 'reserved' : 'available';
+            const status = activeReservations.length > 0 ? statuses.RESERVED : statuses.AVAILABLE;
             addStatus(room, child, status);
           }
 
           const handler = () => {
-            alert(`Room ${roomId} status: ${room._status ?? 'unknown'}`);
+            alert(`Room ${roomId} status: ${room._status ?? statuses.UNKNOWN}`);
           };
 
           if (!room._clickHandler) {

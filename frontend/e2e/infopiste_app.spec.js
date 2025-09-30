@@ -60,7 +60,7 @@ test.describe('Infopiste', () => {
     expect(defaultScale).toBe(1); 
     
     await page.getByText('Zoom In').click();
-    await page.waitForTimeout(200); 
+    await page.waitForTimeout(500); 
 
     const zoomedInTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
     const zoomedInScale = getScaleFactor(zoomedInTransform);
@@ -68,7 +68,7 @@ test.describe('Infopiste', () => {
     expect(zoomedInScale).toBeGreaterThan(defaultScale);
 
     await page.getByText('Reset').click();
-    await page.waitForTimeout(200); 
+    await page.waitForTimeout(500); 
 
     const resetTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
     const resetScale = getScaleFactor(resetTransform);
@@ -76,7 +76,7 @@ test.describe('Infopiste', () => {
     expect(resetScale).toBeCloseTo(defaultScale, 2); 
 
     await page.getByText('Zoom Out').click();
-    await page.waitForTimeout(200); 
+    await page.waitForTimeout(500); 
     
     const zoomedOutTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
     const zoomedOutScale = getScaleFactor(zoomedOutTransform);

@@ -28,20 +28,24 @@ test.describe('Infopiste', () => {
   test('floorplan is rendered', async ({ page }) => {
     await page.goto('http://localhost:5173');
 
-    const floorplanWrapper = page.getByTestId('floorplan-svg').first();
-    await floorplanWrapper.waitFor({ state: 'attached' });
+    const svg = page.locator('[data-testid="floorplan-svg"]').first();
+    await svg.waitFor({ state: 'attached' });
+    await expect(svg).toBeVisible();
 
-    const rooms = await page.locator('svg g').count();
-    expect(rooms).toBeGreaterThan(0);
+    const rooms = page.locator('svg g > .room');
+    await rooms.first().waitFor({ state: 'visible' });
+
+    const roomCount = await rooms.count();
+    expect(roomCount).toBeGreaterThan(0);
   });
 
   test('zoom functionality works', async ({ page }) => {
     await page.goto('http://localhost:5173');
 
-    const svg = page.getByTestId('floorplan-svg').first();
+    const svg = page.locator('[data-testid="floorplan-svg"]').first()
 
     const transformedElement = svg.locator('xpath=..'); 
-    await transformedElement.waitFor({ state: 'visible' });
+    await expect(transformedElement).toBeVisible();
 
     const getScaleFactor = (transform) => {
         const match = transform.match(/matrix\(([^,]+),/);
@@ -116,7 +120,7 @@ test.describe('Infopiste', () => {
     await page.goto('http://localhost:5173');
 
     const floorplan = page.getByTestId('floorplan-svg').first();
-    await floorplan.waitFor();
+    await expect(floorplan).toBeVisible();
 
     const roomA344 = floorplan.locator('#A344');
     const roomA345 = floorplan.locator('#A345');

@@ -15,8 +15,10 @@
   "devDependencies": {
     "@faker-js/faker": "^10.0.0",
     "eslint": "^9.35.0",
-    "eslint-config-xo": "^0.49.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
     "supertest": "^7.1.4"
   },
   "dependencies": {
@@ -27,5 +29,9 @@
     "express": "^5.1.0",
     "isomorphic-fetch": "^3.0.0",
     "mongoose": "^8.18.1"
-  }
-}
+},
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  }}

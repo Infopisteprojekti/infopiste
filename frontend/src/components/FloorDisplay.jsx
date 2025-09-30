@@ -28,7 +28,7 @@ const FloorDisplay = ({ floor }) => {
     const floorplan = floorplanRef.current;
     let rooms = [];
 
-    const checkActive = (reservation) => {
+    const checkActive = reservation => {
       const now = new Date();
       const start = new Date(reservation.start.dateTime);
       const end = new Date(reservation.end.dateTime);
@@ -55,14 +55,12 @@ const FloorDisplay = ({ floor }) => {
           child.classList.add('room');
           room.setAttribute('data-room-id', roomId);
 
-          const roomData = data.find((e) => e.id === roomId);
+          const roomData = data.find(e => e.id === roomId);
           if (!roomData || roomData.type === 'office') {
             addStatus(room, child, statuses.UNAVAILABLE);
           } else {
             const reservations = roomData.reservations;
-            const activeReservations = reservations.filter((e) =>
-              checkActive(e),
-            );
+            const activeReservations = reservations.filter(e => checkActive(e));
             const status =
               activeReservations.length > 0
                 ? statuses.RESERVED

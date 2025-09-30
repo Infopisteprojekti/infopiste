@@ -33,5 +33,9 @@ test('room with correct id is found', async () => {
 test('reservations for specific room are returned', async () => {
   const res = await api.get('/api/rooms/A310/reservations').expect(200);
 
-  assert.strictEqual(Array.isArray(res.body), true, 'reservations are in array');
+  assert.strictEqual(
+    Array.isArray(res.body),
+    true,
+    'reservations are in array'
+  );
 });

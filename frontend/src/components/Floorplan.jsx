@@ -12,16 +12,43 @@ const Floorplan = () => {
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
-          <div className='floorplan-toolbar toolbar__transform'>
-            <button onClick={() => zoomIn()}>Zoom In <Plus size={16} /></button>
-            <button onClick={() => zoomOut()}>Zoom Out <Minus size={16} /></button>
-            <button onClick={() => resetTransform()}>Reset <RotateCcw size={16} /></button>
+          <div className="floorplan-toolbar toolbar__transform">
+            <button onClick={() => zoomIn()}>
+              Zoom In <Plus size={16} />
+            </button>
+            <button onClick={() => zoomOut()}>
+              Zoom Out <Minus size={16} />
+            </button>
+            <button onClick={() => resetTransform()}>
+              Reset <RotateCcw size={16} />
+            </button>
           </div>
 
-          <div className='floorplan-toolbar toolbar__floor-switch'>
-            <button onClick={() => { setFloor(1); resetTransform(); }}>Floor 1</button>
-            <button onClick={() => { setFloor(2); resetTransform(); }}>Floor 2</button>
-            <button onClick={() => { setFloor(3); resetTransform(); }}>Floor 3</button>
+          <div className="floorplan-toolbar toolbar__floor-switch">
+            <button
+              onClick={() => {
+                setFloor(1);
+                resetTransform();
+              }}
+            >
+              Floor 1
+            </button>
+            <button
+              onClick={() => {
+                setFloor(2);
+                resetTransform();
+              }}
+            >
+              Floor 2
+            </button>
+            <button
+              onClick={() => {
+                setFloor(3);
+                resetTransform();
+              }}
+            >
+              Floor 3
+            </button>
           </div>
 
           <TransformComponent

@@ -29,8 +29,7 @@ router.get('/:id/reservations', async (request, response) => {
   let { reservations } = room;
 
   if (date) {
-    reservations = reservations.filter(r =>
-      r.start.dateTime.startsWith(date));
+    reservations = reservations.filter(r => r.start.dateTime.startsWith(date));
   }
 
   response.json(reservations);

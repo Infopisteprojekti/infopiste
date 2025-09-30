@@ -16,7 +16,7 @@ export default defineConfig({
       '/api': {
         target: 'http://backend:1234',
         changeOrigin: true,
-      }
-    }
-  }
+      },
+    },
+  },
 });

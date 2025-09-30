@@ -26,6 +26,11 @@ spec:
           env:
             - name: MONGO_DB_URL
               valueFrom:
-              configMapKeyRef:
-                name: infopiste-config
-                key: MONGO_DB_URL
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: MONGO_DB_URL
+            - name: MS_API_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: MS_API_KEY

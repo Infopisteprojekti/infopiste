@@ -1,11 +1,7 @@
 import { getAppClient } from '../services/graph_auth.js';
 
 function createBatchRequest(roomIds, roomEmails) {
-  const now = new Date();
-  const nowUtc = now.toISOString();
-  const weekAheadUtc = new Date(
-    now.getTime() + 7 * 24 * 60 * 60 * 1000
-  ).toISOString();
+  const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
 
   const batchRequest = roomEmails.map((email, idx) => {
     const roomId = roomIds[idx];
@@ -32,15 +28,29 @@ function filterBatchResponse(roomIds, batchResponse) {
       );
     }
 
-    const reservations = res.body.value.map(e => ({
-      start: e.start,
-      end: e.end,
-      displayName: e.location?.displayName || null,
-    }));
+    const reservations = res.body.value.map(mapEventToReservation);
     return { id: roomId, reservations };
   });
 
   return result;
+}
+
+function mapEventToReservation(event) {
+  return {
+    start: event.start,
+    end: event.end,
+    displayName: event.location?.displayName || null,
+  };
+}
+
+function getUtcNowAndWeekAhead() {
+  const now = new Date();
+  const nowUtc = now.toISOString();
+  const weekAheadUtc = new Date(
+    now.getTime() + 7 * 24 * 60 * 60 * 1000
+  ).toISOString();
+
+  return { nowUtc, weekAheadUtc };
 }
 
 export async function fetchRoomReservations(roomIds) {
@@ -60,5 +70,28 @@ export async function fetchRoomReservations(roomIds) {
   } catch (err) {
     console.error('fetchRoomReservations failed: ', err);
     throw new Error('Could not fetch room reservations', err);
+  }
+}
+
+export async function fetchReservationsById(roomId) {
+  const roomEmail = `exactum.${roomId.toLowerCase()}@helsinki.fi`;
+
+  try {
+    const client = getAppClient();
+
+    const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
+
+    const results = await client
+      .api(`/users/${roomEmail}/calendar/events`)
+      .select(['start', 'end', 'location'])
+      .filter(
+        `end/dateTime ge '${nowUtc}' and start/dateTime le '${weekAheadUtc}'`
+      )
+      .orderby('start/dateTime')
+      .get();
+
+    return results.value.map(mapEventToReservation);
+  } catch (err) {
+    throw new Error(err);
   }
 }

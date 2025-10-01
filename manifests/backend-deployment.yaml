@@ -29,8 +29,18 @@ spec:
                 configMapKeyRef:
                   name: infopiste-config
                   key: MONGO_DB_URL
-            - name: MS_API_KEY
+            - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:
                   name: infopiste-config
-                  key: MS_API_KEY
+                  key: TENANT_ID
+            - name: CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: CLIENT_ID
+            - name: CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: CLIENT_SECRET

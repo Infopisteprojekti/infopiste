@@ -7,7 +7,7 @@ test.describe('Infopiste', () => {
     await expect(page.getByText('A348')).toBeVisible();
 
     const title = await page.title();
-    expect(title).toBe('infonäyttö')
+    expect(title).toBe('infonäyttö');
   });
 
   test('zoom buttons exist', async ({ page }) => {
@@ -43,45 +43,53 @@ test.describe('Infopiste', () => {
   test('zoom functionality works', async ({ page }) => {
     await page.goto('http://localhost:5173');
 
-    const svg = page.locator('[data-testid="floorplan-svg"]').first()
+    const svg = page.locator('[data-testid="floorplan-svg"]').first();
 
-    const transformedElement = svg.locator('xpath=..'); 
+    const transformedElement = svg.locator('xpath=..');
     await expect(transformedElement).toBeVisible();
 
-    const getScaleFactor = (transform) => {
-        const match = transform.match(/matrix\(([^,]+),/);
-        if (match) {
-            return parseFloat(match[1]);
-        }
-        return 1; 
+    const getScaleFactor = transform => {
+      const match = transform.match(/matrix\(([^,]+),/);
+      if (match) {
+        return parseFloat(match[1]);
+      }
+      return 1;
     };
 
-    const initialTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
-    const defaultScale = getScaleFactor(initialTransform); 
-    expect(defaultScale).toBe(1); 
-    
-    await page.getByText('Zoom In').click();
-    await page.waitForTimeout(500); 
+    const initialTransform = await transformedElement.evaluate(
+      elem => getComputedStyle(elem).transform
+    );
+    const defaultScale = getScaleFactor(initialTransform);
+    expect(defaultScale).toBe(1);
 
-    const zoomedInTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
+    await page.getByText('Zoom In').click();
+    await page.waitForTimeout(500);
+
+    const zoomedInTransform = await transformedElement.evaluate(
+      elem => getComputedStyle(elem).transform
+    );
     const zoomedInScale = getScaleFactor(zoomedInTransform);
-    
+
     expect(zoomedInScale).toBeGreaterThan(defaultScale);
 
     await page.getByText('Reset').click();
-    await page.waitForTimeout(500); 
+    await page.waitForTimeout(500);
 
-    const resetTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
+    const resetTransform = await transformedElement.evaluate(
+      elem => getComputedStyle(elem).transform
+    );
     const resetScale = getScaleFactor(resetTransform);
-    
-    expect(resetScale).toBeCloseTo(defaultScale, 2); 
+
+    expect(resetScale).toBeCloseTo(defaultScale, 2);
 
     await page.getByText('Zoom Out').click();
-    await page.waitForTimeout(500); 
-    
-    const zoomedOutTransform = await transformedElement.evaluate(elem => getComputedStyle(elem).transform);
+    await page.waitForTimeout(500);
+
+    const zoomedOutTransform = await transformedElement.evaluate(
+      elem => getComputedStyle(elem).transform
+    );
     const zoomedOutScale = getScaleFactor(zoomedOutTransform);
-    
+
     expect(zoomedOutScale).toBeLessThan(defaultScale);
   });
 
@@ -93,7 +101,7 @@ test.describe('Infopiste', () => {
           {
             id: 'A344',
             type: 'meeting',
-            reservations: []
+            reservations: [],
           },
           {
             id: 'A345',
@@ -103,18 +111,22 @@ test.describe('Infopiste', () => {
                 id: 1,
                 subject: 'Best Meeting',
                 organizer: 'Some Person',
-                start: { dateTime: new Date(Date.now() - 1000 * 60 * 60).toISOString() },
-                end: { dateTime: new Date(Date.now() + 1000 * 60 * 60).toISOString() },
-                location: 'A345'
-              }
-            ]
+                start: {
+                  dateTime: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+                },
+                end: {
+                  dateTime: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
+                },
+                location: 'A345',
+              },
+            ],
           },
           {
             id: 'A346',
             type: 'office',
-            reservations: []
-          }
-        ])
+            reservations: [],
+          },
+        ]),
       });
     });
 
@@ -155,5 +167,5 @@ test.describe('Infopiste', () => {
 
     await page.getByText('Bulletin Board').click();
     await expect(page.getByText('Files')).toBeVisible();
-  })
+  });
 });

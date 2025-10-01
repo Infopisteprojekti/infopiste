@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 

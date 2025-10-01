@@ -94,7 +94,7 @@ const FloorDisplay = ({ floor }) => {
     };
   }, [floor]);
 
-  return <FloorSVG ref={floorplanRef} data-testid='floorplan-svg'/>;
+  return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;
 };
 
 export default FloorDisplay;

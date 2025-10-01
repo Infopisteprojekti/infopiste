@@ -5,6 +5,8 @@ import { getAppClient } from '../services/graph_auth.js';
 const router = Router();
 const rooms = generateRooms();
 
+const ROOMIDS = ['b233', 'a214', 'a218b', 'a307', 'c231'];
+
 router.get('/', async (request, response) => {
   response.status(200).json(rooms);
 });
@@ -21,14 +23,30 @@ router.get('/:id', async (request, response) => {
 router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
 
+  if (!ROOMIDS.includes(id.toLowerCase())) {
+    console.log(`Unsupported room: ${id}`);
+    response.status(404).json({ error: `Room not supported: ${id}` });
+  }
+
+  const roomEmail = `exactum.${id.toLowerCase()}@helsinki.fi`;
+
   try {
     const client = getAppClient();
 
+    // Filter events from current time to max week ahead
+    const now = new Date();
+    const nowUtc = now.toISOString();
+    const weekAheadUtc = new Date(
+      now.getTime() + 7 * 24 * 60 * 60 * 1000
+    ).toISOString();
+
     const results = await client
-      .api(`/users/${id}/calendar/events`)
+      .api(`/users/${roomEmail}/calendar/events`)
       .select(['start', 'end', 'location'])
+      .filter(
+        `end/dateTime ge '${nowUtc}' and start/dateTime le '${weekAheadUtc}'`
+      )
       .orderby('start/dateTime')
-      .top(20)
       .get();
 
     const events = results.value.map(e => ({

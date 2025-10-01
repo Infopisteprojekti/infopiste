@@ -44,7 +44,9 @@ in the root of the project.
 
 Alternatively, the frontend can be accessed by running
 
-`$ npm run dev`
+```bash
+$ npm run dev
+```
 
 in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host`.
 
@@ -62,7 +64,7 @@ and an `.env` file created in the root directory with the following contents:
 VITE_API_BASE_URL=http://localhost:1234
 ```
 
-This assumes the [backend](./backend) is running locally on the default port 1234. 
+This assumes the [backend](./backend) is running locally on the default port 1234.
 
 # Testing
 
@@ -88,7 +90,9 @@ This is equivalent to running `npx vitest run`.
 
 The end-to-end tests can be run locally with
 
-`$ npm run e2e`.
+```bash
+$ npm run e2e
+```
 
 This is equivalent to running `npx playwright test`.
 

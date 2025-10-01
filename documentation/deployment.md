@@ -6,7 +6,9 @@ Whenever new content is pushed or merged into the `main` branch, the files `back
 
 `front.yaml` similarly runs the frontend tests located in [frontend/tests](../frontend/tests), and also does linting.
 
-`staging-deploy.yaml` builds the frontend and backend Docker images, and pushes them to DockerHub. 
+Additionally, the end to end tests in [frontend/e2e](../frontend/e2e/) are run in `front.yaml`.
+
+`staging-deploy.yaml` builds the frontend and backend Docker images, and pushes them to DockerHub.
 
 The configuration for the OpenShift staging server deployment can be found in [manifests](../manifests/). It includes the following:
 

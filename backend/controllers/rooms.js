@@ -1,23 +1,20 @@
 import { Router } from 'express';
 import { generateRooms } from '../mockdata/generate-room-data.js';
 import { getAppClient } from '../services/graph_auth.js';
+import { fetchRoomReservations } from '../services/rooms.js';
 
 const router = Router();
-const rooms = generateRooms();
 
 const ROOMIDS = ['b233', 'a214', 'a218b', 'a307', 'c231'];
 
 router.get('/', async (request, response) => {
-  response.status(200).json(rooms);
-});
-
-router.get('/:id', async (request, response) => {
-  const room = rooms.find(r => r.id === request.params.id);
-  if (!room) {
-    return response.status(404).json({ error: 'room not found' });
+  try {
+    const reservations = await fetchRoomReservations(ROOMIDS);
+    response.status(200).json(reservations);
+  } catch (err) {
+    console.error(err);
+    response.status(500).json({ error: err });
   }
-
-  response.status(200).json(room);
 });
 
 router.get('/:id/reservations', async (request, response) => {
@@ -57,7 +54,7 @@ router.get('/:id/reservations', async (request, response) => {
 
     response.json(events);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     response
       .status(500)
       .json({ error: `Failed to fetch reservations for room: ${id}` });

@@ -1,4 +1,4 @@
-import { getAppClient } from '../services/graph_auth.js';
+import { getAppClient } from './graph-auth.js';
 
 function createBatchRequest(roomIds, roomEmails) {
   const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();

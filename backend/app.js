@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import logger from './utils/logger.js';
 import { MONGO_DB_URL, MS_SETTINGS, SKIP_GRAPH } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
-import { initializeGraphForAppOnlyAuth } from './services/graph_auth.js';
+import { initializeGraphForAppOnlyAuth } from './services/graph-auth.js';
 import { initRedis } from './services/redis-client.js';
 
 import roomsRouter from './controllers/rooms.js';

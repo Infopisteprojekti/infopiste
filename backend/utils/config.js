@@ -12,3 +12,6 @@ export const MS_SETTINGS = {
 };
 
 export const SKIP_GRAPH = process.env.SKIP_GRAPH === 'true';
+
+export const REDIS_URL = process.env.REDIS_URL || 'redis://redis:6379/0';
+export const TTL_SECONDS = 60;

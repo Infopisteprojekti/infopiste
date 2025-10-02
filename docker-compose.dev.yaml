@@ -17,6 +17,7 @@ services:
       SKIP_GRAPH: ${SKIP_GRAPH}
     depends_on:
       - mongo
+      - redis
 
   frontend:
     build:
@@ -42,6 +43,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: test_user
       MONGO_INITDB_ROOT_PASSWORD: test_password
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
 
 volumes:
   mongo_data:

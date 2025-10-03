@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import supertest from 'supertest';
-import app from '../app.js';
+import { createApp } from '../app.js';
 
+const mockRedis = {
+  get: async () => null,
+  set: async () => null,
+  del: async () => null,
+};
+
+const app = createApp({ redisClient: mockRedis });
 const api = supertest(app);
 
 test('health check returns ok', async () => {

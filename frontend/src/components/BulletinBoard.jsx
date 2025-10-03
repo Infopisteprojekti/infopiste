@@ -1,4 +1,4 @@
-import qrcode from '../assets/QRCode-for-Example-form.png';
+import qrcode from '../assets/form.svg';
 import '../css/BulletinBoard.css';
 
 const BulletinBoard = () => {

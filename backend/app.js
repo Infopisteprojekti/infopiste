@@ -3,44 +3,61 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 import logger from './utils/logger.js';
-import { MONGO_DB_URL, MS_SETTINGS, SKIP_GRAPH } from './utils/config.js';
+import { MONGO_DB_URL, MS_SETTINGS, TEST } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
 import { initializeGraphForAppOnlyAuth } from './services/graph-auth.js';
-import { initRedis } from './services/redis-client.js';
+import { initRedis, getRedis } from './services/redis-client.js';
 
 import roomsRouter from './controllers/rooms.js';
 
-const app = express();
+export function createApp({ redisClient } = {}) {
+  const app = express();
 
-mongoose.set('strictQuery', false);
-logger.info('Connecting to', MONGO_DB_URL);
+  let redis;
+  if (redisClient) {
+    redis = redisClient;
+  } else {
+    redis = getRedis();
+  }
 
-mongoose
-  .connect(MONGO_DB_URL)
-  .then(() => {
-    logger.info('connected to MongoDB');
-  })
-  .catch(error => {
-    logger.error('error connection to MongoDB:', error.message);
+  app.use((req, res, next) => {
+    req.redisClient = redis;
+    next();
   });
 
-app.use(cors());
-app.use(express.json());
-app.use(requestLogger);
+  app.use(cors());
+  app.use(express.json());
+  app.use(requestLogger);
 
-await initRedis();
-initializeGraphForAppOnlyAuth(MS_SETTINGS, SKIP_GRAPH);
+  app.use('/api/rooms', roomsRouter);
 
-app.use('/api/rooms', roomsRouter);
+  app.get('/', (req, res) => res.send('infonäyttö backend'));
+  app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+  app.get('/api/hello', async (req, res) => {
+    res.json({ message: 'hello from backend server' });
+  });
 
-app.get('/', (req, res) => res.send('infonäyttö backend'));
+  app.use(unknownEndpoint);
 
-app.get('/api/hello', async (req, res) => {
-  res.json({ message: 'hello from backend server' });
-});
+  return app;
+}
 
-app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+export async function initApp() {
+  mongoose.set('strictQuery', false);
+  logger.info('Connecting to', MONGO_DB_URL);
 
-app.use(unknownEndpoint);
+  try {
+    await mongoose.connect(MONGO_DB_URL);
+    logger.info('Connected to MongoDB');
+  } catch (error) {
+    logger.error('Error connecting to MongoDB:', error.message);
+  }
 
-export default app;
+  if (!TEST) {
+    console.log('Initializing Redis and Graph');
+    await initRedis();
+    initializeGraphForAppOnlyAuth(MS_SETTINGS);
+  } else {
+    console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
+  }
+}

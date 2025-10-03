@@ -12,7 +12,7 @@ const ROOMIDS = ['b233', 'a214', 'a218b', 'a307'];
 
 router.get('/', async (request, response) => {
   const cacheKey = 'rooms:reservations';
-  const redis = getRedis();
+  const redis = request.redisClient;
 
   const cached = await redis.get(cacheKey);
   if (cached) {
@@ -35,12 +35,11 @@ router.get('/', async (request, response) => {
 router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
 
-  const redis = getRedis();
+  const redis = request.redisClient;
   const cacheKey = `rooms:reservations:${id}`;
 
   const cached = await redis.get(cacheKey);
   if (cached) {
-    console.log('FETCHED FROM CACHE');
     return response.status(200).json(JSON.parse(cached));
   }
 

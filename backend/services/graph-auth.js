@@ -7,12 +7,7 @@ let _settings = undefined;
 let _clientSecretCredential = undefined;
 let _appClient = undefined;
 
-export function initializeGraphForAppOnlyAuth(settings, skip = false) {
-  if (skip) {
-    console.warn('Graph initialization skipped');
-    return;
-  }
-
+export function initializeGraphForAppOnlyAuth(settings) {
   // Ensure settings isn't null
   if (!settings) {
     throw new Error('Settings cannot be undefined');

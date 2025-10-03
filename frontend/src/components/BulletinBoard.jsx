@@ -1,24 +1,37 @@
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import qrcode from '../../../backend/mockdata/QRCode-for-Example-form.png';
+import qrcode from '../assets/QRCode-for-Example-form.png';
 import '../css/BulletinBoard.css';
 
 const BulletinBoard = () => {
   return (
-    <TransformWrapper initialScale={1} minScale={1} maxScale={5}>
-      <>
-        <div className="bottomright">
-          <img src={qrcode} width="300" height="300" />
-        </div>
-
-        <TransformComponent
-          wrapperStyle={{ width: '100%', height: '100vh' }}
-          contentStyle={{ width: '100%', height: '100%' }}
+    <div>
+      <button
+        type="submit"
+        id="openbutton"
+        className="openbutton"
+        onClick={() => {
+          document.getElementById('popup').classList.add('open-popup');
+          document.getElementById('openbutton').style.visibility = 'hidden';
+        }}
+      >
+        Add file
+      </button>
+      <div className="popup" id="popup">
+        <img src={qrcode} className="bottomright" />
+        <button
+          type="button"
+          className="closebutton"
+          onClick={() => {
+            document.getElementById('popup').classList.remove('open-popup');
+            document.getElementById('openbutton').style.visibility = 'visible';
+          }}
         >
-          <br />
-          <h1>Files</h1>
-        </TransformComponent>
-      </>
-    </TransformWrapper>
+          Close
+        </button>
+      </div>
+
+      <br />
+      <h1>Files</h1>
+    </div>
   );
 };
 

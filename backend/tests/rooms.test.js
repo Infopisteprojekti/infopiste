@@ -3,6 +3,7 @@ import {
   createBatchRequest,
   filterBatchResponse,
   mapEventToReservation,
+  fetchRoomReservations,
 } from '../services/rooms.js';
 import * as graphAuth from '../services/graph-auth.js';
 
@@ -83,6 +84,4 @@ describe('rooms service', () => {
     expect(mapTest.location.displayName).toBe('Room B233');
     expect(mapTest.location.locationType).toBe('confRoom');
   });
-
-  test('');
 });

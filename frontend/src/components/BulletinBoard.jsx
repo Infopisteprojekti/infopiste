@@ -1,5 +1,5 @@
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import qrcode from '../assets/QRCode-for-Example-form.png';
+import qrcode from '../../../backend/mockdata/QRCode-for-Example-form.png';
 import '../css/BulletinBoard.css';
 
 const BulletinBoard = () => {

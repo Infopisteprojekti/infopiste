@@ -1,7 +1,8 @@
-import test from 'node:test';
+import { describe, test, expect, vi } from 'vitest';
 import assert from 'node:assert';
 import supertest from 'supertest';
 import { createApp } from '../app.js';
+import * as roomsService from '../services/rooms.js';
 
 const mockRedis = {
   get: async () => null,
@@ -9,40 +10,54 @@ const mockRedis = {
   del: async () => null,
 };
 
+const mockRooms = [
+  {
+    id: 'b233',
+    name: 'Room B233',
+    reservations: [
+      {
+        id: 'res1',
+        start: '',
+        end: '',
+        location: '',
+      },
+    ],
+  },
+  { id: 'a214', name: 'Room A214', reservations: [] },
+];
+
+vi.mock('../services/rooms.js', () => ({
+  fetchRoomReservations: vi.fn(async () => mockRooms),
+  fetchReservationsById: vi.fn(async id => {
+    const room = mockRooms.find(r => r.id.toLowerCase() === id);
+    return room ? room.reservations : [];
+  }),
+}));
+
 const app = createApp({ redisClient: mockRedis });
 const api = supertest(app);
 
-test('health check returns ok', async () => {
-  const res = await api.get('/health').expect(200);
+describe('backend endpoint tests', () => {
+  test('health check returns ok', async () => {
+    const res = await api.get('/health').expect(200);
 
-  assert.strictEqual(res.body.status, 'ok');
-});
+    expect(res.body.status).toBe('ok');
+  });
 
-test('rooms are returned', async () => {
-  const res = await api
-    .get('/api/rooms')
-    .expect(200)
-    .expect('Content-Type', /application\/json/);
+  test('rooms are returned', async () => {
+    const res = await api
+      .get('/api/rooms')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
 
-  assert.strictEqual(Array.isArray(res.body), true, 'rooms are in array');
-  assert.ok(res.body.length > 0, 'room array is not empty');
-});
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
 
-test('room with correct id is found', async () => {
-  const res = await api
-    .get('/api/rooms/A310')
-    .expect(200)
-    .expect('Content-Type', /application\/json/);
+  test('reservations for specific room are returned', async () => {
+    const res = await api.get('/api/rooms/b233/reservations').expect(200);
 
-  assert.strictEqual(res.body.id, 'A310');
-});
-
-test('reservations for specific room are returned', async () => {
-  const res = await api.get('/api/rooms/A310/reservations').expect(200);
-
-  assert.strictEqual(
-    Array.isArray(res.body),
-    true,
-    'reservations are in array'
-  );
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
 });

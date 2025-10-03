@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test TEST=true node --test",
+    "test": "cross-env NODE_ENV=test TEST=true vitest run",
     "start": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server.js"
   },
@@ -20,7 +20,8 @@
     "eslint-plugin-prettier": "^5.5.4",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@azure/identity": "^4.12.0",

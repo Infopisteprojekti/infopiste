@@ -1,15 +1,16 @@
 import { getAppClient } from './graph-auth.js';
 
-function createBatchRequest(roomIds, roomEmails) {
+function createBatchRequest(roomIds) {
   const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
 
-  const batchRequest = roomEmails.map((email, idx) => {
-    const roomId = roomIds[idx];
+  const batchRequest = roomIds.map(roomId => {
+    const roomEmail = `exactum.${roomId.toLowerCase()}@helsinki.fi`;
+
     return {
       id: roomId,
       method: 'GET',
       url:
-        `/users/${email}/calendar/events?` +
+        `/users/${roomEmail}/calendar/events?` +
         `$select=start,end,location&` +
         `$filter=end/dateTime ge '${nowUtc}' and start/dateTime le '${weekAheadUtc}'&` +
         `$orderby=start/dateTime`,
@@ -39,7 +40,10 @@ function mapEventToReservation(event) {
   return {
     start: event.start,
     end: event.end,
-    displayName: event.location?.displayName || null,
+    location: {
+      locationType: event.location?.locationType,
+      displayName: event.location?.displayName || null,
+    },
   };
 }
 
@@ -57,11 +61,7 @@ export async function fetchRoomReservations(roomIds) {
   try {
     const client = getAppClient();
 
-    const roomEmails = roomIds.map(
-      id => `exactum.${id.toLowerCase()}@helsinki.fi`
-    );
-
-    const batchRequest = createBatchRequest(roomIds, roomEmails);
+    const batchRequest = createBatchRequest(roomIds);
     const batchResponse = await client
       .api('/$batch')
       .post({ requests: batchRequest });

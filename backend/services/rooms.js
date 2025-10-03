@@ -95,3 +95,5 @@ export async function fetchReservationsById(roomId) {
     throw new Error(err);
   }
 }
+
+export { createBatchRequest, filterBatchResponse, mapEventToReservation };

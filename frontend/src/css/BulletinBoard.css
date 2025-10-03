@@ -24,6 +24,7 @@
     bottom: 60px;
     right: 10px;
     cursor: pointer;
+    background: white;
     border: 1px solid #dddddd;
     border-radius: 8px;
     padding: 10px;
@@ -32,7 +33,7 @@
 }
 
 .popup {
-    width: 350px;
+    width: 300px;
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -42,4 +43,11 @@
 
 .open-popup {
     visibility: visible;
+}
+
+.popup p {
+    position: absolute;
+    font-size: 14px;
+    bottom: 400px;
+    right: 100px;
 }

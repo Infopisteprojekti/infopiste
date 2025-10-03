@@ -22,19 +22,13 @@ The functionality is in [server.js](../backend/server.js).
 
 A `room` is an object containing:
 - `id`: the room's unique identifier
-- `type` (`office`, `classroom`, or `meeting room`)
-- `capacity`: number of people the room accommodates
 - `reservations`: an array of `reservation` objects describing the reservations for the room.
 
 A `reservation` is an object containing:
 - `id`: the reservation's unique identifier
-- `subject`: the subject of the reservation
-- `organizer`: the responsible person for the reservation
 - `start`: start time for the reservation
 - `end`: end time for the reservation
-- `location`: the `id` of the `room` where the reservation takes place.
-
-`/api/rooms/:id` returns a specific room with the given id.
+- `location`: the `displayName` and `locationType` of the `room` where the reservation takes place.
 
 `/api/rooms/:id/reservations` returns the reservations for a specific room with the given id.
 

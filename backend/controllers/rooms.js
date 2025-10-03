@@ -8,7 +8,7 @@ import { TTL_SECONDS } from '../utils/config.js';
 
 const router = Router();
 
-const ROOMIDS = ['b233', 'a214', 'a218b', 'a307', 'c231'];
+const ROOMIDS = ['b233', 'a214', 'a218b', 'a307'];
 
 router.get('/', async (request, response) => {
   const cacheKey = 'rooms:reservations';

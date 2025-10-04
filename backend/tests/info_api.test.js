@@ -60,4 +60,14 @@ describe('backend endpoint tests', () => {
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.body.length).toBeGreaterThan(0);
   });
+
+  test('reservations for non-existent room returns 404', async () => {
+    const res = await api
+      .get('/api/rooms/nonexistent/reservations')
+      .expect(404);
+
+    expect(res.body).toStrictEqual({
+      error: 'Room not supported: nonexistent',
+    });
+  });
 });

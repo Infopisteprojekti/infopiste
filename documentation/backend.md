@@ -105,7 +105,7 @@ The tests can be found in the [tests](../backend/tests) directory.
 
 [info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
 
-Specifically, it tests the endpoints `/health`, `/api/rooms`, and `/api/rooms/:id/reservations`.
+Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, and `/api/rooms/:id/reservations`.
 
 `[rooms.test.js](../backend/tests/rooms.test.js) tests the functionality of the functions in [services/rooms.js](../backend/services/rooms.js).
 
@@ -119,11 +119,15 @@ The app can also be tested locally by running
 $ npm run test
 ```
 
+This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run`.
+
 Coverage in CLI can be viewed with
 
 ```bash
 $ npm run coverage
 ```
+
+This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run --coverage`.
 
 ESLint is used for linting. The linting can be checked with
 

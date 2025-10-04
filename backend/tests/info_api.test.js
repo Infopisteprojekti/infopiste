@@ -1,14 +1,7 @@
 import { describe, test, expect, vi } from 'vitest';
-import assert from 'node:assert';
 import supertest from 'supertest';
 import { createApp } from '../app.js';
-import * as roomsService from '../services/rooms.js';
-
-const mockRedis = {
-  get: async () => null,
-  set: async () => null,
-  del: async () => null,
-};
+import * as redisClient from '../services/redis-client.js';
 
 const mockRooms = [
   {
@@ -25,6 +18,12 @@ const mockRooms = [
   },
   { id: 'a214', name: 'Room A214', reservations: [] },
 ];
+
+const mockRedis = {
+  get: vi.fn().mockResolvedValue(JSON.stringify(mockRooms)),
+  set: async () => null,
+  del: async () => null,
+};
 
 vi.mock('../services/rooms.js', () => ({
   fetchRoomReservations: vi.fn(async () => mockRooms),
@@ -54,6 +53,13 @@ describe('backend endpoint tests', () => {
     expect(res.body.length).toBeGreaterThan(0);
   });
 
+  test('cached rooms are returned if present', async () => {
+    const res = await api.get('/api/rooms');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(mockRooms);
+  });
+
   test('reservations for specific room are returned', async () => {
     const res = await api.get('/api/rooms/b233/reservations').expect(200);
 
@@ -62,7 +68,17 @@ describe('backend endpoint tests', () => {
   });
 
   test('reservations for non-existent room returns 404', async () => {
-    const res = await api
+    // Here, the cache is ensured to be empty, as otherwise the test returns 200.
+    const mockRedisEmpty = {
+      get: vi.fn().mockResolvedValue(null),
+      set: vi.fn(),
+      del: vi.fn(),
+    };
+
+    const appNoCache = createApp({ redisClient: mockRedisEmpty });
+    const apiNoCache = supertest(appNoCache);
+
+    const res = await apiNoCache
       .get('/api/rooms/nonexistent/reservations')
       .expect(404);
 

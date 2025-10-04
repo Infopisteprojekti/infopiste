@@ -2,8 +2,7 @@ name: Backend tests
 
 on:
   push:
-    branches:
-      [main, 32-room-availability-data-is-fetched-to-the-backend-from-o365]
+    branches: [main]
   pull_request:
     branches: [main]
 

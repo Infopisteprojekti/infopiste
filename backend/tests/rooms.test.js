@@ -4,6 +4,7 @@ import {
   filterBatchResponse,
   mapEventToReservation,
   fetchRoomReservations,
+  fetchReservationsById,
 } from '../services/rooms.js';
 import * as graphAuth from '../services/graph-auth.js';
 
@@ -140,6 +141,36 @@ describe('rooms service', () => {
 
     await expect(() => fetchRoomReservations(roomIds)).rejects.toThrow(
       'Could not fetch room reservations: Failed to fetch reservations for room nonexistent: Unknown error'
+    );
+  });
+
+  test('fetchReservationsById returns reservations for valid room', async () => {
+    const mockEvent = [
+      {
+        start: { dateTime: '2025-01-01T12:00:00Z' },
+        end: { dateTime: '2025-01-01T13:00:00Z' },
+        location: { displayName: 'Room B233', locationType: 'confRoom' },
+      },
+    ];
+
+    mockClient.get.mockResolvedValue({ value: mockEvent });
+
+    const res = await fetchReservationsById('b233');
+
+    expect(res).toEqual([
+      {
+        start: { dateTime: '2025-01-01T12:00:00Z' },
+        end: { dateTime: '2025-01-01T13:00:00Z' },
+        location: { displayName: 'Room B233', locationType: 'confRoom' },
+      },
+    ]);
+  });
+
+  test('fetchReservationsById throws error for nonexistent room', async () => {
+    mockClient.get.mockRejectedValue(new Error('Invalid room'));
+
+    await expect(fetchReservationsById('nonexistent')).rejects.toThrow(
+      'Invalid room'
     );
   });
 });

@@ -9,16 +9,35 @@ import * as graphAuth from '../services/graph-auth.js';
 
 const mockClient = {
   api: vi.fn().mockReturnThis(),
-  post: vi.fn(),
+  post: vi.fn().mockResolvedValue({
+    responses: [
+      {
+        id: 'b233',
+        status: 200,
+        body: {
+          value: [
+            {
+              start: { dateTime: '2025-01-01T12:00:00Z' },
+              end: { dateTime: '2025-01-01T13:00:00Z' },
+              location: { displayName: 'Room B233', locationType: 'confRoom' },
+            },
+          ],
+        },
+      },
+    ],
+  }),
   select: vi.fn().mockReturnThis(),
   filter: vi.fn().mockReturnThis(),
-  oderby: vi.fn().mockReturnThis(),
-  get: vi.fn(),
+  orderby: vi.fn().mockReturnThis(),
+  get: vi.fn().mockReturnThis(),
 };
 
+vi.mock('../services/graph-auth.js', () => ({
+  getAppClient: () => mockClient,
+}));
+
 beforeEach(() => {
-  vi.resetAllMocks();
-  vi.spyOn(graphAuth, 'getAppClient').mockReturnValue(mockClient);
+  vi.clearAllMocks();
 });
 
 describe('rooms service', () => {
@@ -92,5 +111,27 @@ describe('rooms service', () => {
     const mapTest = mapEventToReservation(event);
     expect(mapTest.location.displayName).toBe('Room B233');
     expect(mapTest.location.locationType).toBe('confRoom');
+  });
+
+  test('fetchRoomReservations returns filtered response for room that exists', async () => {
+    const roomIds = ['b233'];
+
+    const res = await fetchRoomReservations(roomIds);
+
+    expect(res).toEqual([
+      {
+        id: 'b233',
+        reservations: [
+          {
+            start: { dateTime: '2025-01-01T12:00:00Z' },
+            end: { dateTime: '2025-01-01T13:00:00Z' },
+            location: { displayName: 'Room B233', locationType: 'confRoom' },
+          },
+        ],
+      },
+    ]);
+
+    expect(mockClient.api).toHaveBeenCalledWith('/$batch');
+    expect(mockClient.post).toHaveBeenCalled();
   });
 });

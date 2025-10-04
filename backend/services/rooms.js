@@ -69,7 +69,7 @@ export async function fetchRoomReservations(roomIds) {
     return filterBatchResponse(roomIds, batchResponse);
   } catch (err) {
     console.error('fetchRoomReservations failed: ', err);
-    throw new Error('Could not fetch room reservations', err);
+    throw new Error(`Could not fetch room reservations: ${err.message}`);
   }
 }
 

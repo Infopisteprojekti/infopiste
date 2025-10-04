@@ -54,9 +54,9 @@ describe('rooms service', () => {
       ],
     };
 
-    const result = filterBatchResponse(roomIds, batchResponse);
+    const res = filterBatchResponse(roomIds, batchResponse);
 
-    expect(result).toEqual([
+    expect(res).toEqual([
       {
         id: 'b233',
         reservations: [
@@ -73,7 +73,7 @@ describe('rooms service', () => {
     ]);
   });
 
-  test('filterBatchResponse returns error if result is null', async () => {
+  test('filterBatchResponse throws error if result is null', async () => {
     const roomIds = ['nonexistent'];
     const batchResponse = { responses: [{ id: 'nonexistent' }] };
 

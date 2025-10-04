@@ -16,7 +16,7 @@ const BulletinBoard = () => {
         Add file
       </button>
       <div className="popup" id="popup">
-        <p> Scan QR code to add </p>
+        <p>Scan QR code to add</p>
         <img src={qrcode} className="bottomright" />
         <button
           type="button"

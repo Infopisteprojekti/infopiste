@@ -73,6 +73,15 @@ describe('rooms service', () => {
     ]);
   });
 
+  test('filterBatchResponse returns error if result is null', async () => {
+    const roomIds = ['nonexistent'];
+    const batchResponse = { responses: [{ id: 'nonexistent' }] };
+
+    expect(() => filterBatchResponse(roomIds, batchResponse)).toThrow(
+      `Failed to fetch reservations for room ${roomIds[0]}: Unknown error`
+    );
+  });
+
   test('mapEventToReservation maps event correctly', () => {
     const event = {
       start: { dateTime: '2025-01-01T12:00:00Z' },

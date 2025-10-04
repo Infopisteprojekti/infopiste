@@ -134,4 +134,12 @@ describe('rooms service', () => {
     expect(mockClient.api).toHaveBeenCalledWith('/$batch');
     expect(mockClient.post).toHaveBeenCalled();
   });
+
+  test('fetchRoomReservations throws error for nonexistent room', async () => {
+    const roomIds = ['nonexistent'];
+
+    await expect(() => fetchRoomReservations(roomIds)).rejects.toThrow(
+      'Could not fetch room reservations: Failed to fetch reservations for room nonexistent: Unknown error'
+    );
+  });
 });

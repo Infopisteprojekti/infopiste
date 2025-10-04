@@ -43,6 +43,12 @@ describe('backend endpoint tests', () => {
     expect(res.body.status).toBe('ok');
   });
 
+  test('hello endpoint returns hello message', async () => {
+    const res = await api.get('/api/hello').expect(200);
+
+    expect(res.body).toStrictEqual({ message: 'hello from backend server' });
+  });
+
   test('rooms are returned', async () => {
     const res = await api
       .get('/api/rooms')

@@ -105,7 +105,7 @@ const FloorDisplay = ({ floor }) => {
   }, [floor]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
-  return <FloorSVG ref={floorplanRef} />;
+  return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;
 };
 
 export default FloorDisplay;

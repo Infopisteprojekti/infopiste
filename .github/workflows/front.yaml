@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  lint:
+  tests:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,27 +17,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: install
+      - name: install dependencies
         run: npm install
       - name: lint
         run: npm run lint
+      - name: frontend unit tests
+        run: npm run test
 
-  frontend-tests:
-    name: Run frontend tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: get installed playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
         with:
-          node-version: 22
-      
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./frontend
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-      - name: Run frontend tests
-        run: npm test
-        working-directory: ./frontend
+      - name: install playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+
+      - name: end to end tests
+        run: npx playwright test --workers=4

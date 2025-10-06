@@ -1,6 +1,6 @@
 # Requirements
 
-`Node` version 20 is used to build the frontend image. `npm` is also required.
+`Node` version 20 is used to build the backend image. `npm` is also required.
 
 # Backend technologies used
 

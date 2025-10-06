@@ -41,36 +41,38 @@ const FloorDisplay = ({ floor }) => {
     child.classList.add(status);
   };
 
-  const updateStatuses = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/api/rooms`);
-      const data = await response.json();
-
-      for (const room of roomsRef.current) {
-        const child = room.querySelector('*');
-        const roomId = child?.id;
-        if (!roomId) continue;
-
-        const roomData = data.find(e => e.id === roomId);
-        if (!roomData || roomData.type === 'office') {
-          addStatus(room, child, roomStatus.UNAVAILABLE);
-        } else {
-          const activeReservations = roomData.reservations.filter(e => checkActive(e));
-          const status =
-            activeReservations.length > 0
-              ? roomStatus.RESERVED
-              : roomStatus.AVAILABLE;
-          addStatus(room, child, status);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     const floorplan = floorplanRef.current;
     if (!floorplan) return;
+
+    const updateStatuses = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/api/rooms`);
+        const data = await response.json();
+
+        for (const room of roomsRef.current) {
+          const child = room.querySelector('*');
+          const roomId = child?.id;
+          if (!roomId) continue;
+
+          const roomData = data.find(e => e.id === roomId);
+          if (!roomData || roomData.type === 'office') {
+            addStatus(room, child, roomStatus.UNAVAILABLE);
+          } else {
+            const activeReservations = roomData.reservations.filter(e =>
+              checkActive(e)
+            );
+            const status =
+              activeReservations.length > 0
+                ? roomStatus.RESERVED
+                : roomStatus.AVAILABLE;
+            addStatus(room, child, status);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     const rooms = Array.from(floorplan.querySelectorAll('g'));
     roomsRef.current = rooms;

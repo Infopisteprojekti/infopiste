@@ -2,7 +2,7 @@ name: Frontend tests
 
 on:
   push:
-    branches: [main, e2e-tests]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -26,23 +26,21 @@ jobs:
 
       - name: get installed playwright version
         id: playwright-version
-        run: |
-          PLAYWRIGHT_VERSION=$(npm ls @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')
-          echo "Detected Playwright version: $PLAYWRIGHT_VERSION"
-          echo "::set-output name=version::$PLAYWRIGHT_VERSION"
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
 
-      # cache playwright's browser binaries for faster CI
-      - uses: actions/cache@v3
+      - name: cache playwright binaries
+        uses: actions/cache@v3
         id: playwright-cache
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
-      - name: install Playwright system dependencies
-        run: npx playwright install-deps
-      - name: install browsers for end to end tests
-        run: npx playwright install
+      - name: install playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+
       - name: end to end tests
         run: npx playwright test --workers=4

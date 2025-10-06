@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Floorplan from '../src/components/Floorplan';
 import '../src/css/Floorplan.css';
 import { describe, expect, test, vi } from 'vitest';
@@ -35,21 +36,21 @@ vi.mock('../src/assets/exactum-3.svg?react', () => ({
 
 describe('Floorplan', () => {
   test('floorplan is rendered correctly', async () => {
-    render(<Floorplan />);
+    render(<MemoryRouter><Floorplan /></MemoryRouter>);
 
     const room = document.querySelector('[data-room-id="A346"]')
     expect(room).toBeInTheDocument();
   });
 
   test('correct amount of rooms is rendered', () => {
-    render(<Floorplan />);
+    render(<MemoryRouter><Floorplan /></MemoryRouter>);
 
     const rooms = document.querySelectorAll('g[data-room-id]');
     expect(rooms.length).toBe(3);
   })
 
   test('zoom buttons exist', () => {
-    render(<Floorplan />);
+    render(<MemoryRouter><Floorplan /></MemoryRouter>);
 
     expect(screen.getByText(/Zoom In/i)).toBeInTheDocument();
     expect(screen.getByText(/Zoom Out/i)).toBeInTheDocument();
@@ -59,11 +60,18 @@ describe('Floorplan', () => {
   test('clicking room is possible', async () => {
     const user = userEvent.setup();
 
-    render(<Floorplan />)
+    render(<MemoryRouter><Floorplan /></MemoryRouter>);
 
     const room = document.querySelector('[data-room-id="A346"]');
     await user.click(room)
 
     expect(clickMock).toHaveBeenCalled();
+  })
+
+  test('url parameters work', async () => {
+    render(<MemoryRouter initialEntries={['/?floor=2']}><Floorplan /></MemoryRouter>);
+
+    const room = document.querySelector('[data-room-id="B233"]')
+    expect(room).toBeInTheDocument();
   })
 });

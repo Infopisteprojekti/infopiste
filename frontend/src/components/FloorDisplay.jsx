@@ -22,8 +22,7 @@ const FloorDisplay = ({ floor }) => {
 
   const checkActive = reservation => {
     if (reservation.start.timeZone !== 'UTC') {
-      console.error('Reservation timezone not in UTC');
-      // throw new Error('Reservation timezone not in UTC');
+      console.warn('Reservation timezone not in UTC');
     }
 
     const now = new Date();

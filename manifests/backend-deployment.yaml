@@ -29,6 +29,11 @@ spec:
                 configMapKeyRef:
                   name: infopiste-config
                   key: MONGO_DB_URL
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: REDIS_URL
             - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:
@@ -44,3 +49,10 @@ spec:
                 configMapKeyRef:
                   name: infopiste-config
                   key: CLIENT_SECRET
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "50Mi"
+              cpu: "50m"

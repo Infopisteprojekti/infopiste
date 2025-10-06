@@ -1,7 +1,5 @@
 import { useRef, useEffect } from 'react';
-import Floor1SVG from '../assets/exactum-1.svg?react';
-import Floor2SVG from '../assets/exactum-2.svg?react';
-import Floor3SVG from '../assets/exactum-3.svg?react';
+import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
@@ -17,14 +15,7 @@ const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
-
-export const floors = [
-  { id: 1, label: '1', svg: Floor1SVG },
-  { id: 2, label: '2', svg: Floor2SVG },
-  { id: 3, label: '3', svg: Floor3SVG },
-];
-
-export const FloorDisplay = ({ floor }) => {
+const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
@@ -112,3 +103,5 @@ export const FloorDisplay = ({ floor }) => {
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} />;
 };
+
+export default FloorDisplay;

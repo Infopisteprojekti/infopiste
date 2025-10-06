@@ -1,7 +1,8 @@
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useState } from 'react';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
-import { FloorDisplay, floors } from './FloorDisplay';
+import FloorDisplay from './FloorDisplay';
+import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
 const DEFAULT_FLOOR = 3;

@@ -17,13 +17,14 @@ const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
-const floors = {
-  1: Floor1SVG,
-  2: Floor2SVG,
-  3: Floor3SVG,
-};
 
-const FloorDisplay = ({ floor }) => {
+export const floors = [
+  { id: 1, label: '1', svg: Floor1SVG },
+  { id: 2, label: '2', svg: Floor2SVG },
+  { id: 3, label: '3', svg: Floor3SVG },
+];
+
+export const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
@@ -108,8 +109,6 @@ const FloorDisplay = ({ floor }) => {
     };
   }, [floor]);
 
-  const FloorSVG = floors[floor];
+  const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} />;
 };
-
-export default FloorDisplay;

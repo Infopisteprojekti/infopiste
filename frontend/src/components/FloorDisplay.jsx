@@ -21,9 +21,13 @@ const FloorDisplay = ({ floor }) => {
   const roomsRef = useRef([]);
 
   const checkActive = reservation => {
+    if (reservation.start.timeZone !== 'UTC') {
+      throw new Error('Reservation timezone not in UTC');
+    }
+
     const now = new Date();
-    const start = new Date(reservation.start.dateTime);
-    const end = new Date(reservation.end.dateTime);
+    const start = new Date(reservation.start.dateTime + 'Z');
+    const end = new Date(reservation.end.dateTime + 'Z');
     return start < now && end > now;
   };
 

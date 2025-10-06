@@ -26,7 +26,7 @@ const floors = {
 const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const FloorSVG = floors[floor];
-  let pollingInterval;
+  const pollingIntervalRef = useRef(null);
 
   useEffect(() => {
     const floorplan = floorplanRef.current;
@@ -88,13 +88,11 @@ const FloorDisplay = ({ floor }) => {
 
     if (floorplan) {
       fetchStatuses();
-      pollingInterval = setInterval(() => {
-        fetchStatuses();
-      }, POLLING_INTERVAL);
+      pollingIntervalRef.current = setInterval(fetchStatuses, POLLING_INTERVAL);
     }
 
     return () => {
-      clearInterval(pollingInterval);
+      clearInterval(pollingIntervalRef.current);
       for (const room of rooms) {
         if (room._clickHandler) {
           room.removeEventListener('click', room._clickHandler);

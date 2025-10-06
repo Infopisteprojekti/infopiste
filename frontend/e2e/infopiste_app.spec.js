@@ -112,12 +112,15 @@ test.describe('Infopiste', () => {
                 subject: 'Best Meeting',
                 organizer: 'Some Person',
                 start: {
-                  dateTime: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+                  dateTime: '1990-01-01T12:00:00',
                 },
                 end: {
-                  dateTime: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
+                  dateTime: '2125-01-01T12:00:00',
                 },
-                location: 'A345',
+                location: {
+                  displayName: 'Room A345',
+                  locationType: 'confRoom',
+                },
               },
             ],
           },

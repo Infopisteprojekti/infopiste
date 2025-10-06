@@ -4,6 +4,7 @@ import { REDIS_URL } from '../utils/config.js';
 let redis;
 
 export async function initRedis() {
+  console.log("Connecting to Redis", REDIS_URL);
   if (!redis) {
     redis = createClient({ url: REDIS_URL });
 

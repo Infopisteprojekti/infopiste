@@ -9,7 +9,7 @@ import '../css/Floorplan.css';
 const Floorplan = () => {
   const [searchParams] = useSearchParams();
   const floorParam = Number(searchParams.get('floor'));
-  const defaultFloor = floors.find(f => f.id === floorParam)?.id ?? 3;
+  const defaultFloor = !isNaN(floorParam) && floors.some(f => f.id === floorParam) ? floorParam : 3;
   const [floor, setFloor] = useState(defaultFloor);
 
   return (

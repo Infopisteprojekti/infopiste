@@ -4,12 +4,15 @@ import Floor2SVG from '../assets/exactum-2.svg?react';
 import Floor3SVG from '../assets/exactum-3.svg?react';
 import '../css/Floorplan.css';
 
-const statuses = {
+const POLLING_INTERVAL = 60 * 1000; // 60 seconds
+
+const roomStatus = {
   UNAVAILABLE: 'unavailable',
   AVAILABLE: 'available',
   RESERVED: 'reserved',
   UNKNOWN: 'unknown',
 };
+
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
@@ -23,6 +26,7 @@ const floors = {
 const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const FloorSVG = floors[floor];
+  let pollingInterval;
 
   useEffect(() => {
     const floorplan = floorplanRef.current;
@@ -37,7 +41,7 @@ const FloorDisplay = ({ floor }) => {
 
     const addStatus = (room, child, status) => {
       room._status = status;
-      child.classList.remove(...Object.values(statuses));
+      child.classList.remove(...Object.values(roomStatus));
       child.classList.add(status);
     };
 
@@ -57,19 +61,19 @@ const FloorDisplay = ({ floor }) => {
 
           const roomData = data.find(e => e.id === roomId);
           if (!roomData || roomData.type === 'office') {
-            addStatus(room, child, statuses.UNAVAILABLE);
+            addStatus(room, child, roomStatus.UNAVAILABLE);
           } else {
             const reservations = roomData.reservations;
             const activeReservations = reservations.filter(e => checkActive(e));
             const status =
               activeReservations.length > 0
-                ? statuses.RESERVED
-                : statuses.AVAILABLE;
+                ? roomStatus.RESERVED
+                : roomStatus.AVAILABLE;
             addStatus(room, child, status);
           }
 
           const handler = () => {
-            alert(`Room ${roomId} status: ${room._status ?? statuses.UNKNOWN}`);
+            alert(`Room ${roomId} status: ${room._status ?? roomStatus.UNKNOWN}`);
           };
 
           if (!room._clickHandler) {
@@ -82,9 +86,15 @@ const FloorDisplay = ({ floor }) => {
       }
     };
 
-    if (floorplan) fetchStatuses();
+    if (floorplan) {
+      fetchStatuses();
+      pollingInterval = setInterval(() => {
+        fetchStatuses();
+      }, POLLING_INTERVAL);
+    }
 
     return () => {
+      clearInterval(pollingInterval);
       for (const room of rooms) {
         if (room._clickHandler) {
           room.removeEventListener('click', room._clickHandler);

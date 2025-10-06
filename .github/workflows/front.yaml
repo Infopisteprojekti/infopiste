@@ -41,6 +41,7 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - name: install browsers for end to end tests
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
       - name: end to end tests
         run: npx playwright test --workers=4

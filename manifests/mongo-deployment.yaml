@@ -20,9 +20,15 @@ spec:
             - containerPort: 27017
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: test_user
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: MONGO_INITDB_ROOT_USERNAME 
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: test_password
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: MONGO_INITDB_ROOT_PASSWORD
           volumeMounts:
             - mountPath: /data/db
               name: infopiste-volume

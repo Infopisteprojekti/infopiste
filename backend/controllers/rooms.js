@@ -1,38 +1,66 @@
 import { Router } from 'express';
-import { generateRooms } from '../mockdata/generate-room-data.js';
+import {
+  fetchRoomReservations,
+  fetchReservationsById,
+} from '../services/rooms.js';
+import { getRedis } from '../services/redis-client.js';
+import { TTL_SECONDS } from '../utils/config.js';
 
 const router = Router();
-const rooms = generateRooms();
+
+const ROOMIDS = ['b233', 'a214', 'a218b', 'a307'];
 
 router.get('/', async (request, response) => {
-  response.status(200).json(rooms);
-});
+  const cacheKey = 'rooms:reservations';
+  const redis = request.redisClient;
 
-router.get('/:id', async (request, response) => {
-  const room = rooms.find(r => r.id === request.params.id);
-  if (!room) {
-    return response.status(404).json({ error: 'room not found' });
+  const cached = await redis.get(cacheKey);
+  if (cached) {
+    return response.status(200).json(JSON.parse(cached));
   }
 
-  response.status(200).json(room);
+  try {
+    const reservations = await fetchRoomReservations(ROOMIDS);
+    await redis.set(cacheKey, JSON.stringify(reservations), {
+      EX: TTL_SECONDS,
+    });
+
+    response.status(200).json(reservations);
+  } catch (err) {
+    console.error(err);
+    response.status(500).json({ error: err });
+  }
 });
 
 router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
-  const { date } = request.query;
 
-  const room = rooms.find(r => r.id === id);
-  if (!room) {
-    return response.status(404).json({ error: 'room not found' });
+  const redis = request.redisClient;
+  const cacheKey = `rooms:reservations:${id}`;
+
+  const cached = await redis.get(cacheKey);
+  if (cached) {
+    return response.status(200).json(JSON.parse(cached));
   }
 
-  let { reservations } = room;
-
-  if (date) {
-    reservations = reservations.filter(r => r.start.dateTime.startsWith(date));
+  if (!ROOMIDS.includes(id.toLowerCase())) {
+    console.log(`Unsupported room: ${id}`);
+    return response.status(404).json({ error: `Room not supported: ${id}` });
   }
 
-  response.json(reservations);
+  try {
+    const reservations = await fetchReservationsById(id.toLowerCase());
+    await redis.set(cacheKey, JSON.stringify(reservations), {
+      EX: TTL_SECONDS,
+    });
+
+    response.status(200).json(reservations);
+  } catch (err) {
+    console.error(err);
+    response.status(500).json({
+      error: `Failed to fetch reservations for room: ${id}, error: ${err}`,
+    });
+  }
 });
 
 export default router;

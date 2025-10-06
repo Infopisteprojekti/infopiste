@@ -8,9 +8,9 @@ The backend of the application is built with Express. The backend of choice is M
 
 # Backend structure
 
-The backend can be found at the [backend/](../backend/) directory. 
+The backend can be found at the [backend/](../backend/) directory.
 
-It includes both development environment and production `Dockerfile`s. 
+It includes both development environment and production `Dockerfile`s.
 
 Mock room data is currently generated in [mockdata/generate-room-data.js](../backend/mockdata/generate-room-data.js).
 
@@ -21,20 +21,16 @@ The functionality is in [server.js](../backend/server.js).
 `/api/rooms` returns all the rooms.
 
 A `room` is an object containing:
+
 - `id`: the room's unique identifier
-- `type` (`office`, `classroom`, or `meeting room`)
-- `capacity`: number of people the room accommodates
 - `reservations`: an array of `reservation` objects describing the reservations for the room.
 
 A `reservation` is an object containing:
+
 - `id`: the reservation's unique identifier
-- `subject`: the subject of the reservation
-- `organizer`: the responsible person for the reservation
 - `start`: start time for the reservation
 - `end`: end time for the reservation
-- `location`: the `id` of the `room` where the reservation takes place.
-
-`/api/rooms/:id` returns a specific room with the given id.
+- `location`: the `displayName` and `locationType` of the `room` where the reservation takes place.
 
 `/api/rooms/:id/reservations` returns the reservations for a specific room with the given id.
 
@@ -59,9 +55,9 @@ has the following output:
 {"status":"ok"}
 ```
 
-Please note that to run the application with Docker or locally, you need to create a `.env` file in the [backend](../backend/) directory. 
+Please note that to run the application with Docker or locally, you need to create a `.env` file in the [backend](../backend/) directory.
 
-The environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`. 
+The environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`.
 
 Since the `docker-compose.yaml` maps MongoDB's internal port (`27017`), the value of `MONGO_DB_URL` depends on if the application is run locally or in Docker.
 
@@ -105,19 +101,33 @@ Note that MongoDB should be running locally for this to work. Otherwise, connect
 
 # Testing
 
-The tests can be found in the [tests](../backend/tests) directory. 
+The tests can be found in the [tests](../backend/tests) directory.
 
 [info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
 
-Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/rooms/:id`, and `/api/rooms/:id/reservations`.
+Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, and `/api/rooms/:id/reservations`.
 
-The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed. 
+`[rooms.test.js](../backend/tests/rooms.test.js) tests the functionality of the functions in [services/rooms.js](../backend/services/rooms.js).
+
+The tests ensure that the data is in the correct shape.
+
+The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 
 The app can also be tested locally by running
 
 ```bash
 $ npm run test
 ```
+
+This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run`.
+
+Coverage in CLI can be viewed with
+
+```bash
+$ npm run coverage
+```
+
+This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run --coverage`.
 
 ESLint is used for linting. The linting can be checked with
 

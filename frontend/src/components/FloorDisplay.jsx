@@ -1,7 +1,5 @@
 import { useRef, useEffect } from 'react';
-import Floor1SVG from '../assets/exactum-1.svg?react';
-import Floor2SVG from '../assets/exactum-2.svg?react';
-import Floor3SVG from '../assets/exactum-3.svg?react';
+import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
@@ -17,21 +15,19 @@ const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
-const floors = {
-  1: Floor1SVG,
-  2: Floor2SVG,
-  3: Floor3SVG,
-};
-
 const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
 
   const checkActive = reservation => {
+    if (reservation.start.timeZone !== 'UTC') {
+      console.warn('Reservation timezone not in UTC');
+    }
+
     const now = new Date();
-    const start = new Date(reservation.start.dateTime);
-    const end = new Date(reservation.end.dateTime);
+    const start = new Date(reservation.start.dateTime + 'Z');
+    const end = new Date(reservation.end.dateTime + 'Z');
     return start < now && end > now;
   };
 
@@ -108,7 +104,7 @@ const FloorDisplay = ({ floor }) => {
     };
   }, [floor]);
 
-  const FloorSVG = floors[floor];
+  const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} />;
 };
 

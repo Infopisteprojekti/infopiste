@@ -71,6 +71,9 @@ In Docker:
 
 ## Docker
 
+> [!CAUTION]  
+> Do not put API-keys in `.sample.env`! Copy the file, name the copy `.env` and fill the values there.
+
 The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
 
 ```bash

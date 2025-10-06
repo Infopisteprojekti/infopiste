@@ -2,12 +2,14 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useState } from 'react';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import FloorDisplay from './FloorDisplay';
+import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
 const DEFAULT_FLOOR = 3;
 
 const Floorplan = () => {
   const [floor, setFloor] = useState(DEFAULT_FLOOR);
+
   return (
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
       {({ zoomIn, zoomOut, resetTransform }) => (
@@ -25,30 +27,17 @@ const Floorplan = () => {
           </div>
 
           <div className="floorplan-toolbar toolbar__floor-switch">
-            <button
-              onClick={() => {
-                setFloor(1);
-                resetTransform();
-              }}
-            >
-              Floor 1
-            </button>
-            <button
-              onClick={() => {
-                setFloor(2);
-                resetTransform();
-              }}
-            >
-              Floor 2
-            </button>
-            <button
-              onClick={() => {
-                setFloor(3);
-                resetTransform();
-              }}
-            >
-              Floor 3
-            </button>
+            {floors.map(({ id, label }) => (
+              <button
+                key={id}
+                onClick={() => {
+                  setFloor(id);
+                  resetTransform();
+                }}
+              >
+                Floor {label}
+              </button>
+            ))}
           </div>
 
           <TransformComponent

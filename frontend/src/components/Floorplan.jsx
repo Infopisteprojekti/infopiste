@@ -1,14 +1,16 @@
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useState } from 'react';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { useSearchParams } from 'react-router-dom';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import FloorDisplay from './FloorDisplay';
 import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
-const DEFAULT_FLOOR = 3;
-
 const Floorplan = () => {
-  const [floor, setFloor] = useState(DEFAULT_FLOOR);
+  const [searchParams] = useSearchParams();
+  const floorParam = Number(searchParams.get('floor'));
+  const defaultFloor = floors.find(f => f.id === floorParam)?.id ?? 3;
+  const [floor, setFloor] = useState(defaultFloor);
 
   return (
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>

@@ -1,6 +1,6 @@
 # Requirements
 
-`Node` version 20 is used to build the frontend image. `npm` is also required.
+`Node` version 20 is used to build the backend image. `npm` is also required.
 
 # Backend technologies used
 
@@ -70,6 +70,9 @@ In Docker:
 `MONGO_DB_URL=mongodb://mongo:27017/db`
 
 ## Docker
+
+> [!CAUTION]  
+> Do not put API-keys in `.sample.env`! Copy the file, name the copy `.env` and fill the values there.
 
 The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
 

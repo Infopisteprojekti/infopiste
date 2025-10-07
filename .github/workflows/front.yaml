@@ -2,7 +2,7 @@ name: Frontend tests
 
 on:
   push:
-    branches: [main, no-e2e-cache]
+    branches: [main]
   pull_request:
     branches: [main]
 

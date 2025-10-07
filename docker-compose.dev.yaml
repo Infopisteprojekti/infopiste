@@ -9,7 +9,7 @@ services:
       - ./backend:/app
       - /app/node_modules
     environment:
-      MONGO_DB_URL: mongodb://test_user:test_password@mongo:27017
+      MONGO_DB_URL: mongodb://test_user:test_password@mongo:27017/test_db?authSource=admin
       PORT: 1234
       CLIENT_ID: ${CLIENT_ID}
       CLIENT_SECRET: ${CLIENT_SECRET}

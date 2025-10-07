@@ -23,24 +23,7 @@ jobs:
         run: npm run lint
       - name: frontend unit tests
         run: npm run test
-
-      - name: get installed playwright version
-        id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
-
-      - name: cache playwright binaries
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      - name: install playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - name: install playwright dependencies
         run: npx playwright install --with-deps
-
       - name: end to end tests
-        run: npx playwright test --workers=4
+        run: npm run e2e

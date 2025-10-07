@@ -52,7 +52,7 @@ const FloorDisplay = ({ floor }) => {
           if (!roomId) continue;
 
           const roomData = !data.error
-            ? data?.find(e => e.id === roomId)
+            ? data?.find(e => e.id.toLowerCase() === roomId.toLowerCase())
             : null;
           if (!roomData || roomData.type === 'office') {
             addStatus(room, child, roomStatus.UNAVAILABLE);

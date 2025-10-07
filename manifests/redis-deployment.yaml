@@ -18,3 +18,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: infopiste-redis-volume
+      volumes:
+        - name: infopiste-redis-volume
+          persistentVolumeClaim:
+            claimName: infopiste-redis-claim            

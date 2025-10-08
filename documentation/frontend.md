@@ -16,11 +16,21 @@ It also includes both development environment and production `Dockerfile`s.
 
 The actual functionality can be found in [src/](../frontend/src/).
 
-[assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the rest of the directory contains the functionality of the application.
+[assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the QR code for uploading forms.
 
-[Floorplan.jsx](../frontend/src/Floorplan.jsx) contains all the logic for fetching rooms and the data related to them, while [App.jsx](../frontend/src/App.jsx) wraps the `Floorplan` component using a style, and [main.jsx](../frontend/src/main.jsx) wraps the `App` component with `StrictMode`.
+[components/](../frontend/src/components/) contains the following React components:
 
-`main.jsx` is then used in [index.html](../frontend/index.html) to render the components.
+`BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices.
+
+`FloorDisplay` iterates through all rooms in the given floor, and assigns the correct data (reservation status and click handler, as well as polling) to each room.
+
+`Floorplan` is used to specify which floor to display, and includes the logic and buttons for zooming and switching rooms. 
+
+`App` implements a navigation bar at the bottom of the page. The application is a single page application using React Router.
+
+`main.jsx` is used in [index.html](../frontend/index.html) to render the components.
+
+The styling for each component is defined in [css/](../frontend/src/css/).
 
 # Running the frontend
 

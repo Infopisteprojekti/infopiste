@@ -41,34 +41,51 @@ const FloorDisplay = ({ floor }) => {
     const floorplan = floorplanRef.current;
     if (!floorplan) return;
 
-    const updateStatuses = async () => {
+    const fetchRoomData = async () => {
       try {
         const response = await fetch(`${baseUrl}/api/rooms`);
+        if (!response.ok)
+          throw new Error(`Error fetching room data: ${response.status}`);
+
         const data = await response.json();
+        if (data.error) throw new Error(data.error);
 
-        for (const room of roomsRef.current) {
-          const child = room.querySelector('*');
-          const roomId = child?.id;
-          if (!roomId) continue;
-
-          const roomData = !data.error
-            ? data?.find(e => e.id.toLowerCase() === roomId.toLowerCase())
-            : null;
-          if (!roomData || roomData.type === 'office') {
-            addStatus(room, child, roomStatus.UNAVAILABLE);
-          } else {
-            const activeReservations = roomData.reservations.filter(e =>
-              checkActive(e)
-            );
-            const status =
-              activeReservations.length > 0
-                ? roomStatus.RESERVED
-                : roomStatus.AVAILABLE;
-            addStatus(room, child, status);
-          }
-        }
+        return data;
       } catch (error) {
-        console.error(error);
+        console.error('Error in fetching room data:', error);
+        return null;
+      }
+    };
+
+    const updateStatuses = async () => {
+      const data = await fetchRoomData();
+
+      for (const room of roomsRef.current) {
+        const child = room.querySelector('*');
+        const roomId = child?.id;
+        if (!roomId) continue;
+
+        if (!data) {
+          addStatus(room, child, roomStatus.UNAVAILABLE);
+          continue;
+        }
+
+        const roomData = data?.find(
+          e => e.id.toLowerCase() === roomId.toLowerCase()
+        );
+        if (!roomData || roomData.type === 'office') {
+          addStatus(room, child, roomStatus.UNAVAILABLE);
+          continue;
+        }
+
+        const activeReservations = roomData.reservations.filter(e =>
+          checkActive(e)
+        );
+        const status =
+          activeReservations.length > 0
+            ? roomStatus.RESERVED
+            : roomStatus.AVAILABLE;
+        addStatus(room, child, status);
       }
     };
 

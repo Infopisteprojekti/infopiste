@@ -35,5 +35,6 @@ The definition of done for the tasks is as follows:
 
 - Feature's acceptance criteria are met
 - Feature has been tested sufficiently, and the tests go through
+- Feature has been documented appropriately
 - Code follows the agreed upon style
 - Code has been reviewed

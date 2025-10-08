@@ -52,7 +52,7 @@ const FloorDisplay = ({ floor }) => {
 
         return data;
       } catch (error) {
-        console.error('Error in fetching room data:', error);
+        console.error(error);
         return null;
       }
     };

@@ -26,7 +26,7 @@ The actual functionality can be found in [src/](../frontend/src/).
 
 `Floorplan` is used to specify which floor to display, and includes the logic and buttons for zooming and switching rooms. 
 
-`App` implements a navigation bar at the bottom of the page. The application is a single page application using React Router.
+`App` implements a navigation bar at the bottom of the page. The application is a single-page application using React Router.
 
 `main.jsx` is used in [index.html](../frontend/index.html) to render the components.
 
@@ -52,29 +52,18 @@ in the root of the project.
 
 ## Local development
 
+> [!IMPORTANT]
+> Remember to install the dependencies first by running `npm install`!
+
 Alternatively, the frontend can be accessed by running
 
 ```bash
 $ npm run dev
 ```
 
-in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host`.
+in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host 0.0.0.0 --port 5173`.
 
 The application will then be available at `localhost:5173`.
-
-Note that before attempting to start the frontend, dependencies should be installed with
-
-```bash
-$ npm install
-```
-
-and an `.env` file created in the root directory with the following contents:
-
-```env
-VITE_API_BASE_URL=http://localhost:1234
-```
-
-This assumes the [backend](./backend) is running locally on the default port 1234.
 
 # Testing
 

@@ -2,6 +2,8 @@
 
 `Node` version 20 is used to build the backend image. `npm` is also required.
 
+The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
+
 # Backend technologies used
 
 The backend of the application is built with Express. The database of choice is MongoDB. `Mongoose` is used to interface with the database in the backend.
@@ -24,7 +26,7 @@ The express app is built in [app.js](../backend/app.js). The connection to the d
 
 `/health` responds with status 200 and message `ok`.
 
-`/api/hello` returns message `hello from backend`.
+`/api/hello` returns the message `hello from backend`.
 
 Endpoints for fetching room data are defined in [controllers/rooms.js](../backend/controllers/rooms.js).
 
@@ -91,6 +93,9 @@ $ curl http://localhost:1234/health
 
 ## Local development
 
+> [!IMPORTANT]
+> Remember to install the dependencies first by running `npm install`!
+
 Alternatively, the backend can be accessed by running
 
 ```bash
@@ -117,6 +122,9 @@ The tests ensure that the data is in the correct shape.
 
 The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 
+> [!NOTE]
+> All of the below commands have to be run in in the backend directory.
+
 The app can also be tested locally by running
 
 ```bash
@@ -138,7 +146,5 @@ ESLint is used for linting. The linting can be checked with
 ```bash
 $ npm run lint
 ```
-
-in the `backend/` directory.
 
 This is equivalent to running `npx eslint .`

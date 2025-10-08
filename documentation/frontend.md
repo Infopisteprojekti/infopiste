@@ -79,6 +79,9 @@ These tests are used to test the end-to-end functionality of the application, wh
 
 The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed.
 
+> [!NOTE]
+> All of the below commands have to be run in in the backend directory.
+
 The unit tests can be run locally with
 
 ```bash
@@ -102,7 +105,5 @@ ESLint is used for linting. The linting can be checked with
 ```bash
 $ npm run lint
 ```
-
-in the `frontend/` directory.
 
 This is equivalent to running `npx eslint .`

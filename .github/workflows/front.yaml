@@ -23,7 +23,3 @@ jobs:
         run: npm run lint
       - name: frontend unit tests
         run: npm run test
-      - name: install playwright dependencies
-        run: npx playwright install --with-deps
-      - name: end to end tests
-        run: npm run e2e

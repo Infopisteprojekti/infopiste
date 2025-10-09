@@ -31,8 +31,8 @@ spec:
                   key: MONGO_INITDB_ROOT_PASSWORD
           volumeMounts:
             - mountPath: /data/db
-              name: infopiste-volume
+              name: infopiste-mongo-volume
       volumes:
-        - name: infopiste-volume
+        - name: infopiste-mongo-volume
           persistentVolumeClaim:
-            claimName: infopiste-claim
+            claimName: infopiste-mongo-claim

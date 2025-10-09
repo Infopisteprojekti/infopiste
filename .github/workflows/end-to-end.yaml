@@ -18,29 +18,32 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-        - name: get installed playwright version
-          id: playwright-version
-          run: echo "PLAYWRIGHT VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+      - name: install dependencies
+        run: npm ci
 
-        - name: cache playwright binaries
-          uses: actions/cache@v3
-          id: playwright-cache
-          with:
-            path: |
-              ~/.cache/ms-playwright
-            key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }} 
-            restore-keys: |
-              ${{ runner.os }}-playwright-
+      - name: get installed playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
 
-        - name: install Playwright browsers
-          if: steps.playwright-cache.outputs.cache-hit != 'true'
-          run: npx playwright install --with-deps
+      - name: cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }} 
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-        - name: e2e tests
-          run: npm run e2e
+      - name: install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+
+      - name: e2e tests
+        run: npm run e2e

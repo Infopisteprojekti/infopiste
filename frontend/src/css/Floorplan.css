@@ -1,33 +1,33 @@
 :root {
-    --roomReserved: #f59796;
-    --roomAvailable: #b7e7b7;
-    --roomUnavailable: #d4d4d4;
-    --roomHover: #7ab6ea;
+  --roomReserved: #f59796;
+  --roomAvailable: #b7e7b7;
+  --roomUnavailable: #d4d4d4;
+  --roomHover: #7ab6ea;
 }
 
 .room {
-    cursor: pointer;
-    user-select: none;
-    transition: fill 200ms ease-out;
-    font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: fill 200ms ease-out;
+  font-size: 24px;
 }
 
 .room ~ svg > text {
-    pointer-events: none;
-    font-family: sans-serif;
-    font-size: 28px;
+  pointer-events: none;
+  font-family: sans-serif;
+  font-size: 28px;
 }
 
 .room.available {
-    fill: var(--roomAvailable);
+  fill: var(--roomAvailable);
 }
 
 .room.unavailable {
-    fill: var(--roomUnavailable);
+  fill: var(--roomUnavailable);
 }
 
 .room.reserved {
-    fill: var(--roomReserved);
+  fill: var(--roomReserved);
 }
 
 .room:hover {
@@ -70,4 +70,8 @@
 .floorplan-toolbar button:hover {
   background: #f5f5f5;
   transform: scale(1.05);
+}
+
+.location-marker {
+  fill: red;
 }

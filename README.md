@@ -15,4 +15,6 @@ Application in development with the goal of showing useful information relevant 
 
 [Backend documentation](documentation/backend.md)
 
-[CI/CD Description](documentation/deployment.md)
+[CI/CD description](documentation/deployment.md)
+
+[Development commands](documentation/development.md)

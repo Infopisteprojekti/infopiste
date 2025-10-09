@@ -2,9 +2,11 @@
 
 `Node` version 20 is used to build the backend image. `npm` is also required.
 
+The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
+
 # Backend technologies used
 
-The backend of the application is built with Express. The backend of choice is MongoDB. `Mongoose` is used to interface with the database in the backend.
+The backend of the application is built with Express. The database of choice is MongoDB. `Mongoose` is used to interface with the database in the backend.
 
 # Backend structure
 
@@ -14,15 +16,29 @@ It includes both development environment and production `Dockerfile`s.
 
 Mock room data is currently generated in [mockdata/generate-room-data.js](../backend/mockdata/generate-room-data.js).
 
-The functionality is in [server.js](../backend/server.js).
+The server is started in [server.js](../backend/server.js).
 
-`server.js` offers various endpoints to fetch relevant data. It also includes the `/health` endpoint for a health check.
+The express app is built in [app.js](../backend/app.js). The connection to the database is also formed in `app.js`. 
+
+`app.js` offers a few endpoints used for health checks:
+
+`/` returns the message `infonäyttö backend`.
+
+`/health` responds with status 200 and message `ok`.
+
+`/api/hello` returns the message `hello from backend`.
+
+Endpoints for fetching room data are defined in [controllers/rooms.js](../backend/controllers/rooms.js).
 
 `/api/rooms` returns all the rooms.
+
+`/api/rooms/:id/reservations` returns all reservations for the room with the given `id`.
 
 A `room` is an object containing:
 
 - `id`: the room's unique identifier
+- `type`: the type of the room, which can be `meeting_room`, `office`, or `classroom`.
+- `capacity`: the capacity of the room
 - `reservations`: an array of `reservation` objects describing the reservations for the room.
 
 A `reservation` is an object containing:
@@ -31,8 +47,6 @@ A `reservation` is an object containing:
 - `start`: start time for the reservation
 - `end`: end time for the reservation
 - `location`: the `displayName` and `locationType` of the `room` where the reservation takes place.
-
-`/api/rooms/:id/reservations` returns the reservations for a specific room with the given id.
 
 # Running the backend
 
@@ -55,24 +69,13 @@ has the following output:
 {"status":"ok"}
 ```
 
-Please note that to run the application with Docker or locally, you need to create a `.env` file in the [backend](../backend/) directory.
-
-The environment file should include the values `PORT` (optional, as it's set to 1234 by default in `server.js`), and `MONGO_DB_URL`.
-
-Since the `docker-compose.yaml` maps MongoDB's internal port (`27017`), the value of `MONGO_DB_URL` depends on if the application is run locally or in Docker.
-
-Locally:
-
-`MONGO_DB_URL=mongodb://localhost:27017/db`
-
-In Docker:
-
-`MONGO_DB_URL=mongodb://mongo:27017/db`
-
 ## Docker
 
 > [!CAUTION]  
 > Do not put API-keys in `.sample.env`! Copy the file, name the copy `.env` and fill the values there.
+
+Please note that to run the application with Docker or locally, you need to create a `.env` file.
+
 
 The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
 
@@ -90,10 +93,13 @@ $ curl http://localhost:1234/health
 
 ## Local development
 
+> [!IMPORTANT]
+> Remember to install the dependencies first by running `npm install`!
+
 Alternatively, the backend can be accessed by running
 
 ```bash
-$ npm run start
+$ npm run dev
 ```
 
 in the [backend](../backend/) directory of the project. This is equivalent to running `NODE_ENV=production node server.js`.
@@ -116,6 +122,9 @@ The tests ensure that the data is in the correct shape.
 
 The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 
+> [!NOTE]
+> All of the below commands have to be run in in the backend directory.
+
 The app can also be tested locally by running
 
 ```bash
@@ -137,7 +146,5 @@ ESLint is used for linting. The linting can be checked with
 ```bash
 $ npm run lint
 ```
-
-in the `backend/` directory.
 
 This is equivalent to running `npx eslint .`

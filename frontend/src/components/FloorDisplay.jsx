@@ -10,12 +10,10 @@ const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
-const FloorDisplay = ({ floor }) => {
+const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
-  const [params] = useSearchParams();
-  const markerCoords = params.get('marker').split(',').map(Number);
 
   const checkActive = reservation => {
     if (reservation.start.timeZone !== 'UTC') {
@@ -37,6 +35,9 @@ const FloorDisplay = ({ floor }) => {
   useEffect(() => {
     const floorplan = floorplanRef.current;
     if (!floorplan) return;
+
+    const prevMarker = floorplan.querySelector('.location-marker');
+    if (prevMarker) prevMarker.remove();
 
     const fetchRoomData = async () => {
       try {
@@ -109,7 +110,7 @@ const FloorDisplay = ({ floor }) => {
     updateStatuses();
     pollingIntervalRef.current = setInterval(updateStatuses, POLLING_INTERVAL);
 
-    if (markerCoords.length === 2) {
+    if (floor === initialFloor && markerCoords.length === 2) {
       const [posx, posy] = markerCoords;
 
       const marker = document.createElementNS(
@@ -133,7 +134,7 @@ const FloorDisplay = ({ floor }) => {
         }
       }
     };
-  }, [floor]);
+  }, [floor, initialFloor, markerCoords]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;

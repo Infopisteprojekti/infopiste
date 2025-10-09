@@ -2,7 +2,7 @@ name: End to end tests
 
 on:
   push:
-    branches: [main, optimize-ci-e2e]
+    branches: [main]
     paths:
       - 'frontend/**'
       - '.github/workflows/end-to-end.yaml'

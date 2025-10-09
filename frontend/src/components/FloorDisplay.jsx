@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import floors from '../constants/floors';
 import '../css/Floorplan.css';
+import { useSearchParams } from 'react-router-dom';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
 
@@ -19,6 +20,8 @@ const FloorDisplay = ({ floor }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
+  const [params] = useSearchParams();
+  const markerCoords = params.get('marker').split(',').map(Number);
 
   const checkActive = reservation => {
     if (reservation.start.timeZone !== 'UTC') {
@@ -111,6 +114,21 @@ const FloorDisplay = ({ floor }) => {
 
     updateStatuses();
     pollingIntervalRef.current = setInterval(updateStatuses, POLLING_INTERVAL);
+
+    if (markerCoords.length === 2) {
+      const [posx, posy] = markerCoords;
+
+      const marker = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'circle'
+      );
+      marker.setAttribute('cx', posx);
+      marker.setAttribute('cy', posy);
+      marker.setAttribute('r', 20);
+      marker.classList.add('location-marker');
+
+      floorplanRef.current.appendChild(marker);
+    }
 
     return () => {
       clearInterval(pollingIntervalRef.current);

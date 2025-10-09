@@ -110,7 +110,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
     updateStatuses();
     pollingIntervalRef.current = setInterval(updateStatuses, POLLING_INTERVAL);
 
-    if (floor === initialFloor && markerCoords.length === 2) {
+    if (floor === initialFloor && markerCoords?.length === 2) {
       const [posx, posy] = markerCoords;
 
       const marker = document.createElementNS(

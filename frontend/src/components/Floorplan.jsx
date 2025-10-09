@@ -14,7 +14,7 @@ const Floorplan = () => {
       ? floorParam
       : 3;
   const [floor, setFloor] = useState(defaultFloor);
-  const markerCoords = searchParams.get('marker').split(',').map(Number);
+  const markerCoords = searchParams.get('marker')?.split(',').map(Number);
 
   return (
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>

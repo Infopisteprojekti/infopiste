@@ -1,16 +1,10 @@
 import { useRef, useEffect } from 'react';
 import floors from '../constants/floors';
+import roomStatus from '../constants/roomStatus';
 import '../css/Floorplan.css';
 import { useSearchParams } from 'react-router-dom';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
-
-const roomStatus = {
-  UNAVAILABLE: 'unavailable',
-  AVAILABLE: 'available',
-  RESERVED: 'reserved',
-  UNKNOWN: 'unknown',
-};
 
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||

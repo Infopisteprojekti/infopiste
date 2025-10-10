@@ -2,18 +2,23 @@ import mongoose from 'mongoose';
 import { MONGO_DB_URL } from '../utils/config.js';
 import { Form } from '../models/formModel.js';
 
+// vaihdoin linkit netistä löytyvään pdf tiedostoon, jotta frontendiä pystyy kokeilemaan mockdatalla
+// myös joku toinen pdf käy
+
 const mockForms = [
     {
         title: 'Best notice',
         startDate: new Date('2025-01-01'),
         endDate: new Date('2025-01-02'),
-        fileUrl: 'https://example.com'
+        //fileUrl: 'https://example.com'
+        fileUrl: 'https://pdfobject.com/pdf/sample.pdf'
     },
     {
         title: 'Second best notice',
         startDate: new Date('2025-06-01'),
         endDate: new Date('2025-06-02'),
-        fileUrl: 'https://example.com'
+        //fileUrl: 'https://example.com'
+        fileUrl: 'https://pdfobject.com/pdf/sample.pdf'
     }
 ]
 

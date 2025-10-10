@@ -6,7 +6,7 @@ Whenever new content is pushed or merged into the `main` branch, the files `back
 
 `front.yaml` similarly runs the frontend tests located in [frontend/tests](../frontend/tests), and also does linting.
 
-Additionally, the end to end tests in [frontend/e2e](../frontend/e2e/) are run in `front.yaml`.
+Additionally, the end to end tests in [frontend/e2e](../frontend/e2e/) are run in `end-to-end.yaml`. The end to end tests are only run if the workflow or the contents of the frontend directory change.
 
 `staging-deploy.yaml` builds the frontend and backend Docker images, and pushes them to DockerHub.
 

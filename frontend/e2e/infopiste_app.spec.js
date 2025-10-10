@@ -171,4 +171,23 @@ test.describe('Infopiste', () => {
     await page.getByText('Bulletin Board').click();
     await expect(page.getByText('Files')).toBeVisible();
   });
+
+  test('qr code can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173');
+
+    await page.getByText('Bulletin Board').click();
+    await page.getByText('Files').click();
+    
+    await expect(page.getByText('Scan QR code to add')).toBeVisible();
+  });
+
+  test('qr code can be closed', async ({ page}) => {
+    await page.goto('http://localhost:5173');
+
+    await page.getByText('Bulletin Board').click();
+    await page.getByText('Files').click();
+    await page.getByText('Close').click();
+
+    await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
+  });
 });

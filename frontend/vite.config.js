@@ -9,11 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './tests/testSetup.js',
-    exclude: [
-      'e2e',
-      'node_modules',
-      'dist',
-    ],
+    exclude: ['e2e', 'node_modules', 'dist'],
     coverage: {
       provider: 'v8',
       exclude: [
@@ -24,9 +20,9 @@ export default defineConfig({
         'dist/**',
         'eslint.config.js',
         'vite.config.js',
-        'src/constants/**'
-      ]
-    }
+        'src/constants/**',
+      ],
+    },
   },
 
   server: {

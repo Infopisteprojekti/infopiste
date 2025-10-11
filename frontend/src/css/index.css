@@ -26,3 +26,24 @@ body,
 .navbar-button:hover {
   background-color: #cccccc;
 }
+
+.navbar-language-switcher {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-language-switcher select {
+  font-size: 18px;
+  padding: 16px 14px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  /* appearance: none; */
+  outline: none;
+}
+
+.navbar-language-switcher select:hover {
+  background-color: #cccccc;
+}

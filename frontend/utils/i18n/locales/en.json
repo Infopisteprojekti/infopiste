@@ -2,5 +2,11 @@
   "navbar": {
     "floorplan": "Floorplan",
     "bulletinboard": "Bulletin Board"
+  },
+  "floorplan-toolbar": {
+    "zoom-in": "Zoom In",
+    "zoom-out": "Zoom Out",
+    "reset": "Reset",
+    "floor-label": "Floor {{label}}"
   }
 }

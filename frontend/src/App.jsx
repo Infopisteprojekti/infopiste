@@ -2,15 +2,19 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Floorplan from './components/Floorplan';
 import BulletinBoard from './components/BulletinBoard';
 
+import { useTranslation } from 'react-i18next';
+
 function App() {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="navbar">
         <Link className="navbar-button" to="/">
-          Floorplan
+          {t('navbar.floorplan')}
         </Link>
         <Link className="navbar-button" to="/board">
-          Bulletin Board
+          {t('navbar.bulletinboard')}
         </Link>
       </div>
       <div>

@@ -88,7 +88,15 @@ The unit tests can be run locally with
 $ npm run test
 ```
 
-This is equivalent to running `npx vitest run`.
+This is equivalent to running `npx vitest run tests`.
+
+Coverage can be viewed with
+
+```bash
+$ npm run coverage
+```
+
+This is equivalent to running `npx vitest run tests --coverage`.
 
 The end-to-end tests can be run locally with
 

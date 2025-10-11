@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Floorplan from '../src/components/Floorplan';
+import App from '../src/App'
 import '../src/css/Floorplan.css';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -73,5 +74,50 @@ describe('Floorplan', () => {
 
     const room = document.querySelector('[data-room-id="B233"]')
     expect(room).toBeInTheDocument();
+  })
+
+  test('bulletin board can be accessed', async () => {
+    const user = userEvent.setup();
+
+    render(<MemoryRouter><App /></MemoryRouter>);
+
+    const bulletinBoardButton = await screen.findByText('Bulletin Board');
+    await user.click(bulletinBoardButton);
+
+    const addFileButton = await screen.findByText('Add file');
+    expect(addFileButton).toBeInTheDocument();
+  })
+
+  test('qr code to upload files appears', async () => {
+    const user = userEvent.setup();
+
+    render(<MemoryRouter><App /></MemoryRouter>);
+
+    const bulletinBoardButton = await screen.findByText('Bulletin Board');
+    await user.click(bulletinBoardButton);
+
+    const addFileButton = await screen.findByText('Add file');
+    await user.click(addFileButton);
+
+    const popup = document.getElementById('popup');
+    expect(popup.classList.contains('open-popup')).toBe(true);
+  })
+
+  test('qr code can be closed', async () => {
+    const user = userEvent.setup();
+
+    render(<MemoryRouter><App /></MemoryRouter>);
+
+    const bulletinBoardButton = await screen.findByText('Bulletin Board');
+    await user.click(bulletinBoardButton);
+
+    const addFileButton = await screen.findByText('Add file');
+    await user.click(addFileButton);
+
+    const closeButton = await screen.findByText('Close');
+    await user.click(closeButton);
+
+    const popup = document.getElementById('popup');
+    expect(popup.classList.contains('open-popup')).toBe(false);
   })
 });

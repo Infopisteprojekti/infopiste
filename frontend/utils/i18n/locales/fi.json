@@ -1,1 +1,6 @@
-{}
+{
+  "navbar": {
+    "floorplan": "Kartta",
+    "bulletinboard": "Ilmoitustaulu"
+  }
+}

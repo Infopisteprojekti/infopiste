@@ -129,7 +129,7 @@ const FloorDisplay = ({ floor }) => {
         }
       }
     };
-  }, [floor]);
+  }, [floor, t]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;

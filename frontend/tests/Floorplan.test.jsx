@@ -6,6 +6,8 @@ import '../src/css/Floorplan.css';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
+import i18n from './testSetup.js';
+
 // Mock ResizeObserver
 class ResizeObserver {
   constructor(callback) { }
@@ -123,17 +125,20 @@ describe('Floorplan', () => {
 
   test.only('Language can be changed from English to Finnish', async () => {
     const user = userEvent.setup();
+    const spy = vi.spyOn(i18n, 'changeLanguage');
 
     render(<MemoryRouter><App /></MemoryRouter>);
 
     expect(await screen.findByText('Floor Plan')).toBeInTheDocument();
 
-    const langDropDown= await screen.findByText('EN');
+    // Assumes default language to be English
+    const langDropDown = await screen.findByText('EN');
     await user.click(langDropDown);
 
     const finnishOption = await screen.findByText('Finnish');
     await user.click(finnishOption)
 
+    expect(spy).toHaveBeenCalledWith('fi');
     expect(await screen.findByText('Kartta')).toBeInTheDocument();
   })
 });

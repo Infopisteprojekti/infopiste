@@ -9,6 +9,20 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './tests/testSetup.js',
+    exclude: ['e2e', 'node_modules', 'dist'],
+    coverage: {
+      provider: 'v8',
+      exclude: [
+        'e2e/**',
+        'playwright.config.js',
+        'src/main.jsx',
+        'node_modules/**',
+        'dist/**',
+        'eslint.config.js',
+        'vite.config.js',
+        'src/constants/**',
+      ],
+    },
   },
 
   server: {

@@ -171,4 +171,15 @@ test.describe('Infopiste', () => {
     await page.getByText('Bulletin Board').click();
     await expect(page.getByText('Files')).toBeVisible();
   });
+
+  test('qr code can be opened and closed', async ({ page }) => {
+    await page.goto('http://localhost:5173');
+
+    await page.getByText('Bulletin Board').click();
+    await page.getByText('Add file').click();
+    await expect(page.getByText('Scan QR code to add')).toBeVisible();
+
+    await page.getByText('Close').click();
+    await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
+  });
 });

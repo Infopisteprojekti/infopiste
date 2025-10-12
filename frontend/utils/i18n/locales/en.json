@@ -15,5 +15,10 @@
     "available": "Available",
     "reserved": "Reserved",
     "unknown": "Unknown"
+  },
+  "bulletinboard": {
+    "qr-add-file": "Add file",
+    "qr-close": "Close",
+    "qr-description": "Scan QR code to add"
   }
 }

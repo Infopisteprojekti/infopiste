@@ -1,7 +1,10 @@
 import qrcode from '../assets/form.svg';
 import '../css/BulletinBoard.css';
+import { useTranslation } from 'react-i18next';
 
 const BulletinBoard = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <button
@@ -13,10 +16,10 @@ const BulletinBoard = () => {
           document.getElementById('openbutton').style.visibility = 'hidden';
         }}
       >
-        Add file
+        {t('bulletinboard.qr-add-file')}
       </button>
       <div className="popup" id="popup">
-        <p>Scan QR code to add</p>
+        <p>{t('bulletinboard.qr-description')}</p>
         <img src={qrcode} className="bottomright" />
         <button
           type="button"
@@ -26,7 +29,7 @@ const BulletinBoard = () => {
             document.getElementById('openbutton').style.visibility = 'visible';
           }}
         >
-          Close
+          {t('bulletinboard.qr-close')}
         </button>
       </div>
 

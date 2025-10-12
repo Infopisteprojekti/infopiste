@@ -120,4 +120,20 @@ describe('Floorplan', () => {
     const popup = document.getElementById('popup');
     expect(popup.classList.contains('open-popup')).toBe(false);
   })
+
+  test.only('Language can be changed from English to Finnish', async () => {
+    const user = userEvent.setup();
+
+    render(<MemoryRouter><App /></MemoryRouter>);
+
+    expect(await screen.findByText('Floor Plan')).toBeInTheDocument();
+
+    const langDropDown= await screen.findByText('EN');
+    await user.click(langDropDown);
+
+    const finnishOption = await screen.findByText('Finnish');
+    await user.click(finnishOption)
+
+    expect(await screen.findByText('Kartta')).toBeInTheDocument();
+  })
 });

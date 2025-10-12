@@ -9,7 +9,7 @@
     "reset": "Reset",
     "floor-label": "Floor {{label}}"
   },
-  "room-status-message": "Room {{roomId}} status: {{status}}",
+  "room-status-message": "Room: {{roomId}}\nStatus: {{status}}",
   "room-status": {
     "unavailable": "Unavailable",
     "available": "Available",

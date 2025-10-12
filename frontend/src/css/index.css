@@ -8,19 +8,24 @@ body,
 .navbar {
   position: absolute;
   display: flex;
+  align-items: center;
   bottom: 0;
   width: 100%;
   background-color: #eeeeee;
   gap: 16px;
   z-index: 200;
+  height: 64px;
 }
 
 .navbar-button {
   font-size: 24px;
-  padding: 16px 32px;
+  padding: 0 32px;
   text-decoration: none;
   color: black;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .navbar-button:hover {
@@ -32,18 +37,15 @@ body,
   position: relative;
   display: flex;
   align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  height: 100%;
 }
 
-.navbar-language-switcher select {
-  font-size: 18px;
-  padding: 16px 14px;
+.navbar-language-switcher .globe-icon {
+  position: absolute;
+  left: 10px;
+  pointer-events: none;
   color: black;
-  border: none;
-  cursor: pointer;
-  /* appearance: none; */
-  outline: none;
-}
-
-.navbar-language-switcher select:hover {
-  background-color: #cccccc;
+  z-index: 10;
 }

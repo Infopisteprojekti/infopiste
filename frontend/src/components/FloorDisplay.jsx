@@ -12,7 +12,7 @@ const baseUrl =
 
 const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const { t } = useTranslation();
-  
+
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);

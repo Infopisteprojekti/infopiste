@@ -1,1 +1,24 @@
-{}
+{
+  "navbar": {
+    "floorplan": "Våningskarta",
+    "bulletinboard": "Anslagstavla"
+  },
+  "floorplan-toolbar": {
+    "zoom-in": "Zooma in",
+    "zoom-out": "Zooma ut",
+    "reset": "Återställ",
+    "floor-label": "Våning {{label}}"
+  },
+  "room-status-message": "Rum {{roomId}}\nStatus: {{status}}",
+  "room-status": {
+    "unavailable": "Ej tillgänglig",
+    "available": "Tillgänglig",
+    "reserved": "Reserverad",
+    "unknown": "Information saknas"
+  },
+  "bulletinboard": {
+    "qr-add-file": "Lägg till ett meddelande på anslagstavlan",
+    "qr-close": "Stäng",
+    "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
+  }
+}

@@ -6,7 +6,9 @@ import { useTranslation } from 'react-i18next';
 
 import FloorDisplay from './FloorDisplay';
 import floors from '../constants/floors';
-import '../css/Floorplan.css';
+import '../styles/components/Floorplan.css';
+import '../styles/components/Toolbar.css';
+import '../styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
@@ -24,19 +26,19 @@ const Floorplan = () => {
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
-          <div className="floorplan-toolbar toolbar__transform">
-            <button onClick={() => zoomIn()}>
+          <div className="toolbar toolbar__floorplan-transform">
+            <button className="button" onClick={() => zoomIn()}>
               {t('floorplan-toolbar.zoom-in')} <Plus size={16} />
             </button>
-            <button onClick={() => zoomOut()}>
+            <button className="button" onClick={() => zoomOut()}>
               {t('floorplan-toolbar.zoom-out')} <Minus size={16} />
             </button>
-            <button onClick={() => resetTransform()}>
+            <button className="button" onClick={() => resetTransform()}>
               {t('floorplan-toolbar.reset')} <RotateCcw size={16} />
             </button>
           </div>
 
-          <div className="floorplan-toolbar toolbar__floor-switch">
+          <div className="toolbar toolbar__floorplan-floor-switch">
             {floors.map(({ id, label }) => (
               <button
                 key={id}
@@ -44,6 +46,7 @@ const Floorplan = () => {
                   setFloor(id);
                   resetTransform();
                 }}
+                className={`button ${id === floor ? 'active' : ''}`}
               >
                 {t('floorplan-toolbar.floor-label', { label })}
               </button>
@@ -51,7 +54,7 @@ const Floorplan = () => {
           </div>
 
           <TransformComponent
-            wrapperStyle={{ width: '100%', height: '100vh' }}
+            wrapperStyle={{ width: '100%', height: '100%' }}
             contentStyle={{ width: '100%', height: '100%' }}
           >
             <FloorDisplay

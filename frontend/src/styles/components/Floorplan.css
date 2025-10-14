@@ -1,0 +1,49 @@
+:root {
+  --roomReserved: #f59796;
+  --roomAvailable: #b7e7b7;
+  --roomUnavailable: #d4d4d4;
+  --roomHover: #7ab6ea;
+}
+
+.room {
+  cursor: pointer;
+  user-select: none;
+  transition: fill 200ms ease-out;
+  font-size: 1rem;
+}
+
+.room ~ svg > text {
+  pointer-events: none;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+}
+
+.room.available {
+  fill: var(--roomAvailable);
+}
+
+.room.unavailable {
+  fill: var(--roomUnavailable);
+}
+
+.room.reserved {
+  fill: var(--roomReserved);
+}
+
+.room:hover {
+  fill: var(--roomHover);
+}
+
+.toolbar.toolbar__floorplan-transform {
+  top: 0.8rem;
+  right: 0.8rem;
+}
+
+.toolbar.toolbar__floorplan-floor-switch {
+  top: 0.8rem;
+  left: 0.8rem;
+}
+
+.location-marker {
+  fill: red;
+}

@@ -1,5 +1,5 @@
 import qrcode from '../assets/form.svg';
-import '../css/BulletinBoard.css';
+import '../styles/components/BulletinBoard.css';
 import { useTranslation } from 'react-i18next';
 
 const BulletinBoard = () => {

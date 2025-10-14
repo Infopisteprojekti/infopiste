@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import floors from '../constants/floors';
 import roomStatus from '../constants/roomStatus';
-import '../css/Floorplan.css';
+import '../styles/components/Floorplan.css';
 import { useTranslation } from 'react-i18next';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds

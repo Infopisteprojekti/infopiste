@@ -6,7 +6,7 @@
   "floorplan-toolbar": {
     "zoom-in": "Suurenna",
     "zoom-out": "Pienennä",
-    "reset": "Paluta",
+    "reset": "Palauta",
     "floor-label": "{{label}}. kerros"
   },
   "room-status-message": "Huone {{roomId}}\nTila: {{status}}",

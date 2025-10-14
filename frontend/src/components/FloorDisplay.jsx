@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import floors from '../constants/floors';
 import roomStatus from '../constants/roomStatus';
 import '../css/Floorplan.css';
+import { useTranslation } from 'react-i18next';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
 
@@ -10,6 +11,8 @@ const baseUrl =
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
 const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
+  const { t } = useTranslation();
+
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
@@ -99,7 +102,12 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
 
       if (!room._clickHandler) {
         const handler = () => {
-          alert(`Room ${roomId} status: ${room._status ?? roomStatus.UNKNOWN}`);
+          alert(
+            t('room-status-message', {
+              roomId,
+              status: t(`room-status.${room._status ?? roomStatus.UNKNOWN}`),
+            })
+          );
         };
         room.addEventListener('click', handler);
         room._clickHandler = handler;
@@ -133,7 +141,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
         }
       }
     };
-  }, [floor, initialFloor, markerCoords]);
+  }, [floor, initialFloor, markerCoords, t]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;

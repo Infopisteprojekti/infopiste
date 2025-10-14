@@ -8,21 +8,44 @@ body,
 .navbar {
   position: absolute;
   display: flex;
+  align-items: center;
   bottom: 0;
   width: 100%;
   background-color: #eeeeee;
   gap: 16px;
   z-index: 200;
+  height: 64px;
 }
 
 .navbar-button {
   font-size: 24px;
-  padding: 16px 32px;
+  padding: 0 32px;
   text-decoration: none;
   color: black;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .navbar-button:hover {
   background-color: #cccccc;
+}
+
+.navbar-language-switcher {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.navbar-language-switcher .globe-icon {
+  position: absolute;
+  left: 10px;
+  pointer-events: none;
+  color: black;
+  z-index: 10;
 }

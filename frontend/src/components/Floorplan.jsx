@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useSearchParams } from 'react-router-dom';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
 import FloorDisplay from './FloorDisplay';
 import floors from '../constants/floors';
 import '../css/Floorplan.css';
 
 const Floorplan = () => {
+  const { t } = useTranslation();
+
   const [searchParams] = useSearchParams();
   const floorParam = Number(searchParams.get('floor'));
   const defaultFloor =
@@ -22,13 +26,13 @@ const Floorplan = () => {
         <>
           <div className="floorplan-toolbar toolbar__transform">
             <button onClick={() => zoomIn()}>
-              Zoom In <Plus size={16} />
+              {t('floorplan-toolbar.zoom-in')} <Plus size={16} />
             </button>
             <button onClick={() => zoomOut()}>
-              Zoom Out <Minus size={16} />
+              {t('floorplan-toolbar.zoom-out')} <Minus size={16} />
             </button>
             <button onClick={() => resetTransform()}>
-              Reset <RotateCcw size={16} />
+              {t('floorplan-toolbar.reset')} <RotateCcw size={16} />
             </button>
           </div>
 
@@ -41,7 +45,7 @@ const Floorplan = () => {
                   resetTransform();
                 }}
               >
-                Floor {label}
+                {t('floorplan-toolbar.floor-label', { label })}
               </button>
             ))}
           </div>

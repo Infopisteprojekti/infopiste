@@ -1,24 +1,18 @@
 import { useRef, useEffect } from 'react';
 import floors from '../constants/floors';
+import roomStatus from '../constants/roomStatus';
 import '../css/Floorplan.css';
 import { useTranslation } from 'react-i18next';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
 
-const roomStatus = {
-  UNAVAILABLE: 'unavailable',
-  AVAILABLE: 'available',
-  RESERVED: 'reserved',
-  UNKNOWN: 'unknown',
-};
-
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
   'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
-const FloorDisplay = ({ floor }) => {
+const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const { t } = useTranslation();
-
+  
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
@@ -43,6 +37,9 @@ const FloorDisplay = ({ floor }) => {
   useEffect(() => {
     const floorplan = floorplanRef.current;
     if (!floorplan) return;
+
+    const prevMarker = floorplan.querySelector('.location-marker');
+    if (prevMarker) prevMarker.remove();
 
     const fetchRoomData = async () => {
       try {
@@ -120,6 +117,21 @@ const FloorDisplay = ({ floor }) => {
     updateStatuses();
     pollingIntervalRef.current = setInterval(updateStatuses, POLLING_INTERVAL);
 
+    if (floor === initialFloor && markerCoords?.length === 2) {
+      const [posx, posy] = markerCoords;
+
+      const marker = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'circle'
+      );
+      marker.setAttribute('cx', posx);
+      marker.setAttribute('cy', posy);
+      marker.setAttribute('r', 20);
+      marker.classList.add('location-marker');
+
+      floorplanRef.current.appendChild(marker);
+    }
+
     return () => {
       clearInterval(pollingIntervalRef.current);
       for (const room of roomsRef.current) {
@@ -129,7 +141,7 @@ const FloorDisplay = ({ floor }) => {
         }
       }
     };
-  }, [floor, t]);
+  }, [floor, initialFloor, markerCoords, t]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
   return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;

@@ -18,6 +18,7 @@ const Floorplan = () => {
       ? floorParam
       : 3;
   const [floor, setFloor] = useState(defaultFloor);
+  const markerCoords = searchParams.get('marker')?.split(',').map(Number);
 
   return (
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
@@ -53,7 +54,11 @@ const Floorplan = () => {
             wrapperStyle={{ width: '100%', height: '100vh' }}
             contentStyle={{ width: '100%', height: '100%' }}
           >
-            <FloorDisplay floor={floor} />
+            <FloorDisplay
+              floor={floor}
+              initialFloor={floorParam}
+              markerCoords={markerCoords}
+            />
           </TransformComponent>
         </>
       )}

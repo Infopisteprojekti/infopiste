@@ -123,7 +123,7 @@ describe('Floorplan', () => {
     expect(popup.classList.contains('open-popup')).toBe(false);
   })
 
-  test.only('Language can be changed from English to Finnish', async () => {
+  test('Language can be changed from English to Finnish', async () => {
     const user = userEvent.setup();
     const spy = vi.spyOn(i18n, 'changeLanguage');
 

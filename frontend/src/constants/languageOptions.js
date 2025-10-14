@@ -1,7 +1,7 @@
 const LANGUAGE_OPTIONS = [
-  { value: 'fi', label: 'FI', fullName: 'Finnish' },
+  { value: 'fi', label: 'FI', fullName: 'suomi' },
+  { value: 'sv', label: 'SV', fullName: 'svenska' },
   { value: 'en', label: 'EN', fullName: 'English' },
-  { value: 'sv', label: 'SV', fullName: 'Swedish' },
 ];
 
 export default LANGUAGE_OPTIONS;

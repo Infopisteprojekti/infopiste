@@ -135,7 +135,7 @@ describe('Floorplan', () => {
     const langDropDown = await screen.findByText('EN');
     await user.click(langDropDown);
 
-    const finnishOption = await screen.findByText('Finnish');
+    const finnishOption = await screen.findByText('suomi');
     await user.click(finnishOption)
 
     expect(spy).toHaveBeenCalledWith('fi');

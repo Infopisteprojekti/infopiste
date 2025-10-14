@@ -1,0 +1,120 @@
+@import url('./Button.css');
+
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid var(--buttonBorder);
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+}
+
+.nav-button {
+  padding: 0 1rem !important;
+  height: 2rem !important;
+  font-size: 1rem !important;
+  line-height: 1;
+}
+
+.language-select {
+  margin-left: auto;
+  padding-right: 0.1rem !important;
+  padding-left: 0.5rem !important;
+
+  .lang__control {
+    all: unset;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .lang__value-container {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    line-height: 1;
+  }
+
+  .lang__input {
+    margin: 0;
+    padding: 0;
+  }
+
+  .lang__dropdown-indicator {
+    display: flex;
+    align-items: center;
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+    color: var(--buttonText);
+  }
+
+  .lang__control--menu-is-open .lang__dropdown-indicator {
+    transform: rotate(360deg);
+  }
+
+  .lang__dropdown-indicator:hover {
+    color: var(--buttonText);
+  }
+
+  .lang__menu {
+    backdrop-filter: blur(12px);
+    box-shadow: none;
+    border: 1px solid var(--buttonBorder);
+    border-radius: 0.5rem;
+    width: auto;
+    background-color: none;
+    padding: 0.5rem;
+    left: auto;
+    right: 0;
+    cursor: default;
+  }
+
+  .lang__menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .lang__option {
+    font-size: 0.8rem;
+    width: 100%;
+    padding-right: 1rem;
+    border: 1px solid var(--buttonBorder);
+    border-radius: var(--buttonBorderRadius);
+    cursor: pointer;
+    transition: var(--buttonTransition);
+  }
+
+  .lang__option:hover,
+  .lang__option--is-focused {
+    background-color: var(--buttonHover);
+  }
+
+  .lang__option--is-selected {
+    background-color: var(--buttonActive) !important;
+  }
+
+  .lang__option-content-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    color: var(--buttonText);
+  }
+
+  .lang__option-content-inner span {
+    text-transform: uppercase;
+  }
+
+  .globe-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}

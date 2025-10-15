@@ -1,0 +1,25 @@
+@import url('./base/reset.css');
+@import url(./base/variables.css);
+@import url('./base/typography.css');
+
+:root {
+  font-size: 24px;
+}
+
+html,
+body,
+#root {
+  background-color: #ffffff;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+}

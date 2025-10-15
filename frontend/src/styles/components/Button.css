@@ -1,0 +1,34 @@
+:root {
+  --buttonActive: var(--accentColor);
+  --buttonHover: #e2e6ea;
+  --buttonBackground: #fcfcfc;
+  --buttonText: #111111;
+  --buttonBorder: #dddddd;
+  --buttonTransition: all 0.2s ease-out;
+  --buttonBorderRadius: 8px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--buttonTransition);
+  cursor: pointer;
+  border: 1px solid var(--buttonBorder);
+  border-radius: var(--buttonBorderRadius);
+  background-color: var(--buttonBackground);
+  padding: 0.5rem;
+  color: var(--buttonText);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--buttonHover);
+}
+
+.button.active {
+  background-color: var(--buttonActive);
+  color: var(--buttonBackground);
+}

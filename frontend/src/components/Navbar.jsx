@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
+    localStorage.setItem('lang', lng);
   };
 
   const location = useLocation();

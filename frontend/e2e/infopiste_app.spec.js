@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Infopiste', () => {
   test('home page can be opened', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     await expect(page.getByText('A348')).toBeVisible();
 
@@ -11,7 +11,7 @@ test.describe('Infopiste', () => {
   });
 
   test('zoom buttons exist', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     await expect(page.getByText('Zoom In')).toBeVisible();
     await expect(page.getByText('Zoom Out')).toBeVisible();
@@ -19,7 +19,7 @@ test.describe('Infopiste', () => {
   });
 
   test('zoom buttons are clickable', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     await page.getByText('Zoom In').click();
     await page.getByText('Zoom Out').click();
@@ -27,7 +27,7 @@ test.describe('Infopiste', () => {
   });
 
   test('floorplan is rendered', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     const svg = page.locator('[data-testid="floorplan-svg"]').first();
     await svg.waitFor({ state: 'attached' });
@@ -41,7 +41,7 @@ test.describe('Infopiste', () => {
   });
 
   test('zoom functionality works', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     const svg = page.locator('[data-testid="floorplan-svg"]').first();
 
@@ -133,7 +133,7 @@ test.describe('Infopiste', () => {
       });
     });
 
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     const floorplan = page.getByTestId('floorplan-svg').first();
     await expect(floorplan).toBeVisible();
@@ -148,7 +148,7 @@ test.describe('Infopiste', () => {
   });
 
   test('floor can be changed', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     const floor3Room = page.locator('#A344');
     await expect(floor3Room).toBeVisible();
@@ -166,14 +166,14 @@ test.describe('Infopiste', () => {
   });
 
   test('bulletin board view can be opened', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     await page.getByText('Bulletin Board').click();
     await expect(page.getByText('Files')).toBeVisible();
   });
 
   test('qr code can be opened and closed', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:5173?lang=en');
 
     await page.getByText('Bulletin Board').click();
     await page.getByText('Add file').click();

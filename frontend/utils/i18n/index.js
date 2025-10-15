@@ -7,16 +7,19 @@ import fiLang from './locales/fi.json';
 import svLang from './locales/sv.json';
 
 const DEFAULT_LANG = 'fi';
+const supportedLangs = LANGUAGE_OPTIONS.map(opt => opt.value);
 
 const urlParams = new URLSearchParams(window.location.search);
 const langQuery = urlParams.get('lang');
 const savedLang = localStorage.getItem('lang');
 
-const lang = langQuery || savedLang || DEFAULT_LANG;
+const lang = supportedLangs.includes(langQuery || '')
+  ? langQuery
+  : savedLang && supportedLangs.includes(savedLang)
+    ? savedLang
+    : DEFAULT_LANG;
 
-if (lang) {
-  localStorage.setItem('lang', lang);
-}
+localStorage.setItem('lang', lang);
 
 i18n
   .use(initReactI18next)

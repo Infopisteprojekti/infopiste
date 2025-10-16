@@ -14,7 +14,7 @@ const langQuery = urlParams.get('lang');
 
 const initialLang = supportedLangs.includes(langQuery)
   ? langQuery
-  : DEFAULT_LANG;
+  : localStorage.getItem('lang') || DEFAULT_LANG;
 
 i18n
   .use(initReactI18next)

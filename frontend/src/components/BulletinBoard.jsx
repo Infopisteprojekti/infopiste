@@ -1,9 +1,12 @@
 import qrcode from '../assets/form.svg';
 import '../styles/components/Button.css';
 import '../styles/components/BulletinBoard.css';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useEffect } from 'react';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
@@ -75,12 +78,9 @@ const BulletinBoard = () => {
               {new Date(form.startDate).toLocaleDateString()} -{' '}
               {new Date(form.endDate).toLocaleDateString()}
             </p>
-            <iframe
-              src={form.fileUrl}
-              width="50%"
-              height="700px"
-              title={form.title}
-            />
+            <Document file={form.fileUrl} key={form._id}>
+              <Page pageNumber={1} width={600} renderTextLayer={false} renderAnnotationLayer={false} />
+            </Document>
           </li>
         ))}
       </ul>

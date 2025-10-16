@@ -11,7 +11,7 @@ const AppSettingsProvider = ({ children }) => {
 
   const defaultSettings = {
     lang: urlParams.get('lang') || localStorage.getItem('lang') || 'fi',
-    floor: urlParams.get('floor') || localStorage.getItem('floor') || 1,
+    floor: urlParams.get('floor') || localStorage.getItem('floor') || 3,
     marker: urlParams.get('marker') || localStorage.getItem('marker') || null,
   };
 

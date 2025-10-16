@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Floorplan from '../src/components/Floorplan';
-import App from '../src/App';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
+
+import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
+import Floorplan from '../src/components/Floorplan';
+import App from '../src/App';
 
 import i18n from './testSetup.js';
 
@@ -37,10 +39,14 @@ vi.mock('../src/assets/exactum-3.svg?react', () => ({
 }));
 
 describe('Floorplan', () => {
+  window.location = { ...window.location, search: '?lang=en' };
+
   test('floorplan is rendered correctly', async () => {
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -49,9 +55,13 @@ describe('Floorplan', () => {
   });
 
   test('correct amount of rooms is rendered', () => {
+    window.location = { ...window.location, search: '?lang=en' };
+
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -60,9 +70,13 @@ describe('Floorplan', () => {
   });
 
   test('zoom buttons exist', () => {
+    window.location = { ...window.location, search: '?lang=en' };
+
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -74,9 +88,13 @@ describe('Floorplan', () => {
   test('clicking room is possible', async () => {
     const user = userEvent.setup();
 
+    window.location = { ...window.location, search: '?lang=en' };
+
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -87,9 +105,11 @@ describe('Floorplan', () => {
   });
 
   test('url parameters work', async () => {
+    window.location = { ...window.location, search: '?lang=en&floor=2' };
+
     render(
-      <MemoryRouter initialEntries={['/?floor=2']}>
-        <Floorplan />
+      <MemoryRouter>
+        <App />
       </MemoryRouter>
     );
 
@@ -99,6 +119,8 @@ describe('Floorplan', () => {
 
   test('bulletin board can be accessed', async () => {
     const user = userEvent.setup();
+
+    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -115,6 +137,8 @@ describe('Floorplan', () => {
 
   test('qr code to upload files appears', async () => {
     const user = userEvent.setup();
+
+    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -134,6 +158,8 @@ describe('Floorplan', () => {
 
   test('qr code can be closed', async () => {
     const user = userEvent.setup();
+
+    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -157,6 +183,8 @@ describe('Floorplan', () => {
   test('Language can be changed from English to Finnish', async () => {
     const user = userEvent.setup();
     const spy = vi.spyOn(i18n, 'changeLanguage');
+
+    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>

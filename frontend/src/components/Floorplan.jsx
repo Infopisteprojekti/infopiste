@@ -15,7 +15,7 @@ const Floorplan = () => {
   const { t } = useTranslation();
   const { settings } = useAppSettings();
 
-  const defaultFloor = Number(settings.floor) || 1;
+  const defaultFloor = Number(settings.floor) || 3;
   const [floor, setFloor] = useState(defaultFloor);
 
   const markerCoords = settings.marker

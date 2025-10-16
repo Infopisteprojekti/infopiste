@@ -99,6 +99,7 @@
 
   .lang__option--is-selected {
     background-color: var(--buttonActive) !important;
+    color: var(--buttonBackground) !important;
   }
 
   .lang__option-content-inner {
@@ -106,15 +107,13 @@
     align-items: center;
     gap: 0.5rem;
     height: 100%;
-    color: var(--buttonText);
   }
 
-  .lang__option-content-inner span {
+  .lang__option-content-inner .label {
     text-transform: uppercase;
   }
 
-  .globe-icon {
-    width: 1rem;
-    height: 1rem;
+  .lang__flag {
+    filter: saturate(1.2);
   }
 }

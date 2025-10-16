@@ -33,14 +33,18 @@ const LanguageSwitcher = ({ i18n, changeLanguage }) => {
       classNamePrefix="lang"
       formatOptionLabel={(option, { context }) => (
         <div className="lang__option-content">
-          {context === 'menu' ? (
-            <span>{option.fullName}</span>
-          ) : (
-            <div className="lang__option-content-inner">
-              <Globe size={18} className="globe-icon" />
-              <span>{option.label}</span>
-            </div>
-          )}
+          <div className="lang__option-content-inner">
+            <img
+              className="lang__flag"
+              src={`https://flagcdn.com/24x18/${option.flag}.png`}
+              srcset={`https://flagcdn.com/48x36/${option.flag}.png 2x, https://flagcdn.com/72x54/${option.flag}.png 3x`}
+              width="24"
+              height="18"
+            ></img>
+            <span className={context === 'menu' ? '' : 'label'}>
+              {context === 'menu' ? option.fullName : option.label}
+            </span>
+          </div>
         </div>
       )}
     />

@@ -11,7 +11,7 @@ const mockForms = [
     title: 'Second best notice',
     startDate: new Date('2025-06-01'),
     endDate: new Date('2025-06-02'),
-    fileUrl: 'https://pdfobject.com/pdf/sample.pdf',
+    fileUrl: 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf',
   },
 ];
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { useSearchParams } from 'react-router-dom';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

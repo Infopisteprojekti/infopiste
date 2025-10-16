@@ -1,4 +1,8 @@
-import { createContext, useContext, useRef, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+// Fast refresh expects only react components but here we are
+// exporting also a hook.
+
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AppSettingsContext = createContext(null);
 
@@ -24,6 +28,9 @@ const AppSettingsProvider = ({ children }) => {
   useEffect(() => {
     console.log('App context current values:', settings);
   }, [settings]);
+
+  // Inactivity code should probably be here.
+  // Commented out defaultSettingsRef can be used to restore the original defaults.
 
   return (
     <AppSettingsContext.Provider value={{ settings, setSettings }}>

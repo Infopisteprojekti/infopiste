@@ -5,6 +5,9 @@ import svgr from 'vite-plugin-svgr';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  optimizeDeps: {
+    include: ['react-pdf', 'pdfjs-dist'],
+  },
   test: {
     environment: 'jsdom',
     globals: true,

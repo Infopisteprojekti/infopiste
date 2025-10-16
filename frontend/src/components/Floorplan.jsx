@@ -6,20 +6,20 @@ import { useTranslation } from 'react-i18next';
 
 import FloorDisplay from './FloorDisplay';
 import floors from '../constants/floors';
+import { useAppSettings } from '../context/AppSettingsContext.jsx';
+
 import '../styles/components/Floorplan.css';
 import '../styles/components/Toolbar.css';
 import '../styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
+  const { settings } = useAppSettings();
+
+  const defaultFloor = Number(settings.floor) || 1;
+  const [floor, setFloor] = useState(defaultFloor);
 
   const [searchParams] = useSearchParams();
-  const floorParam = Number(searchParams.get('floor'));
-  const defaultFloor =
-    !isNaN(floorParam) && floors.some(f => f.id === floorParam)
-      ? floorParam
-      : 3;
-  const [floor, setFloor] = useState(defaultFloor);
   const markerCoords = searchParams.get('marker')?.split(',').map(Number);
 
   return (
@@ -59,7 +59,7 @@ const Floorplan = () => {
           >
             <FloorDisplay
               floor={floor}
-              initialFloor={floorParam}
+              initialFloor={defaultFloor}
               markerCoords={markerCoords}
             />
           </TransformComponent>

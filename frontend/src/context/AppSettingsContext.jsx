@@ -8,6 +8,7 @@ const AppSettingsProvider = ({ children }) => {
   const defaultSettings = {
     lang: urlParams.get('lang') || localStorage.getItem('lang') || 'fi',
     floor: urlParams.get('floor') || localStorage.getItem('floor') || 1,
+    marker: urlParams.get('marker') || localStorage.getItem('marker') || null,
   };
 
   // const defaultSettingsRef = useRef(defaultSettings);
@@ -17,7 +18,12 @@ const AppSettingsProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('lang', settings.lang);
     localStorage.setItem('floor', settings.floor);
-  }, [settings.lang, settings.floor]);
+    localStorage.setItem('marker', settings.marker);
+  }, [settings.lang, settings.floor, settings.marker]);
+
+  useEffect(() => {
+    console.log('App context current values:', settings);
+  }, [settings]);
 
   return (
     <AppSettingsContext.Provider value={{ settings, setSettings }}>

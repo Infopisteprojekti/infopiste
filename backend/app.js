@@ -7,6 +7,7 @@ import { MONGO_DB_URL, MS_SETTINGS, TEST } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
 import { initializeGraphForAppOnlyAuth } from './services/graph-auth.js';
 import { initRedis, getRedis } from './services/redis-client.js';
+import { insertMockData } from './mockdata/mock-forms-in-db.js';
 
 import roomsRouter from './controllers/rooms.js';
 import formsRouter from './controllers/forms.js';
@@ -51,15 +52,20 @@ export async function initApp() {
   try {
     await mongoose.connect(MONGO_DB_URL);
     logger.info('Connected to MongoDB');
+    insertMockData();
   } catch (error) {
     logger.error('Error connecting to MongoDB:', error.message);
   }
 
-  if (!TEST) {
+  const { CLIENT_ID, CLIENT_SECRET, TENANT_ID } = process.env;
+  const hasGraphCreds = CLIENT_ID && CLIENT_SECRET && TENANT_ID;
+
+  if (hasGraphCreds) {
     console.log('Initializing Redis and Graph');
     await initRedis();
     initializeGraphForAppOnlyAuth(MS_SETTINGS);
   } else {
     console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
+    await initRedis();
   }
 }

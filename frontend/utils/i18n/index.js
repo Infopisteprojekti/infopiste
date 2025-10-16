@@ -11,21 +11,16 @@ const supportedLangs = LANGUAGE_OPTIONS.map(opt => opt.value);
 
 const urlParams = new URLSearchParams(window.location.search);
 const langQuery = urlParams.get('lang');
-const savedLang = localStorage.getItem('lang');
 
-const lang = supportedLangs.includes(langQuery || '')
+const initialLang = supportedLangs.includes(langQuery)
   ? langQuery
-  : savedLang && supportedLangs.includes(savedLang)
-    ? savedLang
-    : DEFAULT_LANG;
-
-localStorage.setItem('lang', lang);
+  : DEFAULT_LANG;
 
 i18n
   .use(initReactI18next)
 
   .init({
-    lng: lang,
+    lng: initialLang,
     fallbackLng: DEFAULT_LANG,
 
     interpolation: {

@@ -52,20 +52,15 @@ export async function initApp() {
   try {
     await mongoose.connect(MONGO_DB_URL);
     logger.info('Connected to MongoDB');
-    insertMockData();
   } catch (error) {
     logger.error('Error connecting to MongoDB:', error.message);
   }
 
-  const { CLIENT_ID, CLIENT_SECRET, TENANT_ID } = process.env;
-  const hasGraphCreds = CLIENT_ID && CLIENT_SECRET && TENANT_ID;
-
-  if (hasGraphCreds) {
+  if (!TEST) {
     console.log('Initializing Redis and Graph');
     await initRedis();
     initializeGraphForAppOnlyAuth(MS_SETTINGS);
   } else {
     console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
-    await initRedis();
   }
 }

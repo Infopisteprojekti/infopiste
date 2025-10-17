@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
 
 test.describe('Infopiste', () => {
   test('home page can be opened', async ({ page }) => {
@@ -94,44 +95,7 @@ test.describe('Infopiste', () => {
   });
 
   test('room statuses are correct', async ({ page }) => {
-    await page.route('**/api/rooms', route => {
-      route.fulfill({
-        contentType: 'application/json',
-        body: JSON.stringify([
-          {
-            id: 'A344',
-            type: 'meeting',
-            reservations: [],
-          },
-          {
-            id: 'A345',
-            type: 'meeting',
-            reservations: [
-              {
-                id: 1,
-                subject: 'Best Meeting',
-                organizer: 'Some Person',
-                start: {
-                  dateTime: '1990-01-01T12:00:00',
-                },
-                end: {
-                  dateTime: '2125-01-01T12:00:00',
-                },
-                location: {
-                  displayName: 'Room A345',
-                  locationType: 'confRoom',
-                },
-              },
-            ],
-          },
-          {
-            id: 'A346',
-            type: 'office',
-            reservations: [],
-          },
-        ]),
-      });
-    });
+    mockRoomsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
 
@@ -184,61 +148,21 @@ test.describe('Infopiste', () => {
   });
 
   test('pdfs are rendered correctly', async ({ page }) => {
-    await page.route('**/api/forms', route => {
-      route.fulfill({
-        contentType: 'application/json',
-        body: JSON.stringify([
-          {
-            _id: '1',
-            title: 'Form 1',
-            startDate: '2025-01-01',
-            endDate: '2025-01-31',
-            fileUrl: '/form1.pdf',
-          },
-          {
-            _id: '2',
-            title: 'Form 2',
-            startDate: '2025-02-01',
-            endDate: '2025-02-28',
-            fileUrl: '/form2.pdf',
-          },
-        ])
-      })
-    });
+    mockFormsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
-    await page.getByText('Form 1').toBeVisible();
+    await expect(page.getByText('Form 1')).toBeVisible();
   });
 
   test('pdfs can be switched', async ({ page }) => {
-    await page.route('**/api/forms', route => {
-      route.fulfill({
-        contentType: 'application/json',
-        body: JSON.stringify([
-          {
-            _id: '1',
-            title: 'Form 1',
-            startDate: '2025-01-01',
-            endDate: '2025-01-31',
-            fileUrl: '/form1.pdf',
-          },
-          {
-            _id: '2',
-            title: 'Form 2',
-            startDate: '2025-02-01',
-            endDate: '2025-02-28',
-            fileUrl: '/form2.pdf',
-          },
-        ])
-      })
-    });
+    mockFormsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
     await page.getByText('Next').click();
-    await page.getByText('Form 2').toBeVisible();
+    await expect(page.getByText('Form 2')).toBeVisible();
   });
 });

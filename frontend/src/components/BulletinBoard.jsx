@@ -21,29 +21,28 @@ const BulletinBoard = () => {
   useEffect(() => {
     const fetchForms = async () => {
       try {
-        const res = await fetch(`${baseUrl}/api/forms`)
-        if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`)
+        const res = await fetch(`${baseUrl}/api/forms`);
+        if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`);
 
         const data = await res.json();
         if (data.error) throw new Error(data.error);
-  
+
         setForms(data);
         return;
-
       } catch (err) {
         console.error(err);
         return null;
       }
-    }
-    fetchForms()
+    };
+    fetchForms();
   }, []);
-  
+
   const nextForm = () => {
-    setIndex((prev) => (prev + 1) % forms.length);
+    setIndex(prev => (prev + 1) % forms.length);
   };
 
   const prevForm = () => {
-    setIndex((prev) => (prev - 1 + forms.length) % forms.length);
+    setIndex(prev => (prev - 1 + forms.length) % forms.length);
   };
 
   const toggleQr = () => {
@@ -89,27 +88,31 @@ const BulletinBoard = () => {
 
       <br />
       <div className="pdf-container">
-          <h3>{currentForm.title}</h3>
-          <p>
-            {new Date(currentForm.startDate).toLocaleDateString()} –{" "}
-            {new Date(currentForm.endDate).toLocaleDateString()}
-          </p>
-          <div className="pdf-wrapper">
-            <button className="pdf-button left"onClick={nextForm}>← Previous</button>
-            <Document
-              file={currentForm.fileUrl}
-              key={currentForm._id}
-              onLoadError={console.error}
-            >
-              <Page
-                pageNumber={1}
-                width={700}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-              />
-            </Document>
-            <button className="pdf-button right"onClick={prevForm}>Next →</button>
-          </div>
+        <h3>{currentForm.title}</h3>
+        <p>
+          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
+          {new Date(currentForm.endDate).toLocaleDateString()}
+        </p>
+        <div className="pdf-wrapper">
+          <button className="pdf-button left" onClick={nextForm}>
+            ← Previous
+          </button>
+          <Document
+            file={currentForm.fileUrl}
+            key={currentForm._id}
+            onLoadError={console.error}
+          >
+            <Page
+              pageNumber={1}
+              width={700}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+          </Document>
+          <button className="pdf-button right" onClick={prevForm}>
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );

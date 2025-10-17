@@ -48,6 +48,15 @@ A `reservation` is an object containing:
 - `end`: end time for the reservation
 - `location`: the `displayName` and `locationType` of the `room` where the reservation takes place.
 
+`/api/forms` returns all user-uploaded Forms.
+
+ A `Form` is a mongoose model containing:
+ 
+- `title`: title string
+- `startDate`: the start time for the notice
+- `endDate`: the end time for the notice
+- `fileUrl`: URL for the uploaded PDF file.
+
 # Running the backend
 
 ## Staging server
@@ -114,7 +123,7 @@ The tests can be found in the [tests](../backend/tests) directory.
 
 [info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
 
-Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, and `/api/rooms/:id/reservations`.
+Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, `/api/rooms/:id/reservations` and `/api/forms`.
 
 `[rooms.test.js](../backend/tests/rooms.test.js) tests the functionality of the functions in [services/rooms.js](../backend/services/rooms.js).
 

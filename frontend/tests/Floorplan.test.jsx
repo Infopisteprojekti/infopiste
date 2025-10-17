@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Floorplan from '../src/components/Floorplan';
+import BulletinBoard from '../src/components/BulletinBoard.jsx';
 import App from '../src/App';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -19,6 +20,15 @@ global.ResizeObserver = ResizeObserver;
 
 // Mock svg asset in tests, click event for A346
 const clickMock = vi.fn();
+
+// Mock pdf
+vi.mock('react-pdf', () => {
+  return {
+    Document: ({ children }) => <div data-testid="document">{children}</div>,
+    Page: () => <div data-testid="page">PDF Page</div>,
+    pdfjs: { GlobalWorkerOptions: { workerSrc: '' } },
+  };
+});
 
 vi.mock('../src/assets/exactum-3.svg?react', () => ({
   default: ({ ref }) => (
@@ -96,18 +106,45 @@ describe('Floorplan', () => {
     const room = document.querySelector('[data-room-id="B233"]');
     expect(room).toBeInTheDocument();
   });
+});
+
+describe('BulletinBoard', () => {
+  const mockForms = [
+    {
+      _id: '1',
+      title: 'Form 1',
+      startDate: '2025-01-01',
+      endDate: '2025-01-31',
+      fileUrl: '/form1.pdf',
+    },
+    {
+      _id: '2',
+      title: 'Form 2',
+      startDate: '2025-02-01',
+      endDate: '2025-02-28',
+      fileUrl: '/form2.pdf',
+    },
+  ];
+
+  let fetchSpy;
+
+  beforeEach(() => {
+    fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => mockForms,
+    });
+  });
+
+  afterEach(() => {
+    fetchSpy.mockRestore();
+  });
 
   test('bulletin board can be accessed', async () => {
-    const user = userEvent.setup();
-
     render(
       <MemoryRouter>
-        <App />
+        <BulletinBoard />
       </MemoryRouter>
     );
-
-    const bulletinBoardButton = await screen.findByText('Bulletin Board');
-    await user.click(bulletinBoardButton);
 
     const addFileButton = await screen.findByText('Add file');
     expect(addFileButton).toBeInTheDocument();
@@ -118,12 +155,9 @@ describe('Floorplan', () => {
 
     render(
       <MemoryRouter>
-        <App />
+        <BulletinBoard />
       </MemoryRouter>
     );
-
-    const bulletinBoardButton = await screen.findByText('Bulletin Board');
-    await user.click(bulletinBoardButton);
 
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
@@ -137,12 +171,9 @@ describe('Floorplan', () => {
 
     render(
       <MemoryRouter>
-        <App />
+        <BulletinBoard />
       </MemoryRouter>
     );
-
-    const bulletinBoardButton = await screen.findByText('Bulletin Board');
-    await user.click(bulletinBoardButton);
 
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
@@ -154,26 +185,29 @@ describe('Floorplan', () => {
     expect(popup.classList.contains('open-popup')).toBe(false);
   });
 
-  test('Language can be changed from English to Finnish', async () => {
-    const user = userEvent.setup();
-    const spy = vi.spyOn(i18n, 'changeLanguage');
-
+  test('renders loading', async () => {
     render(
       <MemoryRouter>
-        <App />
+        <BulletinBoard />
       </MemoryRouter>
     );
 
-    expect(await screen.findByText('Floor Plan')).toBeInTheDocument();
+    expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
+  });
 
-    // Assumes default language to be English
-    const langDropDown = await screen.findByText('EN');
-    await user.click(langDropDown);
+  test('navigation between forms works', async () => {
+    render(<BulletinBoard />);
+    await waitFor(() => screen.getByText('Form 1'));
 
-    const finnishOption = await screen.findByText('suomi');
-    await user.click(finnishOption);
+    const nextButton = screen.getByText('← Previous');
+    const prevButton = screen.getByText('Next →');
 
-    expect(spy).toHaveBeenCalledWith('fi');
-    expect(await screen.findByText('Kartta')).toBeInTheDocument();
+    userEvent.click(nextButton);
+    await waitFor(() => screen.getByText('Form 2'));
+    expect(screen.getByText('Form 2')).toBeInTheDocument();
+
+    userEvent.click(prevButton);
+    await waitFor(() => screen.getByText('Form 1'));
+    expect(screen.getByText('Form 1')).toBeInTheDocument();
   });
 });

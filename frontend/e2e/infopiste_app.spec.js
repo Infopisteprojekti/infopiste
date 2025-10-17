@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
+import { mockForms, mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
 
 test.describe('Infopiste', () => {
   test('home page can be opened', async ({ page }) => {
@@ -130,16 +130,20 @@ test.describe('Infopiste', () => {
   });
 
   test('bulletin board view can be opened', async ({ page }) => {
-    await page.goto('http://localhost:5173?lang=en');
+    mockFormsRoute(page);
 
+    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
+
     await expect(page.getByText('Files')).toBeVisible();
   });
 
   test('qr code can be opened and closed', async ({ page }) => {
-    await page.goto('http://localhost:5173?lang=en');
+    mockFormsRoute(page);
 
+    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
+
     await page.getByText('Add file').click();
     await expect(page.getByText('Scan QR code to add')).toBeVisible();
 

@@ -73,6 +73,8 @@ The unit tests can be found in the [tests](../frontend/tests/) directory.
 
 [Floorplan.test.jsx](../frontend/tests/Floorplan.test.jsx) tests the functionality of the `Floorplan` component. These tests use mocks in place of using the actual component, due to the complexity of creating unit tests for a component that fetches data from the backend.
 
+The file also includes tests for the `BulletinBoard` component.
+
 End-to-end tests can be found in the [e2e](../frontend/e2e/) directory.
 
 These tests are used to test the end-to-end functionality of the application, which includes the communication between the frontend and backend.

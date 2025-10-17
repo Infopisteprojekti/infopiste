@@ -1,4 +1,4 @@
-import { afterEach } from 'vitest';
+import { beforeEach, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 
@@ -17,6 +17,10 @@ i18n.use(initReactI18next).init({
   },
   interpolation: { escapeValue: false },
 });
+
+beforeEach(() => {
+  i18n.changeLanguage('en');
+})
 
 afterEach(() => {
   cleanup();

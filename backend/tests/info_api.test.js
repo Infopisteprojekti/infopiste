@@ -2,6 +2,30 @@ import { describe, test, expect, vi } from 'vitest';
 import supertest from 'supertest';
 import { createApp } from '../app.js';
 import * as redisClient from '../services/redis-client.js';
+import { Form } from '../models/formModel.js';
+
+const mockForms = [
+  {
+    _id: '1',
+    title: 'Form 1',
+    startDate: '2025-01-01',
+    endDate: '2025-01-31',
+    fileUrl: '/form1.pdf',
+  },
+  {
+    _id: '2',
+    title: 'Form 2',
+    startDate: '2025-02-01',
+    endDate: '2025-02-28',
+    fileUrl: '/form2.pdf',
+  },
+];
+
+vi.mock('../models/formModel.js', () => ({
+  Form: {
+    find: vi.fn(),
+  },
+}));
 
 const mockRooms = [
   {
@@ -91,5 +115,14 @@ describe('backend endpoint tests', () => {
     expect(res.body).toStrictEqual({
       error: 'Room not supported: nonexistent',
     });
+  });
+
+  test('forms are returned', async () => {
+    Form.find.mockResolvedValue(mockForms);
+
+    const res = await api.get('/api/forms').expect(200);
+
+    expect(res.body).toEqual(mockForms);
+    expect(Form.find).toHaveBeenCalledOnce();
   });
 });

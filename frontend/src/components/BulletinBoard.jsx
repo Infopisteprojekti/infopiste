@@ -16,6 +16,7 @@ const BulletinBoard = () => {
   const { t } = useTranslation();
   const [qrState, setQrState] = useState(false);
   const [forms, setForms] = useState([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -36,6 +37,14 @@ const BulletinBoard = () => {
     }
     fetchForms()
   }, []);
+  
+  const nextForm = () => {
+    setIndex((prev) => (prev + 1) % forms.length);
+  };
+
+  const prevForm = () => {
+    setIndex((prev) => (prev - 1 + forms.length) % forms.length);
+  };
 
   const toggleQr = () => {
     const newState = !qrState;
@@ -52,6 +61,16 @@ const BulletinBoard = () => {
     }
     setQrState(newState);
   };
+
+  if (forms.length === 0) {
+    return (
+      <div>
+        <p>Loading PDFs...</p>
+      </div>
+    );
+  }
+
+  const currentForm = forms[index];
 
   return (
     <div>
@@ -70,20 +89,32 @@ const BulletinBoard = () => {
 
       <br />
       <h1>Files</h1>
-      <ul>
-        {forms.map(form => (
-          <li key={form._id}>
-            <h3>{form.title}</h3>
-            <p>
-              {new Date(form.startDate).toLocaleDateString()} -{' '}
-              {new Date(form.endDate).toLocaleDateString()}
-            </p>
-            <Document file={form.fileUrl} key={form._id}>
-              <Page pageNumber={1} width={600} renderTextLayer={false} renderAnnotationLayer={false} />
+      <div className="pdf-container">
+          <h3>{currentForm.title}</h3>
+          <p>
+            {new Date(currentForm.startDate).toLocaleDateString()} –{" "}
+            {new Date(currentForm.endDate).toLocaleDateString()}
+          </p>
+
+          <div className="pdf-wrapper">
+            <Document
+              file={currentForm.fileUrl}
+              key={currentForm._id}
+              onLoadError={console.error}
+            >
+              <Page
+                pageNumber={1}
+                width={600}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
             </Document>
-          </li>
-        ))}
-      </ul>
+          </div>
+          <div className="pdf-nav">
+            <button onClick={prevForm}>← Previous</button>
+            <button onClick={nextForm}>Next →</button>
+          </div>
+      </div>
     </div>
   );
 };

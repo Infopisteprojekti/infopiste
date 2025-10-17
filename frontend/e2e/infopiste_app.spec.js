@@ -182,4 +182,63 @@ test.describe('Infopiste', () => {
     await page.getByText('Close').click();
     await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
   });
+
+  test('pdfs are rendered correctly', async ({ page }) => {
+    await page.route('**/api/forms', route => {
+      route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            _id: '1',
+            title: 'Form 1',
+            startDate: '2025-01-01',
+            endDate: '2025-01-31',
+            fileUrl: '/form1.pdf',
+          },
+          {
+            _id: '2',
+            title: 'Form 2',
+            startDate: '2025-02-01',
+            endDate: '2025-02-28',
+            fileUrl: '/form2.pdf',
+          },
+        ])
+      })
+    });
+
+    await page.goto('http://localhost:5173?lang=en');
+    await page.getByText('Bulletin Board').click();
+
+    await page.getByText('Form 1').toBeVisible();
+  });
+
+  test('pdfs can be switched', async ({ page }) => {
+    await page.route('**/api/forms', route => {
+      route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            _id: '1',
+            title: 'Form 1',
+            startDate: '2025-01-01',
+            endDate: '2025-01-31',
+            fileUrl: '/form1.pdf',
+          },
+          {
+            _id: '2',
+            title: 'Form 2',
+            startDate: '2025-02-01',
+            endDate: '2025-02-28',
+            fileUrl: '/form2.pdf',
+          },
+        ])
+      })
+    });
+
+    await page.goto('http://localhost:5173?lang=en');
+    await page.getByText('Bulletin Board').click();
+
+    await page.getByText('Next').click();
+    await page.getByText('Form 2').toBeVisible();
+  });
 });

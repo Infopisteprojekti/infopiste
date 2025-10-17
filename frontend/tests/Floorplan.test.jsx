@@ -106,6 +106,29 @@ describe('Floorplan', () => {
     const room = document.querySelector('[data-room-id="B233"]');
     expect(room).toBeInTheDocument();
   });
+
+  test('Language can be changed from English to Finnish', async () => {
+    const user = userEvent.setup();
+    const spy = vi.spyOn(i18n, 'changeLanguage');
+
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByText('Floor Plan')).toBeInTheDocument();
+
+    // Assumes default language to be English
+    const langDropDown = await screen.findByText('EN');
+    await user.click(langDropDown);
+
+    const finnishOption = await screen.findByText('Suomi');
+    await user.click(finnishOption);
+
+    expect(spy).toHaveBeenCalledWith('fi');
+    expect(await screen.findByText('Kartta')).toBeInTheDocument();
+  });
 });
 
 describe('BulletinBoard', () => {

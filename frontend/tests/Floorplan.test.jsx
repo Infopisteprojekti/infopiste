@@ -39,8 +39,6 @@ vi.mock('../src/assets/exactum-3.svg?react', () => ({
 }));
 
 describe('Floorplan', () => {
-  window.location = { ...window.location, search: '?lang=en' };
-
   test('floorplan is rendered correctly', async () => {
     render(
       <MemoryRouter>
@@ -55,8 +53,6 @@ describe('Floorplan', () => {
   });
 
   test('correct amount of rooms is rendered', () => {
-    window.location = { ...window.location, search: '?lang=en' };
-
     render(
       <MemoryRouter>
         <AppSettingsProvider>
@@ -70,8 +66,6 @@ describe('Floorplan', () => {
   });
 
   test('zoom buttons exist', () => {
-    window.location = { ...window.location, search: '?lang=en' };
-
     render(
       <MemoryRouter>
         <AppSettingsProvider>
@@ -87,8 +81,6 @@ describe('Floorplan', () => {
 
   test('clicking room is possible', async () => {
     const user = userEvent.setup();
-
-    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -120,8 +112,6 @@ describe('Floorplan', () => {
   test('bulletin board can be accessed', async () => {
     const user = userEvent.setup();
 
-    window.location = { ...window.location, search: '?lang=en' };
-
     render(
       <MemoryRouter>
         <App />
@@ -137,8 +127,6 @@ describe('Floorplan', () => {
 
   test('qr code to upload files appears', async () => {
     const user = userEvent.setup();
-
-    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -158,8 +146,6 @@ describe('Floorplan', () => {
 
   test('qr code can be closed', async () => {
     const user = userEvent.setup();
-
-    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>
@@ -183,8 +169,6 @@ describe('Floorplan', () => {
   test('Language can be changed from English to Finnish', async () => {
     const user = userEvent.setup();
     const spy = vi.spyOn(i18n, 'changeLanguage');
-
-    window.location = { ...window.location, search: '?lang=en' };
 
     render(
       <MemoryRouter>

@@ -1,12 +1,8 @@
-/* eslint-disable react-refresh/only-export-components */
-// Fast refresh expects only react components but here we are
-// exporting also a hook.
-
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 const AppSettingsContext = createContext(null);
 
-const AppSettingsProvider = ({ children }) => {
+export const AppSettingsProvider = ({ children }) => {
   const urlParams = new URLSearchParams(window.location.search);
 
   const defaultSettings = {
@@ -39,12 +35,4 @@ const AppSettingsProvider = ({ children }) => {
   );
 };
 
-const useAppSettings = () => {
-  const context = useContext(AppSettingsContext);
-  if (!context) {
-    throw new Error('Context not initialized');
-  }
-  return context;
-};
-
-export { AppSettingsProvider, useAppSettings };
+export default AppSettingsContext;

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import FloorDisplay from './FloorDisplay';
 import floors from '../constants/floors';
-import { useAppSettings } from '../context/AppSettingsContext.jsx';
+import { useAppSettings } from '../context/useAppSettings.js';
 
 import '../styles/components/Floorplan.css';
 import '../styles/components/Toolbar.css';

@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import Select from 'react-select';
-import { Globe } from 'lucide-react';
 import LANGUAGE_OPTIONS from '../constants/languageOptions';
-import { useAppSettings } from '../context/AppSettingsContext.jsx';
+import { useAppSettings } from '../context/useAppSettings.js';
 
 const LanguageSwitcher = ({ i18n, changeLanguage }) => {
   const { settings, setSettings } = useAppSettings();

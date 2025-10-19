@@ -6,6 +6,7 @@ import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
 import i18n from './testSetup.js';
+import reservations from '../src/services/reservations.js';
 
 // Mock ResizeObserver
 class ResizeObserver {
@@ -19,6 +20,20 @@ global.ResizeObserver = ResizeObserver;
 
 // Mock svg asset in tests, click event for A346
 const clickMock = vi.fn();
+
+vi.mock('../src/services/rooms.js', () => {
+  const mockRooms = [
+    { id: 'A346', type: 'office', capacity: 1, reservations: [] },
+    { id: 'A348', type: 'classroom', capactity: 2, reservations: [] },
+    { id: 'A311', type: 'meeting_room', capacity: 3, reservations: [] },
+  ];
+
+  return {
+    default: {
+      getRooms: vi.fn().mockResolvedValue(mockRooms),
+    },
+  };
+});
 
 vi.mock('../src/assets/exactum-3.svg?react', () => ({
   default: ({ ref }) => (
@@ -73,6 +88,7 @@ describe('Floorplan', () => {
 
   test('clicking room is possible', async () => {
     const user = userEvent.setup();
+    window.alert = vi.fn();
 
     render(
       <MemoryRouter>

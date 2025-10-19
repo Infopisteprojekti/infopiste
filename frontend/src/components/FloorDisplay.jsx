@@ -40,7 +40,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
 
     const updateStatuses = async () => {
       const data = await roomService.getRooms();
-      
+
       for (const room of roomsRef.current) {
         const child = room.querySelector('*');
         const roomId = child?.id;

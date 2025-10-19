@@ -59,7 +59,6 @@ function getUtcNowAndWeekAhead() {
 
 export async function fetchRoomReservations(roomIds) {
   try {
-
     const batchRequest = createBatchRequest(roomIds);
     const batchResponse = await graphClient
       .api('/$batch')

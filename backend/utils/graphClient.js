@@ -10,7 +10,7 @@ let graphClient;
 
 const client = {
   api: endpoint => graphClient.api(endpoint),
-  
+
   getExactumRooms() {
     return graphClient
       .api('/places/microsoft.graph.room')

@@ -10,6 +10,46 @@ let graphClient;
 
 const client = {
   api: endpoint => graphClient.api(endpoint),
+  
+  getExactumRooms() {
+    return graphClient
+      .api('/places/microsoft.graph.room')
+      .filter("startswith(emailAddress, 'exactum')")
+      .select(
+        'emailAddress',
+        'displayName',
+        'floorNumber',
+        'capacity',
+        'isWheelChairAccessible',
+        'tags'
+      )
+      .get();
+  },
+
+  async getRoomEventsBatch(roomEmails, startDate, endDate) {
+    const batchRequests = roomEmails.map((email, index) => ({
+      id: `${index + 1}`,
+      method: 'GET',
+      url:
+        `/users/${email}/calendarView?` +
+        `startDateTime=${startDate}&endDateTime=${endDate}&` +
+        `$select=start,end,location`,
+    }));
+
+    const response = await graphClient
+      .api('/$batch')
+      .post({ requests: batchRequests });
+
+    return response.responses.flatMap(room => {
+      const events = room.body.value || [];
+
+      return events.map(event => ({
+        roomEmail: event.location.uniqueId,
+        startTime: new Date(event.start.dateTime + 'Z'),
+        endTime: new Date(event.end.dateTime + 'Z'),
+      }));
+    });
+  },
 
   async initialize() {
     try {

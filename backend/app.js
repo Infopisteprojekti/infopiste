@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 
-import { MS_SETTINGS, TEST } from './utils/config.js';
+import { TEST } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
-import { initializeGraphForAppOnlyAuth } from './services/graph-auth.js';
 import { initRedis, getRedis } from './services/redis-client.js';
 import { connectToDatabase } from './utils/dbConnection.js';
+import graphClient from './utils/graphClient.js';
 
 import roomsRouter from './controllers/rooms.js';
 
@@ -47,7 +47,7 @@ export async function initApp() {
   if (!TEST) {
     console.log('Initializing Redis and Graph');
     await initRedis();
-    initializeGraphForAppOnlyAuth(MS_SETTINGS);
+    await graphClient.initialize();
   } else {
     console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
   }

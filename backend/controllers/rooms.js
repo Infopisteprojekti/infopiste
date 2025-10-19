@@ -3,7 +3,7 @@ import {
   fetchRoomReservations,
   fetchReservationsById,
 } from '../services/rooms.js';
-import { getRedis } from '../services/redis-client.js';
+import redis from '../utils/redisClient.js';
 import { TTL_SECONDS } from '../utils/config.js';
 
 const router = Router();
@@ -12,7 +12,6 @@ const ROOMIDS = ['b233', 'a214', 'a218b', 'a307'];
 
 router.get('/', async (request, response) => {
   const cacheKey = 'rooms:reservations';
-  const redis = request.redisClient;
 
   const cached = await redis.get(cacheKey);
   if (cached) {
@@ -35,7 +34,6 @@ router.get('/', async (request, response) => {
 router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
 
-  const redis = request.redisClient;
   const cacheKey = `rooms:reservations:${id}`;
 
   const cached = await redis.get(cacheKey);

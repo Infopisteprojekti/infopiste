@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
 import roomsRouter from './controllers/rooms.js';
+import reservationsRouter from './controllers/reservations.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use('/api/rooms', roomsRouter);
+app.use('/api/reservations', reservationsRouter);
 
 app.get('/', (req, res) => res.send('infonäyttö backend'));
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));

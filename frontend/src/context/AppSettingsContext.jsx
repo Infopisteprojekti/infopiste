@@ -3,37 +3,35 @@ import { useNavigate } from 'react-router-dom';
 
 const INACTIVITY_TIMEOUT_SECONDS = 60;
 
-const AppSettingsContext = createContext(null);
-
-export const AppSettingsProvider = ({ children }) => {
+const getDefaultSettings = () => {
   const urlParams = new URLSearchParams(window.location.search);
-
-  const defaultSettings = {
+  return {
     lang: urlParams.get('lang') || localStorage.getItem('lang') || 'fi',
     floor: urlParams.get('floor') || Number(localStorage.getItem('floor')) || 3,
     marker: urlParams.get('marker') || localStorage.getItem('marker') || null,
   };
+};
 
-  const defaultSettingsRef = useRef(defaultSettings);
-  const [settings, setSettings] = useState(defaultSettings);
-  const [resetTrigger, setResetTrigger] = useState(0);
+const usePersistSettings = settings => {
+  useEffect(() => {
+    localStorage.setItem('lang', settings.lang);
+    localStorage.setItem('floor', settings.floor);
+    localStorage.setItem('marker', settings.marker);
+  }, [settings.lang, settings.floor, settings.marker]);
+};
+
+const useInactivity = ({ restoreDefaults, timeout = 60, navigateTo }) => {
   const inactivityTimer = useRef(null);
   const navigate = useNavigate();
-
-  const restoreDefaults = useCallback(() => {
-    console.log('Restoring default settings due to inactivity');
-    setSettings(defaultSettingsRef.current);
-    setResetTrigger(prev => prev + 1);
-  }, []);
 
   const resetInactivityTimer = useCallback(() => {
     if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
 
     inactivityTimer.current = setTimeout(() => {
       restoreDefaults();
-      navigate('/');
-    }, INACTIVITY_TIMEOUT_SECONDS * 1000);
-  }, [restoreDefaults, navigate]);
+      navigate(navigateTo);
+    }, timeout * 1000);
+  }, [restoreDefaults, timeout, navigateTo, navigate]);
 
   useEffect(() => {
     const events = [
@@ -58,11 +56,28 @@ export const AppSettingsProvider = ({ children }) => {
     };
   }, [resetInactivityTimer]);
 
-  useEffect(() => {
-    localStorage.setItem('lang', settings.lang);
-    localStorage.setItem('floor', settings.floor);
-    localStorage.setItem('marker', settings.marker);
-  }, [settings.lang, settings.floor, settings.marker]);
+  return resetInactivityTimer;
+};
+
+const AppSettingsContext = createContext(null);
+
+export const AppSettingsProvider = ({ children }) => {
+  const defaultSettingsRef = useRef(getDefaultSettings());
+  const [settings, setSettings] = useState(defaultSettingsRef.current);
+  const [resetTrigger, setResetTrigger] = useState(0);
+
+  const restoreDefaults = useCallback(() => {
+    console.log('Restoring default settings due to inactivity');
+    setSettings(defaultSettingsRef.current);
+    setResetTrigger(prev => prev + 1);
+  }, []);
+
+  usePersistSettings(settings);
+  useInactivity({
+    restoreDefaults,
+    timeout: INACTIVITY_TIMEOUT_SECONDS,
+    navigateTo: '/',
+  });
 
   useEffect(() => {
     console.log('App context current values:', settings);

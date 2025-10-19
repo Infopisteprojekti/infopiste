@@ -27,7 +27,7 @@ const Floorplan = () => {
     if (Number(settings.floor) !== floor) {
       setFloor(Number(settings.floor));
     }
-  }, [settings.floor]);
+  }, [settings.floor, floor]);
 
   useEffect(() => {
     if (transformRef.current) {

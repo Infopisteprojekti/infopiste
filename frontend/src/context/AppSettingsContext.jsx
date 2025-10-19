@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect } from 'react';
+import { createContext, useState, useRef, useEffect, useCallback } from 'react';
 
 const INACTIVITY_TIMEOUT_SECONDS = 3;
 
@@ -9,7 +9,7 @@ export const AppSettingsProvider = ({ children }) => {
 
   const defaultSettings = {
     lang: urlParams.get('lang') || localStorage.getItem('lang') || 'fi',
-    floor: urlParams.get('floor') || localStorage.getItem('floor') || 3,
+    floor: urlParams.get('floor') || Number(localStorage.getItem('floor')) || 3,
     marker: urlParams.get('marker') || localStorage.getItem('marker') || null,
   };
 
@@ -18,19 +18,19 @@ export const AppSettingsProvider = ({ children }) => {
   const [resetTrigger, setResetTrigger] = useState(0);
   const inactivityTimer = useRef(null);
 
-  const restoreDefaults = () => {
+  const restoreDefaults = useCallback(() => {
     console.log('Restoring default settings due to inactivity');
     setSettings(defaultSettingsRef.current);
     setResetTrigger(prev => prev + 1);
-  };
+  }, []);
 
-  const resetInactivityTimer = () => {
+  const resetInactivityTimer = useCallback(() => {
     clearTimeout(inactivityTimer.current);
     inactivityTimer.current = setTimeout(
       restoreDefaults,
       INACTIVITY_TIMEOUT_SECONDS * 1000
     );
-  };
+  }, [restoreDefaults]);
 
   useEffect(() => {
     const events = [
@@ -53,7 +53,7 @@ export const AppSettingsProvider = ({ children }) => {
         window.removeEventListener(event, resetInactivityTimer)
       );
     };
-  }, []);
+  }, [resetInactivityTimer]);
 
   useEffect(() => {
     localStorage.setItem('lang', settings.lang);

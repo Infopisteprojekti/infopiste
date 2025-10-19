@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -13,14 +13,20 @@ import '../styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
-  const { settings } = useAppSettings();
+  const { settings, setSettings } = useAppSettings();
 
-  const defaultFloor = Number(settings.floor) || 3;
-  const [floor, setFloor] = useState(defaultFloor);
+  const initialFloorRef = useRef(Number(settings.floor) || 3);
+  const [floor, setFloor] = useState(Number(settings.floor) || 3);
 
   const markerCoords = settings.marker
     ? settings.marker.split(',').map(Number)
     : undefined;
+
+  useEffect(() => {
+    if (Number(settings.floor) !== floor) {
+      setFloor(Number(settings.floor));
+    }
+  }, [settings.floor]);
 
   return (
     <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
@@ -44,6 +50,7 @@ const Floorplan = () => {
                 key={id}
                 onClick={() => {
                   setFloor(id);
+                  setSettings(prev => ({ ...prev, floor: id }));
                   resetTransform();
                 }}
                 className={`button ${id === floor ? 'active' : ''}`}
@@ -59,7 +66,7 @@ const Floorplan = () => {
           >
             <FloorDisplay
               floor={floor}
-              initialFloor={defaultFloor}
+              initialFloor={initialFloorRef.current}
               markerCoords={markerCoords}
             />
           </TransformComponent>

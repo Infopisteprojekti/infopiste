@@ -15,11 +15,13 @@ export const AppSettingsProvider = ({ children }) => {
 
   const defaultSettingsRef = useRef(defaultSettings);
   const [settings, setSettings] = useState(defaultSettings);
+  const [resetTrigger, setResetTrigger] = useState(0);
   const inactivityTimer = useRef(null);
 
   const restoreDefaults = () => {
     console.log('Restoring default settings due to inactivity');
     setSettings(defaultSettingsRef.current);
+    setResetTrigger(prev => prev + 1);
   };
 
   const resetInactivityTimer = () => {
@@ -64,7 +66,9 @@ export const AppSettingsProvider = ({ children }) => {
   }, [settings]);
 
   return (
-    <AppSettingsContext.Provider value={{ settings, setSettings }}>
+    <AppSettingsContext.Provider
+      value={{ settings, setSettings, resetTrigger }}
+    >
       {children}
     </AppSettingsContext.Provider>
   );

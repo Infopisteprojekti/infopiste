@@ -13,10 +13,11 @@ import '../styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
-  const { settings, setSettings } = useAppSettings();
+  const { settings, setSettings, resetTrigger } = useAppSettings();
 
   const initialFloorRef = useRef(Number(settings.floor) || 3);
   const [floor, setFloor] = useState(Number(settings.floor) || 3);
+  const transformRef = useRef(null);
 
   const markerCoords = settings.marker
     ? settings.marker.split(',').map(Number)
@@ -28,8 +29,19 @@ const Floorplan = () => {
     }
   }, [settings.floor]);
 
+  useEffect(() => {
+    if (transformRef.current) {
+      transformRef.current.resetTransform();
+    }
+  }, [resetTrigger]);
+
   return (
-    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+    <TransformWrapper
+      ref={transformRef}
+      initialScale={1}
+      minScale={0.5}
+      maxScale={5}
+    >
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
           <div className="toolbar toolbar__floorplan-transform">

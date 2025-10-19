@@ -1,6 +1,6 @@
 import { createContext, useState, useRef, useEffect, useCallback } from 'react';
 
-const INACTIVITY_TIMEOUT_SECONDS = 3;
+const INACTIVITY_TIMEOUT_SECONDS = 60;
 
 const AppSettingsContext = createContext(null);
 

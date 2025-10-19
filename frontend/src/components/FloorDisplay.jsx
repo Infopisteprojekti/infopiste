@@ -1,14 +1,11 @@
 import { useRef, useEffect } from 'react';
+import roomService from '../services/rooms.js';
 import floors from '../constants/floors';
 import roomStatus from '../constants/roomStatus';
 import '../styles/components/Floorplan.css';
 import { useTranslation } from 'react-i18next';
 
 const POLLING_INTERVAL = 60 * 1000; // 60 seconds
-
-const baseUrl =
-  import.meta.env.VITE_API_BASE_URL ||
-  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
 const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const { t } = useTranslation();
@@ -41,25 +38,9 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
     const prevMarker = floorplan.querySelector('.location-marker');
     if (prevMarker) prevMarker.remove();
 
-    const fetchRoomData = async () => {
-      try {
-        const response = await fetch(`${baseUrl}/api/rooms`);
-        if (!response.ok)
-          throw new Error(`Error fetching room data: ${response.status}`);
-
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
-
-        return data;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
-    };
-
     const updateStatuses = async () => {
-      const data = await fetchRoomData();
-
+      const data = await roomService.getRooms();
+      
       for (const room of roomsRef.current) {
         const child = room.querySelector('*');
         const roomId = child?.id;

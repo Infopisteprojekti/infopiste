@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useRef, useEffect } from 'react';
+
+const INACTIVITY_TIMEOUT_SECONDS = 3;
 
 const AppSettingsContext = createContext(null);
 
@@ -11,9 +13,45 @@ export const AppSettingsProvider = ({ children }) => {
     marker: urlParams.get('marker') || localStorage.getItem('marker') || null,
   };
 
-  // const defaultSettingsRef = useRef(defaultSettings);
-
+  const defaultSettingsRef = useRef(defaultSettings);
   const [settings, setSettings] = useState(defaultSettings);
+  const inactivityTimer = useRef(null);
+
+  const restoreDefaults = () => {
+    console.log('Restoring default settings due to inactivity');
+    setSettings(defaultSettingsRef.current);
+  };
+
+  const resetInactivityTimer = () => {
+    clearTimeout(inactivityTimer.current);
+    inactivityTimer.current = setTimeout(
+      restoreDefaults,
+      INACTIVITY_TIMEOUT_SECONDS * 1000
+    );
+  };
+
+  useEffect(() => {
+    const events = [
+      'mousedown',
+      'mousemove',
+      'keydown',
+      'scroll',
+      'touchstart',
+      'touchmove',
+    ];
+    events.forEach(event =>
+      window.addEventListener(event, resetInactivityTimer)
+    );
+
+    resetInactivityTimer();
+
+    return () => {
+      clearTimeout(inactivityTimer.current);
+      events.forEach(event =>
+        window.removeEventListener(event, resetInactivityTimer)
+      );
+    };
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('lang', settings.lang);
@@ -24,9 +62,6 @@ export const AppSettingsProvider = ({ children }) => {
   useEffect(() => {
     console.log('App context current values:', settings);
   }, [settings]);
-
-  // Inactivity code should probably be here.
-  // Commented out defaultSettingsRef can be used to restore the original defaults.
 
   return (
     <AppSettingsContext.Provider value={{ settings, setSettings }}>

@@ -1,4 +1,5 @@
 import { createContext, useState, useRef, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const INACTIVITY_TIMEOUT_SECONDS = 60;
 
@@ -17,6 +18,7 @@ export const AppSettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState(defaultSettings);
   const [resetTrigger, setResetTrigger] = useState(0);
   const inactivityTimer = useRef(null);
+  const navigate = useNavigate();
 
   const restoreDefaults = useCallback(() => {
     console.log('Restoring default settings due to inactivity');
@@ -25,12 +27,13 @@ export const AppSettingsProvider = ({ children }) => {
   }, []);
 
   const resetInactivityTimer = useCallback(() => {
-    clearTimeout(inactivityTimer.current);
-    inactivityTimer.current = setTimeout(
-      restoreDefaults,
-      INACTIVITY_TIMEOUT_SECONDS * 1000
-    );
-  }, [restoreDefaults]);
+    if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
+
+    inactivityTimer.current = setTimeout(() => {
+      restoreDefaults();
+      navigate('/');
+    }, INACTIVITY_TIMEOUT_SECONDS * 1000);
+  }, [restoreDefaults, navigate]);
 
   useEffect(() => {
     const events = [

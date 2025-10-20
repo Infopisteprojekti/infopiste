@@ -6,6 +6,10 @@ import App from '../src/App';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
+import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
+import Floorplan from '../src/components/Floorplan';
+import App from '../src/App';
+
 import i18n from './testSetup.js';
 
 // Mock ResizeObserver
@@ -50,7 +54,9 @@ describe('Floorplan', () => {
   test('floorplan is rendered correctly', async () => {
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -61,7 +67,9 @@ describe('Floorplan', () => {
   test('correct amount of rooms is rendered', () => {
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -72,7 +80,9 @@ describe('Floorplan', () => {
   test('zoom buttons exist', () => {
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -86,7 +96,9 @@ describe('Floorplan', () => {
 
     render(
       <MemoryRouter>
-        <Floorplan />
+        <AppSettingsProvider>
+          <Floorplan />
+        </AppSettingsProvider>
       </MemoryRouter>
     );
 
@@ -97,9 +109,11 @@ describe('Floorplan', () => {
   });
 
   test('url parameters work', async () => {
+    window.location = { ...window.location, search: '?lang=en&floor=2' };
+
     render(
-      <MemoryRouter initialEntries={['/?floor=2']}>
-        <Floorplan />
+      <MemoryRouter>
+        <App />
       </MemoryRouter>
     );
 

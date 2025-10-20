@@ -1,4 +1,4 @@
-import { beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 
@@ -19,8 +19,8 @@ i18n.use(initReactI18next).init({
 });
 
 beforeEach(() => {
-  i18n.changeLanguage('en');
-})
+  window.location = { ...window.location, search: '?lang=en' };
+});
 
 afterEach(() => {
   cleanup();

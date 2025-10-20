@@ -12,14 +12,8 @@ const BulletinBoard = () => {
     const newState = !qrState;
     if (newState) {
       document.getElementById('popup').classList.add('open-popup');
-      document.getElementById('qrButton').innerHTML = t(
-        'bulletinboard.qr-close'
-      );
     } else {
       document.getElementById('popup').classList.remove('open-popup');
-      document.getElementById('qrButton').innerHTML = t(
-        'bulletinboard.qr-add-file'
-      );
     }
     setQrState(newState);
   };
@@ -32,7 +26,7 @@ const BulletinBoard = () => {
         className="button qr-button"
         onClick={toggleQr}
       >
-        {t('bulletinboard.qr-add-file')}
+        {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
       </button>
       <div className="popup" id="popup">
         <p>{t('bulletinboard.qr-description')}</p>

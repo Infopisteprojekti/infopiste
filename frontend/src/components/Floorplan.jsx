@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -13,17 +13,35 @@ import '../styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
-  const { settings } = useAppSettings();
+  const { settings, setSettings, resetTrigger } = useAppSettings();
 
-  const defaultFloor = Number(settings.floor) || 3;
-  const [floor, setFloor] = useState(defaultFloor);
+  const initialFloorRef = useRef(Number(settings.floor) || 3);
+  const [floor, setFloor] = useState(Number(settings.floor) || 3);
+  const transformRef = useRef(null);
 
   const markerCoords = settings.marker
     ? settings.marker.split(',').map(Number)
     : undefined;
 
+  useEffect(() => {
+    if (Number(settings.floor) !== floor) {
+      setFloor(Number(settings.floor));
+    }
+  }, [settings.floor, floor]);
+
+  useEffect(() => {
+    if (transformRef.current) {
+      transformRef.current.resetTransform();
+    }
+  }, [resetTrigger]);
+
   return (
-    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+    <TransformWrapper
+      ref={transformRef}
+      initialScale={1}
+      minScale={0.5}
+      maxScale={5}
+    >
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
           <div className="toolbar toolbar__floorplan-transform">
@@ -44,6 +62,7 @@ const Floorplan = () => {
                 key={id}
                 onClick={() => {
                   setFloor(id);
+                  setSettings(prev => ({ ...prev, floor: id }));
                   resetTransform();
                 }}
                 className={`button ${id === floor ? 'active' : ''}`}
@@ -59,7 +78,7 @@ const Floorplan = () => {
           >
             <FloorDisplay
               floor={floor}
-              initialFloor={defaultFloor}
+              initialFloor={initialFloorRef.current}
               markerCoords={markerCoords}
             />
           </TransformComponent>

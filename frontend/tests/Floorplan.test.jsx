@@ -1,13 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import Floorplan from '../src/components/Floorplan';
-import BulletinBoard from '../src/components/BulletinBoard.jsx';
-import App from '../src/App';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
-import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
+import { MemoryRouter } from 'react-router-dom';
 import Floorplan from '../src/components/Floorplan';
+import BulletinBoard from '../src/components/BulletinBoard.jsx';
+import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
 import App from '../src/App';
 
 import i18n from './testSetup.js';

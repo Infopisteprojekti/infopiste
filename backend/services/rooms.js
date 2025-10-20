@@ -84,7 +84,7 @@ export async function fetchReservationsById(roomId) {
 
     const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
 
-    logger.graph(`fetching reservtions by id for ${roomId}`);
+    logger.graph(`fetching reservations by id for ${roomId}`);
 
     const results = await client
       .api(`/users/${roomEmail}/calendar/events`)

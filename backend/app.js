@@ -62,5 +62,6 @@ export async function initApp() {
     initializeGraphForAppOnlyAuth(MS_SETTINGS);
   } else {
     console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
+    insertMockData();
   }
 }

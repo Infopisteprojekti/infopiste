@@ -10,7 +10,7 @@ const error = (...params) => {
   }
 };
 
-const graph = (what) => {
+const graph = what => {
   if (process.env.NODE_ENV !== 'test') {
     console.log(`ms graph: ${what}`);
   }

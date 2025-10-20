@@ -17,6 +17,7 @@ const BulletinBoard = () => {
   const [qrState, setQrState] = useState(false);
   const [forms, setForms] = useState([]);
   const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -31,7 +32,8 @@ const BulletinBoard = () => {
         return;
       } catch (err) {
         console.error(err);
-        return null;
+      } finally {
+        setLoading(false);
       }
     };
     fetchForms();
@@ -55,10 +57,18 @@ const BulletinBoard = () => {
     setQrState(newState);
   };
 
-  if (forms.length === 0) {
+  if (loading) {
     return (
       <div>
         <p>Loading PDFs...</p>
+      </div>
+    )
+  }
+
+  if (forms.length === 0) {
+    return (
+      <div>
+        <p>No PDFs were found.</p>
       </div>
     );
   }

@@ -10,4 +10,10 @@ const error = (...params) => {
   }
 };
 
-export default { info, error };
+const graph = (what) => {
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(`ms graph: ${what}`);
+  }
+};
+
+export default { info, error, graph };

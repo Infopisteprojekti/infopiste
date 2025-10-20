@@ -1,8 +1,8 @@
 import axios from 'axios';
-const baseurl = '/api/rooms';
+const baseUrl = '/api/rooms';
 
 const getRooms = async () => {
-  const response = await axios.get(baseurl);
+  const response = await axios.get(baseUrl);
   return response.data;
 };
 

@@ -7,8 +7,10 @@ import { MONGO_DB_URL, MS_SETTINGS, TEST } from './utils/config.js';
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
 import { initializeGraphForAppOnlyAuth } from './services/graph-auth.js';
 import { initRedis, getRedis } from './services/redis-client.js';
+import { insertMockData } from './mockdata/mock-forms-in-db.js';
 
 import roomsRouter from './controllers/rooms.js';
+import formsRouter from './controllers/forms.js';
 
 export function createApp({ redisClient } = {}) {
   const app = express();
@@ -30,6 +32,7 @@ export function createApp({ redisClient } = {}) {
   app.use(requestLogger);
 
   app.use('/api/rooms', roomsRouter);
+  app.use('/api/forms', formsRouter);
 
   app.get('/', (req, res) => res.send('infonäyttö backend'));
   app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
@@ -59,5 +62,6 @@ export async function initApp() {
     initializeGraphForAppOnlyAuth(MS_SETTINGS);
   } else {
     console.log('RUNNING IN TESTING MODE (MSGRAPH AND REDIS SKIPPED)');
+    insertMockData();
   }
 }

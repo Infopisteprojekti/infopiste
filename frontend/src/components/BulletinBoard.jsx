@@ -1,12 +1,51 @@
 import qrcode from '../assets/form.svg';
 import '../styles/components/Button.css';
 import '../styles/components/BulletinBoard.css';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useEffect } from 'react';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+
+const baseUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
 const BulletinBoard = () => {
   const { t } = useTranslation();
   const [qrState, setQrState] = useState(false);
+  const [forms, setForms] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchForms = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/forms`);
+        if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`);
+
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        setForms(data);
+        return;
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchForms();
+  }, []);
+
+  const nextForm = () => {
+    setIndex(prev => (prev + 1) % forms.length);
+  };
+
+  const prevForm = () => {
+    setIndex(prev => (prev - 1 + forms.length) % forms.length);
+  };
 
   const toggleQr = () => {
     const newState = !qrState;
@@ -17,6 +56,24 @@ const BulletinBoard = () => {
     }
     setQrState(newState);
   };
+
+  if (loading) {
+    return (
+      <div>
+        <p>Loading PDFs...</p>
+      </div>
+    );
+  }
+
+  if (forms.length === 0) {
+    return (
+      <div>
+        <p>No PDFs were found.</p>
+      </div>
+    );
+  }
+
+  const currentForm = forms[index];
 
   return (
     <div>
@@ -34,7 +91,33 @@ const BulletinBoard = () => {
       </div>
 
       <br />
-      <h1>Files</h1>
+      <div className="pdf-container">
+        <h3>{currentForm.title}</h3>
+        <p>
+          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
+          {new Date(currentForm.endDate).toLocaleDateString()}
+        </p>
+        <div className="pdf-wrapper">
+          <button className="pdf-button left" onClick={nextForm}>
+            ← Previous
+          </button>
+          <Document
+            file={currentForm.fileUrl}
+            key={currentForm._id}
+            onLoadError={console.error}
+          >
+            <Page
+              pageNumber={1}
+              width={700}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+          </Document>
+          <button className="pdf-button right" onClick={prevForm}>
+            Next →
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

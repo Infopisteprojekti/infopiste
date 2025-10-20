@@ -19,7 +19,7 @@ i18n.use(initReactI18next).init({
 });
 
 beforeEach(() => {
-  window.location = { ...window.location, search: '?lang=en' };
+  i18n.changeLanguage('en');
 });
 
 afterEach(() => {

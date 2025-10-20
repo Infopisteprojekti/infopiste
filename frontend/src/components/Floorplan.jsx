@@ -36,15 +36,20 @@ const Floorplan = () => {
             <button className="button" onClick={() => resetTransform()}>
               {t('floorplan-toolbar.reset')} <RotateCcw size={16} />
             </button>
-            <br/>
+
+            <br />
+
             <p>
-              <span className="available">●</span> {t('room-status.available')}
+              <span className="available">●</span>
+              {t('room-status.available')}
             </p>
             <p>
-              <span className="reserved">●</span> {t('room-status.reserved')}
+              <span className="reserved">●</span>
+              {t('room-status.reserved')}
             </p>
             <p>
-              <span className="unavailable">●</span> {t('room-status.unavailable')}
+              <span className="unavailable">●</span>
+              {t('room-status.unavailable')}
             </p>
           </div>
 

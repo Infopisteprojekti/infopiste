@@ -44,8 +44,8 @@ const mockRooms = [
 ];
 
 const mockRedis = {
-  get: vi.fn().mockResolvedValue(JSON.stringify(mockRooms)),
-  set: async () => null,
+  get: vi.fn().mockResolvedValue(null),
+  set: vi.fn().mockResolvedValue('OK'),
   del: async () => null,
 };
 

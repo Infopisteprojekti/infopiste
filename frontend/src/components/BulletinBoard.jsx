@@ -62,7 +62,7 @@ const BulletinBoard = () => {
       <div>
         <p>Loading PDFs...</p>
       </div>
-    )
+    );
   }
 
   if (forms.length === 0) {

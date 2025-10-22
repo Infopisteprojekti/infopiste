@@ -47,3 +47,13 @@
 .location-marker {
   fill: red;
 }
+
+.floorplan-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}

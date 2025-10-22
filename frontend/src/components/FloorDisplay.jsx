@@ -1,6 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import floors from '../constants/floors';
 import roomStatus from '../constants/roomStatus';
+import RoomPopUp from './RoomPopUp';
 import '../styles/components/Floorplan.css';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,8 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const floorplanRef = useRef(null);
   const pollingIntervalRef = useRef(null);
   const roomsRef = useRef([]);
+  const roomStatuses = useRef(new Map());
+  const [roomPopUp, setRoomPopUp] = useState(null);
 
   const checkActive = reservation => {
     if (reservation.start.timeZone !== 'UTC') {
@@ -29,7 +32,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   };
 
   const addStatus = (room, child, status) => {
-    room._status = status;
+    roomStatuses.current.set(child.id, status);
     child.classList.remove(...Object.values(roomStatus));
     child.classList.add(status);
   };
@@ -92,6 +95,17 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
     const rooms = Array.from(floorplan.querySelectorAll('g'));
     roomsRef.current = rooms;
 
+    const handleRoomClick = event => {
+      const child = event.currentTarget.querySelector('*');
+      const roomId = child?.id;
+      const status = roomStatuses.current.get(roomId) ?? roomStatus.UNKNOWN;
+
+      setRoomPopUp({
+        roomId,
+        status,
+      });
+    };
+
     for (const room of rooms) {
       const child = room.querySelector('*');
       const roomId = child?.id;
@@ -99,19 +113,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
 
       child.classList.add('room');
       room.setAttribute('data-room-id', roomId);
-
-      if (!room._clickHandler) {
-        const handler = () => {
-          alert(
-            t('room-status-message', {
-              roomId,
-              status: t(`room-status.${room._status ?? roomStatus.UNKNOWN}`),
-            })
-          );
-        };
-        room.addEventListener('click', handler);
-        room._clickHandler = handler;
-      }
+      room.addEventListener('click', handleRoomClick);
     }
 
     updateStatuses();
@@ -135,16 +137,27 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
     return () => {
       clearInterval(pollingIntervalRef.current);
       for (const room of roomsRef.current) {
-        if (room._clickHandler) {
-          room.removeEventListener('click', room._clickHandler);
-          delete room._clickHandler;
-        }
+        room.removeEventListener('click', handleRoomClick);
       }
+      roomsRef.current = [];
     };
   }, [floor, initialFloor, markerCoords, t]);
 
   const FloorSVG = floors.find(f => f.id === floor)?.svg;
-  return <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />;
+
+  return (
+    <div className="floorplan-wrapper">
+      <FloorSVG ref={floorplanRef} data-testid="floorplan-svg" />
+
+      {roomPopUp && (
+        <RoomPopUp
+          roomId={roomPopUp.roomId}
+          status={roomPopUp.status}
+          onClose={() => setRoomPopUp(null)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default FloorDisplay;

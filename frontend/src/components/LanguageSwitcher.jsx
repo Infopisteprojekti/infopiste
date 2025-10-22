@@ -36,7 +36,7 @@ const LanguageSwitcher = ({ i18n, changeLanguage }) => {
             <img
               className="lang__flag"
               src={`https://flagcdn.com/24x18/${option.flag}.png`}
-              srcset={`https://flagcdn.com/48x36/${option.flag}.png 2x, https://flagcdn.com/72x54/${option.flag}.png 3x`}
+              srcSet={`https://flagcdn.com/48x36/${option.flag}.png 2x, https://flagcdn.com/72x54/${option.flag}.png 3x`}
               width="24"
               height="18"
             ></img>

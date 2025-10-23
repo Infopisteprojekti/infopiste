@@ -31,9 +31,11 @@ export const mockRooms = [
         organizer: 'Some Person',
         start: {
           dateTime: '1990-01-01T12:00:00',
+          timeZone: 'UTC',
         },
         end: {
           dateTime: '2125-01-01T12:00:00',
+          timeZone: 'UTC',
         },
         location: {
           displayName: 'Room A345',

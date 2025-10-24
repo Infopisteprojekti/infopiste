@@ -18,6 +18,7 @@ const BulletinBoard = () => {
   const [forms, setForms] = useState([]);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [automaticRotation, setAutomaticRotation] = useState(true);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -39,6 +40,16 @@ const BulletinBoard = () => {
     fetchForms();
   }, []);
 
+  useEffect(() => {
+    if (!automaticRotation || forms.length === 0) return;
+
+    const timeout = setTimeout(() => {
+      setIndex(prev => (prev + 1) % forms.length);
+    }, 10000);
+
+    return () => clearTimeout(timeout);
+  }, [automaticRotation, index, forms.length]);
+
   const nextForm = () => {
     setIndex(prev => (prev + 1) % forms.length);
   };
@@ -55,6 +66,10 @@ const BulletinBoard = () => {
       document.getElementById('popup').classList.remove('open-popup');
     }
     setQrState(newState);
+  };
+
+  const RotatePdfs = () => {
+    setAutomaticRotation(prev => !prev)
   };
 
   if (loading) {
@@ -77,6 +92,12 @@ const BulletinBoard = () => {
 
   return (
     <div>
+      <button 
+        onClick={RotatePdfs} 
+        className="button"
+      >
+        {automaticRotation ? "Pause Automatic Rotation" : "Automatic Rotation"}
+      </button>
       <button
         type="submit"
         id="qrButton"

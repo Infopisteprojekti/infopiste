@@ -69,7 +69,7 @@ const BulletinBoard = () => {
   };
 
   const RotatePdfs = () => {
-    setAutomaticRotation(prev => !prev)
+    setAutomaticRotation(prev => !prev);
   };
 
   if (loading) {
@@ -92,11 +92,8 @@ const BulletinBoard = () => {
 
   return (
     <div>
-      <button 
-        onClick={RotatePdfs} 
-        className="button"
-      >
-        {automaticRotation ? "Pause Automatic Rotation" : "Automatic Rotation"}
+      <button onClick={RotatePdfs} className="button">
+        {automaticRotation ? 'Pause Automatic Rotation' : 'Automatic Rotation'}
       </button>
       <button
         type="submit"

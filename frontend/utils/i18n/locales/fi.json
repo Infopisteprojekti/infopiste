@@ -19,6 +19,8 @@
   "bulletinboard": {
     "qr-add-file": "Lisää ilmoitus",
     "qr-close": "Sulje",
-    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
+    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
+    "stop-rotation": "Pysäytä automaattinen kelaus",
+    "continue-rotation": "Jatka automaattista kelausta"
   }
 }

@@ -19,6 +19,8 @@
   "bulletinboard": {
     "qr-add-file": "Add file",
     "qr-close": "Close",
-    "qr-description": "Scan QR code to add"
+    "qr-description": "Scan QR code to add",
+    "stop-rotation": "Pause automatic scrolling",
+    "continue-rotation": "Continue automatic scrolling"
   }
 }

@@ -93,7 +93,7 @@ const BulletinBoard = () => {
   return (
     <div>
       <button onClick={RotatePdfs} className="button">
-        {automaticRotation ? 'Pause Automatic Rotation' : 'Automatic Rotation'}
+        {automaticRotation ? t('bulletinboard.stop-rotation') : t('bulletinboard.continue-rotation')}
       </button>
       <button
         type="submit"

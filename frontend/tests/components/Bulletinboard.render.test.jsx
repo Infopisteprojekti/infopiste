@@ -1,7 +1,7 @@
 import '../setup/mockReactPdf.jsx';
 import '../setup/mockResizeObserver.js';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -56,6 +56,8 @@ describe('BulletinBoard - Rendering', () => {
   test('renders loading state', async () => {
     setup();
 
-    expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
+    });
   });
 });

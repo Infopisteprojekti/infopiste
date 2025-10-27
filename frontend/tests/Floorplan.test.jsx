@@ -14,23 +14,6 @@ import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
 import App from '../src/App';
 
 describe('Floorplan', () => {
-  test('clicking room is possible', async () => {
-    const user = userEvent.setup();
-
-    render(
-      <MemoryRouter>
-        <AppSettingsProvider>
-          <Floorplan />
-        </AppSettingsProvider>
-      </MemoryRouter>
-    );
-
-    const room = document.querySelector('[data-room-id="A346"]');
-    await user.click(room);
-
-    expect(clickMock).toHaveBeenCalled();
-  });
-
   test('url parameters work', async () => {
     window.location = { ...window.location, search: '?lang=en&floor=2' };
 

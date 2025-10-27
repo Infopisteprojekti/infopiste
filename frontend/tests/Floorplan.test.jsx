@@ -1,3 +1,8 @@
+import { clickMock } from './setup/mockExactumSvg.jsx';
+import './setup/mockReactPdf.jsx';
+import './setup/mockResizeObserver.js';
+import i18n from './setup/i18nTest.js';
+
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -7,46 +12,6 @@ import Floorplan from '../src/components/Floorplan';
 import BulletinBoard from '../src/components/BulletinBoard.jsx';
 import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
 import App from '../src/App';
-
-import i18n from './testSetup.js';
-
-// Mock ResizeObserver
-class ResizeObserver {
-  constructor(callback) {}
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
-
-global.ResizeObserver = ResizeObserver;
-
-// Mock svg asset in tests, click event for A346
-const clickMock = vi.fn();
-
-// Mock pdf
-vi.mock('react-pdf', () => {
-  return {
-    Document: ({ children }) => <div data-testid="document">{children}</div>,
-    Page: () => <div data-testid="page">PDF Page</div>,
-    pdfjs: { GlobalWorkerOptions: { workerSrc: '' } },
-  };
-});
-
-vi.mock('../src/assets/exactum-3.svg?react', () => ({
-  default: ({ ref }) => (
-    <svg ref={ref}>
-      <g data-room-id="A346" _status="available" onClick={clickMock}>
-        <rect id="A346" />
-      </g>
-      <g data-room-id="A348" _status="reserved">
-        <rect id="A348" />
-      </g>
-      <g data-room-id="A311" _status="unavailable">
-        <rect id="A311" />
-      </g>
-    </svg>
-  ),
-}));
 
 describe('Floorplan', () => {
   test('floorplan is rendered correctly', async () => {

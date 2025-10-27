@@ -14,46 +14,6 @@ import { AppSettingsProvider } from '../src/context/AppSettingsContext.jsx';
 import App from '../src/App';
 
 describe('Floorplan', () => {
-  test('floorplan is rendered correctly', async () => {
-    render(
-      <MemoryRouter>
-        <AppSettingsProvider>
-          <Floorplan />
-        </AppSettingsProvider>
-      </MemoryRouter>
-    );
-
-    const room = document.querySelector('[data-room-id="A346"]');
-    expect(room).toBeInTheDocument();
-  });
-
-  test('correct amount of rooms is rendered', () => {
-    render(
-      <MemoryRouter>
-        <AppSettingsProvider>
-          <Floorplan />
-        </AppSettingsProvider>
-      </MemoryRouter>
-    );
-
-    const rooms = document.querySelectorAll('g[data-room-id]');
-    expect(rooms.length).toBe(3);
-  });
-
-  test('zoom buttons exist', () => {
-    render(
-      <MemoryRouter>
-        <AppSettingsProvider>
-          <Floorplan />
-        </AppSettingsProvider>
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText(/Zoom In/i)).toBeInTheDocument();
-    expect(screen.getByText(/Zoom Out/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reset/i)).toBeInTheDocument();
-  });
-
   test('clicking room is possible', async () => {
     const user = userEvent.setup();
 

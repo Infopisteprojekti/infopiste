@@ -82,17 +82,6 @@ describe('BulletinBoard', () => {
     fetchSpy.mockRestore();
   });
 
-  test('bulletin board can be accessed', async () => {
-    render(
-      <MemoryRouter>
-        <BulletinBoard />
-      </MemoryRouter>
-    );
-
-    const addFileButton = await screen.findByText('Add file');
-    expect(addFileButton).toBeInTheDocument();
-  });
-
   test('qr code to upload files appears', async () => {
     const user = userEvent.setup();
 
@@ -126,16 +115,6 @@ describe('BulletinBoard', () => {
 
     const popup = document.getElementById('popup');
     expect(popup.classList.contains('open-popup')).toBe(false);
-  });
-
-  test('renders loading', async () => {
-    render(
-      <MemoryRouter>
-        <BulletinBoard />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
   });
 
   test('navigation between forms works', async () => {

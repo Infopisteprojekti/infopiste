@@ -79,7 +79,7 @@ const BulletinBoard = () => {
         <div>
           <p>Loading PDFs...</p>
         </div>
-      ) : forms.length == 0 ? (
+      ) : forms.length === 0 ? (
         <div>
           <p>No PDFs were found</p>
         </div>

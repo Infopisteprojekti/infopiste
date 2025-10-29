@@ -1,9 +1,9 @@
-import qrcode from '../assets/form.svg';
 import '../styles/components/Button.css';
 import '../styles/components/BulletinBoard.css';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import PDFDisplay from './PDFDisplay';
+import QRCode from './QRCode'
 
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
@@ -11,7 +11,6 @@ const baseUrl =
 
 const BulletinBoard = () => {
   const { t } = useTranslation();
-  const [qrState, setQrState] = useState(false);
   const [forms, setForms] = useState([]);
   const [selectedForm, setSelectedForm] = useState(null);
   const [index, setIndex] = useState(0);
@@ -56,16 +55,6 @@ const BulletinBoard = () => {
     setIndex(prev => (prev - 1 + forms.length) % forms.length);
   };
 
-  const toggleQr = () => {
-    const newState = !qrState;
-    if (newState) {
-      document.getElementById('popup').classList.add('open-popup');
-    } else {
-      document.getElementById('popup').classList.remove('open-popup');
-    }
-    setQrState(newState);
-  };
-
   const RotatePdfs = () => {
     setAutomaticRotation(prev => !prev);
   };
@@ -89,19 +78,7 @@ const BulletinBoard = () => {
   if (!selectedForm) {
     return (
       <div>
-        <button
-          type="submit"
-          id="qrButton"
-          className="button qr-button"
-          onClick={toggleQr}
-        >
-          {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
-        </button>
-        <div className="popup" id="popup">
-          <p>{t('bulletinboard.qr-description')}</p>
-          <img src={qrcode} className="bottomright" />
-        </div>
-
+        <QRCode />
         <p style={{
           textAlign: 'center',
           margin: '1rem 0',
@@ -131,19 +108,7 @@ const BulletinBoard = () => {
       <button className="button" onClick={() => setSelectedForm(null)}>
         ← {t('bulletinboard.back') || 'View all PDFs'}
       </button>
-      <button
-          type="submit"
-          id="qrButton"
-          className="button qr-button"
-          onClick={toggleQr}
-        >
-          {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
-        </button>
-        <div className="popup" id="popup">
-          <p>{t('bulletinboard.qr-description')}</p>
-          <img src={qrcode} className="bottomright" />
-        </div>
-
+      <QRCode />
         <PDFDisplay 
           currentForm={currentForm}
           nextForm={nextForm}

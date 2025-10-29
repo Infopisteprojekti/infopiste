@@ -1,12 +1,9 @@
 import qrcode from '../assets/form.svg';
 import '../styles/components/Button.css';
 import '../styles/components/BulletinBoard.css';
-import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+import { useState, useEffect } from 'react';
+import PDFDisplay from './PDFDisplay';
 
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
@@ -83,7 +80,7 @@ const BulletinBoard = () => {
   if (forms.length === 0) {
     return (
       <div>
-        <p>No PDFs were found.</p>
+        <p>No PDFs were found</p>
       </div>
     );
   }
@@ -109,35 +106,12 @@ const BulletinBoard = () => {
         <p>{t('bulletinboard.qr-description')}</p>
         <img src={qrcode} className="bottomright" />
       </div>
-
       <br />
-      <div className="pdf-container">
-        <h3>{currentForm.title}</h3>
-        <p>
-          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
-          {new Date(currentForm.endDate).toLocaleDateString()}
-        </p>
-        <div className="pdf-wrapper">
-          <button className="pdf-button left" onClick={nextForm}>
-            ← Previous
-          </button>
-          <Document
-            file={currentForm.fileUrl}
-            key={currentForm._id}
-            onLoadError={console.error}
-          >
-            <Page
-              pageNumber={1}
-              width={700}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </Document>
-          <button className="pdf-button right" onClick={prevForm}>
-            Next →
-          </button>
-        </div>
-      </div>
+      <PDFDisplay
+        currentForm={currentForm}
+        nextForm={nextForm}
+        prevForm={prevForm}
+      />
     </div>
   );
 };

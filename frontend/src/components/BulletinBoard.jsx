@@ -57,22 +57,6 @@ const BulletinBoard = () => {
     setQrState(newState);
   };
 
-  if (loading) {
-    return (
-      <div>
-        <p>Loading PDFs...</p>
-      </div>
-    );
-  }
-
-  if (forms.length === 0) {
-    return (
-      <div>
-        <p>No PDFs were found.</p>
-      </div>
-    );
-  }
-
   const currentForm = forms[index];
 
   return (
@@ -89,35 +73,45 @@ const BulletinBoard = () => {
         <p>{t('bulletinboard.qr-description')}</p>
         <img src={qrcode} className="bottomright" />
       </div>
-
       <br />
-      <div className="pdf-container">
-        <h3>{currentForm.title}</h3>
-        <p>
-          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
-          {new Date(currentForm.endDate).toLocaleDateString()}
-        </p>
-        <div className="pdf-wrapper">
-          <button className="pdf-button left" onClick={nextForm}>
-            ← Previous
-          </button>
-          <Document
-            file={currentForm.fileUrl}
-            key={currentForm._id}
-            onLoadError={console.error}
-          >
-            <Page
-              pageNumber={1}
-              width={700}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </Document>
-          <button className="pdf-button right" onClick={prevForm}>
-            Next →
-          </button>
+
+      {loading ? (
+        <div>
+          <p>Loading PDFs...</p>
         </div>
-      </div>
+      ) : forms.length === 0 ? (
+        <div>
+          <p>No PDFs were found</p>
+        </div>
+      ) : (
+        <div className="pdf-container">
+          <h3>{currentForm.title}</h3>
+          <p>
+            {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
+            {new Date(currentForm.endDate).toLocaleDateString()}
+          </p>
+          <div className="pdf-wrapper">
+            <button className="pdf-button left" onClick={nextForm}>
+              ← Previous
+            </button>
+            <Document
+              file={currentForm.fileUrl}
+              key={currentForm._id}
+              onLoadError={console.error}
+            >
+              <Page
+                pageNumber={1}
+                width={700}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
+            </Document>
+            <button className="pdf-button right" onClick={prevForm}>
+              Next →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

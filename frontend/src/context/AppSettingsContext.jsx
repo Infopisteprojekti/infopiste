@@ -12,8 +12,7 @@ import i18n from '@/utils/i18n';
 
 const INACTIVITY_TIMEOUT_SECONDS = 60;
 
-const isTest =
-  import.meta.env.MODE === 'test' || process.env.NODE_ENV === 'test';
+const isTest = import.meta.env.MODE === 'test';
 
 const getDefaultSettings = (search, storage = localStorage) => {
   const urlParams = new URLSearchParams(search ?? '');

@@ -7,8 +7,7 @@ import svLang from './locales/sv.json';
 
 const DEFAULT_LANG = 'fi';
 
-const isTest =
-  import.meta.env.MODE === 'test' || process.env.NODE_ENV === 'test';
+const isTest = import.meta.env.MODE === 'test';
 
 const initialLang =
   new URLSearchParams(window.location.search).get('lang') ||

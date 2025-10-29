@@ -1,0 +1,24 @@
+{
+  "navbar": {
+    "floorplan": "Floor Plan",
+    "bulletinboard": "Bulletin Board"
+  },
+  "floorplan-toolbar": {
+    "zoom-in": "Zoom In",
+    "zoom-out": "Zoom Out",
+    "reset": "Reset",
+    "floor-label": "Floor {{label}}"
+  },
+  "room-status-message": "Room: {{roomId}}\nStatus: {{status}}",
+  "room-status": {
+    "unavailable": "Unavailable",
+    "available": "Available",
+    "reserved": "Reserved",
+    "unknown": "Unknown"
+  },
+  "bulletinboard": {
+    "qr-add-file": "Add file",
+    "qr-close": "Close",
+    "qr-description": "Scan QR code to add"
+  }
+}

@@ -34,6 +34,6 @@ describe('App - Navigation and URL params', () => {
     const bulletinBoardButton = await screen.findByText('Bulletin Board');
     await user.click(bulletinBoardButton);
 
-    expect(await screen.findByText('No PDFs were found.')).toBeInTheDocument();
+    expect(await screen.findByText('No PDFs were found')).toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import LanguageSwitcher from './LanguageSwitcher.jsx';
+import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
 import { useTranslation } from 'react-i18next';
-import '../styles/components/Navbar.css';
+import '@/styles/components/Navbar.css';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();

@@ -1,6 +1,6 @@
-import qrcode from '../assets/form.svg';
-import '../styles/components/Button.css';
-import '../styles/components/BulletinBoard.css';
+import qrcode from '@/assets/form.svg';
+import '@/styles/components/Button.css';
+import '@/styles/components/BulletinBoard.css';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';

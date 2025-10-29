@@ -1,26 +1,19 @@
-import { useEffect } from 'react';
 import Select from 'react-select';
 import LANGUAGE_OPTIONS from '@/constants/languageOptions';
 import { useAppSettings } from '@/context/useAppSettings.js';
+import { useTranslation } from 'react-i18next';
 
-const LanguageSwitcher = ({ i18n, changeLanguage }) => {
+const LanguageSwitcher = () => {
   const { settings, setSettings } = useAppSettings();
-
-  useEffect(() => {
-    if (i18n.resolvedLanguage !== settings.lang) {
-      changeLanguage(settings.lang);
-    }
-  }, [settings.lang, i18n, changeLanguage]);
 
   const handleChange = opt => {
     const newLang = opt.value;
-    changeLanguage(newLang);
     setSettings(prev => ({ ...prev, lang: newLang }));
   };
 
   return (
     <Select
-      value={LANGUAGE_OPTIONS.find(opt => opt.value === i18n.resolvedLanguage)}
+      value={LANGUAGE_OPTIONS.find(opt => opt.value === settings.lang)}
       onChange={handleChange}
       options={LANGUAGE_OPTIONS}
       isSearchable={false}

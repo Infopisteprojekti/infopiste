@@ -65,7 +65,7 @@ const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
         statusMapRef.current.set(room, status);
       }
     },
-    [fetchRoomData, ready, rooms, floorElement]
+    [fetchRoomData, ready, rooms, floorElement, statusMapRef]
   );
 
   useEffect(() => {

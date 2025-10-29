@@ -37,12 +37,15 @@ const useRoomsSetup = (floorElement, ready, t, statusMapRef) => {
 
     setRooms(roomGroups);
 
+    const listenersSnapshot = listenersRef.current;
+    const roomsSnapshot = [...roomGroups];
+
     return () => {
-      for (const room of roomGroups) {
-        const handler = listenersRef.current.get(room);
+      for (const room of roomsSnapshot) {
+        const handler = listenersSnapshot.get(room);
         if (handler) {
           room.removeEventListener('click', handler);
-          listenersRef.current.delete(room);
+          listenersSnapshot.delete(room);
         }
       }
     };

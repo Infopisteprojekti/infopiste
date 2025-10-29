@@ -1,4 +1,5 @@
 import graphClient from '../utils/graphClient.js';
+import logger from '../utils/logger.js';
 
 function createBatchRequest(roomIds) {
   const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
@@ -59,6 +60,8 @@ function getUtcNowAndWeekAhead() {
 
 export async function fetchRoomReservations(roomIds) {
   try {
+    logger.graph(`fetching room reservations for ${roomIds}`);
+
     const batchRequest = createBatchRequest(roomIds);
     const batchResponse = await graphClient
       .api('/$batch')
@@ -76,6 +79,8 @@ export async function fetchReservationsById(roomId) {
 
   try {
     const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
+
+    logger.graph(`fetching reservations by id for ${roomId}`);
 
     const results = await graphClient
       .api(`/users/${roomEmail}/calendar/events`)

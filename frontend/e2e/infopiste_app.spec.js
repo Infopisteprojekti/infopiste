@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { mockForms, mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
 
 test.describe('Infopiste', () => {
   test('home page can be opened', async ({ page }) => {
@@ -94,44 +95,7 @@ test.describe('Infopiste', () => {
   });
 
   test('room statuses are correct', async ({ page }) => {
-    await page.route('**/api/rooms', route => {
-      route.fulfill({
-        contentType: 'application/json',
-        body: JSON.stringify([
-          {
-            id: 'A344',
-            type: 'meeting',
-            reservations: [],
-          },
-          {
-            id: 'A345',
-            type: 'meeting',
-            reservations: [
-              {
-                id: 1,
-                subject: 'Best Meeting',
-                organizer: 'Some Person',
-                start: {
-                  dateTime: '1990-01-01T12:00:00',
-                },
-                end: {
-                  dateTime: '2125-01-01T12:00:00',
-                },
-                location: {
-                  displayName: 'Room A345',
-                  locationType: 'confRoom',
-                },
-              },
-            ],
-          },
-          {
-            id: 'A346',
-            type: 'office',
-            reservations: [],
-          },
-        ]),
-      });
-    });
+    mockRoomsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
 
@@ -166,20 +130,43 @@ test.describe('Infopiste', () => {
   });
 
   test('bulletin board view can be opened', async ({ page }) => {
-    await page.goto('http://localhost:5173?lang=en');
+    mockFormsRoute(page);
 
+    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
+
     await expect(page.getByText('Files')).toBeVisible();
   });
 
   test('qr code can be opened and closed', async ({ page }) => {
-    await page.goto('http://localhost:5173?lang=en');
+    mockFormsRoute(page);
 
+    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
+
     await page.getByText('Add file').click();
     await expect(page.getByText('Scan QR code to add')).toBeVisible();
 
     await page.getByText('Close').click();
     await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
+  });
+
+  test('pdfs are rendered correctly', async ({ page }) => {
+    mockFormsRoute(page);
+
+    await page.goto('http://localhost:5173?lang=en');
+    await page.getByText('Bulletin Board').click();
+
+    await expect(page.getByText('Form 1')).toBeVisible();
+  });
+
+  test('pdfs can be switched', async ({ page }) => {
+    mockFormsRoute(page);
+
+    await page.goto('http://localhost:5173?lang=en');
+    await page.getByText('Bulletin Board').click();
+
+    await page.getByText('Next').click();
+    await expect(page.getByText('Form 2')).toBeVisible();
   });
 });

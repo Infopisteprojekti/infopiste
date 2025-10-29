@@ -1,25 +1,82 @@
 import supertest from 'supertest';
-import { vi, test, describe, assert } from 'vitest';
+import { vi, test, describe, beforeEach, afterEach, assert } from 'vitest';
 
 import app from '../app.js';
 const api = supertest(app);
 import helper from './test_helper.js';
 
-vi.mock('../models/formModel.js', () => ({
-  Form: {
-    find: vi.fn(),
+vi.mock('../utils/redisClient.js', () => ({
+  default: {
+    get: vi.fn(),
+    set: vi.fn(),
+    expire: vi.fn(),
   },
 }));
 
-import Form from '../models/formModel.js';
+vi.mock('../models/form.js', () => ({
+  default: {
+    find: vi.fn(),
+    deleteMany: vi.fn(),
+  },
+}));
+
+import redisClient from '../utils/redisClient.js';
+import Form from '../models/form.js';
 
 describe('forms api', () => {
-  test('forms are returned', async () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  test('returns forms from database if cache is empty', async () => {
+    redisClient.get.mockResolvedValue(null);
+
     Form.find.mockResolvedValue(helper.initialForms);
+    redisClient.set.mockResolvedValue('OK');
+    redisClient.expire.mockResolvedValue(1);
 
-    const res = await api.get('/api/forms').expect(200);
+    const response = await api
+      .get('/api/forms')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
 
-    assert.strictEqual(res.body.length, helper.initialForms.length);
+    assert.strictEqual(response.body.source, 'database');
+    assert.strictEqual(response.body.data.length, helper.initialForms.length);
+
+    assert.strictEqual(redisClient.get.mock.calls.length, 1);
+    assert.strictEqual(redisClient.set.mock.calls.length, 1);
+    assert.strictEqual(redisClient.expire.mock.calls.length, 1);
+
     assert.strictEqual(Form.find.mock.calls.length, 1);
+  });
+
+  test('returns forms from cache when available', async () => {
+    redisClient.get.mockResolvedValue(JSON.stringify(helper.initialForms));
+
+    const response = await api
+      .get('/api/forms')
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    assert.strictEqual(response.body.source, 'cache');
+    assert.strictEqual(response.body.data.length, helper.initialForms.length);
+
+    assert.strictEqual(redisClient.get.mock.calls.length, 1);
+    assert.strictEqual(Form.find.mock.calls.length, 0);
+    assert.strictEqual(redisClient.set.mock.calls.length, 0);
+  });
+
+  test('returns empty array if no forms exist', async () => {
+    redisClient.get.mockResolvedValue(null);
+    Form.find.mockResolvedValue([]);
+
+    const response = await api.get('/api/forms').expect(200);
+
+    assert.strictEqual(response.body.source, 'database');
+    assert.strictEqual(response.body.data.length, 0);
   });
 });

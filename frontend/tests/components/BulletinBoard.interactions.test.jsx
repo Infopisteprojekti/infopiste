@@ -39,7 +39,10 @@ describe('BulletinBoard - Interactions', () => {
   beforeEach(() => {
     fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue({
       ok: true,
-      json: async () => mockForms,
+      json: async () => ({
+        source: 'fake response',
+        data: mockForms,
+      })
     });
   });
 

@@ -53,7 +53,7 @@ export async function mockFormsRoute(page, forms = mockForms) {
   await page.route('**/api/forms', route => {
     route.fulfill({
       contentType: 'application/json',
-      body: JSON.stringify(forms),
+      body: JSON.stringify({ source: 'fake response', data: forms }),
     });
   });
 }

@@ -13,6 +13,7 @@ const BulletinBoard = () => {
   const { t } = useTranslation();
   const [qrState, setQrState] = useState(false);
   const [forms, setForms] = useState([]);
+  const [selectedForm, setSelectedForm] = useState(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [automaticRotation, setAutomaticRotation] = useState(true);
@@ -72,7 +73,7 @@ const BulletinBoard = () => {
   if (loading) {
     return (
       <div>
-        <p>Loading PDFs...</p>
+        <p>Loading notices...</p>
       </div>
     );
   }
@@ -80,40 +81,78 @@ const BulletinBoard = () => {
   if (forms.length === 0) {
     return (
       <div>
-        <p>No PDFs were found</p>
+        <p>No notices were found</p>
       </div>
     );
   }
 
-  const currentForm = forms[index];
+  if (!selectedForm) {
+    return (
+      <div>
+        <button
+          type="submit"
+          id="qrButton"
+          className="button qr-button"
+          onClick={toggleQr}
+        >
+          {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
+        </button>
+        <div className="popup" id="popup">
+          <p>{t('bulletinboard.qr-description')}</p>
+          <img src={qrcode} className="bottomright" />
+        </div>
 
+        <p style={{
+          textAlign: 'center',
+          margin: '1rem 0',
+          fontWeight: 'bold'
+        }}>{t('bulletinboard.available-notices')}</p>
+        <div className="pdf-grid">
+        {forms.map((form, index) => (
+          <div
+            key={form._id}
+            className="pdf-card"
+            onClick={() => {
+              setSelectedForm(form);
+              setIndex(index);
+            }}
+          >
+            <PDFDisplay currentForm={form} nextForm={() => {}} prevForm={() => {}} preview />
+          </div>
+        ))}
+        </div>
+      </div>
+    );
+  };
+
+  const currentForm = forms[index];
   return (
     <div>
-      <button onClick={RotatePdfs} className="button">
-        {automaticRotation
-          ? t('bulletinboard.stop-rotation')
-          : t('bulletinboard.continue-rotation')}
+      <button className="button" onClick={() => setSelectedForm(null)}>
+        ← {t('bulletinboard.back') || 'View all PDFs'}
       </button>
       <button
-        type="submit"
-        id="qrButton"
-        className="button qr-button"
-        onClick={toggleQr}
-      >
-        {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
-      </button>
-      <div className="popup" id="popup">
-        <p>{t('bulletinboard.qr-description')}</p>
-        <img src={qrcode} className="bottomright" />
-      </div>
-      <br />
-      <PDFDisplay
-        currentForm={currentForm}
-        nextForm={nextForm}
-        prevForm={prevForm}
-      />
+          type="submit"
+          id="qrButton"
+          className="button qr-button"
+          onClick={toggleQr}
+        >
+          {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
+        </button>
+        <div className="popup" id="popup">
+          <p>{t('bulletinboard.qr-description')}</p>
+          <img src={qrcode} className="bottomright" />
+        </div>
+
+        <PDFDisplay 
+          currentForm={currentForm}
+          nextForm={nextForm}
+          prevForm={prevForm}
+          rotateCallBack={RotatePdfs}
+          automaticRotation={automaticRotation}
+        />
     </div>
-  );
+  )
 };
 
 export default BulletinBoard;

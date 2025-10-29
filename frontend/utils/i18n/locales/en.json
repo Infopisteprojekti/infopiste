@@ -21,6 +21,12 @@
     "qr-close": "Close",
     "qr-description": "Scan QR code to add",
     "stop-rotation": "Pause automatic scrolling",
-    "continue-rotation": "Continue automatic scrolling"
+    "continue-rotation": "Continue automatic scrolling",
+    "available-notices": "Available notices",
+    "back": "View all notices"
+  },
+  "pdfdisplay": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }

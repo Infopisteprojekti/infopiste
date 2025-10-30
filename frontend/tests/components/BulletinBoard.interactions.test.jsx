@@ -93,4 +93,17 @@ describe('BulletinBoard - Interactions', () => {
     await waitFor(() => screen.getByText('Form 1'));
     expect(screen.getByText('Form 1')).toBeInTheDocument();
   });
+
+  test('grid view can be returned to', async () => {
+    const user = userEvent.setup();
+
+    setup();
+
+    const form1 = await screen.findByText('Form 1');
+    await user.click(form1);
+
+    const backButton = screen.getByText('← View all notices');
+    await user.click(backButton);
+    expect(screen.getByText('Available notices')).toBeInTheDocument();
+  });
 });

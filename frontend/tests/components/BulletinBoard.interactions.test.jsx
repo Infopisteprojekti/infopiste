@@ -75,18 +75,21 @@ describe('BulletinBoard - Interactions', () => {
   });
 
   test('navigation between forms works', async () => {
-    render(<BulletinBoard />);
+    const user = userEvent.setup();
 
-    await waitFor(() => screen.getByText('Form 1'));
+    setup();
+
+    const form1 = await screen.findByText('Form 1');
+    await user.click(form1);
 
     const nextButton = screen.getByText('← Previous');
     const prevButton = screen.getByText('Next →');
 
-    userEvent.click(nextButton);
+    await user.click(nextButton);
     await waitFor(() => screen.getByText('Form 2'));
     expect(screen.getByText('Form 2')).toBeInTheDocument();
 
-    userEvent.click(prevButton);
+    await user.click(prevButton);
     await waitFor(() => screen.getByText('Form 1'));
     expect(screen.getByText('Form 1')).toBeInTheDocument();
   });

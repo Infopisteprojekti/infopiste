@@ -57,7 +57,7 @@ describe('BulletinBoard - Rendering', () => {
     setup();
 
     await waitFor(() => {
-      expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
+      expect(screen.getByText('Loading notices...')).toBeInTheDocument();
     });
   });
 });

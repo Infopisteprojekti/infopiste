@@ -24,23 +24,19 @@ const PDFDisplay = ({ currentForm, nextForm, prevForm, preview = false, rotateCa
             {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
             {new Date(currentForm.endDate).toLocaleDateString()}
           </p>
+          <button onClick={rotateCallBack} className="button" style={{
+            position: 'absolute',
+            top: '0px',
+            right: '0px',
+            zIndex: 10,
+          }}>
+          {automaticRotation
+            ? t('bulletinboard.stop-rotation')
+            : t('bulletinboard.continue-rotation')}
+          </button>
         </>
       )}
       <div className="pdf-wrapper">
-        {!preview && pdfLoaded && (
-            <>
-            <button onClick={rotateCallBack} className="button" style={{
-                position: 'absolute',
-                top: '-50px',
-                right: '-550px',
-                zIndex: 10,
-            }}>
-              {automaticRotation
-                ? t('bulletinboard.stop-rotation')
-                : t('bulletinboard.continue-rotation')}
-          </button>
-            </>
-        )}
         {!preview && pdfLoaded && (
             <>
               <button className="pdf-button left" onClick={prevForm}>

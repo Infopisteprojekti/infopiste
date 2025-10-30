@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { mockForms, mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
 
-test.describe('Infopiste', () => {
+test.describe('Infopiste Floorplan', () => {
   test('home page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173?lang=en');
 
@@ -128,14 +128,16 @@ test.describe('Infopiste', () => {
     await page.getByText('Floor 3').click();
     await expect(floor3Room).toBeVisible();
   });
+});
 
+test.describe('Infopiste Bulletin Board', () => {
   test('bulletin board view can be opened', async ({ page }) => {
     mockFormsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
-    await expect(page.getByText('Files')).toBeVisible();
+    await expect(page.getByText('Available notices')).toBeVisible();
   });
 
   test('qr code can be opened and closed', async ({ page }) => {
@@ -151,13 +153,14 @@ test.describe('Infopiste', () => {
     await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
   });
 
-  test('pdfs are rendered correctly', async ({ page }) => {
+  test('grid view is rendered correctly', async ({ page }) => {
     mockFormsRoute(page);
 
     await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
     await expect(page.getByText('Form 1')).toBeVisible();
+    await expect(page.getByText('Form 2')).toBeVisible();
   });
 
   test('pdfs can be switched', async ({ page }) => {
@@ -166,7 +169,11 @@ test.describe('Infopiste', () => {
     await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
+    await page.getByText('Form 1').click();
+
     await page.getByText('Next').click();
     await expect(page.getByText('Form 2')).toBeVisible();
   });
-});
+})
+
+  

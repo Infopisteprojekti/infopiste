@@ -61,7 +61,15 @@ const BulletinBoard = () => {
 
   if (loading) {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+        }}
+      >
         <p>Loading notices...</p>
       </div>
     );
@@ -69,7 +77,7 @@ const BulletinBoard = () => {
 
   if (forms.length === 0) {
     return (
-      <div>
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
         <p>No notices were found</p>
       </div>
     );

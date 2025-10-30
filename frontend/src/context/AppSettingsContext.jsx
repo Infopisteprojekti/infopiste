@@ -79,9 +79,9 @@ export const AppSettingsProvider = ({ children }) => {
     navigateTo: '/',
   });
 
-  useEffect(() => {
-    console.log('App context current values:', settings);
-  }, [settings]);
+  // useEffect(() => {
+  //   console.log('App context current values:', settings);
+  // }, [settings]);
 
   return (
     <AppSettingsContext.Provider

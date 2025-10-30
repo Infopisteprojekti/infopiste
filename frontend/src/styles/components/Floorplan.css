@@ -47,3 +47,19 @@
 .location-marker {
   fill: red;
 }
+
+.toolbar p {
+  font-size: 18px;
+}
+
+span.available {
+  color: var(--roomAvailable);
+}
+
+span.unavailable {
+  color: var(--roomUnavailable);
+}
+
+span.reserved {
+  color: var(--roomReserved);
+}

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import '../styles/components/PDFDisplay.css'
@@ -5,9 +6,14 @@ import '../styles/components/PDFDisplay.css'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFDisplay = ({ currentForm, nextForm, prevForm, preview = false, rotateCallBack, automaticRotation }) => {
-  if (!currentForm) return null;
-
   const {t} = useTranslation();
+  const [pdfLoaded, setPdfLoaded] = useState(false);
+
+  useEffect(() => {
+    setPdfLoaded(false);
+  }, [currentForm]);
+
+  if (!currentForm) return null;  
 
   return (
     <div className={`pdf-container ${preview ? 'preview' : ''}`}>
@@ -21,7 +27,7 @@ const PDFDisplay = ({ currentForm, nextForm, prevForm, preview = false, rotateCa
         </>
       )}
       <div className="pdf-wrapper">
-        {!preview && (
+        {!preview && pdfLoaded && (
             <>
             <button onClick={rotateCallBack} className="button" style={{
                 position: 'absolute',
@@ -35,14 +41,14 @@ const PDFDisplay = ({ currentForm, nextForm, prevForm, preview = false, rotateCa
           </button>
             </>
         )}
-        {!preview && (
+        {!preview && pdfLoaded && (
             <>
               <button className="pdf-button left" onClick={prevForm}>
                   ← {t('pdfdisplay.previous')}
               </button>
             </>
         )}
-        <Document file={currentForm.fileUrl} key={currentForm._id} onLoadError={console.error}>
+        <Document file={currentForm.fileUrl} key={currentForm._id} onLoadError={console.error} onLoadSuccess={() => setPdfLoaded(true)}>
           <Page
             pageNumber={1}
             width={preview ? 150 : 700}
@@ -50,7 +56,7 @@ const PDFDisplay = ({ currentForm, nextForm, prevForm, preview = false, rotateCa
             renderAnnotationLayer={false}
             />
         </Document>
-        {!preview && (
+        {!preview && pdfLoaded && (
             <>
               <button className="pdf-button right" onClick={nextForm}>
                 {t('pdfdisplay.next')} →

@@ -185,7 +185,5 @@ test.describe('Infopiste Bulletin Board', () => {
 
     await page.getByText('View all notices').click();
     await expect(page.getByText('Available notices')).toBeVisible();
-  })
-})
-
-  
+  });
+});

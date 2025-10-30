@@ -3,7 +3,7 @@ import '../styles/components/BulletinBoard.css';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import PDFDisplay from './PDFDisplay';
-import QRCode from './QRCode'
+import QRCode from './QRCode';
 
 const baseUrl =
   import.meta.env.VITE_API_BASE_URL ||
@@ -87,28 +87,37 @@ const BulletinBoard = () => {
     return (
       <div>
         <QRCode />
-        <p style={{
-          textAlign: 'center',
-          margin: '1rem 0',
-          fontWeight: 'bold'
-        }}>{t('bulletinboard.available-notices')}</p>
+        <p
+          style={{
+            textAlign: 'center',
+            margin: '1rem 0',
+            fontWeight: 'bold',
+          }}
+        >
+          {t('bulletinboard.available-notices')}
+        </p>
         <div className="pdf-grid">
-        {forms.map((form, index) => (
-          <div
-            key={form._id}
-            className="pdf-card"
-            onClick={() => {
-              setSelectedForm(form);
-              setIndex(index);
-            }}
-          >
-            <PDFDisplay currentForm={form} nextForm={() => {}} prevForm={() => {}} preview />
-          </div>
-        ))}
+          {forms.map((form, index) => (
+            <div
+              key={form._id}
+              className="pdf-card"
+              onClick={() => {
+                setSelectedForm(form);
+                setIndex(index);
+              }}
+            >
+              <PDFDisplay
+                currentForm={form}
+                nextForm={() => {}}
+                prevForm={() => {}}
+                preview
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
-  };
+  }
 
   const currentForm = forms[index];
   return (
@@ -117,15 +126,15 @@ const BulletinBoard = () => {
         ← {t('bulletinboard.back') || 'View all PDFs'}
       </button>
       <QRCode />
-        <PDFDisplay 
-          currentForm={currentForm}
-          nextForm={nextForm}
-          prevForm={prevForm}
-          rotateCallBack={RotatePdfs}
-          automaticRotation={automaticRotation}
-        />
+      <PDFDisplay
+        currentForm={currentForm}
+        nextForm={nextForm}
+        prevForm={prevForm}
+        rotateCallBack={RotatePdfs}
+        automaticRotation={automaticRotation}
+      />
     </div>
-  )
+  );
 };
 
 export default BulletinBoard;

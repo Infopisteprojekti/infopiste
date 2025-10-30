@@ -1,24 +1,23 @@
 import qrcode from '../assets/form.svg';
-import { useState } from 'react'
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const QRCode = () => {
-    const { t } = useTranslation();
-    const [qrState, setQrState] = useState(false);
+  const { t } = useTranslation();
+  const [qrState, setQrState] = useState(false);
 
-    const toggleQr = () => {
-      const newState = !qrState;
-      if (newState) {
-        document.getElementById('popup').classList.add('open-popup');
-      } else {
-        document.getElementById('popup').classList.remove('open-popup');
-      }
-      setQrState(newState);
-      };
+  const toggleQr = () => {
+    const newState = !qrState;
+    if (newState) {
+      document.getElementById('popup').classList.add('open-popup');
+    } else {
+      document.getElementById('popup').classList.remove('open-popup');
+    }
+    setQrState(newState);
+  };
 
-
-    return (
-      <div>
+  return (
+    <div>
       <button
         type="submit"
         id="qrButton"
@@ -32,7 +31,7 @@ const QRCode = () => {
         <img src={qrcode} className="bottomright" />
       </div>
     </div>
-    );
+  );
 };
 
 export default QRCode;

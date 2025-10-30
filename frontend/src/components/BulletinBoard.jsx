@@ -70,7 +70,7 @@ const BulletinBoard = () => {
           fontWeight: 'bold',
         }}
       >
-        <p>Loading notices...</p>
+        <p>{t('bulletinboard.loading-notices')}</p>
       </div>
     );
   }
@@ -78,7 +78,7 @@ const BulletinBoard = () => {
   if (forms.length === 0) {
     return (
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <p>No notices were found</p>
+        <p>{t('bulletinboard.no-notices')}</p>
       </div>
     );
   }

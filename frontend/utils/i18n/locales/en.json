@@ -23,7 +23,9 @@
     "stop-rotation": "Pause automatic scrolling",
     "continue-rotation": "Continue automatic scrolling",
     "available-notices": "Available notices",
-    "back": "View all notices"
+    "back": "View all notices",
+    "no-notices": "No notices available",
+    "loading-notices": "Loading notices..."
   },
   "pdfdisplay": {
     "previous": "Previous",

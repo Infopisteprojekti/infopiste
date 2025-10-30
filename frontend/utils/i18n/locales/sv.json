@@ -23,7 +23,9 @@
     "stop-rotation": "Pausa automatisk rullning",
     "continue-rotation": "Fortsätt automatisk rullning",
     "available-notices": "Tillagda aviseringar",
-    "back": "Visa alla meddelanden"
+    "back": "Visa alla meddelanden",
+    "no-notices": "Inga meddelanden tillgängliga",
+    "loading-notices": "Laddar meddelanden..."
   },
   "pdfdisplay": {
     "previous": "Tidigare",

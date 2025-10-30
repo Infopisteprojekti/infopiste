@@ -174,6 +174,18 @@ test.describe('Infopiste Bulletin Board', () => {
     await page.getByText('Next').click();
     await expect(page.getByText('Form 2')).toBeVisible();
   });
+
+  test('return to grid view works', async ({ page }) => {
+    mockFormsRoute(page);
+
+    await page.goto('http://localhost:5173?lang=en');
+    await page.getByText('Bulletin Board').click();
+
+    await page.getByText('Form 1').click();
+
+    await page.getByText('View all notices').click();
+    await expect(page.getByText('Available notices')).toBeVisible();
+  })
 })
 
   

@@ -29,22 +29,24 @@ describe('BulletinBoard unit tests', () => {
   test('forms render and can be scrolled', async () => {
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      json: async () => [
-        {
-          _id: '1',
-          title: 'Form A',
-          startDate: '2024-01-01',
-          endDate: '2024-01-02',
-          fileUrl: '/a.pdf',
-        },
-        {
-          _id: '2',
-          title: 'Form B',
-          startDate: '2024-02-01',
-          endDate: '2024-02-02',
-          fileUrl: '/b.pdf',
-        },
-      ],
+      json: async () => ({
+        data: [
+          {
+            _id: '1',
+            title: 'Form A',
+            startDate: '2024-01-01',
+            endDate: '2024-01-02',
+            fileUrl: '/a.pdf',
+          },
+          {
+            _id: '2',
+            title: 'Form B',
+            startDate: '2024-02-01',
+            endDate: '2024-02-02',
+            fileUrl: '/b.pdf',
+          },          
+        ],
+      }),
     });
 
     const user = userEvent.setup();

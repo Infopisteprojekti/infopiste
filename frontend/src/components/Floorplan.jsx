@@ -1,29 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { useSearchParams } from 'react-router-dom';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import FloorDisplay from './FloorDisplay';
-import floors from '../constants/floors';
-import '../styles/components/Floorplan.css';
-import '../styles/components/Toolbar.css';
-import '../styles/components/Button.css';
+import FloorDisplay from '@/components/FloorDisplay';
+import floors from '@/constants/floors';
+import { useAppSettings } from '@/context/useAppSettings.js';
+
+import '@/styles/components/Floorplan.css';
+import '@/styles/components/Toolbar.css';
+import '@/styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();
+  const { settings, setSettings, resetTrigger } = useAppSettings();
 
-  const [searchParams] = useSearchParams();
-  const floorParam = Number(searchParams.get('floor'));
-  const defaultFloor =
-    !isNaN(floorParam) && floors.some(f => f.id === floorParam)
-      ? floorParam
-      : 3;
-  const [floor, setFloor] = useState(defaultFloor);
-  const markerCoords = searchParams.get('marker')?.split(',').map(Number);
+  const initialFloorRef = useRef(Number(settings.floor) || 3);
+  const [floor, setFloor] = useState(Number(settings.floor) || 3);
+  const transformRef = useRef(null);
+
+  const markerCoords = settings.marker
+    ? settings.marker.split(',').map(Number)
+    : undefined;
+
+  useEffect(() => {
+    if (Number(settings.floor) !== floor) {
+      setFloor(Number(settings.floor));
+    }
+  }, [settings.floor, floor]);
+
+  useEffect(() => {
+    if (transformRef.current) {
+      transformRef.current.resetTransform();
+    }
+  }, [resetTrigger]);
 
   return (
-    <TransformWrapper initialScale={1} minScale={0.5} maxScale={5}>
+    <TransformWrapper
+      ref={transformRef}
+      initialScale={1}
+      minScale={0.5}
+      maxScale={5}
+    >
       {({ zoomIn, zoomOut, resetTransform }) => (
         <>
           <div className="toolbar toolbar__floorplan-transform">
@@ -36,6 +54,21 @@ const Floorplan = () => {
             <button className="button" onClick={() => resetTransform()}>
               {t('floorplan-toolbar.reset')} <RotateCcw size={16} />
             </button>
+
+            <br />
+
+            <p>
+              <span className="available">●</span>
+              {t('room-status.available')}
+            </p>
+            <p>
+              <span className="reserved">●</span>
+              {t('room-status.reserved')}
+            </p>
+            <p>
+              <span className="unavailable">●</span>
+              {t('room-status.unavailable')}
+            </p>
           </div>
 
           <div className="toolbar toolbar__floorplan-floor-switch">
@@ -44,6 +77,7 @@ const Floorplan = () => {
                 key={id}
                 onClick={() => {
                   setFloor(id);
+                  setSettings(prev => ({ ...prev, floor: id }));
                   resetTransform();
                 }}
                 className={`button ${id === floor ? 'active' : ''}`}
@@ -59,7 +93,7 @@ const Floorplan = () => {
           >
             <FloorDisplay
               floor={floor}
-              initialFloor={floorParam}
+              initialFloor={initialFloorRef.current}
               markerCoords={markerCoords}
             />
           </TransformComponent>

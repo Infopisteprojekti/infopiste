@@ -1,4 +1,5 @@
-import { getAppClient } from './graph-auth.js';
+import graphClient from '../utils/graphClient.js';
+import logger from '../utils/logger.js';
 
 function createBatchRequest(roomIds) {
   const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
@@ -59,10 +60,10 @@ function getUtcNowAndWeekAhead() {
 
 export async function fetchRoomReservations(roomIds) {
   try {
-    const client = getAppClient();
+    logger.graph(`fetching room reservations for ${roomIds}`);
 
     const batchRequest = createBatchRequest(roomIds);
-    const batchResponse = await client
+    const batchResponse = await graphClient
       .api('/$batch')
       .post({ requests: batchRequest });
 
@@ -77,11 +78,11 @@ export async function fetchReservationsById(roomId) {
   const roomEmail = `exactum.${roomId.toLowerCase()}@helsinki.fi`;
 
   try {
-    const client = getAppClient();
-
     const { nowUtc, weekAheadUtc } = getUtcNowAndWeekAhead();
 
-    const results = await client
+    logger.graph(`fetching reservations by id for ${roomId}`);
+
+    const results = await graphClient
       .api(`/users/${roomEmail}/calendar/events`)
       .select(['start', 'end', 'location'])
       .filter(

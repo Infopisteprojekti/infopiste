@@ -1,12 +1,20 @@
 import Select from 'react-select';
-import { Globe } from 'lucide-react';
-import LANGUAGE_OPTIONS from '../constants/languageOptions';
+import LANGUAGE_OPTIONS from '@/constants/languageOptions';
+import { useAppSettings } from '@/context/useAppSettings.js';
+import { useTranslation } from 'react-i18next';
 
-const LanguageSwitcher = ({ i18n, changeLanguage }) => {
+const LanguageSwitcher = () => {
+  const { settings, setSettings } = useAppSettings();
+
+  const handleChange = opt => {
+    const newLang = opt.value;
+    setSettings(prev => ({ ...prev, lang: newLang }));
+  };
+
   return (
     <Select
-      value={LANGUAGE_OPTIONS.find(opt => opt.value === i18n.resolvedLanguage)}
-      onChange={opt => changeLanguage(opt.value)}
+      value={LANGUAGE_OPTIONS.find(opt => opt.value === settings.lang)}
+      onChange={handleChange}
       options={LANGUAGE_OPTIONS}
       isSearchable={false}
       menuPlacement="top"

@@ -58,15 +58,15 @@ const Floorplan = () => {
             <br />
 
             <p>
-              <span className="available">●</span>
+              <span className="available">● </span>
               {t('room-status.available')}
             </p>
             <p>
-              <span className="reserved">●</span>
+              <span className="reserved">● </span>
               {t('room-status.reserved')}
             </p>
             <p>
-              <span className="unavailable">●</span>
+              <span className="unavailable">● </span>
               {t('room-status.unavailable')}
             </p>
           </div>

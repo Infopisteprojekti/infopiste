@@ -3,13 +3,13 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import FloorDisplay from './FloorDisplay';
-import floors from '../constants/floors';
-import { useAppSettings } from '../context/useAppSettings.js';
+import FloorDisplay from '@/components/FloorDisplay';
+import floors from '@/constants/floors';
+import { useAppSettings } from '@/context/useAppSettings.js';
 
-import '../styles/components/Floorplan.css';
-import '../styles/components/Toolbar.css';
-import '../styles/components/Button.css';
+import '@/styles/components/Floorplan.css';
+import '@/styles/components/Toolbar.css';
+import '@/styles/components/Button.css';
 
 const Floorplan = () => {
   const { t } = useTranslation();

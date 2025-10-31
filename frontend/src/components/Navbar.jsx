@@ -1,15 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import LanguageSwitcher from './LanguageSwitcher.jsx';
+import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
 import { useTranslation } from 'react-i18next';
-import '../styles/components/Navbar.css';
+import '@/styles/components/Navbar.css';
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem('lang', lng);
-  };
+  const { t } = useTranslation();
 
   const location = useLocation();
 
@@ -25,7 +20,7 @@ const Navbar = () => {
       <Link className={`nav-button button ${isActive('/board')}`} to="/board">
         {t('navbar.bulletinboard')}
       </Link>
-      <LanguageSwitcher i18n={i18n} changeLanguage={changeLanguage} />
+      <LanguageSwitcher />
     </div>
   );
 };

@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test TEST=true vitest run",
-    "coverage": "cross-env NODE_ENV=test TEST=true vitest run --coverage",
-    "start": "NODE_ENV=production node server.js",
-    "dev": "NODE_ENV=development nodemon server.js"
+    "test": "cross-env NODE_ENV=test vitest run",
+    "coverage": "cross-env NODE_ENV=test vitest run --coverage",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
   },
   "author": "infopiste-tiimi",
   "license": "MIT",
@@ -31,7 +31,6 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "isomorphic-fetch": "^3.0.0",
     "mongoose": "^8.18.1",
     "redis": "^5.8.2"
   },

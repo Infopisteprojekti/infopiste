@@ -1,4 +1,4 @@
-import { Form } from '../models/formModel.js';
+import Form from '../models/form.js';
 
 const mockForms = [
   {

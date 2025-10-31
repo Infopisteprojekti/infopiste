@@ -3,7 +3,8 @@ import {
   fetchRoomReservations,
   fetchReservationsById,
 } from '../services/rooms.js';
-import { getRedis } from '../services/redis-client.js';
+import redis from '../utils/redisClient.js';
+import Room from '../models/room.js';
 import { TTL_SECONDS } from '../utils/config.js';
 
 const router = Router();
@@ -12,7 +13,6 @@ const ROOMIDS = ['b233', 'a214', 'a218b', 'a307'];
 
 router.get('/', async (request, response) => {
   const cacheKey = 'rooms:reservations';
-  const redis = request.redisClient;
 
   const cached = await redis.get(cacheKey);
   if (cached) {
@@ -35,7 +35,6 @@ router.get('/', async (request, response) => {
 router.get('/:id/reservations', async (request, response) => {
   const { id } = request.params;
 
-  const redis = request.redisClient;
   const cacheKey = `rooms:reservations:${id}`;
 
   const cached = await redis.get(cacheKey);
@@ -60,6 +59,34 @@ router.get('/:id/reservations', async (request, response) => {
     response.status(500).json({
       error: `Failed to fetch reservations for room: ${id}, error: ${err}`,
     });
+  }
+});
+
+router.get('/allRooms', async (request, response) => {
+  const cacheKey = 'rooms:all';
+
+  try {
+    const cached = await redis.get(cacheKey);
+    if (cached) {
+      return response.status(200).json({
+        source: 'cache',
+        data: JSON.parse(cached),
+      });
+    }
+
+    const rooms = await Room.find({});
+
+    if (rooms.length > 0) {
+      await redis.set(cacheKey, JSON.stringify(rooms));
+      await redis.expire(cacheKey, TTL_SECONDS);
+    }
+
+    response.status(200).json({
+      source: 'database',
+      data: rooms,
+    });
+  } catch (err) {
+    response.status(500).json({ error: err });
   }
 });
 

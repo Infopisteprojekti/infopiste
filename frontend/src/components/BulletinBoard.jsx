@@ -25,10 +25,10 @@ const BulletinBoard = () => {
         const res = await fetch(`${baseUrl}/api/forms`);
         if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`);
 
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
+        const json = await res.json();
+        if (json.error) throw new Error(json.error);
 
-        setForms(data);
+        setForms(json.data || []);
         return;
       } catch (err) {
         console.error(err);
@@ -57,7 +57,7 @@ const BulletinBoard = () => {
     setQrState(newState);
   };
 
-  const currentForm = forms[index];
+  const currentForm = forms[index] || {};
 
   return (
     <div>

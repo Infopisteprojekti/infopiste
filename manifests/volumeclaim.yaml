@@ -1,0 +1,30 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: infopiste-redis-claim
+  namespace: ohtuprojekti-staging
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: data-2
+  volumeMode: Filesystem
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+
+metadata:
+  name: infopiste-mongo-claim
+  namespace: ohtuprojekti-staging
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: data-2
+  volumeMode: Filesystem

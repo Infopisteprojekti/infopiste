@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: infopiste-frontend
+  name: infopiste-frontend-deployment
   namespace: ohtuprojekti-staging
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
@@ -22,10 +22,29 @@ spec:
           image: infopiste-frontend:staging
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: nginx-cache
-              mountPath: /var/cache/nginx
-      volumes:
-        - name: nginx-cache
-          emptyDir: {}
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "50Mi"
+              cpu: "50m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: infopiste-frontend-service
+  namespace: ohtuprojekti-staging
+spec:
+  selector:
+    app: infopiste-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infopiste-mongo-deployment
+  namespace: ohtuprojekti-staging
 spec:
   replicas: 1
   selector:
@@ -13,8 +14,8 @@ spec:
         app: infopiste-mongo
     spec:
       containers:
-        - name: infopiste-mongo
-          image: mongo
+        - name: my-mongo
+          image: mongo:8
           imagePullPolicy: Always
           ports:
             - containerPort: 27017
@@ -36,3 +37,18 @@ spec:
         - name: infopiste-mongo-volume
           persistentVolumeClaim:
             claimName: infopiste-mongo-claim
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: infopiste-mongo-service
+spec:
+  selector:
+    app: infopiste-mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP

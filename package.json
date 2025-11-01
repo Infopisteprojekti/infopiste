@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "start": "docker compose up -d",
+    "reset": "docker compose down -v && docker compose up -d --build",    
+    "dev": "docker compose -f docker-compose.dev.yaml up -d",
+    "test": "npm run -w frontend test && npm run -w frontend e2e && npm run -w backend test",
+    "lint": "npm run -w frontend lint && npm run -w backend lint",
+    "lint:fix": "npm run -w frontend lint -- --fix && npm run -w backend lint -- --fix"
+  }
+}

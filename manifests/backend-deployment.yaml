@@ -26,16 +26,13 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
+            - name: REDIS_HOST
+              value: infopiste-redis-service
             - name: MONGO_DB_URL
               valueFrom:
                 configMapKeyRef:
                   name: infopiste-config
                   key: MONGO_DB_URL
-            - name: REDIS_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: infopiste-config
-                  key: REDIS_URL
             - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:

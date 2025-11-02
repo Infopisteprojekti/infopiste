@@ -14,6 +14,24 @@ const mockForms = [
     fileUrl:
       'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf',
   },
+  {
+    title: 'Third best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl: 'https://nlsblog.org/wp-content/uploads/2020/06/image-based-pdf-sample.pdf',
+  },
+  {
+    title: 'Fourth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl: 'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Report_sample.pdf',
+  },
+  {
+    title: 'Fifth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl: 'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
 ];
 
 export async function insertMockData() {
@@ -23,5 +41,5 @@ export async function insertMockData() {
     console.log('mock data inserted to db successfully');
   } catch (err) {
     console.error('error inserting mock data:', err);
-  }
+  }/flyer/
 }

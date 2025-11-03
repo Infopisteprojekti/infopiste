@@ -28,7 +28,7 @@ router.get('/', async (request, response) => {
     const proxiedForms = forms.map(data => ({
       ...data._doc,
       fileUrl: data.fileUrl.startsWith('http')
-        ? `${request.protocol}://${request.get('host')}/api/forms/proxy-pdf?url=${encodeURIComponent(data.fileUrl)}`
+        ? `/api/forms/proxy-pdf?url=${encodeURIComponent(data.fileUrl)}`
         : data.fileUrl,
     }));
 

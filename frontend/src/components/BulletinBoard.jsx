@@ -6,8 +6,6 @@ import PDFDisplay from './PDFDisplay';
 import QRCode from './QRCode';
 import formService from '@/services/forms.js';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
-
 const BulletinBoard = () => {
   const { t } = useTranslation();
   const [forms, setForms] = useState([]);

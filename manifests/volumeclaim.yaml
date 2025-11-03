@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 512Mi
   storageClassName: data-2
   volumeMode: Filesystem
 

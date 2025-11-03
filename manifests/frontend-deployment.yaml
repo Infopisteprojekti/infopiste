@@ -18,7 +18,7 @@ spec:
         app: infopiste-frontend
     spec:
       containers:
-        - name: frontend
+        - name: infopiste-frontend
           image: infopiste-frontend:staging
           imagePullPolicy: Always
           ports:
@@ -27,11 +27,11 @@ spec:
               protocol: TCP
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
-            requests:
-              memory: "50Mi"
+              memory: "64Mi"
               cpu: "50m"
+            requests:
+              memory: "32Mi"
+              cpu: "25m"
 
 ---
 
@@ -44,7 +44,8 @@ spec:
   selector:
     app: infopiste-frontend
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: http
   type: ClusterIP

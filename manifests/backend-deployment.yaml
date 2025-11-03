@@ -18,7 +18,7 @@ spec:
         app: infopiste-backend
     spec:
       containers:
-        - name: backend
+        - name: infopiste-backend
           image: infopiste-backend:staging
           imagePullPolicy: Always
           ports:
@@ -50,11 +50,11 @@ spec:
                   key: CLIENT_SECRET
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "256Mi"
+              cpu: "200m"
             requests:
-              memory: "50Mi"
-              cpu: "50m"
+              memory: "128Mi"
+              cpu: "100m"
 
 ---
 

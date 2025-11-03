@@ -14,7 +14,7 @@ spec:
         app: infopiste-mongo
     spec:
       containers:
-        - name: my-mongo
+        - name: infopiste-mongo
           image: mongo:8
           imagePullPolicy: Always
           ports:
@@ -33,6 +33,13 @@ spec:
           volumeMounts:
             - mountPath: /data/db
               name: infopiste-mongo-volume
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"              
       volumes:
         - name: infopiste-mongo-volume
           persistentVolumeClaim:

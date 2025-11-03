@@ -60,7 +60,7 @@ const PDFDisplay = ({
         <Document
           file={currentForm.fileUrl}
           key={currentForm._id}
-          onLoadError={(err) => {
+          onLoadError={err => {
             console.error(err);
             setPdfError(true);
           }}
@@ -82,13 +82,13 @@ const PDFDisplay = ({
         )}
         {!preview && pdfError && (
           <div className="pdf-error-wrapper">
-          <button className="pdf-button left" onClick={prevForm}>
-            ← {t('pdfdisplay.previous')}
-          </button>
-          <button className="pdf-button right" onClick={nextForm}>
-            {t('pdfdisplay.next')} →
-          </button>
-        </div>
+            <button className="pdf-button left" onClick={prevForm}>
+              ← {t('pdfdisplay.previous')}
+            </button>
+            <button className="pdf-button right" onClick={nextForm}>
+              {t('pdfdisplay.next')} →
+            </button>
+          </div>
         )}
       </div>
       {preview && (

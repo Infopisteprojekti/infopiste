@@ -20,6 +20,23 @@ The configuration for the OpenShift staging server deployment can be found in [m
 
 The `frontend-imagestream.yaml` and `backend-imagestream.yaml` files located in [manifests](../manifests/) ensure that the OpenShift deployment uses the updated images. They poll DockerHub every 15 minutes.
 
+## Staging server
+
+Whenever new content is pushed to the main branch, the backend image is rebuilt, and it takes a maximum of 15 minutes for the staging server to apply the new image.
+
+The endpoints can be accessed by adding the wanted endpoint to the end of the url; for example,
+
+```bash
+$ curl https://infopiste-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/api/health
+```
+
+has the following output:
+
+```
+0.k8s.it.helsinki.fi/health
+{"status":"ok"}
+```
+
 # Scrum process
 
 The team follows the Scrum development framework.

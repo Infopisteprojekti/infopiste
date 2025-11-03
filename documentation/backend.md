@@ -53,51 +53,15 @@ A `reservation` is an object containing:
 - `endDate`: the end time for the notice
 - `fileUrl`: URL for the uploaded PDF file.
 
-## Staging server
-
-Whenever new content is pushed to the main branch, the backend image is rebuilt, and it takes a maximum of 15 minutes for the staging server to apply the new image.
-
-The endpoints can be accessed by adding the wanted endpoint to the end of the url; for example,
-
-```bash
-$ curl https://infopiste-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/api/health
-```
-
-has the following output:
-
-```
-0.k8s.it.helsinki.fi/health
-{"status":"ok"}
-```
-
-## Local development
-
-> [!IMPORTANT]
-> Remember to install the dependencies first by running `npm install`!
-
-Alternatively, the backend can be accessed by running
-
-```bash
-$ npm run dev
-```
-
-in the [backend](../backend/) directory of the project. This is equivalent to running `NODE_ENV=production node server.js`.
-
-The server will then be running on port 1234.
-
-Note that MongoDB should be running locally for this to work. Otherwise, connecting to the database will fail, and the backend won't start.
-
 # Testing
 
 The tests can be found in the [tests](../backend/tests) directory.
 
-[info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
+There are tests for all the api endpoints, with mock database and redis clients:
 
-Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, `/api/rooms/:id/reservations` and `/api/forms`.
-
-`[rooms.test.js](../backend/tests/rooms.test.js) tests the functionality of the functions in [services/rooms.js](../backend/services/rooms.js).
-
-The tests ensure that the data is in the correct shape.
+[forms_api.test.js](../backend/tests/forms_api.test.js)
+[rooms_api.test.js](../backend/tests/rooms_api.test.js)
+[reservations_api.test.js](../backend/tests/reservations_api.test.js)
 
 The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 

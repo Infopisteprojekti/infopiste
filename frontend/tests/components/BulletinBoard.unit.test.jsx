@@ -23,8 +23,8 @@ describe('BulletinBoard unit tests', () => {
   test('board loads to an empty state', async () => {
     formServiceMock.mockResolvedValueOnce({ data: [] });
     setup();
-    expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
-    expect(await screen.findByText('No PDFs were found')).toBeInTheDocument();
+    expect(screen.getByText('Loading notices...')).toBeInTheDocument();
+    expect(await screen.findByText('No notices available')).toBeInTheDocument();
   });
 
   test('forms render and can be scrolled', async () => {
@@ -50,7 +50,10 @@ describe('BulletinBoard unit tests', () => {
     const user = userEvent.setup();
     setup();
 
-    expect(await screen.findByText('Form A')).toBeInTheDocument();
+    const formA = await screen.findByText('Form A');
+
+    expect(formA).toBeInTheDocument();
+    await user.click(formA)
     await user.click(screen.getByRole('button', { name: 'Next →' }));
     expect(await screen.findByText('Form B')).toBeInTheDocument();
   });
@@ -77,7 +80,7 @@ describe('BulletinBoard unit tests', () => {
 
     setup();
     await waitFor(() => expect(consoleSpy).toHaveBeenCalled());
-    expect(await screen.findByText('No PDFs were found')).toBeInTheDocument();
+    expect(await screen.findByText('No notices available')).toBeInTheDocument();
     consoleSpy.mockRestore();
   });
 });

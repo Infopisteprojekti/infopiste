@@ -58,7 +58,10 @@ const PDFDisplay = ({
         <Document
           file={currentForm.fileUrl}
           key={currentForm._id}
-          onLoadError={console.error}
+          onLoadError={(err) => {
+            console.error(err);
+            setPdfLoaded(true);
+          }}
           onLoadSuccess={() => setPdfLoaded(true)}
         >
           <Page

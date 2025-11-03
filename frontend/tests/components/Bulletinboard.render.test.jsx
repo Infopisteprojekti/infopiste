@@ -1,9 +1,33 @@
-//Poistettu mainissa
-
 import '../mocks/reactPdf.mock.jsx';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
+
+vi.mock('@/services/forms.js', () => ({
+  default: {
+    getForms: vi.fn(() =>
+      Promise.resolve({
+        data: [
+          {
+            _id: '1',
+            title: 'Form 1',
+            startDate: '2025-01-01',
+            endDate: '2025-01-31',
+            fileUrl: '/form1.pdf',
+          },
+          {
+            _id: '2',
+            title: 'Form 2',
+            startDate: '2025-02-01',
+            endDate: '2025-02-28',
+            fileUrl: '/form2.pdf',
+          },
+        ],
+      })
+    ),
+  },
+}));
+
 
 import { MemoryRouter } from 'react-router-dom';
 import BulletinBoard from '../../src/components/BulletinBoard.jsx';
@@ -17,35 +41,6 @@ describe('BulletinBoard - Rendering', () => {
     );
   };
 
-  const mockForms = [
-    {
-      _id: '1',
-      title: 'Form 1',
-      startDate: '2025-01-01',
-      endDate: '2025-01-31',
-      fileUrl: '/form1.pdf',
-    },
-    {
-      _id: '2',
-      title: 'Form 2',
-      startDate: '2025-02-01',
-      endDate: '2025-02-28',
-      fileUrl: '/form2.pdf',
-    },
-  ];
-
-  let fetchSpy;
-
-  beforeEach(() => {
-    fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue({
-      ok: true,
-      json: async () => mockForms,
-    });
-  });
-
-  afterEach(() => {
-    fetchSpy.mockRestore();
-  });
 
   test('renders bulletin board', async () => {
     setup();

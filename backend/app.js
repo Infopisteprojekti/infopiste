@@ -16,7 +16,7 @@ app.use('/api/rooms', roomsRouter);
 app.use('/api/reservations', reservationsRouter);
 app.use('/api/forms', formsRouter);
 
-app.get('api/health', (req, res) => res.status(200).json({ status: 'ok' }));
+app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 app.use(unknownEndpoint);
 

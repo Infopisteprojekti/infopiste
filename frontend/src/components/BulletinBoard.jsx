@@ -71,6 +71,7 @@ const BulletinBoard = () => {
   if (forms.length === 0) {
     return (
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <QRCode />
         <p>{t('bulletinboard.no-notices')}</p>
       </div>
     );

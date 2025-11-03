@@ -1,7 +1,6 @@
 //Poistettu mainissa
 
-import '../setup/mockReactPdf.jsx';
-import '../setup/mockResizeObserver.js';
+import '../mocks/reactPdf.mock.jsx';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';

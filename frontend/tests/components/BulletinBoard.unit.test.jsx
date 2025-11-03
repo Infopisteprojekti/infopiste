@@ -6,13 +6,14 @@ vi.mock('react-pdf', () => import('../mocks/reactPdf.mock.jsx'));
 vi.mock('@/assets/form.svg', () => ({ default: 'data://qr-mock' }));
 
 import BulletinBoard from '@/components/BulletinBoard.jsx';
+import formService from '@/services/forms.js';
 
-let fetchMock;
+let formServiceMock;
 beforeEach(() => {
-  fetchMock = vi.fn();
-  vi.stubGlobal('fetch', fetchMock);
+  formServiceMock = vi.fn();
+  vi.spyOn(formService, 'getForms').mockImplementation(() => formServiceMock());
 });
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => vi.restoreAllMocks());
 
 describe('BulletinBoard unit tests', () => {
   const setup = () => {
@@ -20,33 +21,30 @@ describe('BulletinBoard unit tests', () => {
   };
 
   test('board loads to an empty state', async () => {
-    fetchMock.mockResolvedValueOnce({ ok: true, json: async () => [] });
+    formServiceMock.mockResolvedValueOnce({ data: [] });
     setup();
     expect(screen.getByText('Loading PDFs...')).toBeInTheDocument();
     expect(await screen.findByText('No PDFs were found')).toBeInTheDocument();
   });
 
   test('forms render and can be scrolled', async () => {
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        data: [
-          {
-            _id: '1',
-            title: 'Form A',
-            startDate: '2024-01-01',
-            endDate: '2024-01-02',
-            fileUrl: '/a.pdf',
-          },
-          {
-            _id: '2',
-            title: 'Form B',
-            startDate: '2024-02-01',
-            endDate: '2024-02-02',
-            fileUrl: '/b.pdf',
-          },          
-        ],
-      }),
+    formServiceMock.mockResolvedValueOnce({
+      data: [
+        {
+          _id: '1',
+          title: 'Form A',
+          startDate: '2024-01-01',
+          endDate: '2024-01-02',
+          fileUrl: '/a.pdf',
+        },
+        {
+          _id: '2',
+          title: 'Form B',
+          startDate: '2024-02-01',
+          endDate: '2024-02-02',
+          fileUrl: '/b.pdf',
+        },          
+      ],
     });
 
     const user = userEvent.setup();
@@ -58,7 +56,7 @@ describe('BulletinBoard unit tests', () => {
   });
 
   test('QR popup can be toggled', async () => {
-    fetchMock.mockResolvedValueOnce({ ok: true, json: async () => [] });
+    formServiceMock.mockResolvedValueOnce({ data: [] });
     const user = userEvent.setup();
     setup();
 
@@ -75,7 +73,7 @@ describe('BulletinBoard unit tests', () => {
 
   test('empty state is shown on fetch error', async () => {
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    fetchMock.mockResolvedValueOnce({ ok: false, status: 500 });
+    formServiceMock.mockRejectedValueOnce(new Error('Network error'));
 
     setup();
     await waitFor(() => expect(consoleSpy).toHaveBeenCalled());

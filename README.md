@@ -11,6 +11,8 @@ Staging in <https://infopiste-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsink
 
 Clone the repository and install docker to get started.
 
+Install dependencies before running the project for the first time with command `npm i`.
+
 Create a `.env` file inside the project's root directory. In that file, copy the contents of the `.sample.env` and add the correct values for the variables.
 
 > [!CAUTION]  

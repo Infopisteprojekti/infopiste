@@ -55,7 +55,7 @@ $ npm start
 # or
 $ docker compose up
 # or
-$ npm reset # Rebuild the production docker images
+$ npm run reset # Rebuild the production docker images
 ```
 
 The application in production mode can be accessed from `http://localhost:5173`.

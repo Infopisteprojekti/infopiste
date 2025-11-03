@@ -13,6 +13,9 @@ Clone the repository and install docker to get started.
 
 Create a `.env` file inside the project's root directory. In that file, copy the contents of the `.sample.env` and add the correct values for the variables.
 
+> [!CAUTION]  
+> Do not put API-keys in `.sample.env`!
+
 Start the full application in development mode:
 
 ```bash

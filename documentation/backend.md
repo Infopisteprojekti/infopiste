@@ -22,7 +22,7 @@ The connection to the database is formed in [dbConnection.js](../backend/utils/d
 
 `app.js` offers an endpoint for health checks:
 
-`/health` responds with status 200 and message `ok`.
+`/api/health` responds with status 200 and message `ok`.
 
 Endpoints for fetching room data are defined in [controllers/rooms.js](../backend/controllers/rooms.js).
 

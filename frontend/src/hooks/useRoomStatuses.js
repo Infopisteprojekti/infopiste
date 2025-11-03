@@ -1,36 +1,22 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import roomStatus from '@/constants/roomStatus';
 import { addStatusToChild, checkActive } from '@/utils/floorplan';
+import roomService from '@/services/rooms';
 
 const POLLING_INTERVAL_SECONDS = 60;
 
-const baseUrl =
-  import.meta.env.VITE_API_BASE_URL ||
-  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
-
 const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
   const intervalRef = useRef(null);
-  const abortRef = useRef(null);
 
-  const fetchRoomData = useCallback(async signal => {
-    const res = await fetch(`${baseUrl}/api/rooms`, { signal });
-    if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`);
-    const data = await res.json();
-    if (data?.error) throw new Error(data.error);
-    return data;
-  }, []);
+  useEffect(() => {
+    if (!ready || !floorElement || rooms.length === 0) return;
 
-  const updateStatuses = useCallback(
-    async signal => {
-      if (!ready || !floorElement) return;
-
+    const updateStatuses = async () => {
       let data = null;
       try {
-        data = await fetchRoomData(signal);
+        data = await roomService.getRooms();
       } catch (error) {
-        if (error.name !== 'AbortError') {
-          console.error(error);
-        }
+        console.error(error);
       }
 
       for (const room of rooms) {
@@ -64,29 +50,16 @@ const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
         addStatusToChild(child, status);
         statusMapRef.current.set(room, status);
       }
-    },
-    [fetchRoomData, ready, rooms, floorElement, statusMapRef]
-  );
-
-  useEffect(() => {
-    if (!ready || !floorElement || rooms.length === 0) return;
-
-    abortRef.current?.abort();
-    abortRef.current = new AbortController();
-    updateStatuses(abortRef.current.signal);
-
-    clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      abortRef.current?.abort();
-      abortRef.current = new AbortController();
-      updateStatuses(abortRef.current.signal);
-    }, POLLING_INTERVAL_SECONDS * 1000);
-
-    return () => {
-      clearInterval(intervalRef.current);
-      abortRef.current?.abort();
     };
-  }, [ready, floorElement, rooms, updateStatuses]);
+
+    updateStatuses();
+    intervalRef.current = setInterval(
+      updateStatuses,
+      POLLING_INTERVAL_SECONDS * 1000
+    );
+
+    return () => clearInterval(intervalRef.current);
+  }, [ready, floorElement, rooms, statusMapRef]);
 
   return statusMapRef;
 };

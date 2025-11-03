@@ -5,12 +5,9 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import formService from '@/services/forms.js';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
-
-const baseUrl =
-  import.meta.env.VITE_API_BASE_URL ||
-  'https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi';
 
 const BulletinBoard = () => {
   const { t } = useTranslation();
@@ -22,14 +19,8 @@ const BulletinBoard = () => {
   useEffect(() => {
     const fetchForms = async () => {
       try {
-        const res = await fetch(`${baseUrl}/api/forms`);
-        if (!res.ok) throw new Error(`Error fetching room data: ${res.status}`);
-
-        const json = await res.json();
-        if (json.error) throw new Error(json.error);
-
+        const json = await formService.getForms();
         setForms(json.data || []);
-        return;
       } catch (err) {
         console.error(err);
       } finally {

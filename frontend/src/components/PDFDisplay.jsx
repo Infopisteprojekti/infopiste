@@ -15,9 +15,11 @@ const PDFDisplay = ({
 }) => {
   const { t } = useTranslation();
   const [pdfLoaded, setPdfLoaded] = useState(false);
+  const [pdfError, setPdfError] = useState(false);
 
   useEffect(() => {
     setPdfLoaded(false);
+    setPdfError(false);
   }, [currentForm]);
 
   if (!currentForm) return null;
@@ -60,7 +62,7 @@ const PDFDisplay = ({
           key={currentForm._id}
           onLoadError={(err) => {
             console.error(err);
-            setPdfLoaded(true);
+            setPdfError(true);
           }}
           onLoadSuccess={() => setPdfLoaded(true)}
         >
@@ -71,12 +73,22 @@ const PDFDisplay = ({
             renderAnnotationLayer={false}
           />
         </Document>
-        {!preview && pdfLoaded && (
+        {!preview && pdfLoaded && !pdfError && (
           <>
             <button className="pdf-button right" onClick={nextForm}>
               {t('pdfdisplay.next')} →
             </button>
           </>
+        )}
+        {!preview && pdfError && (
+          <div className="pdf-error-wrapper">
+          <button className="pdf-button left" onClick={prevForm}>
+            ← {t('pdfdisplay.previous')}
+          </button>
+          <button className="pdf-button right" onClick={nextForm}>
+            {t('pdfdisplay.next')} →
+          </button>
+        </div>
         )}
       </div>
       {preview && (

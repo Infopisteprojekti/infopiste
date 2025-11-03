@@ -37,3 +37,19 @@
 .pdf-wrapper .pdf-button.right {
   right: -105px;
 }
+
+.pdf-error-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pdf-error-wrapper .pdf-button.left {
+  left: -200px;
+}
+
+.pdf-error-wrapper .pdf-button.right {
+  right: -150px;
+}

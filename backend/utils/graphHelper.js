@@ -22,6 +22,7 @@ export const syncExactumRooms = async () => {
         update: {
           $set: {
             roomEmail: room.emailAddress,
+            displayId: (room.displayName.match(/\b([A-Z]\d{2,3}[a-z]?)\b/)?.[1] || '').toUpperCase() || null,
             displayName: room.displayName,
             floorNumber: room.floorNumber,
             capacity: room.capacity,

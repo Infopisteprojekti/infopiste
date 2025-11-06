@@ -8,6 +8,7 @@
 .room {
   cursor: pointer;
   user-select: none;
+  pointer-events: all;
   transition: fill 200ms ease-out;
   font-size: 1rem;
 }
@@ -62,4 +63,15 @@ span.unavailable {
 
 span.reserved {
   color: var(--roomReserved);
+}
+
+.floorplan-wrapper {
+  position: relative;
+  background-color: honeydew;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }

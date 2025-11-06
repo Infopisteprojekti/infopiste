@@ -5,8 +5,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "1234:8080"
+    expose:
+      - "1234"
     environment:
       MONGO_DB_URL: mongodb://user:password@mongo:27017
       REDIS_HOST: redis
@@ -24,6 +24,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5173:8080"
+    environment:
+      BACKEND_HOST: backend
+      BACKEND_PORT: 1234
+      NGINX_PORT: 8080
     depends_on:
       - backend
   mongo:

@@ -10,7 +10,7 @@ export const TENANT_ID = process.env.TENANT_ID;
 
 const REDIS_HOST = process.env.REDIS_HOST;
 
-export const REDIS_URL = `redis://${REDIS_HOST}:6379`;
+export const REDIS_URL = `redis://default:redis@${REDIS_HOST}:6379`;
 
 export const TTL_SECONDS = 60;
 

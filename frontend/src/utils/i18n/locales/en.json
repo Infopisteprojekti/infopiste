@@ -9,7 +9,6 @@
     "reset": "Reset",
     "floor-label": "Floor {{label}}"
   },
-  "room-status-message": "Room: {{roomId}}\nStatus: {{status}}",
   "room-status": {
     "unavailable": "Unavailable",
     "available": "Available",
@@ -20,5 +19,14 @@
     "qr-add-file": "Add file",
     "qr-close": "Close",
     "qr-description": "Scan QR code to add"
-  }
+  },
+  "room": "Room",
+  "status": "Status",
+  "capacity": "Capacity",
+  "floor": "Floor",
+  "accessible": "Accessible",
+  "yes": "Yes",
+  "no": "No",
+  "unknown": "Unknown",
+  "close": "Close"
 }

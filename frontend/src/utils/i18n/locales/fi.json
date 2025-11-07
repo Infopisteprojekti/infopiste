@@ -20,5 +20,14 @@
     "qr-add-file": "Lisää ilmoitus",
     "qr-close": "Sulje",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
-  }
+  },
+  "room": "Huone",
+  "status": "Huoneen tila",
+  "capacity": "Kapasiteetti",
+  "floor": "Kerros",
+  "accessible": "Saavutettava",
+  "yes": "Kyllä",
+  "no": "Ei",
+  "unknown": "Ei tiedossa",
+  "close": "Sulje"
 }

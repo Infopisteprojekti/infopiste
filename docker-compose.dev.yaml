@@ -30,6 +30,7 @@ services:
     depends_on:
       - mongo
       - backend
+    restart: always
 
   mongo:
     image: mongo:8

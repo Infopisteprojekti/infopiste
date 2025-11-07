@@ -17,6 +17,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
   const [reservations, setReservations] = useState([]);
   const [rooms, setRooms] = useState([])
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [popUpPosition, setPopUpPosition] = useState({ x: 0, y: 0});
   const floorplanRef = useRef(null);
 
   useEffect(() => {
@@ -77,6 +78,14 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
       rect.classList.add('room', status);
 
       const handleClick = () => {
+        const rectBounds = rect.getBoundingClientRect();
+        const wrapperBounds = floorplanRef.current.getBoundingClientRect();
+
+        const x = rectBounds.left - wrapperBounds.left + rectBounds.width / 2;
+        const y = rectBounds.top - wrapperBounds.top; + rectBounds.height / 2;
+
+        setPopUpPosition({ x, y });
+
         if (room) {
           setSelectedRoom({ ...room, status });
         } else {
@@ -108,6 +117,7 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
       {selectedRoom && (
         <RoomPopUp
           room={selectedRoom}
+          position={popUpPosition}
           onClose={() => setSelectedRoom(null)}
         />
       )}

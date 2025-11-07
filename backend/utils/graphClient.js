@@ -36,28 +36,22 @@ const client = {
         `$select=start,end,locations`,
     }));
 
-    const response = await graphClient
+    const { responses = [] } = await graphClient
       .api('/$batch')
       .post({ requests: batchRequests });
 
-    return response.responses.flatMap(room => {
-      if (!room.body) return []
+    return responses.flatMap(response => {
+      if (!response.body) return []
 
-      const events = room.body.value || [];
+      const events = response.body.value || [];
 
-      return events.map(event => {
-        const locations = event.locations || [];
-        const roomEmail =
-          locations[0]?.locationUri ||
-          locations[1]?.locationUri ||
-          null;
+      const roomEmail = roomEmails[Number(response.id) - 1];
 
-        return {
+      return events.map(event => ({
           roomEmail,
           startTime: new Date(event.start.dateTime + 'Z'),
           endTime: new Date(event.end.dateTime + 'Z'),          
-        };
-      });
+      }));
     });
   },
 

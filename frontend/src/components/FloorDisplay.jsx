@@ -71,17 +71,24 @@ const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
       if (!roomId) return;
 
       const room = rooms.find(r => r.displayId === roomId);
-      const status = room ? getRoomStatus(room) : statuses.UNKNOWN;
+      const status = room ? getRoomStatus(room) : statuses.UNAVAILABLE;
 
       rect.classList.remove(...Object.values(statuses));
       rect.classList.add('room', status);
 
       const handleClick = () => {
-        if (room) setSelectedRoom(room);
+        if (room) {
+          setSelectedRoom({ ...room, status });
+        } else {
+          setSelectedRoom({
+            displayId: roomId,
+            displayName: `Exactum, ${roomId}`,
+            status: statuses.UNAVAILABLE
+          });
+        }
       };
 
       rect.addEventListener('click', handleClick);
-
       cleanup.push({ rect, handleClick });
     });
 

@@ -10,7 +10,8 @@ const RoomPopUp = ({ room, onClose }) => {
   return (
     <div className="room-pop-up">
       <div>
-        {room.displayName}{room.status}
+        <p>{room.displayName}</p>
+        <p>{room.status}</p>
       </div>
       <button onClick={onClose}>{t('close')}</button>
     </div>

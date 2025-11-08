@@ -64,7 +64,7 @@ spec:
   selector:
     app: infopiste-backend
   ports:
-      protocol: TCP
+    - protocol: TCP
       port: 1234
       targetPort: 1234
   type: ClusterIP

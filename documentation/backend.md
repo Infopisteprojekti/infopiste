@@ -1,6 +1,6 @@
 # Requirements
 
-`Node` version 20 is used to build the backend image. `npm` is also required.
+`Node` version 24 is used to build the backend image. `npm` is also required.
 
 The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
 
@@ -14,19 +14,15 @@ The backend can be found at the [backend/](../backend/) directory.
 
 It includes both development environment and production `Dockerfile`s.
 
-Mock room data is currently generated in [mockdata/generate-room-data.js](../backend/mockdata/generate-room-data.js).
-
 The server is started in [server.js](../backend/server.js).
 
-The express app is built in [app.js](../backend/app.js). The connection to the database is also formed in `app.js`. 
+The express app is built in [app.js](../backend/app.js).
 
-`app.js` offers a few endpoints used for health checks:
+The connection to the database is formed in [dbConnection.js](../backend/utils/dbConnection.js). 
 
-`/` returns the message `infonäyttö backend`.
+`app.js` offers an endpoint for health checks:
 
-`/health` responds with status 200 and message `ok`.
-
-`/api/hello` returns the message `hello from backend`.
+`/api/health` responds with status 200 and message `ok`.
 
 Endpoints for fetching room data are defined in [controllers/rooms.js](../backend/controllers/rooms.js).
 
@@ -57,77 +53,15 @@ A `reservation` is an object containing:
 - `endDate`: the end time for the notice
 - `fileUrl`: URL for the uploaded PDF file.
 
-# Running the backend
-
-## Staging server
-
-The backend is live in the staging server at https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/.
-
-Whenever new content is pushed to the main branch, the backend image is rebuilt, and it takes a maximum of 15 minutes for the staging server to apply the new image.
-
-The endpoints can be accessed by adding the wanted endpoint to the end of the url; for example,
-
-```bash
-$ curl https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/health
-```
-
-has the following output:
-
-```
-0.k8s.it.helsinki.fi/health
-{"status":"ok"}
-```
-
-## Docker
-
-> [!CAUTION]  
-> Do not put API-keys in `.sample.env`! Copy the file, name the copy `.env` and fill the values there.
-
-Please note that to run the application with Docker or locally, you need to create a `.env` file.
-
-
-The backend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the backend using the backend's Dockerfile, and then maps it to port 1234. To run the file, execute the following command:
-
-```bash
-$ docker compose up
-```
-
-in the root of the project.
-
-The backend is then running on port 1234, and can be accessed as follows:
-
-```bash
-$ curl http://localhost:1234/health
-```
-
-## Local development
-
-> [!IMPORTANT]
-> Remember to install the dependencies first by running `npm install`!
-
-Alternatively, the backend can be accessed by running
-
-```bash
-$ npm run dev
-```
-
-in the [backend](../backend/) directory of the project. This is equivalent to running `NODE_ENV=production node server.js`.
-
-The server will then be running on port 1234.
-
-Note that MongoDB should be running locally for this to work. Otherwise, connecting to the database will fail, and the backend won't start.
-
 # Testing
 
 The tests can be found in the [tests](../backend/tests) directory.
 
-[info_api_test.js](../backend/tests/info_api.test.js) tests the functionality of the endpoints.
+There are tests for all the api endpoints, with mock database and redis clients:
 
-Specifically, it tests the endpoints `/health`, `/api/rooms`, `/api/hello`, `/api/rooms/:id/reservations` and `/api/forms`.
-
-`[rooms.test.js](../backend/tests/rooms.test.js) tests the functionality of the functions in [services/rooms.js](../backend/services/rooms.js).
-
-The tests ensure that the data is in the correct shape.
+[forms_api.test.js](../backend/tests/forms_api.test.js)
+[rooms_api.test.js](../backend/tests/rooms_api.test.js)
+[reservations_api.test.js](../backend/tests/reservations_api.test.js)
 
 The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 

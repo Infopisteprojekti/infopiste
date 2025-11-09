@@ -6,24 +6,35 @@ import { UNICAFE_TLL_SECONDS } from '../utils/config.js';
 
 const router = Router();
 
+const MENU_LANGS = ['fi', 'en', 'sv'];
+
 router.get('/menus', async (request, response) => {
   const cacheKey = 'unicafe:menus';
 
+  const lang = request.query.lang;
+  if (lang && !MENU_LANGS.includes(lang)) {
+    return response.status(400).json({ error: 'Invalid language' });
+  }
+
   const cached = await redis.get(cacheKey);
   if (cached) {
-    return response.status(200).json(JSON.parse(cached));
+    const cachedMenus = JSON.parse(cached);
+    const menus = lang ? cachedMenus[lang] : cachedMenus;
+
+    return response.status(200).json({ source: 'cache', data: menus });
   }
 
   try {
-    const menus = await fetchMenuData();
-    await redis.set(cacheKey, JSON.stringify(menus), {
+    const menusData = await fetchMenuData();
+    await redis.set(cacheKey, JSON.stringify(menusData), {
       EX: UNICAFE_TLL_SECONDS,
     });
 
-    response.status(200).json(menus);
+    const menus = lang ? menusData[lang] : menusData;
+    response.status(200).json({ source: 'unicafe', data: menus });
   } catch (err) {
     console.error(err);
-    response.status(500).json({ error: err });
+    response.status(500).json({ error: err.message || err });
   }
 });
 

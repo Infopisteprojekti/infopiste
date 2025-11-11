@@ -7,6 +7,8 @@ import Floorplan from '@/components/Floorplan.jsx';
 import { getZoomControls } from '../mocks/zoomPanPinch.mock.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
+import LoadingContext from '@/context/LoadingContext.js';
+
 vi.mock(
   '@/components/FloorDisplay',
   () => import('../mocks/floorDisplay.mock.jsx')
@@ -15,10 +17,14 @@ vi.mock('react-zoom-pan-pinch', () => import('../mocks/zoomPanPinch.mock.jsx'));
 
 describe('Floorplan unit tests', () => {
   const setup = () => {
+    const [loading, setLoading] = [false, () => undefined];
+
     render(
       <MemoryRouter>
         <AppSettingsProvider>
-          <Floorplan />
+          <LoadingContext value={{ loading, setLoading }}>
+            <Floorplan />
+          </LoadingContext>
         </AppSettingsProvider>
       </MemoryRouter>
     );

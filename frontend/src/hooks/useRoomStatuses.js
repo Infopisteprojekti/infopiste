@@ -1,12 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import roomStatus from '@/constants/roomStatus';
 import { addStatusToChild, checkActive } from '@/utils/floorplan';
 import roomService from '@/services/rooms';
+import LoadingContext from '@/context/LoadingContext';
 
 const POLLING_INTERVAL_SECONDS = 60;
 
 const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
   const intervalRef = useRef(null);
+  const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     if (!ready || !floorElement || rooms.length === 0) return;
@@ -52,6 +54,8 @@ const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
       }
     };
 
+    setLoading(false);
+
     updateStatuses();
     intervalRef.current = setInterval(
       updateStatuses,
@@ -59,7 +63,7 @@ const useRoomStatuses = (floorElement, ready, rooms, statusMapRef) => {
     );
 
     return () => clearInterval(intervalRef.current);
-  }, [ready, floorElement, rooms, statusMapRef]);
+  }, [ready, floorElement, rooms, statusMapRef, setLoading]);
 
   return statusMapRef;
 };

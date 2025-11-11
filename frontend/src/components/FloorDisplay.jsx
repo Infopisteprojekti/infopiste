@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useContext, useEffect } from 'react';
 import floors from '@/constants/floors';
 import '@/styles/components/Floorplan.css';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,12 @@ import useRoomsSetup from '@/hooks/useRoomsSetup';
 import useRoomStatuses from '@/hooks/useRoomStatuses';
 import useLocationMarker from '@/hooks/useLocationMarker';
 
+import LoadingContext from '@/context/LoadingContext';
+
 const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
+  const { setLoading } = useContext(LoadingContext);
+  useEffect(() => setLoading(true), [setLoading]);
+
   const { t } = useTranslation();
   const { floorElement, ready, floorRef } = useSvgReady();
 

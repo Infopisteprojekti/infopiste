@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import FloorDisplay from '@/components/FloorDisplay';
 import floors from '@/constants/floors';
 import { useAppSettings } from '@/context/useAppSettings.js';
+import LoadingContext from '@/context/LoadingContext';
 
 import '@/styles/components/Floorplan.css';
 import '@/styles/components/Toolbar.css';
@@ -34,6 +35,8 @@ const Floorplan = () => {
       transformRef.current.resetTransform();
     }
   }, [resetTrigger]);
+
+  const { setLoading } = useContext(LoadingContext);
 
   return (
     <TransformWrapper
@@ -76,6 +79,7 @@ const Floorplan = () => {
               <button
                 key={id}
                 onClick={() => {
+                  setLoading(true);
                   setFloor(id);
                   setSettings(prev => ({ ...prev, floor: id }));
                   resetTransform();

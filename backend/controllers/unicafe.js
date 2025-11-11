@@ -2,7 +2,7 @@ import { Router } from 'express';
 import redis from '../utils/redisClient.js';
 
 import { fetchMenuData } from '../services/unicafe.js';
-import { UNICAFE_TLL_SECONDS } from '../utils/config.js';
+import { getSecondsUntilTomorrow } from '../utils/date.js';
 
 const router = Router();
 
@@ -24,10 +24,11 @@ router.get('/menus', async (request, response) => {
     return response.status(200).json({ source: 'cache', data: menus });
   }
 
+  const unicafe_tll_seconds = getSecondsUntilTomorrow();
   try {
     const menusData = await fetchMenuData();
     await redis.set(cacheKey, JSON.stringify(menusData), {
-      EX: UNICAFE_TLL_SECONDS,
+      EX: unicafe_tll_seconds,
     });
 
     const menus = lang ? menusData[lang] : menusData;

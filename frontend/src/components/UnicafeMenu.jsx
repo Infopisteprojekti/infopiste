@@ -11,8 +11,6 @@ const UnicafeMenu = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(menus);
-
     if (!menus) {
       setLoading(true);
       MenuService.getMenus()

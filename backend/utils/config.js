@@ -12,9 +12,6 @@ export const REDIS_URL = process.env.REDIS_URL || 'redis://redis:6379/0';
 
 export const TTL_SECONDS = 60;
 
-// export const UNICAFE_TLL_SECONDS = 60 * 60;
-export const UNICAFE_TLL_SECONDS = 30;
-
 export const AVAILABLE_ROOMS = [
   'exactum.b233',
   'exactum.a214',

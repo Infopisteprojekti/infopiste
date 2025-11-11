@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infopiste-redis-deployment
+  namespace: ohtuprojekti-staging
 spec:
   replicas: 1
   selector:
@@ -18,6 +19,13 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 6379
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
           volumeMounts:
             - mountPath: /data
               name: infopiste-redis-volume
@@ -25,3 +33,18 @@ spec:
         - name: infopiste-redis-volume
           persistentVolumeClaim:
             claimName: infopiste-redis-claim            
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: infopiste-redis-service
+spec:
+  selector:
+    app: infopiste-redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  type: ClusterIP

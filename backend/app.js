@@ -18,8 +18,7 @@ app.use('/api/reservations', reservationsRouter);
 app.use('/api/forms', formsRouter);
 app.use('/api/unicafe', unicafeRouter);
 
-app.get('/', (req, res) => res.send('infonäyttö backend'));
-app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 app.use(unknownEndpoint);
 

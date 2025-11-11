@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Floor Plan",
-    "bulletinboard": "Bulletin Board"
+    "bulletinboard": "Bulletin Board",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Zoom In",
@@ -20,5 +21,10 @@
     "qr-add-file": "Add file",
     "qr-close": "Close",
     "qr-description": "Scan QR code to add"
+  },
+  "unicafe": {
+    "no-menus": "No menus available",
+    "no-menu-restaurant": "No menu items available for this restaurant",
+    "menus-source": "Menu data provided by Unicafe"
   }
 }

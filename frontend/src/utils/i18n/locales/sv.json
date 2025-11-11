@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Våningskarta",
-    "bulletinboard": "Anslagstavla"
+    "bulletinboard": "Anslagstavla",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Zooma in",

@@ -5,7 +5,7 @@ import MenuService from '@/services/unicafe.js';
 import '@/styles/components/UnicafeMenu.css';
 
 const UnicafeMenu = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [menus, setMenus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -33,15 +33,13 @@ const UnicafeMenu = () => {
     <div className="unicafe-wrapper">
       <div className="menu-container">
         {menuForLang.length === 0 ? (
-          <div className="no-menu">No menus available.</div>
+          <div className="no-menu">{t('unicafe.no-menus')}</div>
         ) : (
           menuForLang.map(restaurant => (
             <div key={restaurant.id} className="restaurant-card">
               <h2>{restaurant.name}</h2>
               {restaurant.menu.length === 0 ? (
-                <div className="no-menu">
-                  No menu items available for this restaurant.
-                </div>
+                <div className="no-menu">{t('unicafe.no-menu-restaurant')}</div>
               ) : (
                 <div className="menu-items">
                   {restaurant.menu.map((item, index) => (
@@ -66,7 +64,7 @@ const UnicafeMenu = () => {
         )}
       </div>
       <div className="menu-footer">
-        <small>Menu data provided by Unicafe</small>
+        <small>{t('unicafe.menus-source')}</small>
       </div>
     </div>
   );

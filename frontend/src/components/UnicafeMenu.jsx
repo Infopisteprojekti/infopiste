@@ -10,22 +10,8 @@ const UnicafeMenu = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getTodayString = () => {
-    const today = new Date();
-    return today
-      .toLocaleDateString('fi-FI', { day: '2-digit', month: '2-digit' })
-      .replace('/', '.');
-  };
-
   useEffect(() => {
-    const today = getTodayString();
-    const storedMenus = localStorage.getItem('unicafeMenus');
-    const storedDate = localStorage.getItem('unicafeMenusDate');
-
-    if (storedMenus && storedDate === today) {
-      setMenus(JSON.parse(storedMenus));
-      return;
-    }
+    console.log(menus);
 
     if (!menus) {
       setLoading(true);
@@ -33,8 +19,6 @@ const UnicafeMenu = () => {
         .then(data => {
           const menusData = data['data'];
           setMenus(menusData);
-          localStorage.setItem('unicafeMenus', JSON.stringify(menusData));
-          localStorage.setItem('unicafeMenusDate', today);
         })
         .catch(err => setError(err.message || 'Error fetching menus'))
         .finally(() => setLoading(false));

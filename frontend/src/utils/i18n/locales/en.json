@@ -26,5 +26,11 @@
     "no-menus": "No menus available",
     "no-menu-restaurant": "No menu items available for this restaurant",
     "menus-source": "Menu data provided by Unicafe"
+  },
+  "price-names": {
+    "Lisäke": "Side dish",
+    "Lounas": "Lunch",
+    "Vegaanilounas": "Vegan Lunch",
+    "Jälkiruoka": "Dessert"
   }
 }

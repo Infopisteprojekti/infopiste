@@ -54,7 +54,9 @@ const UnicafeMenu = () => {
                             </span>
                           ))}
                       </div>
-                      <p className="price-name">{item.priceName}</p>
+                      <p className="price-name">
+                        {t(`price-names.${item.priceName}`, item.priceName)}
+                      </p>
                     </div>
                   ))}
                 </div>

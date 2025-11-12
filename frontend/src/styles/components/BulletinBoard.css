@@ -35,7 +35,7 @@
 
 .pdf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   gap: 1rem;
   justify-content: center;
 }
@@ -47,6 +47,7 @@
   align-items: center;
   border: 2px solid #ccc;
   transition: transform 0.2s;
+  width: 100%;
 }
 
 .pdf-card:hover {

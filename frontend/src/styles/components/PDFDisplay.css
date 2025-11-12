@@ -55,3 +55,22 @@
   gap: 1rem;
   margin-top: 1rem;
 }
+
+.pdf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0px;
+  flex: 1;
+}
+
+.pdf-header h2 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.pdf-header .button {
+  flex: 1;
+  margin: 0 75px;
+}

@@ -116,9 +116,6 @@ const BulletinBoard = () => {
   const currentForm = forms[index];
   return (
     <div>
-      <button className="button" onClick={() => setSelectedForm(null)}>
-        ← {t('bulletinboard.back') || 'View all PDFs'}
-      </button>
       <QRCode />
       <PDFDisplay
         currentForm={currentForm}
@@ -126,6 +123,7 @@ const BulletinBoard = () => {
         prevForm={prevForm}
         rotateCallBack={RotatePdfs}
         automaticRotation={automaticRotation}
+        backCallBack={() => setSelectedForm(null)}
       />
     </div>
   );

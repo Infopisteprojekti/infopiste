@@ -12,6 +12,7 @@ const PDFDisplay = ({
   preview = false,
   rotateCallBack,
   automaticRotation,
+  backCallBack,
 }) => {
   const { t } = useTranslation();
   const [pdfLoaded, setPdfLoaded] = useState(false);
@@ -28,25 +29,21 @@ const PDFDisplay = ({
     <div className={`pdf-container ${preview ? 'preview' : ''}`}>
       {!preview && (
         <>
+        <div className="pdf-header">
+          <button onClick={backCallBack} className="button">
+            {t('bulletinboard.back')}
+          </button>
           <h2>{currentForm.title}</h2>
-          <p>
-            {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
-            {new Date(currentForm.endDate).toLocaleDateString()}
-          </p>
-          <button
-            onClick={rotateCallBack}
-            className="button"
-            style={{
-              position: 'absolute',
-              top: '0px',
-              right: '0px',
-              zIndex: 10,
-            }}
-          >
+          <button onClick={rotateCallBack} className="button">
             {automaticRotation
               ? t('bulletinboard.stop-rotation')
               : t('bulletinboard.continue-rotation')}
           </button>
+        </div>
+        <p>
+          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
+          {new Date(currentForm.endDate).toLocaleDateString()}
+        </p>
         </>
       )}
       <div className="pdf-wrapper-with-buttons">

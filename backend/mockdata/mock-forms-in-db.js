@@ -72,6 +72,13 @@ const mockForms = [
     fileUrl:
       'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
   },
+  {
+    title: 'Broken notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+    'none!'
+  },
 ];
 
 export async function insertMockData() {

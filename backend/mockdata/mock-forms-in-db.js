@@ -1,4 +1,6 @@
+import mongoose from 'mongoose';
 import Form from '../models/form.js';
+import { MONGO_DB_URL } from '../utils/config.js';
 
 const mockForms = [
   {
@@ -35,14 +37,55 @@ const mockForms = [
     fileUrl:
       'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
   },
+  {
+    title: 'Sixth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
+  {
+    title: 'Seventh best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
+  {
+    title: 'Eighth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
+  {
+    title: 'Ninth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
+  {
+    title: 'Tenth best notice',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-02'),
+    fileUrl:
+      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+  },
 ];
 
 export async function insertMockData() {
   try {
+    const mongoUrl = MONGO_DB_URL;
+    await mongoose.connect(mongoUrl);
+
     await Form.deleteMany({});
     await Form.insertMany(mockForms);
     console.log('mock data inserted to db successfully');
+    await mongoose.disconnect();
   } catch (err) {
     console.error('error inserting mock data:', err);
   }
 }
+
+insertMockData();

@@ -1,126 +1,81 @@
-import { useState, useEffect, useRef } from "react";
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef } from 'react';
 
-import reservationService from '@/services/reservations.js';
-import roomService from '@/services/rooms.js';
+import STATUSES from '@/constants/roomStatus';
+import '@/styles/components/FloorDisplay.css';
 
-import floors from '@/constants/floors';
-import statuses from '@/constants/roomStatus';
-import '@/styles/components/Floorplan.css'
-
-import RoomPopUp from './RoomPopUp';
-
-const POLLING_INTERVAL = 300000; // 5 min
-
-const FloorDisplay = ({ floor, initialFloor, markerCoords }) => {
-  const { t } = useTranslation();
-  const [reservations, setReservations] = useState([]);
-  const [rooms, setRooms] = useState([])
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [popUpPosition, setPopUpPosition] = useState({ x: 0, y: 0});
+const FloorDisplay = ({
+  floor,
+  rooms,
+  reservations,
+  onRoomClick,
+  svgComponent: FloorSVG,
+}) => {
   const floorplanRef = useRef(null);
 
   useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await roomService.getRooms();
-        setRooms(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    const fetchReservations = async () => {
-      try {
-        const response = await reservationService.getReservations();
-        setReservations(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchRooms();
-    fetchReservations();
-
-    const interval = setInterval(fetchReservations, POLLING_INTERVAL);
-    return () => clearInterval(interval);
-  }, []);
-
-  const getRoomStatus = (room) => {
-    const now = new Date();
-    const reservation = reservations.find(r =>
-      r.room.displayId === room.displayId &&
-      new Date(r.start) <= now &&
-      new Date(r.end) >= now
-    );
-
-    return reservation ? statuses.RESERVED : statuses.AVAILABLE;
-  };
-
-  useEffect(() => {
-    if (!floorplanRef.current) return;
-
     const svg = floorplanRef.current.querySelector('svg');
     if (!svg) return;
 
-    const roomRects = svg.querySelectorAll('g > rect');
+    const roomRects = svg.querySelectorAll('g > rect[id]');
+    const handlers = [];
 
-    const cleanup = [];
+    const getRoomStatus = roomDisplayId => {
+      const now = new Date();
+      const reservation = reservations.find(
+        r =>
+          r.room.displayId === roomDisplayId &&
+          new Date(r.start) <= now &&
+          new Date(r.end) >= now
+      );
+
+      const room = rooms.find(r => r.displayId === roomDisplayId);
+
+      if (reservation && room) {
+        return { status: STATUSES.RESERVED, reservation };
+      }
+      return { status: room ? STATUSES.AVAILABLE : STATUSES.UNAVAILABLE };
+    };
 
     roomRects.forEach(rect => {
       const roomId = rect.id;
-      if (!roomId) return;
-
+      const { status, reservation } = getRoomStatus(roomId);
       const room = rooms.find(r => r.displayId === roomId);
-      const status = room ? getRoomStatus(room) : statuses.UNAVAILABLE;
 
-      rect.classList.remove(...Object.values(statuses));
+      rect.classList.remove(...Object.values(STATUSES));
       rect.classList.add('room', status);
 
-      const handleClick = () => {
+      const handleClick = event => {
         const rectBounds = rect.getBoundingClientRect();
-        const wrapperBounds = floorplanRef.current.getBoundingClientRect();
 
-        const x = rectBounds.left - wrapperBounds.left + rectBounds.width / 2;
-        const y = rectBounds.top - wrapperBounds.top; + rectBounds.height / 2;
-
-        setPopUpPosition({ x, y });
-
-        if (room) {
-          setSelectedRoom({ ...room, status });
-        } else {
-          setSelectedRoom({
+        onRoomClick({
+          room: room || {
             displayId: roomId,
-            displayName: `Exactum, ${roomId}`,
-            status: statuses.UNAVAILABLE
-          });
-        }
+            displayName: roomId,
+            status: STATUSES.UNKNOWN,
+          },
+          status,
+          currentReservation: reservation,
+          position: {
+            x: rectBounds.left + rectBounds.width / 2,
+            y: rectBounds.top,
+          },
+        });
       };
 
       rect.addEventListener('click', handleClick);
-      cleanup.push({ rect, handleClick });
+      handlers.push({ rect, handleClick });
     });
 
     return () => {
-      cleanup.forEach(({ rect, handleClick }) => {
+      handlers.forEach(({ rect, handleClick }) => {
         rect.removeEventListener('click', handleClick);
       });
     };
-  }, [floor, rooms, reservations])
-
-  const FloorSVG = floors.find(f => f.id === floor).svg;
+  }, [floor, rooms, reservations, onRoomClick]);
 
   return (
     <div className="floorplan-wrapper" ref={floorplanRef}>
-      {FloorSVG ? <FloorSVG /> : <p>{t("Floorplan not found")}</p>} 
-
-      {selectedRoom && (
-        <RoomPopUp
-          room={selectedRoom}
-          position={popUpPosition}
-          onClose={() => setSelectedRoom(null)}
-        />
-      )}
+      <FloorSVG />
     </div>
   );
 };

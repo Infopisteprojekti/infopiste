@@ -41,16 +41,16 @@ const client = {
       .post({ requests: batchRequests });
 
     return responses.flatMap(response => {
-      if (!response.body) return []
+      if (!response.body) return [];
 
       const events = response.body.value || [];
 
       const roomEmail = roomEmails[Number(response.id) - 1];
 
       return events.map(event => ({
-          roomEmail,
-          startTime: new Date(event.start.dateTime + 'Z'),
-          endTime: new Date(event.end.dateTime + 'Z'),          
+        roomEmail,
+        startTime: new Date(event.start.dateTime + 'Z'),
+        endTime: new Date(event.end.dateTime + 'Z'),
       }));
     });
   },

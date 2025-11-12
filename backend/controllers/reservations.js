@@ -17,7 +17,9 @@ router.get('/', async (request, response) => {
       });
     }
 
-    const reservations = await Reservation.find({}).populate('room', { displayId: 1 });
+    const reservations = await Reservation.find({}).populate('room', {
+      displayId: 1,
+    });
 
     if (reservations.length > 0) {
       await redis.set(cacheKey, JSON.stringify(reservations));

@@ -1,105 +1,157 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import FloorDisplay from '@/components/FloorDisplay';
-import floors from '@/constants/floors';
-import { useAppSettings } from '@/context/useAppSettings.js';
+import RoomPopup from '@/components/RoomPopup';
 
+import { useAppSettings } from '@/context/useAppSettings.js';
+import reservationService from '@/services/reservations.js';
+import roomService from '@/services/rooms.js';
+import floors from '@/constants/floors';
 import '@/styles/components/Floorplan.css';
-import '@/styles/components/Toolbar.css';
-import '@/styles/components/Button.css';
+
+const POLLING_INTERVAL = 30000; // 30 seconds
 
 const Floorplan = () => {
   const { t } = useTranslation();
   const { settings, setSettings, resetTrigger } = useAppSettings();
 
-  const initialFloorRef = useRef(Number(settings.floor) || 3);
   const [floor, setFloor] = useState(Number(settings.floor) || 3);
+  const [rooms, setRooms] = useState([]);
+  const [reservations, setReservations] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [transformState, setTransformState] = useState({});
+
   const transformRef = useRef(null);
 
-  const markerCoords = settings.marker
-    ? settings.marker.split(',').map(Number)
-    : undefined;
-
   useEffect(() => {
-    if (Number(settings.floor) !== floor) {
-      setFloor(Number(settings.floor));
-    }
-  }, [settings.floor, floor]);
+    const fetchRooms = async () => {
+      try {
+        const response = await roomService.getRooms();
+        setRooms(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  useEffect(() => {
-    if (transformRef.current) {
-      transformRef.current.resetTransform();
-    }
-  }, [resetTrigger]);
+    const fetchReservations = async () => {
+      try {
+        const response = await reservationService.getReservations();
+        setReservations(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchRooms();
+    fetchReservations();
+
+    const interval = setInterval(fetchReservations, POLLING_INTERVAL);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleRoomClick = useCallback(
+    ({ room, status, currentReservation, position }) => {
+      setSelectedRoom({ ...room, status, currentReservation });
+      setPopupPosition(position);
+    },
+    []
+  );
+
+  const handleFloorChange = newFloor => {
+    setFloor(newFloor);
+    setSelectedRoom(null);
+    transformRef.current?.resetTransform();
+  };
+
+  const currentFloorSVG = floors.find(f => f.id === floor).svg;
 
   return (
-    <TransformWrapper
-      ref={transformRef}
-      initialScale={1}
-      minScale={0.5}
-      maxScale={5}
-    >
-      {({ zoomIn, zoomOut, resetTransform }) => (
-        <>
-          <div className="toolbar toolbar__floorplan-transform">
-            <button className="button" onClick={() => zoomIn()}>
-              {t('floorplan-toolbar.zoom-in')} <Plus size={16} />
-            </button>
-            <button className="button" onClick={() => zoomOut()}>
-              {t('floorplan-toolbar.zoom-out')} <Minus size={16} />
-            </button>
-            <button className="button" onClick={() => resetTransform()}>
-              {t('floorplan-toolbar.reset')} <RotateCcw size={16} />
-            </button>
-
-            <br />
-
-            <p>
-              <span className="available">● </span>
-              {t('room-status.available')}
-            </p>
-            <p>
-              <span className="reserved">● </span>
-              {t('room-status.reserved')}
-            </p>
-            <p>
-              <span className="unavailable">● </span>
-              {t('room-status.unavailable')}
-            </p>
-          </div>
-
-          <div className="toolbar toolbar__floorplan-floor-switch">
-            {floors.map(({ id, label }) => (
+    <div className="floorplan-container">
+      <TransformWrapper
+        ref={transformRef}
+        initialScale={1}
+        minScale={0.5}
+        maxScale={5}
+        onTransformed={(ref, state) => setTransformState(state)}
+      >
+        {({ zoomIn, zoomOut, resetTransform }) => (
+          <>
+            <div className="zoom-controls">
               <button
-                key={id}
-                onClick={() => {
-                  setFloor(id);
-                  setSettings(prev => ({ ...prev, floor: id }));
-                  resetTransform();
-                }}
-                className={`button ${id === floor ? 'active' : ''}`}
+                className="zoom-button"
+                onClick={() => zoomIn()}
+                aria-label={t('floorplan-toolbar.zoom-in')}
               >
-                {t('floorplan-toolbar.floor-label', { label })}
+                <Plus size={16} />
               </button>
-            ))}
-          </div>
+              <button
+                className="zoom-button"
+                onClick={() => zoomOut()}
+                aria-label={t('floorplan-toolbar.zoom-out')}
+              >
+                <Minus size={16} />
+              </button>
+              <button
+                className="zoom-button"
+                onClick={() => resetTransform()}
+                aria-label={t('floorplan-toolbar.reset')}
+              >
+                <RotateCcw size={16} />
+              </button>
+            </div>
 
-          <TransformComponent
-            wrapperStyle={{ width: '100%', height: '100%' }}
-            contentStyle={{ width: '100%', height: '100%' }}
-          >
-            <FloorDisplay
-              floor={floor}
-              initialFloor={initialFloorRef.current}
-              markerCoords={markerCoords}
-            />
-          </TransformComponent>
-        </>
-      )}
-    </TransformWrapper>
+            <div className="room-legend">
+              <span className="legend-item available">
+                {t('room-status.available')}
+              </span>
+              <span className="legend-item reserved">
+                {t('room-status.reserved')}
+              </span>
+              <span className="legend-item unavailable">
+                {t('room-status.unavailable')}
+              </span>
+            </div>
+
+            <div className="floor-selector">
+              {floors.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => handleFloorChange(id)}
+                  className={`floor-button ${id === floor ? 'active' : ''}`}
+                >
+                  {t('floorplan-toolbar.floor-label', { label })}
+                </button>
+              ))}
+            </div>
+
+            <TransformComponent
+              wrapperStyle={{ width: '100%', height: '100%' }}
+              contentStyle={{ width: '100%', height: '100%' }}
+            >
+              <FloorDisplay
+                floor={floor}
+                rooms={rooms}
+                reservations={reservations}
+                onRoomClick={handleRoomClick}
+                svgComponent={currentFloorSVG}
+              />
+            </TransformComponent>
+
+            {selectedRoom && (
+              <RoomPopup
+                room={selectedRoom}
+                position={popUpPosition}
+                onClose={() => setSelectedRoom(null)}
+              />
+            )}
+          </>
+        )}
+      </TransformWrapper>
+    </div>
   );
 };
 

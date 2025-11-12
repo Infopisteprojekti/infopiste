@@ -22,7 +22,10 @@ export const syncExactumRooms = async () => {
         update: {
           $set: {
             roomEmail: room.emailAddress,
-            displayId: (room.displayName.match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1].toUpperCase()) || null,
+            displayId:
+              room.displayName
+                .match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1]
+                .toUpperCase() || null,
             displayName: room.displayName,
             floorNumber: room.floorNumber,
             capacity: room.capacity,
@@ -65,7 +68,7 @@ export const syncTodaysEvents = async () => {
       return;
     }
 
-    const rooms = await Room.find({})
+    const rooms = await Room.find({});
     const roomMap = new Map(rooms.map(r => [r.roomEmail, r.id]));
 
     const operations = events.map(event => {
@@ -86,7 +89,7 @@ export const syncTodaysEvents = async () => {
             },
           },
           upsert: true,
-          },
+        },
       };
     });
 
@@ -95,7 +98,6 @@ export const syncTodaysEvents = async () => {
     logger.info(
       `Events synced: ${result.upsertedCount} new, ${result.modifiedCount} updated`
     );
-
   } catch (error) {
     logger.error('Error syncing events', error.message);
     throw error;

@@ -19,37 +19,39 @@
   justify-content: space-between;
 }
 
-
 .pdf-button {
-  position: absolute;
-  top: 50%;
-  padding: 0 1rem !important;
-  height: 2rem !important;
-  font-size: 1rem !important;
+  position: relative;
+  padding: 0.5rem 1rem;
+  height: auto;
+  font-size: 1rem;
   line-height: 1;
-  z-index: 10;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.pdf-wrapper .pdf-button.left {
-  left: -150px;
+.pdf-wrapper-with-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  gap: 0rem;
 }
 
-.pdf-wrapper .pdf-button.right {
-  right: -105px;
+.pdf-nav-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.pdf-wrapper-with-buttons .pdf-button {
+  flex-shrink: 0;
 }
 
 .pdf-error-wrapper {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
-}
-
-.pdf-error-wrapper .pdf-button.left {
-  left: -200px;
-}
-
-.pdf-error-wrapper .pdf-button.right {
-  right: -150px;
 }

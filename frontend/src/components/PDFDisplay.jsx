@@ -49,43 +49,45 @@ const PDFDisplay = ({
           </button>
         </>
       )}
-      <div className="pdf-wrapper">
+      <div className="pdf-wrapper-with-buttons">
         {!preview && pdfLoaded && (
           <>
-            <button className="pdf-button left" onClick={prevForm}>
+            <button className="button pdf-nav-button" onClick={prevForm}>
               ← {t('pdfdisplay.previous')}
             </button>
           </>
         )}
-        <Document
-          file={currentForm.fileUrl}
-          key={currentForm._id}
-          onLoadError={err => {
-            console.error(err);
-            setPdfError(true);
-          }}
-          onLoadSuccess={() => setPdfLoaded(true)}
-        >
-          <Page
-            pageNumber={1}
-            width={preview ? 150 : 700}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-          />
-        </Document>
+        <div className="pdf-wrapper">
+          <Document
+            file={currentForm.fileUrl}
+            key={currentForm._id}
+            onLoadError={err => {
+              console.error(err);
+              setPdfError(true);
+            }}
+            onLoadSuccess={() => setPdfLoaded(true)}
+          >
+            <Page
+              pageNumber={1}
+              width={preview ? 150 : 700}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+          </Document>
+        </div>
         {!preview && pdfLoaded && !pdfError && (
           <>
-            <button className="pdf-button right" onClick={nextForm}>
+            <button className="button pdf-nav-button" onClick={nextForm}>
               {t('pdfdisplay.next')} →
             </button>
           </>
         )}
         {!preview && pdfError && (
           <div className="pdf-error-wrapper">
-            <button className="pdf-button left" onClick={prevForm}>
+            <button className="button pdf-nav-button" onClick={prevForm}>
               ← {t('pdfdisplay.previous')}
             </button>
-            <button className="pdf-button right" onClick={nextForm}>
+            <button className="button pdf-nav-button" onClick={nextForm}>
               {t('pdfdisplay.next')} →
             </button>
           </div>

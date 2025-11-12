@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infopiste-mongo-deployment
+  namespace: ohtuprojekti-staging
 spec:
   replicas: 1
   selector:
@@ -32,7 +33,29 @@ spec:
           volumeMounts:
             - mountPath: /data/db
               name: infopiste-mongo-volume
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "500m"              
       volumes:
         - name: infopiste-mongo-volume
           persistentVolumeClaim:
             claimName: infopiste-mongo-claim
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: infopiste-mongo-service
+spec:
+  selector:
+    app: infopiste-mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP

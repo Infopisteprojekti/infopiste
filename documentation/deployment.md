@@ -14,15 +14,28 @@ The configuration for the OpenShift staging server deployment can be found in [m
 
 - `Deployment`s for the frontend, backend, database, and Redis
 - `Service`s to create permanent IP addresses for the frontend, backend, database, and Redis
-- `Route`s to expose the frontend and backend to the Internet
+- `Route` to expose the application to the Internet
 - `Imagestream`s for the frontend and backend deployments to poll DockerHub for new images
-- `PersistentVolumeClaim` for the database
+- `PersistentVolumeClaim` for the database and cache
 
 The `frontend-imagestream.yaml` and `backend-imagestream.yaml` files located in [manifests](../manifests/) ensure that the OpenShift deployment uses the updated images. They poll DockerHub every 15 minutes.
 
-The frontend can be accessed at https://infopiste-frontend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/.
+## Staging server
 
-The backend can be accessed at https://infopiste-backend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/.
+Whenever new content is pushed to the main branch, the backend image is rebuilt, and it takes a maximum of 15 minutes for the staging server to apply the new image.
+
+The endpoints can be accessed by adding the wanted endpoint to the end of the url; for example,
+
+```bash
+$ curl https://infopiste-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/api/health
+```
+
+has the following output:
+
+```
+0.k8s.it.helsinki.fi/health
+{"status":"ok"}
+```
 
 # Scrum process
 

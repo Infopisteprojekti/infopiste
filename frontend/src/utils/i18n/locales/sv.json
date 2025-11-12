@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Våningskarta",
-    "bulletinboard": "Anslagstavla"
+    "bulletinboard": "Anslagstavla",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Zooma in",
@@ -30,5 +31,17 @@
   "pdfdisplay": {
     "previous": "Tidigare",
     "next": "Nästa"
+    "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
+  },
+  "unicafe": {
+    "no-menus": "Ingen matlista tillgänglig",
+    "no-menu-restaurant": "Ingen matlista tillgänglig för den här restaurangen",
+    "menus-source": "Matlistan tillhandahålls av Unicafe"
+  },
+  "price-names": {
+    "Lisäke": "Tillbehör",
+    "Lounas": "Lunch",
+    "Vegaanilounas": "Veganlunch",
+    "Jälkiruoka": "Efterrätt"
   }
 }

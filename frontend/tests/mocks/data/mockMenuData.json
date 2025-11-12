@@ -1,0 +1,75 @@
+{
+  "source": "cache",
+  "data": {
+    "en": [
+      {
+        "id": 2500,
+        "name": "Exactum",
+        "slug": "exactum",
+        "address": "Gustaf Hällströmin katu 2b",
+        "date": "Tue 11.11.",
+        "menu": [
+          {
+            "name": "Sweet potato and peanut soup",
+            "meta": ["G", "KELA", "Veg"],
+            "priceName": "Vegaanilounas"
+          },
+          {
+            "name": " Härkäpapu Red Curry",
+            "meta": ["G", "KELA", "Veg"],
+            "priceName": "Vegaanilounas"
+          },
+          {
+            "name": "Italian vegetable rolls & Gremolata dip",
+            "meta": ["G", "Veg"],
+            "priceName": "Vegaanilounas"
+          },
+          {
+            "name": "Red Curry chicken",
+            "meta": ["G", "KELA", "M"],
+            "priceName": "Lounas"
+          },
+          {
+            "name": "Boiled potatoes",
+            "meta": ["G", "KELA", "Veg"],
+            "priceName": "Lisäke"
+          },
+          {
+            "name": "Kauraa",
+            "meta": ["G", "Veg"],
+            "priceName": "Lisäke"
+          }
+        ]
+      },
+      {
+        "id": 2498,
+        "name": "Chemicum",
+        "slug": "chemicum",
+        "address": "A.I. Virtasen aukio 1",
+        "date": "Tue 11.11.",
+        "menu": [
+          {
+            "name": " Härkäpapu Red Curry",
+            "meta": ["G", "KELA", "Veg"],
+            "priceName": "Vegaanilounas"
+          },
+          {
+            "name": "Quinoa balls with paprika sause",
+            "meta": ["G", "Veg"],
+            "priceName": "Vegaanilounas"
+          },
+          {
+            "name": " Rapea kalaleike, ruohosipulikastiketta",
+            "meta": ["KELA"],
+            "priceName": "Lounas"
+          },
+          {
+            "name": "Berry quark dessert",
+            "meta": ["G", "L"],
+            "priceName": "Jälkiruoka"
+          }
+        ]
+      }
+    ]
+  }
+}

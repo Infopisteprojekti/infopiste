@@ -29,21 +29,21 @@ const PDFDisplay = ({
     <div className={`pdf-container ${preview ? 'preview' : ''}`}>
       {!preview && (
         <>
-        <div className="pdf-header">
-          <button onClick={backCallBack} className="button">
-            {t('bulletinboard.back')}
-          </button>
-          <h2>{currentForm.title}</h2>
-          <button onClick={rotateCallBack} className="button">
-            {automaticRotation
-              ? t('bulletinboard.stop-rotation')
-              : t('bulletinboard.continue-rotation')}
-          </button>
-        </div>
-        <p>
-          {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
-          {new Date(currentForm.endDate).toLocaleDateString()}
-        </p>
+          <div className="pdf-header">
+            <button onClick={backCallBack} className="button">
+              {t('bulletinboard.back')}
+            </button>
+            <h2>{currentForm.title}</h2>
+            <button onClick={rotateCallBack} className="button">
+              {automaticRotation
+                ? t('bulletinboard.stop-rotation')
+                : t('bulletinboard.continue-rotation')}
+            </button>
+          </div>
+          <p>
+            {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
+            {new Date(currentForm.endDate).toLocaleDateString()}
+          </p>
         </>
       )}
       <div className="pdf-wrapper-with-buttons">

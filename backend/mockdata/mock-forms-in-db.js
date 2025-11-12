@@ -76,8 +76,7 @@ const mockForms = [
     title: 'Broken notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
-    fileUrl:
-    'none!'
+    fileUrl: 'none!',
   },
 ];
 

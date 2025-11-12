@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Kartta",
-    "bulletinboard": "Ilmoitustaulu"
+    "bulletinboard": "Ilmoitustaulu",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Suurenna",
@@ -20,5 +21,10 @@
     "qr-add-file": "Lisää ilmoitus",
     "qr-close": "Sulje",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
+  },
+  "unicafe": {
+    "no-menus": "Ruokalistoja ei ole saatavilla",
+    "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",
+    "menus-source": "Ruokalistat tarjoaa Unicafe"
   }
 }

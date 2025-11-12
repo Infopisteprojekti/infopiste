@@ -28,11 +28,12 @@ vi.mock('@/services/forms.js', () => {
 });
 
 vi.mock('../../src/components/PDFDisplay.jsx', () => ({
-  default: ({ currentForm, nextForm, prevForm }) => (
+  default: ({ currentForm, nextForm, prevForm, backCallBack }) => (
     <div data-testid="pdf-display">
       <h2>{currentForm.title}</h2>
       <button onClick={prevForm}>← Previous</button>
       <button onClick={nextForm}>Next →</button>
+      <button onClick={backCallBack}>← View all notices</button>
     </div>
   ),
 }));
@@ -107,7 +108,7 @@ describe('BulletinBoard - Interactions', () => {
     const form1 = await screen.findByText('Form 1');
     await user.click(form1);
 
-    const backButton = screen.getByText('← View all notices');
+    const backButton = screen.getByText(/← View all notices/i);
     await user.click(backButton);
     expect(screen.getByText('Available notices')).toBeInTheDocument();
   });

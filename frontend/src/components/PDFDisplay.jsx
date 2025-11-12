@@ -31,7 +31,7 @@ const PDFDisplay = ({
         <>
           <div className="pdf-header">
             <button onClick={backCallBack} className="button">
-              {t('bulletinboard.back')}
+              ← {t('bulletinboard.back')}
             </button>
             <h2>{currentForm.title}</h2>
             <button onClick={rotateCallBack} className="button">

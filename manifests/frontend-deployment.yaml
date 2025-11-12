@@ -6,7 +6,7 @@ metadata:
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
     image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"infopiste-frontend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"frontend\")].image","pause":"false"}]
+      [{"from":{"kind":"ImageStreamTag","name":"infopiste-frontend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"infopiste-frontend\")].image","pause":"false"}]
 spec:
   replicas: 1
   selector:
@@ -27,9 +27,9 @@ spec:
           - name: BACKEND_HOST
             value: infopiste-backend-service
           - name: BACKEND_PORT
-            value: 1234
+            value: "1234"
           - name: NGINX_PORT
-            value: 8080
+            value: "8080"
           resources:
             limits:
               memory: "256Mi"
@@ -55,7 +55,7 @@ spec:
   selector:
     app: infopiste-frontend
   ports:
-      protocol: TCP
+    - protocol: TCP
       port: 8080
       targetPort: 8080
   type: ClusterIP

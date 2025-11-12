@@ -6,7 +6,7 @@ metadata:
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
     image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"backend\")].image","pause":"false"}]
+      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"infopiste-backend\")].image","pause":"false"}]
 spec:
   replicas: 1
   selector:
@@ -64,7 +64,7 @@ spec:
   selector:
     app: infopiste-backend
   ports:
-      protocol: TCP
+    - protocol: TCP
       port: 1234
       targetPort: 1234
   type: ClusterIP

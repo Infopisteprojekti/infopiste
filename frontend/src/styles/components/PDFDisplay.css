@@ -1,0 +1,76 @@
+.pdf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pdf-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pdf-nav {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pdf-button {
+  position: relative;
+  padding: 0.5rem 1rem;
+  height: auto;
+  font-size: 1rem;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pdf-wrapper-with-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  gap: 0rem;
+}
+
+.pdf-nav-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.pdf-wrapper-with-buttons .pdf-button {
+  flex-shrink: 0;
+}
+
+.pdf-error-wrapper {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pdf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0px;
+  flex: 1;
+}
+
+.pdf-header h2 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.pdf-header .button {
+  flex: 1;
+  margin: 0 75px;
+}

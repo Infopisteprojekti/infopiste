@@ -18,19 +18,3 @@ spec:
         scheduled: true
       referencePolicy:
         type: Local
-    - name: mongo
-      from:
-        kind: DockerImage
-        name: mongo:8
-      importPolicy:
-        scheduled: true
-      referencePolicy:
-        type: Local
-    - name: redis
-      from:
-        kind: DockerImage
-        name: redis:8
-      importPolicy:
-        scheduled: true
-      referencePolicy:
-        type: Local

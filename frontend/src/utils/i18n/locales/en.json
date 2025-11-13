@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Floor Plan",
-    "bulletinboard": "Bulletin Board"
+    "bulletinboard": "Bulletin Board",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Zoom In",
@@ -18,6 +19,17 @@
   "bulletinboard": {
     "qr-add-file": "Add file",
     "qr-close": "Close",
+    "qr-description": "Scan QR code to add",
+    "stop-rotation": "Pause automatic scrolling",
+    "continue-rotation": "Continue automatic scrolling",
+    "available-notices": "Available notices",
+    "back": "View all notices",
+    "no-notices": "No notices available",
+    "loading-notices": "Loading notices..."
+  },
+  "pdfdisplay": {
+    "previous": "Previous",
+    "next": "Next",
     "qr-description": "Scan QR code to add"
   },
   "room": "Room",
@@ -30,4 +42,15 @@
   "unknown": "Unknown",
   "reservation": "Reservation",
   "reserved-by": "Reserved by"
+  "unicafe": {
+    "no-menus": "No menus available",
+    "no-menu-restaurant": "No menu items available for this restaurant",
+    "menus-source": "Menu data provided by Unicafe"
+  },
+  "price-names": {
+    "Lisäke": "Side dish",
+    "Lounas": "Lunch",
+    "Vegaanilounas": "Vegan Lunch",
+    "Jälkiruoka": "Dessert"
+  }
 }

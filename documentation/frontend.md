@@ -1,6 +1,6 @@
 # Requirements
 
-`Node` version 20 is used to build the frontend image. `npm` is also required.
+`Node` version 24 is used to build the frontend image. `npm` is also required.
 
 # Frontend technologies used
 
@@ -20,7 +20,11 @@ The actual functionality can be found in [src/](../frontend/src/).
 
 [components/](../frontend/src/components/) contains the following React components:
 
-`BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices.
+`BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices as a grid, or in an expanded view for the selected notice.
+
+`PDFDisplay` contains the logic for displaying a notice, either as a preview or in an expanded view.
+
+`QRCode` is used to display the QR code to upload files in the relevant components.
 
 `FloorDisplay` iterates through all rooms in the given floor, and assigns the correct data (reservation status and click handler, as well as polling) to each room.
 
@@ -31,39 +35,6 @@ The actual functionality can be found in [src/](../frontend/src/).
 `main.jsx` is used in [index.html](../frontend/index.html) to render the components.
 
 The styling for each component is defined in [css/](../frontend/src/css/).
-
-# Running the frontend
-
-## Staging server
-
-The frontend is live in the staging server at https://infopiste-frontend-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsinki.fi/.
-
-Whenever new content is pushed to the `main` branch, the frontend image is rebuilt, and it takes a maximum of 15 minutes for the staging server to apply the new image.
-
-## Docker
-
-The frontend can also be run with Docker. The [docker-compose.yaml](../docker-compose.yaml) present at the root of the project builds the frontend using the frontend's `Dockerfile`, and then maps it to port 3000. To run the file, execute the following command:
-
-```bash
-$ docker compose up
-```
-
-in the root of the project.
-
-## Local development
-
-> [!IMPORTANT]
-> Remember to install the dependencies first by running `npm install`!
-
-Alternatively, the frontend can be accessed by running
-
-```bash
-$ npm run dev
-```
-
-in the [frontend](../frontend/) directory of the project. This is equivalent to running `npx vite --host 0.0.0.0 --port 5173`.
-
-The application will then be available at `localhost:5173`.
 
 # Testing
 
@@ -107,8 +78,6 @@ $ npm run e2e
 ```
 
 This is equivalent to running `npx playwright test`.
-
-Note that to run either the unit tests or end-to-end tests, the application must be running locally. See [Docker](#docker) or [Local development](#local-development).
 
 ESLint is used for linting. The linting can be checked with
 

@@ -68,6 +68,8 @@ const Floorplan = () => {
 
   const currentFloorSVG = floors.find(f => f.id === floor).svg;
 
+  const { setLoading } = useContext(LoadingContext);
+
   return (
     <div className="floorplan-container">
       <TransformWrapper

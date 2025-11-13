@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: infopiste-backend
+  name: infopiste-backend-deployment
   namespace: ohtuprojekti-staging
   annotations:
     alpha.image.policy.openshift.io/resolve-names: "*"
     image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"backend\")].image","pause":"false"}]
+      [{"from":{"kind":"ImageStreamTag","name":"infopiste-backend:staging","namespace":"ohtuprojekti-staging"},"fieldPath":"spec.template.spec.containers[?(@.name==\"infopiste-backend\")].image","pause":"false"}]
 spec:
   replicas: 1
   selector:
@@ -18,22 +18,19 @@ spec:
         app: infopiste-backend
     spec:
       containers:
-        - name: backend
+        - name: infopiste-backend
           image: infopiste-backend:staging
           imagePullPolicy: Always
           ports:
             - containerPort: 1234
           env:
+            - name: REDIS_HOST
+              value: infopiste-redis-service
             - name: MONGO_DB_URL
               valueFrom:
                 configMapKeyRef:
                   name: infopiste-config
                   key: MONGO_DB_URL
-            - name: REDIS_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: infopiste-config
-                  key: REDIS_URL
             - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:
@@ -51,8 +48,23 @@ spec:
                   key: CLIENT_SECRET
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "256Mi"
+              cpu: "200m"
             requests:
-              memory: "50Mi"
-              cpu: "50m"
+              memory: "128Mi"
+              cpu: "100m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: infopiste-backend-service
+spec:
+  selector:
+    app: infopiste-backend
+  ports:
+    - protocol: TCP
+      port: 1234
+      targetPort: 1234
+  type: ClusterIP

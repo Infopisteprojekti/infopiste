@@ -1,7 +1,8 @@
 {
   "navbar": {
     "floorplan": "Kartta",
-    "bulletinboard": "Ilmoitustaulu"
+    "bulletinboard": "Ilmoitustaulu",
+    "unicafe": "Unicafe"
   },
   "floorplan-toolbar": {
     "zoom-in": "Suurenna",
@@ -19,6 +20,17 @@
   "bulletinboard": {
     "qr-add-file": "Lisää ilmoitus",
     "qr-close": "Sulje",
+    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
+    "stop-rotation": "Pysäytä automaattinen kelaus",
+    "continue-rotation": "Jatka automaattista kelausta",
+    "available-notices": "Lisätyt ilmoitukset",
+    "back": "Takaisin näkymään",
+    "no-notices": "Ei ilmoituksia",
+    "loading-notices": "Ladataan ilmoitukset..."
+  },
+  "pdfdisplay": {
+    "previous": "Edellinen",
+    "next": "Seuraava",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
   },
   "room": "Huone",
@@ -30,5 +42,10 @@
   "no": "Ei",
   "unknown": "Ei tiedossa",
   "reservation": "Varaus",
-  "reserved-by": "Varaaja"  
+  "reserved-by": "Varaaja",  
+  "unicafe": {
+    "no-menus": "Ruokalistoja ei ole saatavilla",
+    "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",
+    "menus-source": "Ruokalistat tarjoaa Unicafe"
+  }
 }

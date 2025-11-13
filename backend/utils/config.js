@@ -8,7 +8,9 @@ export const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 export const TENANT_ID = process.env.TENANT_ID;
 
-export const REDIS_URL = process.env.REDIS_URL || 'redis://redis:6379/0';
+const REDIS_HOST = process.env.REDIS_HOST;
+
+export const REDIS_URL = `redis://default:redis@${REDIS_HOST}:6379`;
 
 export const TTL_SECONDS = 60;
 

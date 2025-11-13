@@ -27,17 +27,6 @@ vi.mock('@/services/forms.js', () => {
   };
 });
 
-vi.mock('../../src/components/PDFDisplay.jsx', () => ({
-  default: ({ currentForm, nextForm, prevForm, backCallBack }) => (
-    <div data-testid="pdf-display">
-      <h2>{currentForm.title}</h2>
-      <button onClick={prevForm}>← Previous</button>
-      <button onClick={nextForm}>Next →</button>
-      <button onClick={backCallBack}>← View all notices</button>
-    </div>
-  ),
-}));
-
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import userEvent from '@testing-library/user-event';

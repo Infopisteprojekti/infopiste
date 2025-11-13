@@ -90,11 +90,6 @@ const PDFDisplay = ({
           </div>
         )}
       </div>
-      {preview && (
-        <div className="pdf-info">
-          <h4>{currentForm.title}</h4>
-        </div>
-      )}
     </div>
   );
 };

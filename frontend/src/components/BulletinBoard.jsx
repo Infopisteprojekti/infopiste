@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import PDFDisplay from './PDFDisplay';
 import QRCode from './QRCode';
 import formService from '@/services/forms.js';
+import PDFImage from './PDFImage';
 
 const BulletinBoard = () => {
   const { t } = useTranslation();
@@ -66,11 +67,9 @@ const BulletinBoard = () => {
     );
   }
 
-  //const currentForm = forms[index] || {};
-
   if (forms.length === 0) {
     return (
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <div style={{ textAlign: 'center', marginTop: '2rem', fontWeight: 'bold' }}>
         <QRCode />
         <p>{t('bulletinboard.no-notices')}</p>
       </div>
@@ -100,12 +99,8 @@ const BulletinBoard = () => {
                 setIndex(index);
               }}
             >
-              <PDFDisplay
-                currentForm={form}
-                nextForm={() => {}}
-                prevForm={() => {}}
-                preview
-              />
+              <PDFImage form={form} preview={true} />
+              <h4>{form.title}</h4>
             </div>
           ))}
         </div>

@@ -33,25 +33,25 @@
   width: 300px;
 }
 
-.pdf-container {
+.pdf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.pdf-card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  border: 2px solid #ccc;
+  transition: transform 0.2s;
+  width: 100%;
 }
 
-.pdf-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pdf-nav {
-  width: 700px;
-  display: flex;
-  justify-content: space-between;
+.pdf-card:hover {
+  transform: translateY(-3px);
 }
 
 .pdf-button {
@@ -63,8 +63,9 @@
   line-height: 1;
 }
 
-.pdf-wrapper .pdf-button.left {
-  left: -172px;
+.pdf-container.preview {
+  width: 150px;
+  height: auto;
 }
 
 .pdf-wrapper .pdf-button.right {

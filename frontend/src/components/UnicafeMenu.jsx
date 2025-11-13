@@ -21,7 +21,7 @@ const UnicafeMenu = () => {
         .catch(err => setError(err.message || 'Error fetching menus'))
         .finally(() => setLoading(false));
     }
-  }, []);
+  }, [menus]);
 
   if (loading) return <div>Loading menus...</div>;
   if (error) return <div>Error: {error}</div>;

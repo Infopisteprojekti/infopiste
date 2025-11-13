@@ -13,3 +13,9 @@ afterEach(() => {
   vi.clearAllMocks();
   vi.unstubAllGlobals();
 });
+
+if (typeof globalThis.DOMMatrix === 'undefined') {
+  globalThis.DOMMatrix = class DOMMatrix {
+    constructor() {}
+  };
+}

@@ -20,7 +20,11 @@ The actual functionality can be found in [src/](../frontend/src/).
 
 [components/](../frontend/src/components/) contains the following React components:
 
-`BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices.
+`BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices as a grid, or in an expanded view for the selected notice.
+
+`PDFDisplay` contains the logic for displaying a notice, either as a preview or in an expanded view.
+
+`QRCode` is used to display the QR code to upload files in the relevant components.
 
 `FloorDisplay` iterates through all rooms in the given floor, and assigns the correct data (reservation status and click handler, as well as polling) to each room.
 

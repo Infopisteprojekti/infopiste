@@ -20,6 +20,17 @@
   "bulletinboard": {
     "qr-add-file": "Lisää ilmoitus",
     "qr-close": "Sulje",
+    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
+    "stop-rotation": "Pysäytä automaattinen kelaus",
+    "continue-rotation": "Jatka automaattista kelausta",
+    "available-notices": "Lisätyt ilmoitukset",
+    "back": "Takaisin näkymään",
+    "no-notices": "Ei ilmoituksia",
+    "loading-notices": "Ladataan ilmoitukset..."
+  },
+  "pdfdisplay": {
+    "previous": "Edellinen",
+    "next": "Seuraava",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
   },
   "unicafe": {

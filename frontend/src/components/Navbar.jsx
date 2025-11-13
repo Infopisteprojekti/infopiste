@@ -24,6 +24,12 @@ const Navbar = () => {
       <Link className={`nav-button button ${isActive('/board')}`} to="/board">
         {t('navbar.bulletinboard')}
       </Link>
+      <Link
+        className={`nav-button button ${isActive('/unicafe')}`}
+        to="/unicafe"
+      >
+        {t('navbar.unicafe')}
+      </Link>
       {loading && <span className="loader"></span>}
       <LanguageSwitcher />
     </div>

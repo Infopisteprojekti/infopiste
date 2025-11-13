@@ -1,15 +1,16 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useContext} from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import FloorDisplay from '@/components/FloorDisplay';
 import RoomPopup from '@/components/RoomPopup';
-
+import floors from '@/constants/floors';
 import { useAppSettings } from '@/context/useAppSettings.js';
+import LoadingContext from '@/context/LoadingContext';
+
 import reservationService from '@/services/reservations.js';
 import roomService from '@/services/rooms.js';
-import floors from '@/constants/floors';
 import '@/styles/components/Floorplan.css';
 
 const POLLING_INTERVAL = 30000; // 30 seconds

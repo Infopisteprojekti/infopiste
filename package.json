@@ -11,9 +11,5 @@
     "css": "tailwindcss -i docs.css -o docs/style.css",
     "css:watch": "npm run css -- -w",
     "css:prod": "npm run css -- -m"
-  },
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.1.17",
-    "tailwindcss": "^4.1.17"
   }
 }

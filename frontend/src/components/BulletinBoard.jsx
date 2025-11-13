@@ -13,7 +13,6 @@ const BulletinBoard = () => {
   const [selectedForm, setSelectedForm] = useState(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [automaticRotation, setAutomaticRotation] = useState(true);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -28,28 +27,6 @@ const BulletinBoard = () => {
     };
     fetchForms();
   }, []);
-
-  useEffect(() => {
-    if (!automaticRotation || forms.length === 0) return;
-
-    const timeout = setTimeout(() => {
-      setIndex(prev => (prev + 1) % forms.length);
-    }, 10000);
-
-    return () => clearTimeout(timeout);
-  }, [automaticRotation, index, forms.length]);
-
-  const nextForm = () => {
-    setIndex(prev => (prev + 1) % forms.length);
-  };
-
-  const prevForm = () => {
-    setIndex(prev => (prev - 1 + forms.length) % forms.length);
-  };
-
-  const RotatePdfs = () => {
-    setAutomaticRotation(prev => !prev);
-  };
 
   if (loading) {
     return (
@@ -108,16 +85,13 @@ const BulletinBoard = () => {
     );
   }
 
-  const currentForm = forms[index];
+  const currentIndex = index
   return (
     <div>
       <QRCode />
       <PDFDisplay
-        currentForm={currentForm}
-        nextForm={nextForm}
-        prevForm={prevForm}
-        rotateCallBack={RotatePdfs}
-        automaticRotation={automaticRotation}
+        currentIndex={currentIndex}
+        forms={forms}
         backCallBack={() => setSelectedForm(null)}
       />
     </div>

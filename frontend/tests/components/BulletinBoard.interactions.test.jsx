@@ -101,4 +101,17 @@ describe('BulletinBoard - Interactions', () => {
     await user.click(backButton);
     expect(screen.getByText('Available notices')).toBeInTheDocument();
   });
+
+  test('automatic scrolling button appears and can be clicked', async () => {
+    const user = userEvent.setup();
+
+    setup();
+
+    const form1 = await screen.findByText('Form 1');
+    await user.click(form1);
+
+    const scrollButton = screen.getByText(/Pause automatic scrolling/i);
+    await user.click(scrollButton);
+    expect(screen.getByText(/Continue automatic scrolling/i)).toBeInTheDocument();
+  })
 });

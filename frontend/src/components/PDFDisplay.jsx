@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
 import '../styles/components/PDFDisplay.css';
 import PDFImage from './PDFImage';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFDisplay = ({
   currentIndex,
@@ -59,6 +56,7 @@ const PDFDisplay = ({
         {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
         {new Date(currentForm.endDate).toLocaleDateString()}
       </p>
+
       <div className="pdf-wrapper-with-buttons">
         <button className="button pdf-nav-button" onClick={prevForm}>
           ← {t('pdfdisplay.previous')}

@@ -28,5 +28,6 @@
   "yes": "Yes",
   "no": "No",
   "unknown": "Unknown",
-  "close": "Close"
+  "reservation": "Reservation",
+  "reserved-by": "Reserved by"
 }

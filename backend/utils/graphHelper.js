@@ -84,6 +84,7 @@ export const syncTodaysEvents = async () => {
           update: {
             $set: {
               room: roomId,
+              subject: event.subject,
               start: event.startTime,
               end: event.endTime,
             },

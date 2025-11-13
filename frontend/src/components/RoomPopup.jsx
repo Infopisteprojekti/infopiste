@@ -39,6 +39,33 @@ const RoomPopup = ({ room, position, onClose }) => {
           {t('status')}: {t(`room-status.${room.status}`) ?? t('unknown')}
         </p>
         <p>
+          {t('reservation')}:{' '}
+          {room.currentReservation.start
+            ? `${new Date(room.currentReservation.start).toLocaleTimeString(
+                'en-GB',
+                {
+                  timeZone: 'Europe/Helsinki',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )} - ${new Date(room.currentReservation.end).toLocaleTimeString(
+                'en-GB',
+                {
+                  timeZone: 'Europe/Helsinki',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )}`
+            : '-'}
+        </p>
+
+        {room.currentReservation.start && (
+          <p>
+            {t('reserved-by')}: {room.currentReservation.subject}
+          </p>
+        )}
+
+        <p>
           {t('capacity')}: {room.capacity ?? t('unknown')}
         </p>
         <p>

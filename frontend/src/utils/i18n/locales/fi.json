@@ -29,5 +29,6 @@
   "yes": "Kyllä",
   "no": "Ei",
   "unknown": "Ei tiedossa",
-  "close": "Sulje"
+  "reservation": "Varaus",
+  "reserved-by": "Varaaja"  
 }

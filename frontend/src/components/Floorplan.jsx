@@ -23,7 +23,6 @@ const Floorplan = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const [transformState, setTransformState] = useState({});
 
   const transformRef = useRef(null);
 
@@ -76,7 +75,6 @@ const Floorplan = () => {
         initialScale={1}
         minScale={0.5}
         maxScale={5}
-        onTransformed={(ref, state) => setTransformState(state)}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>

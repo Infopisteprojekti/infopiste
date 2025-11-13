@@ -54,7 +54,7 @@ const FloorDisplay = ({
             status: STATUSES.UNKNOWN,
           },
           status,
-          currentReservation: reservation,
+          currentReservation: reservation || {},
           position: {
             x: rectBounds.left + rectBounds.width / 2,
             y: rectBounds.top,

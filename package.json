@@ -7,9 +7,6 @@
     "test": "npm run --prefix ./frontend test && npm run --prefix ./backend test",
     "test:e2e": "npm run --prefix ./frontend e2e",
     "lint": "npm run --prefix ./frontend lint && npm run --prefix ./backend lint",
-    "lint:fix": "npm run --prefix ./frontend lint -- --fix && npm run --prefix ./backend lint -- --fix",
-    "css": "tailwindcss -i docs.css -o docs/style.css",
-    "css:watch": "npm run css -- -w",
-    "css:prod": "npm run css -- -m"
+    "lint:fix": "npm run --prefix ./frontend lint -- --fix && npm run --prefix ./backend lint -- --fix"
   }
 }

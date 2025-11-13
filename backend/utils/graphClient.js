@@ -33,7 +33,7 @@ const client = {
       url:
         `/users/${email}/calendarView?` +
         `startDateTime=${startDate}&endDateTime=${endDate}&` +
-        `$select=start,end,locations,subject`,
+        `$select=start,end,locations`,
     }));
 
     const { responses = [] } = await graphClient
@@ -49,7 +49,6 @@ const client = {
 
       return events.map(event => ({
         roomEmail,
-        subject: event.subject,
         startTime: new Date(event.start.dateTime + 'Z'),
         endTime: new Date(event.end.dateTime + 'Z'),
       }));

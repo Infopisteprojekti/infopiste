@@ -1,10 +1,9 @@
 import logger from './logger.js';
 
 export const requestLogger = (request, response, next) => {
-  logger.info('Method:', request.method);
-  logger.info('Path:  ', request.path);
-  logger.info('Body:  ', request.body);
-  logger.info('---');
+  logger.info(
+    `${new Date().toISOString()} - ${request.method} ${request.path}`
+  );
   next();
 };
 

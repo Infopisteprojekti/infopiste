@@ -74,7 +74,11 @@ const FloorDisplay = ({
   }, [floor, rooms, reservations, onRoomClick]);
 
   return (
-    <div className="floorplan-wrapper" ref={floorplanRef}>
+    <div
+      className="floorplan-wrapper"
+      ref={floorplanRef}
+      data-testid="floorplan-svg"
+    >
       <FloorSVG />
     </div>
   );

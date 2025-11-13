@@ -1,6 +1,5 @@
 services:
   backend:
-    container_name: infopiste-backend
     build:
       context: ./backend
       dockerfile: dev.Dockerfile
@@ -19,7 +18,6 @@ services:
       - mongo
       - redis
   frontend:
-    container_name: infopiste-frontend
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
@@ -34,7 +32,6 @@ services:
     restart: always
 
   mongo:
-    container_name: infopiste-mongo
     image: mongo:8
     volumes:
       - mongo_data:/data/db
@@ -42,7 +39,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: password
   redis:
-    container_name: infopiste-redis
     image: redis:8
 
 volumes:

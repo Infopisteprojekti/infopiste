@@ -35,10 +35,10 @@ const RoomPopup = ({ room, position, onClose }) => {
       </div>
 
       <div className="popup-content">
-        <p>
+        <p data-testid="room-status">
           {t('status')}: {t(`room-status.${room.status}`) ?? t('unknown')}
         </p>
-        <p>
+        <p data-testid="room-reservation">
           {t('reservation')}:{' '}
           {room.currentReservation.start
             ? `${new Date(room.currentReservation.start).toLocaleTimeString(
@@ -58,20 +58,13 @@ const RoomPopup = ({ room, position, onClose }) => {
               )}`
             : '-'}
         </p>
-
-        {room.currentReservation.start && (
-          <p>
-            {t('reserved-by')}: {room.currentReservation.subject}
-          </p>
-        )}
-
-        <p>
+        <p data-testid="room-capacity">
           {t('capacity')}: {room.capacity ?? t('unknown')}
         </p>
-        <p>
+        <p data-testid="room-floor">
           {t('floor')}: {room.floorNumber ?? t('unknown')}
         </p>
-        <p>
+        <p data-testid="room-accesible">
           {t('accessible')}:{' '}
           {room.isWheelChairAccessible === true
             ? t('yes')

@@ -6,10 +6,6 @@ const reservationSchema = mongoose.Schema({
     ref: 'Room',
     required: true,
   },
-  subject: {
-    type: String,
-    required: true,
-  },
   start: {
     type: Date,
     required: true,

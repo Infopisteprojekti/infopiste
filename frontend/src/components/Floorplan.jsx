@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef, useCallback, useContext} from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { useAppSettings } from '@/context/useAppSettings.js';
+
 import FloorDisplay from '@/components/FloorDisplay';
 import RoomPopup from '@/components/RoomPopup';
-import floors from '@/constants/floors';
-import { useAppSettings } from '@/context/useAppSettings.js';
-import LoadingContext from '@/context/LoadingContext';
 
 import reservationService from '@/services/reservations.js';
 import roomService from '@/services/rooms.js';
 import '@/styles/components/Floorplan.css';
+import FLOORS from '@/constants/floors';
 
 const POLLING_INTERVAL = 30000; // 30 seconds
 
@@ -26,6 +26,12 @@ const Floorplan = () => {
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
   const transformRef = useRef(null);
+
+  useEffect(() => {
+    if (transformRef.current) {
+      transformRef.current.resetTransform();
+    }
+  }, [resetTrigger]);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -67,9 +73,7 @@ const Floorplan = () => {
     transformRef.current?.resetTransform();
   };
 
-  const currentFloorSVG = floors.find(f => f.id === floor).svg;
-
-  const { setLoading } = useContext(LoadingContext);
+  const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
 
   return (
     <div className="floorplan-container">
@@ -85,21 +89,21 @@ const Floorplan = () => {
               <button
                 className="zoom-button"
                 onClick={() => zoomIn()}
-                aria-label={t('floorplan-toolbar.zoom-in')}
+                data-testid="zoom-in-button"
               >
                 <Plus size={16} />
               </button>
               <button
                 className="zoom-button"
                 onClick={() => zoomOut()}
-                aria-label={t('floorplan-toolbar.zoom-out')}
+                data-testid="zoom-out-button"
               >
                 <Minus size={16} />
               </button>
               <button
                 className="zoom-button"
                 onClick={() => resetTransform()}
-                aria-label={t('floorplan-toolbar.reset')}
+                data-testid="zoom-reset-button"
               >
                 <RotateCcw size={16} />
               </button>
@@ -118,7 +122,7 @@ const Floorplan = () => {
             </div>
 
             <div className="floor-selector">
-              {floors.map(({ id, label }) => (
+              {FLOORS.map(({ id, label }) => (
                 <button
                   key={id}
                   onClick={() => handleFloorChange(id)}

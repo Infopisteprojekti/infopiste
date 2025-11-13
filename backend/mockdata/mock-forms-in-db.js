@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import Form from '../models/form.js';
-import { MONGO_DB_URL } from '../utils/config.js';
 
 const mockForms = [
   {
@@ -80,18 +79,12 @@ const mockForms = [
   },
 ];
 
-export async function insertMockData() {
+export const insertMockForms = async () => {
   try {
-    const mongoUrl = MONGO_DB_URL;
-    await mongoose.connect(mongoUrl);
-
     await Form.deleteMany({});
     await Form.insertMany(mockForms);
     console.log('mock data inserted to db successfully');
-    await mongoose.disconnect();
   } catch (err) {
     console.error('error inserting mock data:', err);
   }
-}
-
-insertMockData();
+};

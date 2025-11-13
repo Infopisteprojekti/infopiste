@@ -46,7 +46,9 @@ const BulletinBoard = () => {
 
   if (forms.length === 0) {
     return (
-      <div style={{ textAlign: 'center', marginTop: '2rem', fontWeight: 'bold' }}>
+      <div
+        style={{ textAlign: 'center', marginTop: '2rem', fontWeight: 'bold' }}
+      >
         <QRCode />
         <p>{t('bulletinboard.no-notices')}</p>
       </div>
@@ -85,7 +87,7 @@ const BulletinBoard = () => {
     );
   }
 
-  const currentIndex = index
+  const currentIndex = index;
   return (
     <div>
       <QRCode />

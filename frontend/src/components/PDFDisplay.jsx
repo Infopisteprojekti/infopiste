@@ -3,11 +3,7 @@ import { useTranslation } from 'react-i18next';
 import '../styles/components/PDFDisplay.css';
 import PDFImage from './PDFImage';
 
-const PDFDisplay = ({
-  currentIndex,
-  forms,
-  backCallBack,
-}) => {
+const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
   const [automaticRotation, setAutomaticRotation] = useState(true);
   const [index, setIndex] = useState(currentIndex);
 
@@ -32,7 +28,7 @@ const PDFDisplay = ({
   const prevForm = () => {
     setIndex(prev => (prev - 1 + forms.length) % forms.length);
   };
-  
+
   const rotatePdfs = () => {
     setAutomaticRotation(prev => !prev);
   };

@@ -47,7 +47,10 @@
   align-items: center;
   border: 2px solid #ccc;
   transition: transform 0.2s;
-  width: 100%;
+  width: 190px;
+  justify-content: space-between;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
 .pdf-card:hover {

@@ -79,7 +79,9 @@ const BulletinBoard = () => {
               }}
             >
               <PDFImage form={form} preview={true} />
-              <h4>{form.title}</h4>
+              <h4 title={form.title}>
+                {form.title.length > 12 ? form.title.slice(0, 12) + '...' : form.title}
+              </h4>
             </div>
           ))}
         </div>

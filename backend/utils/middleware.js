@@ -18,7 +18,7 @@ export const apiLimiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => {
+  skip: req => {
     return req.path === '/api/health';
   },
 });

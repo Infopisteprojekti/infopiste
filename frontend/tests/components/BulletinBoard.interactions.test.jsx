@@ -27,17 +27,6 @@ vi.mock('@/services/forms.js', () => {
   };
 });
 
-vi.mock('../../src/components/PDFDisplay.jsx', () => ({
-  default: ({ currentForm, nextForm, prevForm, backCallBack }) => (
-    <div data-testid="pdf-display">
-      <h2>{currentForm.title}</h2>
-      <button onClick={prevForm}>← Previous</button>
-      <button onClick={nextForm}>Next →</button>
-      <button onClick={backCallBack}>← View all notices</button>
-    </div>
-  ),
-}));
-
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -112,4 +101,17 @@ describe('BulletinBoard - Interactions', () => {
     await user.click(backButton);
     expect(screen.getByText('Available notices')).toBeInTheDocument();
   });
+
+  test('automatic scrolling button appears and can be clicked', async () => {
+    const user = userEvent.setup();
+
+    setup();
+
+    const form1 = await screen.findByText('Form 1');
+    await user.click(form1);
+
+    const scrollButton = screen.getByText(/Pause automatic scrolling/i);
+    await user.click(scrollButton);
+    expect(screen.getByText(/Continue automatic scrolling/i)).toBeInTheDocument();
+  })
 });

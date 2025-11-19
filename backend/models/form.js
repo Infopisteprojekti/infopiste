@@ -4,6 +4,7 @@ const formSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    maxLength: 20,
   },
   startDate: {
     type: Date,

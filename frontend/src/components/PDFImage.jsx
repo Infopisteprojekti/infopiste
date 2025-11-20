@@ -4,6 +4,8 @@ import { useState } from 'react';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFImage = ({ form, preview }) => {
+  const [allPages, setPages] = useState(null);
+
   if (preview) {
     return (
       <Document
@@ -22,7 +24,6 @@ const PDFImage = ({ form, preview }) => {
       </Document>
     );
   }
-  const [allPages, setPages] = useState(null);
 
   if (!form || !form.fileUrl) return null;
 
@@ -31,13 +32,16 @@ const PDFImage = ({ form, preview }) => {
       <Document
         file={form.fileUrl}
         key={form._id || form.fileUrl}
-        onLoadError={(err) => console.error('PDF load error', err)}
+        onLoadError={err => console.error('PDF load error', err)}
         onLoadSuccess={({ numPages }) => setPages(numPages)}
         loading={<div className="pdf-loading">Loading PDF…</div>}
       >
         {allPages &&
           Array.from({ length: allPages }, (_, i) => (
-            <div className="pdf-page-wrapper" key={`${form._id || form.fileUrl}-p${i + 1}`}>
+            <div
+              className="pdf-page-wrapper"
+              key={`${form._id || form.fileUrl}-p${i + 1}`}
+            >
               <Page
                 pageNumber={i + 1}
                 width={preview ? 150 : 700}

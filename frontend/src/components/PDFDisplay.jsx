@@ -35,10 +35,16 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
 
   if (!currentForm) return null;
 
-  const uploaderKey = currentForm.uploaderId || currentForm.uploader || currentForm.uploadedBy || null;
+  const uploaderKey =
+    currentForm.uploaderId ||
+    currentForm.uploader ||
+    currentForm.uploadedBy ||
+    null;
 
   const groupedForms = uploaderKey
-    ? forms.filter(f => (f.uploaderId || f.uploader || f.uploadedBy) === uploaderKey)
+    ? forms.filter(
+        f => (f.uploaderId || f.uploader || f.uploadedBy) === uploaderKey
+      )
     : [currentForm];
 
   return (
@@ -60,17 +66,17 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
       </p>
 
       <div className="pdf-wrapper-with-buttons">
-        <button className="button pdf-nav-button" onClick={prevForm}>
+        <button className="pdf-nav-button" onClick={prevForm}>
           ← {t('pdfdisplay.previous')}
         </button>
         <div className="pdf-wrapper">
-          {groupedForms.map((f) => (
+          {groupedForms.map(f => (
             <div key={f._id || f.fileUrl} style={{ marginBottom: 24 }}>
               <PDFImage form={f} preview={false} />
             </div>
           ))}
         </div>
-        <button className="button pdf-nav-button" onClick={nextForm}>
+        <button className="pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} →
         </button>
       </div>

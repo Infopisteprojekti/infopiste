@@ -74,3 +74,17 @@
   flex: 1;
   margin: 0 75px;
 }
+
+.pdf-image-container {
+  display: block;
+}
+
+.pdf-page-wrapper {
+  margin-bottom: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.pdf-loading {
+  padding: 20px;
+  text-align: center;
+}

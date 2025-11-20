@@ -17,7 +17,7 @@ const PDFImage = ({ form, preview }) => {
       >
         <Page
           pageNumber={1}
-          width={preview ? 150 : 700}
+          width={150}
           renderTextLayer={false}
           renderAnnotationLayer={false}
         />
@@ -28,7 +28,7 @@ const PDFImage = ({ form, preview }) => {
   if (!form || !form.fileUrl) return null;
 
   return (
-    <div className={`pdf-image-container ${preview ? 'preview' : ''}`}>
+    <div className={`pdf-image-container`}>
       <Document
         file={form.fileUrl}
         key={form._id || form.fileUrl}
@@ -44,7 +44,7 @@ const PDFImage = ({ form, preview }) => {
             >
               <Page
                 pageNumber={i + 1}
-                width={preview ? 150 : 700}
+                width={700}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
               />

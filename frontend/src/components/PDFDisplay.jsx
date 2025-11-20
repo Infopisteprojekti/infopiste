@@ -66,7 +66,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
       </p>
 
       <div className="pdf-wrapper-with-buttons">
-        <button className="pdf-nav-button" onClick={prevForm}>
+        <button className="button pdf-nav-button" onClick={prevForm}>
           ← {t('pdfdisplay.previous')}
         </button>
         <div className="pdf-wrapper">
@@ -76,7 +76,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
             </div>
           ))}
         </div>
-        <button className="pdf-nav-button" onClick={nextForm}>
+        <button className="button pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} →
         </button>
       </div>

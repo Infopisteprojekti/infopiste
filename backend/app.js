@@ -18,6 +18,8 @@ app.use(express.json());
 app.use(apiLimiter);
 app.use(requestLogger);
 
+app.set('trust proxy', 1);
+
 app.use('/api/rooms', roomsRouter);
 app.use('/api/reservations', reservationsRouter);
 app.use('/api/forms', formsRouter);

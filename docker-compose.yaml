@@ -1,6 +1,5 @@
 services:
   backend:
-    image: ohtuinfopiste/infopiste-backend:staging
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -16,7 +15,6 @@ services:
       - mongo
       - redis
   frontend:
-    image: ohtuinfopiste/infopiste-frontend:staging
     build:
       context: ./frontend
       dockerfile: Dockerfile

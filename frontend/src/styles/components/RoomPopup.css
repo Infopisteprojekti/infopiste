@@ -1,0 +1,52 @@
+.room-popup {
+  position: fixed;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  font-size: 14px;
+  min-width: 250px;
+  max-width: 350px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.popup-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.popup-button {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  line-height: 1;
+}
+
+.popup-button:hover {
+  color: #000;
+}
+
+.popup-content {
+  padding: 12px 16px;
+}
+
+.popup-content p {
+  margin: 8px 0;
+}

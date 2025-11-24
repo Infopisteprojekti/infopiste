@@ -40,7 +40,7 @@ describe('rooms api', () => {
     redisClient.expire.mockResolvedValue(1);
 
     const response = await api
-      .get('/api/rooms/allRooms')
+      .get('/api/rooms')
       .expect(200)
       .expect('Content-Type', /application\/json/);
 
@@ -58,7 +58,7 @@ describe('rooms api', () => {
     redisClient.get.mockResolvedValue(JSON.stringify(helper.intitialRooms));
 
     const response = await api
-      .get('/api/rooms/allRooms')
+      .get('/api/rooms')
       .expect(200)
       .expect('Content-Type', /application\/json/);
 
@@ -74,7 +74,7 @@ describe('rooms api', () => {
     redisClient.get.mockResolvedValue(null);
     Room.find.mockResolvedValue([]);
 
-    const response = await api.get('/api/rooms/allRooms').expect(200);
+    const response = await api.get('/api/rooms').expect(200);
 
     assert.strictEqual(response.body.source, 'database');
     assert.strictEqual(response.body.data.length, 0);

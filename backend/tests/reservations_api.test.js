@@ -35,7 +35,10 @@ describe('reservations api', () => {
   test('returns reservations from database if cache is empty', async () => {
     redisClient.get.mockResolvedValue(null);
 
-    Reservation.find.mockResolvedValue(helper.initialReservations);
+    Reservation.find.mockReturnValue({
+      populate: vi.fn().mockResolvedValue(helper.initialReservations),
+    });
+
     redisClient.set.mockResolvedValue('OK');
     redisClient.expire.mockResolvedValue(1);
 
@@ -53,7 +56,6 @@ describe('reservations api', () => {
     assert.strictEqual(redisClient.get.mock.calls.length, 1);
     assert.strictEqual(redisClient.set.mock.calls.length, 1);
     assert.strictEqual(redisClient.expire.mock.calls.length, 1);
-
     assert.strictEqual(Reservation.find.mock.calls.length, 1);
   });
 
@@ -80,7 +82,9 @@ describe('reservations api', () => {
 
   test('returns empty array if no reservations exist', async () => {
     redisClient.get.mockResolvedValue(null);
-    Reservation.find.mockResolvedValue([]);
+    Reservation.find.mockReturnValue({
+      populate: vi.fn().mockResolvedValue([]),
+    });
 
     const response = await api.get('/api/reservations').expect(200);
 

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const roomSchema = mongoose.Schema({
   roomEmail: String,
+  displayId: String,
   displayName: String,
   capacity: Number,
   floorNumber: Number,

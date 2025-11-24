@@ -33,18 +33,22 @@ const client = {
       url:
         `/users/${email}/calendarView?` +
         `startDateTime=${startDate}&endDateTime=${endDate}&` +
-        `$select=start,end,location`,
+        `$select=start,end,locations`,
     }));
 
-    const response = await graphClient
+    const { responses = [] } = await graphClient
       .api('/$batch')
       .post({ requests: batchRequests });
 
-    return response.responses.flatMap(room => {
-      const events = room.body.value || [];
+    return responses.flatMap(response => {
+      if (!response.body) return [];
+
+      const events = response.body.value || [];
+
+      const roomEmail = roomEmails[Number(response.id) - 1];
 
       return events.map(event => ({
-        roomEmail: event.location.uniqueId,
+        roomEmail,
         startTime: new Date(event.start.dateTime + 'Z'),
         endTime: new Date(event.end.dateTime + 'Z'),
       }));

@@ -1,117 +1,84 @@
 import { test, expect } from '@playwright/test';
-import { mockFormsRoute, mockRoomsRoute } from '../e2e/testUtils';
+import {
+  mockFormsRoute,
+  mockReservationsRoute,
+  mockRoomsRoute,
+} from '../e2e/testUtils';
 
 test.describe('Infopiste app', () => {
   test.beforeEach(async ({ page }) => {
     await mockRoomsRoute(page);
     await mockFormsRoute(page);
+    await mockReservationsRoute(page);
     await page.goto('?lang=en');
   });
 
   test('home page can be opened', async ({ page }) => {
-    await expect(page.getByText('A348')).toBeVisible();
+    await expect(page.getByText('A307')).toBeVisible();
 
     const title = await page.title();
     expect(title).toBe('infonäyttö');
   });
 
-  test('zoom buttons exist', async ({ page }) => {
-    await expect(page.getByText('Zoom In')).toBeVisible();
-    await expect(page.getByText('Zoom Out')).toBeVisible();
-    await expect(page.getByText('Reset')).toBeVisible();
-  });
-
-  test('zoom buttons are clickable', async ({ page }) => {
-    await page.getByText('Zoom In').click();
-    await page.getByText('Zoom Out').click();
-    await page.getByText('Reset').click();
-  });
-
   test('floorplan is rendered', async ({ page }) => {
-    const svg = page.locator('[data-testid="floorplan-svg"]').first();
-    await svg.waitFor({ state: 'attached' });
-    await expect(svg).toBeVisible();
+    const floorplan = page.getByTestId('floorplan-svg');
+    await expect(floorplan).toBeVisible();
 
-    const rooms = page.locator('svg g > .room');
-    await rooms.first().waitFor({ state: 'visible' });
-
-    const roomCount = await rooms.count();
-    expect(roomCount).toBeGreaterThan(0);
+    const rooms = floorplan.locator('.room');
+    await expect(rooms.first()).toBeVisible();
   });
 
   test('zoom in button works', async ({ page }) => {
     const transformWrapper = page.locator('.react-transform-component');
-
     const initialTransform = await transformWrapper.getAttribute('style');
-
-    await page.getByText('Zoom In').click();
-    await page.waitForTimeout(500);
-
-    const zoomedInTransform = await transformWrapper.getAttribute('style');
-
-    expect(zoomedInTransform).not.toBe(initialTransform);
+    await page.getByTestId('zoom-in-button').click();
+    await expect(transformWrapper).not.toHaveAttribute(
+      'style',
+      initialTransform
+    );
   });
 
   test('zoom out button works', async ({ page }) => {
     const transformWrapper = page.locator('.react-transform-component');
-
     const initialTransform = await transformWrapper.getAttribute('style');
-
-    await page.getByText('Zoom Out').click();
-    await page.waitForTimeout(500);
-
-    const zoomedInTransform = await transformWrapper.getAttribute('style');
-
-    expect(zoomedInTransform).not.toBe(initialTransform);
+    await page.getByTestId('zoom-out-button').click();
+    await expect(transformWrapper).not.toHaveAttribute(
+      'style',
+      initialTransform
+    );
   });
 
   test('reset button works', async ({ page }) => {
     const transformWrapper = page.locator('.react-transform-component');
 
-    const initialTransform = await transformWrapper.getAttribute('style');
+    await page.getByTestId('zoom-in-button').click();
+    await page.getByTestId('zoom-in-button').click();
+    await page.getByTestId('zoom-in-button').click();
 
-    await page.getByText('Zoom In').click();
-    await page.waitForTimeout(500);
-
-    const zoomedInTransform = await transformWrapper.getAttribute('style');
-
-    expect(zoomedInTransform).not.toBe(initialTransform);
-
-    await page.getByText('Reset').click();
-    await page.waitForTimeout(500);
-
-    const resetTransform = await transformWrapper.getAttribute('style');
-
-    expect(resetTransform).toBe(initialTransform);
+    await page.getByTestId('zoom-reset-button').click();
+    await expect(transformWrapper).toHaveAttribute('style', /scale\(1\./);
   });
 
   test('floor can be changed', async ({ page }) => {
-    const floor3Room = page.locator('#A344');
-    await expect(floor3Room).toBeVisible();
-
-    await page.getByText('Floor 2').click();
-    const floor2Room = page.locator('#A244');
-    await expect(floor2Room).toBeVisible();
-
     await page.getByText('Floor 1').click();
-    const floor1Room = page.locator('#A144');
+    const floor1Room = page.locator('#A107');
     await expect(floor1Room).toBeVisible();
 
+    await page.getByText('Floor 2').click();
+    const floor2Room = page.locator('#A207');
+    await expect(floor2Room).toBeVisible();
+
     await page.getByText('Floor 3').click();
+    const floor3Room = page.locator('#A307');
     await expect(floor3Room).toBeVisible();
   });
 
-  test('room statuses are correct', async ({ page }) => {
-    const floorplan = page.getByTestId('floorplan-svg').first();
+  test('reserved room is displayed as reserved', async ({ page }) => {
+    const floorplan = page.getByTestId('floorplan-svg');
     await expect(floorplan).toBeVisible();
 
-    const roomA344 = floorplan.locator('#A344');
-    const roomA345 = floorplan.locator('#A345');
-    const roomA346 = floorplan.locator('#A346');
-
-    await expect(roomA344).toHaveClass(/available/);
-    await expect(roomA345).toHaveClass(/reserved/);
-    await expect(roomA346).toHaveClass(/unavailable/);
+    const roomA307 = floorplan.locator('#A307');
+    await expect(roomA307).toHaveClass(/reserved/);
   });
 
   test('bulletin board view can be opened', async ({ page }) => {
@@ -131,9 +98,6 @@ test.describe('Infopiste app', () => {
   });
 
   test('grid view is rendered correctly', async ({ page }) => {
-    mockFormsRoute(page);
-
-    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
     await expect(page.getByText('Form 1')).toBeVisible();
@@ -150,9 +114,6 @@ test.describe('Infopiste app', () => {
   });
 
   test('return to grid view works', async ({ page }) => {
-    mockFormsRoute(page);
-
-    await page.goto('http://localhost:5173?lang=en');
     await page.getByText('Bulletin Board').click();
 
     await page.getByText('Form 1').click();

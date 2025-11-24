@@ -1,6 +1,5 @@
 services:
   backend:
-    container_name: infopiste-backend
     image: ohtuinfopiste/infopiste-backend:staging
     build:
       context: ./backend
@@ -17,7 +16,6 @@ services:
       - mongo
       - redis
   frontend:
-    container_name: infopiste-frontend
     image: ohtuinfopiste/infopiste-frontend:staging
     build:
       context: ./frontend
@@ -31,7 +29,6 @@ services:
     depends_on:
       - backend
   mongo:
-    container_name: infopiste-mongo
     image: mongo:8
     volumes:
       - mongo_data:/data/db
@@ -39,7 +36,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: password
   redis:
-    container_name: infopiste-redis
     image: redis:8
 
 volumes:

@@ -33,6 +33,16 @@
     "next": "Seuraava",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
   },
+  "room": "Huone",
+  "status": "Huoneen tila",
+  "capacity": "Kapasiteetti",
+  "floor": "Kerros",
+  "accessible": "Saavutettava",
+  "yes": "Kyllä",
+  "no": "Ei",
+  "unknown": "Ei tiedossa",
+  "reservation": "Varaus",
+  "reserved-by": "Varaaja",  
   "unicafe": {
     "no-menus": "Ruokalistoja ei ole saatavilla",
     "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",

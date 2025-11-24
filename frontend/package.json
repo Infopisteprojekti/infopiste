@@ -45,7 +45,9 @@
     "prettier": "^3.6.2",
     "vite": "^7.1.2",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"    
   },
   "prettier": {
     "trailingComma": "es5",

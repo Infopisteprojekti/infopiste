@@ -46,7 +46,7 @@ const UnicafeMenu = () => {
                     <div key={index} className="menu-card">
                       <h3>{item.name}</h3>
                       <div className="meta-tags">
-                        {item.meta
+                        {item.tags
                           ?.filter(tag => tag !== 'M')
                           .map((tag, idx) => (
                             <span key={idx} className="meta-tag">

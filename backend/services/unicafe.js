@@ -3,11 +3,23 @@ const MENU_LANGS = ['fi', 'en', 'sv'];
 const RESTAURANTS = ['chemicum', 'exactum'];
 
 function simplifyMenu(menuItems = []) {
-  return menuItems.map(item => ({
-    name: item.name,
-    meta: item.meta?.[0] || [],
-    priceName: item.price?.name || null,
-  }));
+  return menuItems.map(item => {
+    const tags = item.meta?.[0] || [];
+    const includes = item.meta?.[1] || [];
+    const meta2 = item.meta?.[2] || [];
+
+    const ilmastovalinta = meta2.some(v =>
+      String(v).toLowerCase().includes('ilmastovalinta')
+    );
+
+    return {
+      name: item.name,
+      tags,
+      includes,
+      ilmastovalinta,
+      priceName: item.price?.name || null,
+    };
+  });
 }
 
 export async function fetchMenuData() {

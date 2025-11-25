@@ -10,10 +10,12 @@
 }
 
 .three-grid {
+  max-width: 1800px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
   padding: 1rem;
+  margin: 0 auto;
 }
 
 .menu-card {

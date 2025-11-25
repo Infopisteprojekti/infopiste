@@ -40,6 +40,8 @@
 }
 
 .pdf-nav-button {
+  position: sticky;
+  top: 50%;
   flex-shrink: 0;
   white-space: nowrap;
 }

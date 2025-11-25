@@ -49,8 +49,8 @@ const client = {
 
       return events.map(event => ({
         roomEmail,
-        startTime: new Date(event.start.dateTime + 'Z'),
-        endTime: new Date(event.end.dateTime + 'Z'),
+        startTime: new Date(event.start.dateTime),
+        endTime: new Date(event.end.dateTime),
       }));
     });
   },

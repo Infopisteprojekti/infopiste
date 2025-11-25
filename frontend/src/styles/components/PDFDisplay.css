@@ -31,7 +31,7 @@
 
 .pdf-wrapper-with-buttons {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   position: relative;
   width: fit-content;

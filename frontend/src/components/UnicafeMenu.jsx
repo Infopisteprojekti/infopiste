@@ -48,7 +48,7 @@ const UnicafeMenu = () => {
         ))}
       </div>
 
-      <div className="three-grid">
+      <div className="three-grid fade-container" key={selectedRestaurant}>
         {selectedData.menu.length === 0 ? (
           <div className="no-menu">{t('unicafe.no-menu-restaurant')}</div>
         ) : (

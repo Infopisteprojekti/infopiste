@@ -1,7 +1,11 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
 import graphClient from './graphClient.js';
 import logger from './logger.js';
 import Room from '../models/room.js';
 import Reservation from '../models/reservation.js';
+
+dayjs.extend(utc);
 
 export const syncExactumRooms = async () => {
   try {
@@ -56,27 +60,8 @@ export const syncTodaysEvents = async () => {
     const roomMap = new Map(rooms.map(r => [r.roomEmail, r.id]));
     const roomEmails = rooms.map(r => r.roomEmail);
 
-    const now = new Date();
-    const startOfDay = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        0,
-        0,
-        0
-      )
-    );
-    const endOfDay = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        23,
-        59,
-        59
-      )
-    );
+    const startOfDay = dayjs.utc().startOf('day');
+    const endOfDay = dayjs.utc().endOf('day');
 
     // graph api limit is 20 rooms per request so we need to create chunks
     const chunk = (arr, size) =>
@@ -103,13 +88,13 @@ export const syncTodaysEvents = async () => {
 
     // delete old reservations
     await Reservation.deleteMany({
-      end: { $lt: startOfDay.toISOString() },
+      end: { $lt: startOfDay.toDate() },
     });
 
     // delete todays reservations to remove cancelled events
     await Reservation.deleteMany({
-      start: { $gte: startOfDay.toISOString() },
-      end: { $lte: endOfDay.toISOString() },
+      start: { $gte: startOfDay.toDate() },
+      end: { $lte: endOfDay.toDate() },
     });
 
     if (!allEvents.length) return;

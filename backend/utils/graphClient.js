@@ -1,8 +1,12 @@
 import { ClientSecretCredential } from '@azure/identity';
 import { Client } from '@microsoft/microsoft-graph-client';
 import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials/index.js';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
 import logger from './logger.js';
 import { CLIENT_ID, CLIENT_SECRET, TENANT_ID } from './config.js';
+
+dayjs.extend(utc);
 
 const GRAPH_SCOPES = ['https://graph.microsoft.com/.default'];
 
@@ -49,8 +53,8 @@ const client = {
 
       return events.map(event => ({
         roomEmail,
-        startTime: new Date(event.start.dateTime),
-        endTime: new Date(event.end.dateTime),
+        startTime: dayjs.utc(event.start.dateTime).toDate(),
+        endTime: dayjs.utc(event.end.dateTime).toDate(),
       }));
     });
   },

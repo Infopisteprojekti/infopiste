@@ -50,11 +50,11 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
   const toTop = () => {
     const main = document.getElementsByClassName('main-content')[0];
 
-		main.scrollTo({
-			top: 0,
-			behavior: "smooth"
-		});
-	};
+    main.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div className={`pdf-container`}>

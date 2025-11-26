@@ -28,29 +28,27 @@ const BulletinBoard = () => {
     fetchForms();
   }, []);
 
-  if (loading) {
+  if (loading || forms.length === 0) {
     return (
       <div
         style={{
           display: 'flex',
+          width: '100%',
+          height: '100%',
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: '1.5rem',
           fontWeight: 'bold',
+          gap: '1rem',
         }}
       >
-        <p>{t('bulletinboard.loading-notices')}</p>
-      </div>
-    );
-  }
-
-  if (forms.length === 0) {
-    return (
-      <div
-        style={{ textAlign: 'center', marginTop: '2rem', fontWeight: 'bold' }}
-      >
-        <QRCode />
-        <p>{t('bulletinboard.no-notices')}</p>
+        {loading && <span className="loader"></span>}
+        <p>
+          {loading
+            ? t('bulletinboard.loading-notices')
+            : t('bulletinboard.no-notices')}
+        </p>
+        {!loading && <QRCode />}
       </div>
     );
   }

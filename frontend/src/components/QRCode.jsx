@@ -1,6 +1,8 @@
 import qrcode from '../assets/form.svg';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import '@/styles/components/RoomPopup.css';
+import '@/styles/components/Button.css';
 
 const QRCode = () => {
   const { t } = useTranslation();
@@ -9,9 +11,9 @@ const QRCode = () => {
   const toggleQr = () => {
     const newState = !qrState;
     if (newState) {
-      document.getElementById('popup').classList.add('open-popup');
+      document.getElementById('popup').classList.remove('hidden');
     } else {
-      document.getElementById('popup').classList.remove('open-popup');
+      document.getElementById('popup').classList.add('hidden');
     }
     setQrState(newState);
   };
@@ -22,13 +24,31 @@ const QRCode = () => {
         type="submit"
         id="qrButton"
         className="button qr-button"
+        data-testid="qr-button"
         onClick={toggleQr}
       >
         {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
       </button>
-      <div className="popup" id="popup">
-        <p>{t('bulletinboard.qr-description')}</p>
-        <img src={qrcode} className="bottomright" />
+
+      <div
+        id="popup"
+        className="room-popup hidden"
+        style={{
+          top: '50%',
+          left: '50%',
+          transform: 'translateX(-50%) translateY(-50%)',
+        }}
+      >
+        <div className="popup-header">
+          <h3 className="popup-title">{t('bulletinboard.qr-description')}</h3>
+          <button className="button" onClick={toggleQr}>
+            {t('bulletinboard.qr-close')}
+          </button>
+        </div>
+
+        <div className="popup-content">
+          <img src={qrcode} className="qr" />
+        </div>
       </div>
     </div>
   );

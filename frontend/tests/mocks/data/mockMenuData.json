@@ -11,32 +11,32 @@
         "menu": [
           {
             "name": "Sweet potato and peanut soup",
-            "meta": ["G", "KELA", "Veg"],
+            "tags": ["G", "KELA", "Veg"],
             "priceName": "Vegaanilounas"
           },
           {
             "name": " Härkäpapu Red Curry",
-            "meta": ["G", "KELA", "Veg"],
+            "tags": ["G", "KELA", "Veg"],
             "priceName": "Vegaanilounas"
           },
           {
             "name": "Italian vegetable rolls & Gremolata dip",
-            "meta": ["G", "Veg"],
+            "tags": ["G", "Veg"],
             "priceName": "Vegaanilounas"
           },
           {
             "name": "Red Curry chicken",
-            "meta": ["G", "KELA", "M"],
+            "tags": ["G", "KELA", "M"],
             "priceName": "Lounas"
           },
           {
             "name": "Boiled potatoes",
-            "meta": ["G", "KELA", "Veg"],
+            "tags": ["G", "KELA", "Veg"],
             "priceName": "Lisäke"
           },
           {
             "name": "Kauraa",
-            "meta": ["G", "Veg"],
+            "tags": ["G", "Veg"],
             "priceName": "Lisäke"
           }
         ]
@@ -50,22 +50,22 @@
         "menu": [
           {
             "name": " Härkäpapu Red Curry",
-            "meta": ["G", "KELA", "Veg"],
+            "tags": ["G", "KELA", "Veg"],
             "priceName": "Vegaanilounas"
           },
           {
             "name": "Quinoa balls with paprika sause",
-            "meta": ["G", "Veg"],
+            "tags": ["G", "Veg"],
             "priceName": "Vegaanilounas"
           },
           {
             "name": " Rapea kalaleike, ruohosipulikastiketta",
-            "meta": ["KELA"],
+            "tags": ["KELA"],
             "priceName": "Lounas"
           },
           {
             "name": "Berry quark dessert",
-            "meta": ["G", "L"],
+            "tags": ["G", "L"],
             "priceName": "Jälkiruoka"
           }
         ]

@@ -2,7 +2,7 @@ import qrcode from '../assets/form.svg';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '@/styles/components/RoomPopup.css';
-import '@/styles/components/button.css';
+import '@/styles/components/Button.css';
 
 const QRCode = () => {
   const { t } = useTranslation();

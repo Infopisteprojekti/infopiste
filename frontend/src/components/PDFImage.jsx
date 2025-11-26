@@ -37,7 +37,7 @@ const PDFImage = ({ form, preview }) => {
         loading={<div className="pdf-loading">Loading PDF…</div>}
       >
         {allPages &&
-          Array.from({ length: allPages<6 ? allPages : 5 }, (_, i) => (
+          Array.from({ length: allPages < 6 ? allPages : 5 }, (_, i) => (
             <div
               className="pdf-page-wrapper"
               key={`${form._id || form.fileUrl}-p${i + 1}`}

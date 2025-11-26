@@ -36,7 +36,9 @@
   "unicafe": {
     "no-menus": "No menus available",
     "no-menu-restaurant": "No menu items available for this restaurant",
-    "menus-source": "Menu data provided by Unicafe"
+    "menus-source": "Menu data provided by Unicafe",
+    "climate-choice": "Climate choice",
+    "includes": "Contains"
   },
   "price-names": {
     "Lisäke": "Side dish",

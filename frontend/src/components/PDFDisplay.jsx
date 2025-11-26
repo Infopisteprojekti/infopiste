@@ -35,6 +35,27 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
 
   if (!currentForm) return null;
 
+  const uploaderKey =
+    currentForm.uploaderId ||
+    currentForm.uploader ||
+    currentForm.uploadedBy ||
+    null;
+
+  const groupedForms = uploaderKey
+    ? forms.filter(
+        f => (f.uploaderId || f.uploader || f.uploadedBy) === uploaderKey
+      )
+    : [currentForm];
+
+  const toTop = () => {
+    const main = document.getElementsByClassName('main-content')[0];
+
+    main.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className={`pdf-container`}>
       <div className="pdf-header">
@@ -58,10 +79,19 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
           ← {t('pdfdisplay.previous')}
         </button>
         <div className="pdf-wrapper">
-          <PDFImage form={currentForm} preview={false} />
+          {groupedForms.map(f => (
+            <div key={f._id || f.fileUrl} style={{ marginBottom: 24 }}>
+              <PDFImage form={f} preview={false} />
+            </div>
+          ))}
         </div>
         <button className="button pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} →
+        </button>
+      </div>
+      <div>
+        <button className="button" onClick={toTop}>
+          ⬆️
         </button>
       </div>
     </div>

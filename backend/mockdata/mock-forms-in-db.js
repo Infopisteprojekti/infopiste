@@ -39,36 +39,32 @@ const mockForms = [
     title: 'Sixth best notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
-    fileUrl:
-      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+    fileUrl: 'https://www.princexml.com/samples/magic8/index.pdf',
   },
   {
     title: 'Seventh best notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
     fileUrl:
-      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+      'https://www.princexml.com/samples/invoice-colorful/invoicesample.pdf',
   },
   {
     title: 'Eighth best notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
-    fileUrl:
-      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+    fileUrl: 'https://www.princexml.com/samples/newsletter/drylab.pdf',
   },
   {
     title: 'Ninth best notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
-    fileUrl:
-      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+    fileUrl: 'https://www.princexml.com/samples/textbook/somatosensory.pdf',
   },
   {
     title: 'Tenth best notice',
     startDate: new Date('2025-01-01'),
     endDate: new Date('2025-01-02'),
-    fileUrl:
-      'https://www.colorpilot.com/files-html2pdfx/html2pdfx_Novella_sample.pdf',
+    fileUrl: 'https://www.sldttc.org/allpdf/21583473018.pdf',
   },
   {
     title: 'Broken notice',

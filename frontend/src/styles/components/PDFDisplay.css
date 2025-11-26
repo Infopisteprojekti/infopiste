@@ -31,7 +31,7 @@
 
 .pdf-wrapper-with-buttons {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   position: relative;
   width: fit-content;
@@ -40,6 +40,8 @@
 }
 
 .pdf-nav-button {
+  position: sticky;
+  top: 50%;
   flex-shrink: 0;
   white-space: nowrap;
 }
@@ -73,4 +75,18 @@
 .pdf-header .button {
   flex: 1;
   margin: 0 75px;
+}
+
+.pdf-image-container {
+  display: block;
+}
+
+.pdf-page-wrapper {
+  margin-bottom: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.pdf-loading {
+  padding: 20px;
+  text-align: center;
 }

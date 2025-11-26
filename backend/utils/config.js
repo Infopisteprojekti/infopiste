@@ -13,10 +13,3 @@ const REDIS_HOST = process.env.REDIS_HOST;
 export const REDIS_URL = `redis://default:redis@${REDIS_HOST}:6379`;
 
 export const TTL_SECONDS = 60;
-
-export const AVAILABLE_ROOMS = [
-  'exactum.b233',
-  'exactum.a214',
-  'exactum.a218b',
-  'exactum.a307',
-];

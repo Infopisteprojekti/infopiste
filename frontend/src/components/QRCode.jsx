@@ -41,9 +41,7 @@ const QRCode = () => {
         <div className="popup-header">
           <h3 className="popup-title">{t('bulletinboard.qr-description')}</h3>
           <button className="button" onClick={toggleQr}>
-            {qrState
-              ? t('bulletinboard.qr-close')
-              : t('bulletinboard.qr-add-file')}
+            {t('bulletinboard.qr-close')}
           </button>
         </div>
 

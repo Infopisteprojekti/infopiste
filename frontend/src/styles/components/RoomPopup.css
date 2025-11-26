@@ -50,3 +50,7 @@
 .popup-content p {
   margin: 8px 0;
 }
+
+.room-popup.hidden {
+  display: none;
+}

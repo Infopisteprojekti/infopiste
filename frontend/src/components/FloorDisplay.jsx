@@ -1,7 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
 
 import STATUSES from '@/constants/roomStatus';
 import '@/styles/components/FloorDisplay.css';
+
+dayjs.extend(utc);
 
 const FloorDisplay = ({
   floor,
@@ -12,6 +16,29 @@ const FloorDisplay = ({
 }) => {
   const floorplanRef = useRef(null);
 
+  const roomStatusMap = useMemo(() => {
+    const now = dayjs().utc();
+    const statusMap = new Map();
+
+    rooms.forEach(room => {
+      const roomReservations = reservations.filter(
+        r => r.room.displayId === room.displayId
+      );
+
+      const currentReservation = roomReservations.find(
+        r => dayjs.utc(r.start).isBefore(now) && dayjs.utc(r.end).isAfter(now)
+      );
+
+      statusMap.set(room.displayId, {
+        status: currentReservation ? STATUSES.RESERVED : STATUSES.AVAILABLE,
+        currentReservation,
+        roomReservations: roomReservations,
+      });
+    });
+
+    return statusMap;
+  }, [rooms, reservations]);
+
   useEffect(() => {
     const svg = floorplanRef.current.querySelector('svg');
     if (!svg) return;
@@ -19,32 +46,20 @@ const FloorDisplay = ({
     const roomRects = svg.querySelectorAll('g > rect[id]');
     const handlers = [];
 
-    const getRoomStatus = roomDisplayId => {
-      const now = new Date();
-      const reservation = reservations.find(
-        r =>
-          r.room.displayId === roomDisplayId &&
-          new Date(r.start) <= now &&
-          new Date(r.end) >= now
-      );
-
-      const room = rooms.find(r => r.displayId === roomDisplayId);
-
-      if (reservation && room) {
-        return { status: STATUSES.RESERVED, reservation };
-      }
-      return { status: room ? STATUSES.AVAILABLE : STATUSES.UNAVAILABLE };
-    };
-
     roomRects.forEach(rect => {
       const roomId = rect.id;
-      const { status, reservation } = getRoomStatus(roomId);
       const room = rooms.find(r => r.displayId === roomId);
+      const statusInfo = roomStatusMap.get(roomId) || {
+        status: STATUSES.UNAVAILABLE,
+        currentReservation: {},
+        roomReservations: [],
+      };
 
+      // update svg rect status
       rect.classList.remove(...Object.values(STATUSES));
-      rect.classList.add('room', status);
+      rect.classList.add('room', statusInfo.status);
 
-      const handleClick = event => {
+      const handleClick = () => {
         const rectBounds = rect.getBoundingClientRect();
 
         onRoomClick({
@@ -53,8 +68,9 @@ const FloorDisplay = ({
             displayName: roomId,
             status: STATUSES.UNKNOWN,
           },
-          status,
-          currentReservation: reservation || {},
+          status: statusInfo.status,
+          currentReservation: statusInfo.currentReservation,
+          roomReservations: statusInfo.roomReservations,
           position: {
             x: rectBounds.left + rectBounds.width / 2,
             y: rectBounds.top,
@@ -71,7 +87,7 @@ const FloorDisplay = ({
         rect.removeEventListener('click', handleClick);
       });
     };
-  }, [floor, rooms, reservations, onRoomClick]);
+  }, [floor, rooms, reservations, roomStatusMap, onRoomClick]);
 
   return (
     <div

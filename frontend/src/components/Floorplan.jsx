@@ -60,8 +60,8 @@ const Floorplan = () => {
   }, []);
 
   const handleRoomClick = useCallback(
-    ({ room, status, currentReservation, position }) => {
-      setSelectedRoom({ ...room, status, currentReservation });
+    ({ room, status, reservations, position }) => {
+      setSelectedRoom({ ...room, status, reservations });
       setPopupPosition(position);
     },
     []

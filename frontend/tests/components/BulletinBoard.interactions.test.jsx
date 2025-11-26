@@ -51,7 +51,7 @@ describe('BulletinBoard - Interactions', () => {
     await user.click(addFileButton);
 
     const popup = document.getElementById('popup');
-    expect(popup.classList.contains('open-popup')).toBe(true);
+    expect(popup.classList.contains('hidden')).toBe(false);
   });
 
   test('qr code can be closed', async () => {
@@ -62,11 +62,11 @@ describe('BulletinBoard - Interactions', () => {
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
 
-    const closeButton = await screen.findByText('Close');
+    const closeButton = document.getElementById('qrButton');
     await user.click(closeButton);
 
     const popup = document.getElementById('popup');
-    expect(popup.classList.contains('open-popup')).toBe(false);
+    expect(popup.classList.contains('hidden')).toBe(true);
   });
 
   test('navigation between forms works', async () => {

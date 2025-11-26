@@ -47,6 +47,13 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
       )
     : [currentForm];
 
+  const toTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+	};
+
   return (
     <div className={`pdf-container`}>
       <div className="pdf-header">
@@ -78,6 +85,11 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
         </div>
         <button className="button pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} →
+        </button>
+      </div>
+      <div>
+        <button className="button" onClick={toTop}>
+          button 🡹
         </button>
       </div>
     </div>

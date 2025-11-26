@@ -48,7 +48,9 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
     : [currentForm];
 
   const toTop = () => {
-		window.scrollTo({
+    const main = document.getElementsByClassName('main-content')[0];
+
+		main.scrollTo({
 			top: 0,
 			behavior: "smooth"
 		});
@@ -89,7 +91,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
       </div>
       <div>
         <button className="button" onClick={toTop}>
-          button 🡹
+          ⬆️
         </button>
       </div>
     </div>

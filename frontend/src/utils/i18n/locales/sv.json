@@ -34,6 +34,7 @@
     "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
   },
   "unicafe": {
+    "loading-menus": "Laddar matlistor...",
     "no-menus": "Ingen matlista tillgänglig",
     "no-menu-restaurant": "Ingen matlista tillgänglig för den här restaurangen",
     "menus-source": "Matlistan tillhandahålls av Unicafe"

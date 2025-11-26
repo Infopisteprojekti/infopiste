@@ -26,7 +26,7 @@
     "available-notices": "Lisätyt ilmoitukset",
     "back": "Takaisin näkymään",
     "no-notices": "Ei ilmoituksia",
-    "loading-notices": "Ladataan ilmoitukset..."
+    "loading-notices": "Ladataan ilmoituksia..."
   },
   "pdfdisplay": {
     "previous": "Edellinen",
@@ -44,6 +44,7 @@
   "reservation": "Varaus",
   "reserved-by": "Varaaja",  
   "unicafe": {
+    "loading-menus": "Ladataan ruokalistoja...",
     "no-menus": "Ruokalistoja ei ole saatavilla",
     "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",
     "menus-source": "Ruokalistat tarjoaa Unicafe"

@@ -24,6 +24,7 @@ const QRCode = () => {
         type="submit"
         id="qrButton"
         className="button qr-button"
+        data-testid="qr-button"
         onClick={toggleQr}
       >
         {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}

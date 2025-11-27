@@ -10,7 +10,6 @@
     "reset": "Återställ",
     "floor-label": "Våning {{label}}"
   },
-  "room-status-message": "Rum {{roomId}}\nStatus: {{status}}",
   "room-status": {
     "unavailable": "Ej tillgänglig",
     "available": "Tillgänglig",
@@ -33,10 +32,22 @@
     "next": "Nästa",
     "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
   },
+  "room": "Rum",
+  "status": "Status",
+  "capacity": "Utrymme (antal personer)",
+  "floor": "Våning",
+  "accessible": "Tillgänglig",
+  "yes": "Ja",
+  "no": "Nej",
+  "unknown": "Okänt",
+  "current-reservation": "Nuvarande reservation",
+  "upcoming-reservations": "Följande reservationer",
   "unicafe": {
     "no-menus": "Ingen matlista tillgänglig",
     "no-menu-restaurant": "Ingen matlista tillgänglig för den här restaurangen",
-    "menus-source": "Matlistan tillhandahålls av Unicafe"
+    "menus-source": "Matlistan tillhandahålls av Unicafe",
+    "climate-choice": "Klimatval",
+    "includes": "Innehåller"
   },
   "price-names": {
     "Lisäke": "Tillbehör",

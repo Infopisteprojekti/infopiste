@@ -25,9 +25,31 @@ const UnicafeMenu = () => {
     }
   }, [menus]);
 
-  if (loading) return <div>Loading menus...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!menus) return <div>No menus available.</div>;
+  if (loading || error || !menus) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+          gap: '1rem',
+        }}
+      >
+        {loading && <span className="loader"></span>}
+        <p>
+          {loading
+            ? t('unicafe.loading-menus')
+            : error
+              ? `Error: ${error}`
+              : t('unicafe.no-menus')}
+        </p>
+      </div>
+    );
+  }
 
   const menuForLang = menus[i18n.language] || menus['fi'];
   const selectedData = menuForLang.find(r => r.name === selectedRestaurant);

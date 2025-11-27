@@ -44,6 +44,7 @@
   "current-reservation": "Nuvarande reservation",
   "upcoming-reservations": "Följande reservationer",
   "unicafe": {
+    "loading-menus": "Laddar matlistor...",
     "no-menus": "Ingen matlista tillgänglig",
     "no-menu-restaurant": "Ingen matlista tillgänglig för den här restaurangen",
     "menus-source": "Matlistan tillhandahålls av Unicafe",

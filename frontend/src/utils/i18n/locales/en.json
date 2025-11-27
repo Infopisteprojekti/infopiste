@@ -44,6 +44,7 @@
   "current-reservation": "Current reservation",
   "upcoming-reservations": "Upcoming reservations",
   "unicafe": {
+    "loading-menus": "Loading menus...",
     "no-menus": "No menus available",
     "no-menu-restaurant": "No menu items available for this restaurant",
     "menus-source": "Menu data provided by Unicafe",

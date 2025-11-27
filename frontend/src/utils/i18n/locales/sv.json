@@ -21,17 +21,18 @@
     "qr-add-file": "Lägg till ett meddelande på anslagstavlan",
     "qr-close": "Stäng",
     "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format",
-    "stop-rotation": "Pausa automatisk rullning",
-    "continue-rotation": "Fortsätt automatisk rullning",
+    "stop-rotation": "Pausa bildspel",
+    "continue-rotation": "Fortsätt bildspel",
     "available-notices": "Meddelanden",
     "back": "Visa alla meddelanden",
     "no-notices": "Inga meddelanden tillgängliga",
     "loading-notices": "Laddar meddelanden..."
   },
   "pdfdisplay": {
-    "previous": "Tidigare",
-    "next": "Nästa",
-    "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
+    "previous": "Föregående",
+    "next": "Följande",
+    "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format",
+    "loading": "Laddar"
   },
   "unicafe": {
     "no-menus": "Ingen matlista tillgänglig",

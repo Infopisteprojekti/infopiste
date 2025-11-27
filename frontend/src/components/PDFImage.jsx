@@ -1,10 +1,13 @@
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFImage = ({ form, preview }) => {
   const [allPages, setPages] = useState(null);
+
+  const { t } = useTranslation();
 
   if (preview) {
     return (
@@ -34,7 +37,7 @@ const PDFImage = ({ form, preview }) => {
         key={form._id || form.fileUrl}
         onLoadError={err => console.error('PDF load error', err)}
         onLoadSuccess={({ numPages }) => setPages(numPages)}
-        loading={<div className="pdf-loading">Loading PDF…</div>}
+        loading={<div className="pdf-loading">{t('pdfdisplay.loading')}</div>}
       >
         {allPages &&
           Array.from({ length: allPages }, (_, i) => (

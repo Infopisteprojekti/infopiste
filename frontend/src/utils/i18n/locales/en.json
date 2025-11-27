@@ -30,7 +30,8 @@
   "pdfdisplay": {
     "previous": "Previous",
     "next": "Next",
-    "qr-description": "Scan QR code to add"
+    "qr-description": "Scan QR code to add",
+    "loading": "Loading"
   },
   "room": "Room",
   "status": "Status",

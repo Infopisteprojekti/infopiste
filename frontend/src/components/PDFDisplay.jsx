@@ -60,7 +60,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
     <div className={`pdf-container`}>
       <div className="pdf-header">
         <button onClick={backCallBack} className="button">
-          ← {t('bulletinboard.back')}
+          {t('bulletinboard.back')}
         </button>
         <h2>{currentForm.title}</h2>
         <button onClick={rotatePdfs} className="button">

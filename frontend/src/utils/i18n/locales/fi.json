@@ -46,6 +46,11 @@
   "unicafe": {
     "no-menus": "Ruokalistoja ei ole saatavilla",
     "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",
-    "menus-source": "Ruokalistat tarjoaa Unicafe"
+    "menus-source": "Ruokalistat tarjoaa Unicafe",
+    "climate-choice": "Ilmastovalinta",
+    "includes": "Sisältää"
+  },
+  "price-names": {
+    "Lisäke": "Lisuke"
   }
 }

@@ -31,7 +31,8 @@
   "pdfdisplay": {
     "previous": "Edellinen",
     "next": "Seuraava",
-    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
+    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
+    "loading": "Ladataan"
   },
   "room": "Huone",
   "status": "Huoneen tila",

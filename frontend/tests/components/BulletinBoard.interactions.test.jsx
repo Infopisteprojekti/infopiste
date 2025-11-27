@@ -97,7 +97,7 @@ describe('BulletinBoard - Interactions', () => {
     const form1 = await screen.findByText('Form 1');
     await user.click(form1);
 
-    const backButton = screen.getByText(/← View all notices/i);
+    const backButton = screen.getByText(/View all notices/i);
     await user.click(backButton);
     expect(screen.getByText('Available notices')).toBeInTheDocument();
   });

@@ -40,8 +40,8 @@
   "yes": "Yes",
   "no": "No",
   "unknown": "Unknown",
-  "reservation": "Reservation",
-  "upcoming-reservations": "Upcoming Reservations",
+  "current-reservation": "Current reservation",
+  "upcoming-reservations": "Upcoming reservations",
   "unicafe": {
     "no-menus": "No menus available",
     "no-menu-restaurant": "No menu items available for this restaurant",

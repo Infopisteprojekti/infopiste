@@ -32,13 +32,11 @@ const RoomPopup = ({ room, position, onClose }) => {
   };
 
   const now = dayjs().utc();
-  const upcomingReservations =
-    room.roomReservations ||
-    []
-      .filter(r => dayjs.utc(r.start).isAfter(now))
-      .sort(
-        (a, b) => dayjs.utc(a.start).valueOf() - dayjs.utc(b.start).valueOf()
-      );
+  const upcomingReservations = (room.roomReservations || [])
+    .filter(r => dayjs.utc(r.start).isAfter(now))
+    .sort(
+      (a, b) => dayjs.utc(a.start).valueOf() - dayjs.utc(b.start).valueOf()
+    );
 
   return (
     <div
@@ -59,7 +57,7 @@ const RoomPopup = ({ room, position, onClose }) => {
         </p>
 
         <p data-testid="room-reservation">
-          {t('reservation')}:{' '}
+          {t('current-reservation')}:{' '}
           {room.currentReservation?.start
             ? `${formatTime(room.currentReservation.start)} - ${formatTime(room.currentReservation.end)}`
             : '-'}

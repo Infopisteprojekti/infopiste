@@ -31,7 +31,7 @@ const FloorDisplay = ({
 
       statusMap.set(room.displayId, {
         status: currentReservation ? STATUSES.RESERVED : STATUSES.AVAILABLE,
-        currentReservation,
+        currentReservation: currentReservation || {},
         roomReservations: roomReservations,
       });
     });

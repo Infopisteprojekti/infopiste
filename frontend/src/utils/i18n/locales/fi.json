@@ -41,8 +41,8 @@
   "yes": "Kyllä",
   "no": "Ei",
   "unknown": "Ei tiedossa",
-  "reservation": "Varaus",
-  "reserved-by": "Varaaja",  
+  "current-reservation": "Tämänhetkinen varaus",
+  "upcoming-reservations": "Tulevat varaukset",
   "unicafe": {
     "no-menus": "Ruokalistoja ei ole saatavilla",
     "no-menu-restaurant": "Ruokalistaa ei ole saatavilla tälle ravintolalle",

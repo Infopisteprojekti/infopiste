@@ -1,7 +1,7 @@
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useState } from 'react';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFImage = ({ form, preview }) => {
   const [allPages, setPages] = useState(null);

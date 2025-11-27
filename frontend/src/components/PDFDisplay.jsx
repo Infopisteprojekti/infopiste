@@ -80,7 +80,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
         </button>
         <div className="pdf-wrapper">
           {groupedForms.map(f => (
-            <div key={f._id || f.fileUrl} style={{ marginBottom: 24 }}>
+            <div key={f._id || f.fileUrl}>
               <PDFImage form={f} preview={false} />
             </div>
           ))}

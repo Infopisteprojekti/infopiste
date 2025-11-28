@@ -8,7 +8,7 @@
     "zoom-in": "Suurenna",
     "zoom-out": "Pienennä",
     "reset": "Palauta",
-    "floor-label": "{{label}}. kerros"
+    "floor-label": "Kerros {{label}}"
   },
   "room-status-message": "Huone {{roomId}}\nTila: {{status}}",
   "room-status": {

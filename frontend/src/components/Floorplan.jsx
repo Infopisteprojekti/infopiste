@@ -3,7 +3,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { useAppSettings } from '@/context/useAppSettings.js';
+import { useAppSettings } from '@/hooks/useAppSettings.js';
 
 import FloorDisplay from '@/components/FloorDisplay';
 import RoomPopup from '@/components/RoomPopup';
@@ -17,7 +17,7 @@ const POLLING_INTERVAL = 30000; // 30 seconds
 
 const Floorplan = () => {
   const { t } = useTranslation();
-  const { settings, setSettings, resetTrigger } = useAppSettings();
+  const { settings, setSettings } = useAppSettings();
 
   const [floor, setFloor] = useState(Number(settings.floor) || 3);
   const [rooms, setRooms] = useState([]);
@@ -28,10 +28,10 @@ const Floorplan = () => {
   const transformRef = useRef(null);
 
   useEffect(() => {
-    if (transformRef.current) {
-      transformRef.current.resetTransform();
-    }
-  }, [resetTrigger]);
+    setFloor(Number(settings.floor));
+    setSelectedRoom(null);
+    transformRef.current?.resetTransform();
+  }, [settings.floor]);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -52,12 +52,11 @@ const Floorplan = () => {
       }
     };
 
-    fetchRooms();
-    fetchReservations();
+    Promise.all([fetchRooms(), fetchReservations()]);
 
     const interval = setInterval(fetchReservations, POLLING_INTERVAL);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   const handleRoomClick = useCallback(
     ({ room, status, currentReservation, roomReservations, position }) => {
@@ -75,6 +74,7 @@ const Floorplan = () => {
   const handleFloorChange = newFloor => {
     setFloor(newFloor);
     setSelectedRoom(null);
+    setSettings({ ...settings, floor: newFloor });
     transformRef.current?.resetTransform();
   };
 
@@ -148,6 +148,7 @@ const Floorplan = () => {
                 reservations={reservations}
                 onRoomClick={handleRoomClick}
                 svgComponent={currentFloorSVG}
+                markerCoords={settings.marker}
               />
             </TransformComponent>
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
+import { MapPin } from 'lucide-react';
 
 import STATUSES from '@/constants/roomStatus';
 import '@/styles/components/FloorDisplay.css';
@@ -13,6 +14,7 @@ const FloorDisplay = ({
   reservations,
   onRoomClick,
   svgComponent: FloorSVG,
+  markerCoords,
 }) => {
   const floorplanRef = useRef(null);
 
@@ -96,6 +98,18 @@ const FloorDisplay = ({
       data-testid="floorplan-svg"
     >
       <FloorSVG />
+
+      {markerCoords && markerCoords.floor === floor && (
+        <div
+          style={{
+            position: 'absolute',
+            left: `${markerCoords.x}%`,
+            top: `${markerCoords.y}%`,
+          }}
+        >
+          <MapPin color="#ff0000" />
+        </div>
+      )}
     </div>
   );
 };

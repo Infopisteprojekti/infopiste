@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import '@/styles/components/Navbar.css';
 import { useContext } from 'react';
 import LoadingContext from '@/context/LoadingContext';
+import Feedback from '@/components/Feedback.jsx';
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -31,6 +32,7 @@ const Navbar = () => {
         {t('navbar.unicafe')}
       </Link>
       {loading && <span className="loader"></span>}
+      <Feedback />
       <LanguageSwitcher />
     </div>
   );

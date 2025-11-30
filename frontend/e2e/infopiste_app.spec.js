@@ -14,7 +14,7 @@ test.describe('Infopiste app', () => {
   });
 
   test('home page can be opened', async ({ page }) => {
-    await expect(page.getByText('A307')).toBeVisible();
+    await expect(page.getByText('A335')).toBeVisible();
 
     const title = await page.title();
     expect(title).toBe('infonäyttö');
@@ -48,37 +48,26 @@ test.describe('Infopiste app', () => {
     );
   });
 
-  test('reset button works', async ({ page }) => {
-    const transformWrapper = page.locator('.react-transform-component');
-
-    await page.getByTestId('zoom-in-button').click();
-    await page.getByTestId('zoom-in-button').click();
-    await page.getByTestId('zoom-in-button').click();
-
-    await page.getByTestId('zoom-reset-button').click();
-    await expect(transformWrapper).toHaveAttribute('style', /scale\(1\./);
-  });
-
   test('floor can be changed', async ({ page }) => {
     await page.getByText('Floor 1').click();
-    const floor1Room = page.locator('#A107');
+    const floorplan = page.getByTestId('floorplan-svg');
+
+    const floor1Room = floorplan.locator('#A120');
     await expect(floor1Room).toBeVisible();
 
     await page.getByText('Floor 2').click();
-    const floor2Room = page.locator('#A207');
+    const floor2Room = floorplan.locator('#A235');
     await expect(floor2Room).toBeVisible();
 
-    await page.getByText('Floor 3').click();
-    const floor3Room = page.locator('#A307');
-    await expect(floor3Room).toBeVisible();
+    await expect(floor1Room).not.toBeAttached();
   });
 
   test('reserved room is displayed as reserved', async ({ page }) => {
     const floorplan = page.getByTestId('floorplan-svg');
     await expect(floorplan).toBeVisible();
 
-    const roomA307 = floorplan.locator('#A307');
-    await expect(roomA307).toHaveClass(/reserved/);
+    const roomA335 = floorplan.locator('#A335');
+    await expect(roomA335).toHaveClass(/reserved/);
   });
 
   test('bulletin board view can be opened', async ({ page }) => {

@@ -24,7 +24,7 @@ const Feedback = () => {
         className="button nav-button"
         onClick={changeVisibility}
       >
-        {visibility ? t('bulletinboard.qr-close') : 'Feedback'}
+        {visibility ? t('bulletinboard.qr-close') : t('feedback.open')}
       </button>
 
       <div
@@ -37,9 +37,7 @@ const Feedback = () => {
         }}
       >
         <div className="popup-header">
-          <h3 className="popup-title">
-            {'Give feedback via email to ashwin.rao@helsinki.fi'}
-          </h3>
+          <h3 className="popup-title">{t('feedback.description')}</h3>
           <button className="button" onClick={changeVisibility}>
             {t('bulletinboard.qr-close')}
           </button>

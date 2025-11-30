@@ -54,5 +54,9 @@
   },
   "price-names": {
     "Lisäke": "Lisuke"
+  },
+  "feedback": {
+    "open": "Anna palautetta",
+    "description": "Anna palautetta sähköpostilla osoitteeseen ashwin.rao@helsinki.fi"
   }
 }

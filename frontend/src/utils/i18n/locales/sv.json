@@ -56,5 +56,9 @@
     "Lounas": "Lunch",
     "Vegaanilounas": "Veganlunch",
     "Jälkiruoka": "Efterrätt"
+  },
+  "feedback": {
+    "open": "Ge respons",
+    "description": "Ge respons via e-post till ashwin.rao@helsinki.fi"
   }
 }

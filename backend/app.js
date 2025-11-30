@@ -15,7 +15,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(apiLimiter);
 app.use(requestLogger);
 
 app.set('trust proxy', 1);
@@ -26,6 +25,10 @@ app.use('/api/forms', formsRouter);
 app.use('/api/unicafe', unicafeRouter);
 
 app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok' }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(apiLimiter);
+}
 
 app.use(unknownEndpoint);
 

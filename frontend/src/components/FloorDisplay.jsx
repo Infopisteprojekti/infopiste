@@ -108,7 +108,7 @@ const FloorDisplay = ({
             top: `${markerCoords.y}%`,
           }}
         >
-          <MapPin color="#ff0000" />
+          <MapPin color="#ff0000" fill="#ff0000" />
         </div>
       )}
     </div>

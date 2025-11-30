@@ -43,11 +43,13 @@ const FloorDisplay = ({
     const svg = floorplanRef.current.querySelector('svg');
     if (!svg) return;
 
-    const roomRects = svg.querySelectorAll('g > rect[id]');
+    const roomElements = svg.querySelectorAll(
+      '#layer2 > rect[id], #layer2 > path[id]'
+    );
     const handlers = [];
 
-    roomRects.forEach(rect => {
-      const roomId = rect.id;
+    roomElements.forEach(element => {
+      const roomId = element.id;
       const room = rooms.find(r => r.displayId === roomId);
       const statusInfo = roomStatusMap.get(roomId) || {
         status: STATUSES.UNAVAILABLE,
@@ -56,17 +58,16 @@ const FloorDisplay = ({
       };
 
       // update svg rect status
-      rect.classList.remove(...Object.values(STATUSES));
-      rect.classList.add('room', statusInfo.status);
+      element.classList.remove(...Object.values(STATUSES));
+      element.classList.add('room', statusInfo.status);
 
       const handleClick = () => {
-        const rectBounds = rect.getBoundingClientRect();
+        const rectBounds = element.getBoundingClientRect();
 
         onRoomClick({
           room: room || {
             displayId: roomId,
             displayName: roomId,
-            status: STATUSES.UNKNOWN,
           },
           status: statusInfo.status,
           currentReservation: statusInfo.currentReservation,
@@ -78,13 +79,13 @@ const FloorDisplay = ({
         });
       };
 
-      rect.addEventListener('click', handleClick);
-      handlers.push({ rect, handleClick });
+      element.addEventListener('click', handleClick);
+      handlers.push({ element, handleClick });
     });
 
     return () => {
-      handlers.forEach(({ rect, handleClick }) => {
-        rect.removeEventListener('click', handleClick);
+      handlers.forEach(({ element, handleClick }) => {
+        element.removeEventListener('click', handleClick);
       });
     };
   }, [floor, rooms, reservations, roomStatusMap, onRoomClick]);

@@ -22,11 +22,13 @@ describe('FloorDisplay', () => {
 
   const MockSVG = () => (
     <svg data-testid="mock-svg">
-      <g>
+      <g id="layer2">
         <rect id="R101" data-testid="room-R101" />
         <rect id="R102" data-testid="room-R102" />
         <rect id="R103" data-testid="room-R103" />
       </g>
+      {/* elements outside layer2 of the svg should not be modified */}
+      <rect id="FloorplanPillar" data-testid="FloorplanPillar" />
     </svg>
   );
 
@@ -71,6 +73,24 @@ describe('FloorDisplay', () => {
       expect(unavailableRoom.classList.contains(STATUSES.UNAVAILABLE)).toBe(true);
     });
   });
+
+  it('does not modify elements outside #layer2', async () => {
+    const { getByTestId } = render(
+      <FloorDisplay
+        floor={3}
+        rooms={mockRooms}
+        reservations={mockReservations}
+        onRoomClick={mockOnRoomClick}
+        svgComponent={MockSVG}
+      />
+    );
+
+    await waitFor(() => {
+      const floorplanPillar = getByTestId('FloorplanPillar');
+      // should not have room class applied
+      expect(floorplanPillar.classList.contains('room')).toBe(false);
+    });
+  });  
 
   it('calls onRoomClick with correct data when room is clicked', async () => {
     const { getByTestId } = render(
@@ -127,7 +147,6 @@ describe('FloorDisplay', () => {
         room: expect.objectContaining({
           displayId: 'R103',
           displayName: 'R103',
-          status: STATUSES.UNKNOWN,
         }),
         status: STATUSES.UNAVAILABLE,
       })

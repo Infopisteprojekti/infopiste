@@ -56,5 +56,9 @@
     "Lounas": "Lunch",
     "Vegaanilounas": "Vegan Lunch",
     "Jälkiruoka": "Dessert"
+  },
+  "feedback": {
+    "open": "Give feedback",
+    "description": "Give feedback via email to ashwin.rao@helsinki.fi"
   }
 }

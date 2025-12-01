@@ -3,7 +3,6 @@ import {
   useState,
   useRef,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useCallback,
 } from 'react';
@@ -88,7 +87,7 @@ export const AppSettingsProvider = ({
   children,
   inactivityTimeoutSeconds = INACTIVITY_TIMEOUT_SECONDS,
   inactivityNavigateTo = '/',
-  enableInactivity = isTest,
+  enableInactivity = !isTest,
 }) => {
   const location = useLocation();
 

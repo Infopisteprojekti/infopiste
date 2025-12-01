@@ -34,6 +34,10 @@ const Floorplan = () => {
   }, [resetTrigger]);
 
   useEffect(() => {
+    setFloor(Number(settings.floor));
+  }, [resetTrigger, settings.floor]);
+
+  useEffect(() => {
     const fetchRooms = async () => {
       try {
         const response = await roomService.getRooms();

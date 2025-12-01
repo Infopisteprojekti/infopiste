@@ -11,8 +11,6 @@ Staging in <https://infopiste-ohtuprojekti-staging.ext.ocp-test-0.k8s.it.helsink
 
 Clone the repository and install docker to get started.
 
-Install dependencies before running the project for the first time with command `npm i`.
-
 Create a `.env` file inside the project's root directory. In that file, copy the contents of the `.sample.env` and add the correct values for the variables.
 
 > [!CAUTION]  
@@ -61,6 +59,26 @@ $ npm run reset # Rebuild the production docker images
 ```
 
 The application in production mode can be accessed from `http://localhost:5173`.
+
+## Configuring the application settings
+
+The default settings for the application can be configured using optional url parameters. The application uses these settings to set a reset target for resetting after
+
+Default language can be set with `lang` parameter that has the options `fi`for finnish, `sv` for swedish and `en` for english.
+
+For example default language can be set to english with url:
+
+`http://localhost:5713?lang=en`
+
+"You are here marker" can be added to the floorplan using `marker` parameter. Marker requires three numerical values that are separated by commas. First value sets the floor (options are 0, 1, 2, 3), second value sets the x coordinate (value from 0 to 100) and third value sets the y coordinate (value from 0 to 100).
+
+For example a marker can be set to the middle of first floor with url:
+
+`http://localhost:5713?marker=1,50,50`
+
+You can also set multiple parameters by separating them with an ampersand:
+
+`http://localhost:5713?lang=en&marker=1,50,50`
 
 ## Documentation
 

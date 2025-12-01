@@ -32,8 +32,10 @@ const Navbar = () => {
         {t('navbar.unicafe')}
       </Link>
       {loading && <span className="loader"></span>}
-      <Feedback />
-      <LanguageSwitcher />
+      <div className="navbar-right-side">
+        <Feedback />
+        <LanguageSwitcher />
+      </div>
     </div>
   );
 };

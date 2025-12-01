@@ -28,10 +28,19 @@ const Floorplan = () => {
   const transformRef = useRef(null);
 
   useEffect(() => {
-    setFloor(Number(settings.floor));
+    setFloor(settings.floor);
     setSelectedRoom(null);
-    transformRef.current?.resetTransform();
-  }, [settings.floor]);
+
+    if (settings.marker && settings.marker.floor === settings.floor) {
+      const { x, y } = settings.marker;
+
+      setTimeout(() => {
+        transformRef.current?.zoomToElement('active-marker', 2, 500, 'easeOut');
+      }, 100);
+    } else {
+      transformRef.current?.resetTransform();
+    }
+  }, [settings.floor, settings.marker, settings.resetToken]);
 
   useEffect(() => {
     const fetchRooms = async () => {

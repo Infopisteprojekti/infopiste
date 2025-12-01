@@ -8,18 +8,20 @@ const getDefaultSettings = () => {
   const urlParams = new URLSearchParams(window.location.search);
 
   const markerParam = urlParams.get('marker');
-
   let marker = null;
+  let floor = 3;
 
   if (markerParam) {
-    const [floor, x, y] = markerParam.split(',').map(Number);
-    marker = { floor, x, y };
+    const [markerFloor, x, y] = markerParam.split(',').map(Number);
+    marker = { floor: markerFloor, x, y };
+    floor = markerFloor;
   }
 
   return {
     lang: urlParams.get('lang') ?? 'fi',
-    floor: urlParams.get('floor') ? Number(urlParams.get('floor')) : 3,
+    floor,
     marker,
+    resetToken: Date.now(),
   };
 };
 
@@ -45,7 +47,10 @@ export const AppSettingsProvider = ({
 
   const restoreDefaults = useCallback(() => {
     // console.log('Restoring default settings due to inactivity');
-    setSettings(defaultSettings.current);
+    setSettings({
+      ...defaultSettings.current,
+      resetToken: Date.now(),
+    });
     navigate(inactivityNavigateTo);
   }, [navigate, inactivityNavigateTo]);
 

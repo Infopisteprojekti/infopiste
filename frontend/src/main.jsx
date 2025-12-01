@@ -7,7 +7,7 @@ import '@/styles/index.css';
 
 createRoot(document.getElementById('root')).render(
   <Router>
-    <AppSettingsProvider inactivityTimeoutSeconds={60} inactivityNavigateTo="/">
+    <AppSettingsProvider inactivityTimeoutSeconds={30} inactivityNavigateTo="/">
       <App />
     </AppSettingsProvider>
   </Router>

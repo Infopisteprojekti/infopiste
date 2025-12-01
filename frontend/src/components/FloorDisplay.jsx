@@ -102,10 +102,12 @@ const FloorDisplay = ({
 
       {markerCoords && markerCoords.floor === floor && (
         <div
+          id="active-marker"
           style={{
             position: 'absolute',
             left: `${markerCoords.x}%`,
             top: `${markerCoords.y}%`,
+            transform: 'translate(-50%, -100%)',
           }}
         >
           <MapPin color="#ff0000" fill="#ff0000" />

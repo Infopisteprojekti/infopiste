@@ -17,6 +17,8 @@ const PDFImage = ({ form, preview }) => {
         onLoadError={err => {
           console.error(err);
         }}
+        loading={t('pdfdisplay.loading')}
+        error={t('pdfdisplay.error')}
       >
         <Page
           pageNumber={1}
@@ -38,6 +40,7 @@ const PDFImage = ({ form, preview }) => {
         onLoadError={err => console.error('PDF load error', err)}
         onLoadSuccess={({ numPages }) => setPages(numPages)}
         loading={<div className="pdf-loading">{t('pdfdisplay.loading')}</div>}
+        error={t('pdfdisplay.error')}
       >
         {allPages &&
           Array.from({ length: allPages < 6 ? allPages : 5 }, (_, i) => (

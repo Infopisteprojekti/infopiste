@@ -31,7 +31,8 @@
     "previous": "Previous",
     "next": "Next",
     "qr-description": "Scan QR code to add",
-    "loading": "Loading"
+    "loading": "Loading",
+    "error": "Couldn't load PDF."
   },
   "room": "Room",
   "status": "Status",

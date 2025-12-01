@@ -52,6 +52,8 @@ const BulletinBoard = () => {
       </div>
     );
   }
+  
+  console.log('Forms:', forms)
 
   if (!selectedForm) {
     return (

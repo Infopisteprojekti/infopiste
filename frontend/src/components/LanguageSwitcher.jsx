@@ -28,7 +28,10 @@ const LanguageSwitcher = () => {
           <div className="lang__option-content-inner">
             <img
               className="lang__flag"
-              src={new URL(`../assets/flags/${option.flag}.png`, import.meta.url).href}
+              src={
+                new URL(`../assets/flags/${option.flag}.png`, import.meta.url)
+                  .href
+              }
               width="24"
               height="18"
             ></img>

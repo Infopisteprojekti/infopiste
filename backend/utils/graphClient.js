@@ -4,6 +4,7 @@ import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-grap
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import logger from './logger.js';
+import { excelDateToDayjs } from './date.js';
 import {
   CLIENT_ID,
   CLIENT_SECRET,
@@ -68,6 +69,7 @@ const client = {
 
   async getFormSubmissions() {
     const api_url = `groups/${GROUP_ID}/drive/items/${FILE_ID}/workbook/worksheets/${SHEET_NAME}/range/usedRange`;
+    const dateColumns = ['Aloituspvm', 'Lopetuspvm'];
 
     try {
       const response = await graphClient.api(api_url).get();
@@ -76,8 +78,15 @@ const client = {
       return rows.map(row => {
         const obj = {};
         headers.forEach((header, i) => {
-          obj[header] = row[i] ?? null;
+          const value = row[i] ?? null;
+
+          if (dateColumns.includes(header) && typeof value === 'number') {
+            obj[header] = excelDateToDayjs(value).toISOString();
+          } else {
+            obj[header] = value;
+          }
         });
+
         return obj;
       });
     } catch (error) {

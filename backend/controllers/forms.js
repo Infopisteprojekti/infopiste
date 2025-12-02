@@ -4,6 +4,8 @@ import redis from '../utils/redisClient.js';
 import { TTL_SECONDS } from '../utils/config.js';
 import fetch from 'node-fetch';
 
+import graphClient from '../utils/graphClient.js';
+
 const router = Router();
 
 router.get('/', async (request, response) => {
@@ -35,6 +37,18 @@ router.get('/', async (request, response) => {
     response.status(200).json({
       source: 'database',
       data: proxiedForms,
+    });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+});
+
+router.get('/test', async (request, response) => {
+  try {
+    const res = await graphClient.getFormSubmissions();
+    response.status(200).json({
+      source: 'database',
+      data: res,
     });
   } catch (err) {
     response.status(500).json({ error: err });

@@ -4,7 +4,14 @@ import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-grap
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import logger from './logger.js';
-import { CLIENT_ID, CLIENT_SECRET, TENANT_ID } from './config.js';
+import {
+  CLIENT_ID,
+  CLIENT_SECRET,
+  TENANT_ID,
+  GROUP_ID,
+  FILE_ID,
+  SHEET_NAME,
+} from './config.js';
 
 dayjs.extend(utc);
 
@@ -57,6 +64,25 @@ const client = {
         endTime: dayjs.utc(event.end.dateTime).toDate(),
       }));
     });
+  },
+
+  async getFormSubmissions() {
+    const api_url = `groups/${GROUP_ID}/drive/items/${FILE_ID}/workbook/worksheets/${SHEET_NAME}/range/usedRange`;
+
+    try {
+      const response = await graphClient.api(api_url).get();
+      const [headers, ...rows] = response.values;
+
+      return rows.map(row => {
+        const obj = {};
+        headers.forEach((header, i) => {
+          obj[header] = row[i] ?? null;
+        });
+        return obj;
+      });
+    } catch (error) {
+      logger.error('Error fetching Excel data:', error);
+    }
   },
 
   async initialize() {

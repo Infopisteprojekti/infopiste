@@ -15,6 +15,9 @@ services:
       CLIENT_SECRET: ${CLIENT_SECRET}
       TENANT_ID: ${TENANT_ID}
       LOAD_MOCK_DATA: ${LOAD_MOCK_DATA}
+      GROUP_ID: ${GROUP_ID}
+      FILE_ID: ${FILE_ID}
+      SHEET_NAME: ${SHEET_NAME}
     depends_on:
       - mongo
       - redis

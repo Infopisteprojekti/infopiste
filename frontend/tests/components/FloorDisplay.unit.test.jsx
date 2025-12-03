@@ -22,12 +22,12 @@ describe('FloorDisplay', () => {
 
   const MockSVG = () => (
     <svg data-testid="mock-svg">
-      <g id="layer2">
+      <g id="overlay">
         <rect id="R101" data-testid="room-R101" />
         <rect id="R102" data-testid="room-R102" />
         <rect id="R103" data-testid="room-R103" />
       </g>
-      {/* elements outside layer2 of the svg should not be modified */}
+      {/* elements outside the overlay layer of the svg should not be modified */}
       <rect id="FloorplanPillar" data-testid="FloorplanPillar" />
     </svg>
   );
@@ -74,7 +74,7 @@ describe('FloorDisplay', () => {
     });
   });
 
-  it('does not modify elements outside #layer2', async () => {
+  it('does not modify elements outside #overlay', async () => {
     const { getByTestId } = render(
       <FloorDisplay
         floor={3}

@@ -23,3 +23,5 @@ export const REDIS_URL = `redis://default:redis@${REDIS_HOST}:6379`;
 export const TTL_SECONDS = 60;
 
 export const LOAD_MOCK_DATA = process.env.LOAD_MOCK_DATA === 'true';
+
+export const MAX_PDF_DAYS = 14;

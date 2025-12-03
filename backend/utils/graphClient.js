@@ -3,8 +3,9 @@ import { Client } from '@microsoft/microsoft-graph-client';
 import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials/index.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
+import isBetween from 'dayjs/plugin/isBetween.js';
 import logger from './logger.js';
-import { excelDateToDayjs } from './date.js';
+import { excelDateToDayjs, isValidSubmissionDateRange } from './date.js';
 import {
   CLIENT_ID,
   CLIENT_SECRET,
@@ -16,6 +17,7 @@ import {
 } from './config.js';
 
 dayjs.extend(utc);
+dayjs.extend(isBetween);
 
 const GRAPH_SCOPES = ['https://graph.microsoft.com/.default'];
 
@@ -76,13 +78,14 @@ const client = {
       const response = await graphClient.api(api_url).get();
       const [headers, ...rows] = response.values;
 
-      return rows.map(row => {
+      const parsed = rows.map(row => {
         const obj = {};
         headers.forEach((header, i) => {
           const value = row[i] ?? null;
 
           if (dateColumns.includes(header) && typeof value === 'number') {
-            obj[header] = excelDateToDayjs(value).toISOString();
+            const isEndDate = header === 'Lopetuspvm';
+            obj[header] = excelDateToDayjs(value, isEndDate).toISOString();
           } else {
             obj[header] = value;
           }
@@ -90,6 +93,13 @@ const client = {
 
         return obj;
       });
+
+      const now = dayjs();
+      return parsed.filter(
+        row =>
+          isValidSubmissionDateRange(row.Aloituspvm, row.Lopetuspvm) &&
+          now.isBetween(row.Aloituspvm, row.Lopetuspvm, 'day', '[]')
+      );
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
       throw error;

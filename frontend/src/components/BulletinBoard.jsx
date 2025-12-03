@@ -30,6 +30,13 @@ const BulletinBoard = () => {
     fetchForms();
   }, []);
 
+  useEffect(() => {
+    if (!selectedForm) {
+      setPreviewLoading(true);
+      setLoadCount(0);
+    }
+  }, [selectedForm]);
+
   const handleImageLoad = () => {
     setLoadCount((prev) => {
       const newCount = prev + 1;

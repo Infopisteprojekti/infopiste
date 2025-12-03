@@ -8,6 +8,8 @@ import graphClient from '../utils/graphClient.js';
 
 const router = Router();
 
+const SUBMISSIONS_TLL_SECONDS = 30 * 60;
+
 router.get('/', async (request, response) => {
   const cacheKey = 'forms:all';
 
@@ -44,11 +46,82 @@ router.get('/', async (request, response) => {
 });
 
 router.get('/test', async (request, response) => {
+  // const cacheKey = 'form_submissions';
+
   try {
     const res = await graphClient.getFormSubmissions();
     response.status(200).json({
-      source: 'database',
+      source: 'graph',
       data: res,
+    });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+});
+
+router.get('/test/files', async (request, response) => {
+  try {
+    const res = await graphClient.getDriveItems();
+    response.status(200).json({
+      source: 'graph',
+      data: res,
+    });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+});
+
+router.get('/test/forms', async (request, response) => {
+  const cacheKey = 'forms:test';
+
+  try {
+    const cached = await redis.get(cacheKey);
+    if (cached) {
+      return response.status(200).json({
+        source: 'cache',
+        data: JSON.parse(cached),
+      });
+    }
+
+    const [submissions, files] = await Promise.all([
+      graphClient.getFormSubmissions(),
+      graphClient.getDriveItems(),
+    ]);
+
+    const fileMap = new Map();
+    files.forEach(file => {
+      if (file.webUrl && file.downloadUrl) {
+        fileMap.set(file.webUrl, file.downloadUrl);
+      }
+    });
+
+    const result = submissions
+      .map(row => {
+        const excelUrl = row['Ilmoitus pdf-muodossa'];
+
+        if (!excelUrl) return null;
+
+        const downloadUrl = fileMap.get(excelUrl);
+
+        if (!downloadUrl) return null;
+
+        return {
+          title: row['Ilmoituksen otsikko'] || null,
+          fileUrl: downloadUrl,
+          startDate: row['Aloituspvm'] || null,
+          endDate: row['Lopetuspvm'] || null,
+        };
+      })
+      .filter(Boolean);
+
+    if (result.length > 0) {
+      await redis.set(cacheKey, JSON.stringify(result));
+      await redis.expire(cacheKey, SUBMISSIONS_TLL_SECONDS);
+    }
+
+    response.status(200).json({
+      source: 'graph',
+      data: result,
     });
   } catch (err) {
     response.status(500).json({ error: err });

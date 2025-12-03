@@ -38,7 +38,7 @@ const BulletinBoard = () => {
   }, [selectedForm]);
 
   const handleImageLoad = () => {
-    setLoadCount((prev) => {
+    setLoadCount(prev => {
       const newCount = prev + 1;
       if (newCount >= forms.length) {
         setPreviewLoading(false);
@@ -86,24 +86,29 @@ const BulletinBoard = () => {
           {t('bulletinboard.available-notices')}
         </p>
         {previewLoading && (
-          <div style={{ 
-        display: 'flex',
-        width: '100%',
-        height: '77vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        gap: '1rem',
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              height: '77vh',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              gap: '1rem',
+            }}
+          >
             <span className="loader"></span>
             <p>{t('bulletinboard.loading-notices')}</p>
           </div>
         )}
-        <div className="pdf-grid" style={{
-          opacity: previewLoading ? 0 : 1,
-          pointerEvents: previewLoading ? 'none' : 'auto',
-        }}>
+        <div
+          className="pdf-grid"
+          style={{
+            opacity: previewLoading ? 0 : 1,
+            pointerEvents: previewLoading ? 'none' : 'auto',
+          }}
+        >
           {forms.map((form, index) => (
             <div
               key={form._id}

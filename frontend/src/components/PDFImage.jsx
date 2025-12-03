@@ -10,7 +10,7 @@ const PDFImage = ({ form, preview, onLoaded }) => {
 
   if (preview) {
     return (
-        <Document
+      <Document
         file={form.fileUrl}
         key={form._id}
         onLoadError={err => {
@@ -28,7 +28,7 @@ const PDFImage = ({ form, preview, onLoaded }) => {
           renderAnnotationLayer={false}
         />
       </Document>
-    );      
+    );
   }
 
   if (!form || !form.fileUrl) return null;

@@ -14,6 +14,8 @@ export const FILE_ID = process.env.FILE_ID;
 
 export const SHEET_NAME = process.env.SHEET_NAME;
 
+export const FOLDER_ID = process.env.FOLDER_ID;
+
 const REDIS_HOST = process.env.REDIS_HOST;
 
 export const REDIS_URL = `redis://default:redis@${REDIS_HOST}:6379`;

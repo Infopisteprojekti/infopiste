@@ -12,6 +12,7 @@ import {
   GROUP_ID,
   FILE_ID,
   SHEET_NAME,
+  FOLDER_ID,
 } from './config.js';
 
 dayjs.extend(utc);
@@ -91,6 +92,30 @@ const client = {
       });
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
+      throw error;
+    }
+  },
+
+  async getDriveItems() {
+    const api_url = `groups/${GROUP_ID}/drive/items/${FOLDER_ID}/children`;
+    try {
+      const response = await graphClient.api(api_url).get();
+
+      const items = response.value || [];
+
+      const result = items.map(item => ({
+        id: item.id,
+        name: item.name,
+        webUrl: item.webUrl,
+        downloadUrl: item['@microsoft.graph.downloadUrl'],
+        size: item.size,
+        createdDateTime: item.createdDateTime,
+      }));
+
+      return result;
+    } catch (error) {
+      logger.error('Error fetching drive items:', error);
+      throw error;
     }
   },
 

@@ -13,6 +13,8 @@ const BulletinBoard = () => {
   const [selectedForm, setSelectedForm] = useState(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [previewLoading, setPreviewLoading] = useState(true);
+  const [loadCount, setLoadCount] = useState(0);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -27,6 +29,16 @@ const BulletinBoard = () => {
     };
     fetchForms();
   }, []);
+
+  const handleImageLoad = () => {
+    setLoadCount((prev) => {
+      const newCount = prev + 1;
+      if (newCount >= forms.length) {
+        setPreviewLoading(false);
+      }
+      return newCount;
+    });
+  };
 
   if (loading || forms.length === 0) {
     return (
@@ -52,8 +64,6 @@ const BulletinBoard = () => {
       </div>
     );
   }
-  
-  console.log('Forms:', forms)
 
   if (!selectedForm) {
     return (
@@ -68,7 +78,25 @@ const BulletinBoard = () => {
         >
           {t('bulletinboard.available-notices')}
         </p>
-        <div className="pdf-grid">
+        {previewLoading && (
+          <div style={{ 
+        display: 'flex',
+        width: '100%',
+        height: '77vh',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+        gap: '1rem',
+          }}>
+            <span className="loader"></span>
+            <p>{t('bulletinboard.loading-notices')}</p>
+          </div>
+        )}
+        <div className="pdf-grid" style={{
+          opacity: previewLoading ? 0 : 1,
+          pointerEvents: previewLoading ? 'none' : 'auto',
+        }}>
           {forms.map((form, index) => (
             <div
               key={form._id}
@@ -78,7 +106,7 @@ const BulletinBoard = () => {
                 setIndex(index);
               }}
             >
-              <PDFImage form={form} preview={true} />
+              <PDFImage form={form} preview={true} onLoaded={handleImageLoad} />
               <h4 title={form.title}>
                 {form.title.length > 12
                   ? form.title.slice(0, 12) + '...'

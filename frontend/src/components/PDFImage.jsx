@@ -4,20 +4,21 @@ import { useTranslation } from 'react-i18next';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const PDFImage = ({ form, preview }) => {
+const PDFImage = ({ form, preview, onLoaded }) => {
   const [allPages, setPages] = useState(null);
-
   const { t } = useTranslation();
 
   if (preview) {
     return (
-      <Document
+        <Document
         file={form.fileUrl}
         key={form._id}
         onLoadError={err => {
           console.error(err);
+          onLoaded && onLoaded(form._id);
         }}
-        loading={t('pdfdisplay.loading')}
+        onLoadSuccess={() => onLoaded && onLoaded(form._id)}
+        loading={null}
         error={t('pdfdisplay.error')}
       >
         <Page
@@ -27,7 +28,7 @@ const PDFImage = ({ form, preview }) => {
           renderAnnotationLayer={false}
         />
       </Document>
-    );
+    );      
   }
 
   if (!form || !form.fileUrl) return null;

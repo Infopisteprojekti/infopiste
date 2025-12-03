@@ -69,7 +69,7 @@ const BulletinBoard = () => {
         <div className="pdf-grid">
           {forms.map((form, index) => (
             <div
-              key={form._id}
+              key={form.id}
               className="pdf-card"
               onClick={() => {
                 setSelectedForm(form);

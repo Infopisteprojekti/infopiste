@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import Form from '../models/form.js';
 import redis from '../utils/redisClient.js';
-import { TTL_SECONDS } from '../utils/config.js';
 import fetch from 'node-fetch';
 
 import graphClient from '../utils/graphClient.js';
@@ -11,67 +9,6 @@ const router = Router();
 const SUBMISSIONS_TLL_SECONDS = 30 * 60;
 
 router.get('/', async (request, response) => {
-  const cacheKey = 'forms:all';
-
-  try {
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      return response.status(200).json({
-        source: 'cache',
-        data: JSON.parse(cached),
-      });
-    }
-
-    const forms = await Form.find({});
-
-    if (forms.length > 0) {
-      await redis.set(cacheKey, JSON.stringify(forms));
-      await redis.expire(cacheKey, TTL_SECONDS);
-    }
-
-    const proxiedForms = forms.map(data => ({
-      ...data._doc,
-      fileUrl: data.fileUrl.startsWith('http')
-        ? `/api/forms/proxy-pdf?url=${encodeURIComponent(data.fileUrl)}`
-        : data.fileUrl,
-    }));
-
-    response.status(200).json({
-      source: 'database',
-      data: proxiedForms,
-    });
-  } catch (err) {
-    response.status(500).json({ error: err });
-  }
-});
-
-router.get('/test', async (request, response) => {
-  // const cacheKey = 'form_submissions';
-
-  try {
-    const res = await graphClient.getFormSubmissions();
-    response.status(200).json({
-      source: 'graph',
-      data: res,
-    });
-  } catch (err) {
-    response.status(500).json({ error: err });
-  }
-});
-
-router.get('/test/files', async (request, response) => {
-  try {
-    const res = await graphClient.getDriveItems();
-    response.status(200).json({
-      source: 'graph',
-      data: res,
-    });
-  } catch (err) {
-    response.status(500).json({ error: err });
-  }
-});
-
-router.get('/test/forms', async (request, response) => {
   const cacheKey = 'forms:test';
 
   try {
@@ -105,9 +42,14 @@ router.get('/test/forms', async (request, response) => {
 
         if (!downloadUrl) return null;
 
+        const proxyUrl = downloadUrl.startsWith('http')
+          ? `/api/forms/proxy-pdf?url=${encodeURIComponent(downloadUrl)}`
+          : null;
+
         return {
+          id: row['Id'],
           title: row['Ilmoituksen otsikko'] || null,
-          fileUrl: downloadUrl,
+          fileUrl: proxyUrl,
           startDate: row['Aloituspvm'] || null,
           endDate: row['Lopetuspvm'] || null,
         };

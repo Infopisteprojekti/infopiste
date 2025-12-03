@@ -75,6 +75,7 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
+    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
     await user.click(form1);
 
     const nextButton = screen.getByText('← Previous');
@@ -95,6 +96,7 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
+    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
     await user.click(form1);
 
     const backButton = screen.getByText(/View all notices/i);
@@ -108,6 +110,7 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
+    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
     await user.click(form1);
 
     const scrollButton = screen.getByText(/Pause automatic scrolling/i);

@@ -25,6 +25,8 @@ router.get('/', async (request, response) => {
       graphClient.getDriveItems(),
     ]);
 
+    // Match the two results by the webUrl.
+    // Not ideal but seems to be the only shared value.
     const fileMap = new Map();
     files.forEach(file => {
       if (file.webUrl && file.downloadUrl) {

@@ -4,6 +4,7 @@ import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSettings } from '@/hooks/useAppSettings.js';
+import { fetchWithRetry } from '@/utils/floorplan_helper';
 
 import FloorDisplay from '@/components/FloorDisplay';
 import RoomPopup from '@/components/RoomPopup';
@@ -24,16 +25,16 @@ const Floorplan = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [loading, setLoading] = useState(false);
 
   const transformRef = useRef(null);
+  const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
 
   useEffect(() => {
     setFloor(settings.floor);
     setSelectedRoom(null);
 
     if (settings.marker && settings.marker.floor === settings.floor) {
-      const { x, y } = settings.marker;
-
       setTimeout(() => {
         transformRef.current?.zoomToElement('active-marker', 2, 500, 'easeOut');
       }, 100);
@@ -45,7 +46,7 @@ const Floorplan = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await roomService.getRooms();
+        const response = await fetchWithRetry(() => roomService.getRooms());
         setRooms(response.data);
       } catch (err) {
         console.error(err);
@@ -54,18 +55,32 @@ const Floorplan = () => {
 
     const fetchReservations = async () => {
       try {
-        const response = await reservationService.getReservations();
+        const response = await fetchWithRetry(() =>
+          reservationService.getReservations()
+        );
         setReservations(response.data);
       } catch (err) {
         console.error(err);
       }
     };
 
-    Promise.all([fetchRooms(), fetchReservations()]);
+    const fetchInitialData = async () => {
+      setLoading(true);
+
+      try {
+        await Promise.all([fetchRooms(), fetchReservations()]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialData();
 
     const interval = setInterval(fetchReservations, POLLING_INTERVAL);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   const handleRoomClick = useCallback(
     ({ room, status, currentReservation, roomReservations, position }) => {
@@ -84,13 +99,11 @@ const Floorplan = () => {
     setFloor(newFloor);
     setSelectedRoom(null);
     setSettings({ ...settings, floor: newFloor });
-    transformRef.current?.resetTransform();
   };
-
-  const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
 
   return (
     <div className="floorplan-container">
+      {loading && <span className="loader"></span>}
       <TransformWrapper
         ref={transformRef}
         initialScale={1}

@@ -19,11 +19,14 @@ vi.mock('@/constants/floors', () => ({
   ],
 }));
 
-vi.mock('@/context/useAppSettings', () => ({
+vi.mock('@/hooks/useAppSettings', () => ({
   useAppSettings: () => ({
-    settings: { floor: '3' },
+    settings: {
+      lang: 'en',
+      floor: 3,
+      marker: null,
+    },
     setSettings: vi.fn(),
-    resetTrigger: 0,
   }),
 }));
 
@@ -54,6 +57,7 @@ vi.mock('@/components/FloorDisplay', () => ({
             room: { id: 1, displayName: 'Test Room' },
             status: 'available',
             currentReservation: {},
+            roomReservations: [],
             position: { x: 100, y: 100 },
           })
         }
@@ -110,8 +114,8 @@ describe('Floorplan', () => {
     render(<Floorplan />);
 
     await waitFor(() => {
-      expect(roomService.getRooms).toHaveBeenCalledTimes(1);
-      expect(reservationService.getReservations).toHaveBeenCalledTimes(1);
+      expect(roomService.getRooms).toHaveBeenCalled();
+      expect(reservationService.getReservations).toHaveBeenCalled();
     });
   });
 

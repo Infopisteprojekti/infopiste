@@ -21,6 +21,7 @@ const getDefaultSettings = () => {
     lang: urlParams.get('lang') ?? 'fi',
     floor,
     marker,
+    loading: false,
     resetToken: Date.now(),
   };
 };
@@ -49,6 +50,7 @@ export const AppSettingsProvider = ({
     // console.log('Restoring default settings due to inactivity');
     setSettings({
       ...defaultSettings.current,
+      loading: false,
       resetToken: Date.now(),
     });
     navigate(inactivityNavigateTo);

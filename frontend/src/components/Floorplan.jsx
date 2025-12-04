@@ -25,7 +25,6 @@ const Floorplan = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const [loading, setLoading] = useState(false);
 
   const transformRef = useRef(null);
   const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
@@ -65,14 +64,14 @@ const Floorplan = () => {
     };
 
     const fetchInitialData = async () => {
-      setLoading(true);
+      setSettings(s => ({ ...s, loading: true }));
 
       try {
         await Promise.all([fetchRooms(), fetchReservations()]);
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false);
+        setSettings(s => ({ ...s, loading: false }));
       }
     };
 
@@ -80,6 +79,7 @@ const Floorplan = () => {
 
     const interval = setInterval(fetchReservations, POLLING_INTERVAL);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRoomClick = useCallback(
@@ -103,7 +103,6 @@ const Floorplan = () => {
 
   return (
     <div className="floorplan-container">
-      {loading && <span className="loader"></span>}
       <TransformWrapper
         ref={transformRef}
         initialScale={1}

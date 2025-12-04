@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
 import { useTranslation } from 'react-i18next';
+
+import { useAppSettings } from '@/hooks/useAppSettings';
+import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
 import '@/styles/components/Navbar.css';
 
 const Navbar = () => {
   const { t } = useTranslation();
-
+  const { settings } = useAppSettings();
   const location = useLocation();
 
   const isActive = path => {
@@ -26,6 +28,9 @@ const Navbar = () => {
       >
         {t('navbar.unicafe')}
       </Link>
+
+      {settings.loading && <span className="loader"></span>}
+
       <LanguageSwitcher />
     </div>
   );

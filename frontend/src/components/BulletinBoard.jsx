@@ -47,7 +47,7 @@ const BulletinBoard = () => {
     });
   };
 
-  if (loading || forms.length === 0) {
+  if (!loading && forms.length === 0) {
     return (
       <div
         style={{
@@ -61,11 +61,8 @@ const BulletinBoard = () => {
           gap: '1rem',
         }}
       >
-        {loading && <span className="loader"></span>}
         <p>
-          {loading
-            ? t('bulletinboard.loading-notices')
-            : t('bulletinboard.no-notices')}
+          {t('bulletinboard.no-notices')}
         </p>
         {!loading && <QRCode />}
       </div>

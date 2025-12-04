@@ -61,9 +61,7 @@ const BulletinBoard = () => {
           gap: '1rem',
         }}
       >
-        <p>
-          {t('bulletinboard.no-notices')}
-        </p>
+        <p>{t('bulletinboard.no-notices')}</p>
         {!loading && <QRCode />}
       </div>
     );

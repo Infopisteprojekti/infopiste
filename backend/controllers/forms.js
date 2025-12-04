@@ -6,7 +6,7 @@ import graphClient from '../utils/graphClient.js';
 
 const router = Router();
 
-const SUBMISSIONS_TLL_SECONDS = 30 * 60;
+const SUBMISSIONS_TTL_SECONDS = 30 * 60;
 
 router.get('/', async (request, response) => {
   const cacheKey = 'forms:test';
@@ -60,7 +60,7 @@ router.get('/', async (request, response) => {
 
     if (result.length > 0) {
       await redis.set(cacheKey, JSON.stringify(result));
-      await redis.expire(cacheKey, SUBMISSIONS_TLL_SECONDS);
+      await redis.expire(cacheKey, SUBMISSIONS_TTL_SECONDS);
     }
 
     response.status(200).json({

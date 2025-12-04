@@ -65,7 +65,14 @@ export const AppSettingsProvider = ({
   }, [restoreDefaults, inactivityTimeoutSeconds]);
 
   useEffect(() => {
-    const events = ['mousedown', 'touchstart', 'keydown', 'touchmove', 'scroll', 'mousemove'];
+    const events = [
+      'mousedown',
+      'touchstart',
+      'keydown',
+      'touchmove',
+      'scroll',
+      'mousemove',
+    ];
     events.forEach(e => window.addEventListener(e, resetInactivityTimer));
     resetInactivityTimer();
 

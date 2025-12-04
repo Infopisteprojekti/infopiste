@@ -10,7 +10,7 @@ const SUBMISSIONS_TTL_SECONDS = 30 * 60;
 const MAX_ACTIVE_PER_EMAIL = 3;
 
 router.get('/', async (request, response) => {
-  const cacheKey = 'forms:test';
+  const cacheKey = 'forms:all';
 
   try {
     const cached = await redis.get(cacheKey);

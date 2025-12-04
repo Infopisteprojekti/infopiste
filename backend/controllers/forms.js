@@ -7,6 +7,7 @@ import graphClient from '../utils/graphClient.js';
 const router = Router();
 
 const SUBMISSIONS_TTL_SECONDS = 30 * 60;
+const MAX_ACTIVE_PER_EMAIL = 3;
 
 router.get('/', async (request, response) => {
   const cacheKey = 'forms:test';
@@ -34,15 +35,25 @@ router.get('/', async (request, response) => {
       }
     });
 
+    const countByEmail = new Map();
+
+    // TODO: Should probably be refactored. Too much logic in one place.
     const result = submissions
+      .sort((a, b) => new Date(a['Aloituspvm']) - new Date(b['Aloituspvm']))
       .map(row => {
         const excelUrl = row['Ilmoitus pdf-muodossa'];
-
         if (!excelUrl) return null;
 
         const downloadUrl = fileMap.get(excelUrl);
-
         if (!downloadUrl) return null;
+
+        const email = row['Email'];
+        if (!email) return null;
+
+        // Max active check
+        const current = countByEmail.get(email) || 0;
+        if (current >= MAX_ACTIVE_PER_EMAIL) return null;
+        countByEmail.set(email, current + 1);
 
         const proxyUrl = downloadUrl.startsWith('http')
           ? `/api/forms/proxy-pdf?url=${encodeURIComponent(downloadUrl)}`
@@ -68,7 +79,7 @@ router.get('/', async (request, response) => {
       data: result,
     });
   } catch (err) {
-    response.status(500).json({ error: err });
+    response.status(500).json({ error: err.message });
   }
 });
 

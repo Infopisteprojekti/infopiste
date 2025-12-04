@@ -83,6 +83,7 @@ const client = {
         headers.forEach((header, i) => {
           const value = row[i] ?? null;
 
+          // Get items that are active and have a valid date range
           if (dateColumns.includes(header) && typeof value === 'number') {
             const isEndDate = header === 'Lopetuspvm';
             obj[header] = excelDateToDayjs(value, isEndDate).toISOString();

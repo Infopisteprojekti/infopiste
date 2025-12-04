@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppSettings } from '@/hooks/useAppSettings';
 import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
+import Feedback from '@/components/Feedback.jsx';
 import '@/styles/components/Navbar.css';
 
 const Navbar = () => {
@@ -31,7 +32,10 @@ const Navbar = () => {
 
       {settings.loading && <span className="loader"></span>}
 
-      <LanguageSwitcher />
+      <div className="navbar-right-side">
+        <Feedback />
+        <LanguageSwitcher />
+      </div>
     </div>
   );
 };

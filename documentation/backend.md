@@ -91,3 +91,10 @@ $ npm run lint
 ```
 
 This is equivalent to running `npx eslint .`
+
+# Mock data
+> [!CAUTION]  
+> Loading mock data will delete all items from the database.
+
+Mock bulletin board submissions can be loaded by setting `LOAD_MOCK_DATA=true` in `.env`, while using the application in **development mode**.
+

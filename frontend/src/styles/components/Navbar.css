@@ -129,6 +129,13 @@
   animation: rotation 1s linear infinite;
 }
 
+.navbar-right-side {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

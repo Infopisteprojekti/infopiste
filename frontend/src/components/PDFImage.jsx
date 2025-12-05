@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next';
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjs.GlobalWorkerOptions.workerSrc =
   new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
 
-const PDFImage = ({ form, preview }) => {
+const PDFImage = ({ form, preview, onLoaded }) => {
   const [allPages, setPages] = useState(null);
-
   const { t } = useTranslation();
 
   if (preview) {
@@ -17,7 +16,11 @@ const PDFImage = ({ form, preview }) => {
         key={form._id}
         onLoadError={err => {
           console.error(err);
+          onLoaded && onLoaded(form._id);
         }}
+        onLoadSuccess={() => onLoaded && onLoaded(form._id)}
+        loading={null}
+        error={t('pdfdisplay.error')}
       >
         <Page
           pageNumber={1}
@@ -39,6 +42,7 @@ const PDFImage = ({ form, preview }) => {
         onLoadError={err => console.error('PDF load error', err)}
         onLoadSuccess={({ numPages }) => setPages(numPages)}
         loading={<div className="pdf-loading">{t('pdfdisplay.loading')}</div>}
+        error={t('pdfdisplay.error')}
       >
         {allPages &&
           Array.from({ length: allPages < 6 ? allPages : 5 }, (_, i) => (

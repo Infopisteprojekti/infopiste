@@ -31,7 +31,8 @@
     "previous": "Föregående",
     "next": "Följande",
     "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format",
-    "loading": "Laddar"
+    "loading": "Laddar",
+    "error": "Kunde inte ladda pdf-filen."
   },
   "room": "Rum",
   "status": "Status",

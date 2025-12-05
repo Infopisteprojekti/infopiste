@@ -32,7 +32,8 @@
     "previous": "Edellinen",
     "next": "Seuraava",
     "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
-    "loading": "Ladataan"
+    "loading": "Ladataan",
+    "error": "PDF-tiedoston lataaminen epäonnistui."
   },
   "room": "Huone",
   "status": "Huoneen tila",

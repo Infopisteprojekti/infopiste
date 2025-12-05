@@ -60,6 +60,7 @@
   },
   "feedback": {
     "open": "Give feedback",
-    "description": "Give feedback via email to ashwin.rao@helsinki.fi"
+    "description": "Give feedback via email to ashwin.rao@helsinki.fi",
+    "close": "Close"
   }
 }

@@ -10,9 +10,9 @@ const Feedback = () => {
   const changeVisibility = () => {
     const newState = !visibility;
     if (newState) {
-      document.getElementById('popup').classList.remove('hidden');
+      document.getElementById('feedback-popup').classList.remove('hidden');
     } else {
-      document.getElementById('popup').classList.add('hidden');
+      document.getElementById('feedback-popup').classList.add('hidden');
     }
     setVisibility(newState);
   };
@@ -24,11 +24,11 @@ const Feedback = () => {
         className="button nav-button"
         onClick={changeVisibility}
       >
-        {visibility ? t('bulletinboard.qr-close') : t('feedback.open')}
+        {visibility ? t('feedback.close') : t('feedback.open')}
       </button>
 
       <div
-        id="popup"
+        id="feedback-popup"
         className="room-popup hidden"
         style={{
           top: '50%',
@@ -39,7 +39,7 @@ const Feedback = () => {
         <div className="popup-header">
           <h3 className="popup-title">{t('feedback.description')}</h3>
           <button className="button" onClick={changeVisibility}>
-            {t('bulletinboard.qr-close')}
+            {t('feedback.close')}
           </button>
         </div>
       </div>

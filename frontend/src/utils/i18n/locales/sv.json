@@ -60,6 +60,7 @@
   },
   "feedback": {
     "open": "Ge respons",
-    "description": "Ge respons via e-post till ashwin.rao@helsinki.fi"
+    "description": "Ge respons via e-post till ashwin.rao@helsinki.fi",
+    "close": "Stäng"
   }
 }

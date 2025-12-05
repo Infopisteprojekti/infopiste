@@ -36,6 +36,7 @@
 
 g text {
   pointer-events: none;
+  font-family: sans-serif;
 }
 
 .zoom-controls {

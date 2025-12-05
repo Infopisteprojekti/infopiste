@@ -44,7 +44,7 @@ const FloorDisplay = ({
     if (!svg) return;
 
     const roomElements = svg.querySelectorAll(
-      '#layer2 > rect[id], #layer2 > path[id]'
+      '#overlay > rect[id], #overlay > path[id]'
     );
     const handlers = [];
 

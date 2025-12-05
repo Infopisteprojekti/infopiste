@@ -3,7 +3,8 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { useAppSettings } from '@/context/useAppSettings.js';
+import { useAppSettings } from '@/hooks/useAppSettings.js';
+import { fetchWithRetry } from '@/utils/floorplan_helper';
 
 import FloorDisplay from '@/components/FloorDisplay';
 import RoomPopup from '@/components/RoomPopup';
@@ -17,7 +18,7 @@ const POLLING_INTERVAL = 30000; // 30 seconds
 
 const Floorplan = () => {
   const { t } = useTranslation();
-  const { settings, setSettings, resetTrigger } = useAppSettings();
+  const { settings, setSettings } = useAppSettings();
 
   const [floor, setFloor] = useState(Number(settings.floor) || 3);
   const [rooms, setRooms] = useState([]);
@@ -26,21 +27,25 @@ const Floorplan = () => {
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
   const transformRef = useRef(null);
+  const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
 
   useEffect(() => {
-    if (transformRef.current) {
-      transformRef.current.resetTransform();
+    setFloor(settings.floor);
+    setSelectedRoom(null);
+
+    if (settings.marker && settings.marker.floor === settings.floor) {
+      setTimeout(() => {
+        transformRef.current?.zoomToElement('active-marker', 2, 500, 'easeOut');
+      }, 100);
+    } else {
+      transformRef.current?.resetTransform();
     }
-  }, [resetTrigger]);
-
-  useEffect(() => {
-    setFloor(Number(settings.floor));
-  }, [resetTrigger, settings.floor]);
+  }, [settings.floor, settings.marker, settings.resetToken]);
 
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await roomService.getRooms();
+        const response = await fetchWithRetry(() => roomService.getRooms());
         setRooms(response.data);
       } catch (err) {
         console.error(err);
@@ -49,18 +54,32 @@ const Floorplan = () => {
 
     const fetchReservations = async () => {
       try {
-        const response = await reservationService.getReservations();
+        const response = await fetchWithRetry(() =>
+          reservationService.getReservations()
+        );
         setReservations(response.data);
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchRooms();
-    fetchReservations();
+    const fetchInitialData = async () => {
+      setSettings(s => ({ ...s, loading: true }));
+
+      try {
+        await Promise.all([fetchRooms(), fetchReservations()]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setSettings(s => ({ ...s, loading: false }));
+      }
+    };
+
+    fetchInitialData();
 
     const interval = setInterval(fetchReservations, POLLING_INTERVAL);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRoomClick = useCallback(
@@ -79,10 +98,8 @@ const Floorplan = () => {
   const handleFloorChange = newFloor => {
     setFloor(newFloor);
     setSelectedRoom(null);
-    transformRef.current?.resetTransform();
+    setSettings({ ...settings, floor: newFloor });
   };
-
-  const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
 
   return (
     <div className="floorplan-container">
@@ -152,6 +169,7 @@ const Floorplan = () => {
                 reservations={reservations}
                 onRoomClick={handleRoomClick}
                 svgComponent={currentFloorSVG}
+                markerCoords={settings.marker}
               />
             </TransformComponent>
 

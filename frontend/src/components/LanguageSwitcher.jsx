@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import LANGUAGE_OPTIONS from '@/constants/languageOptions';
-import { useAppSettings } from '@/context/useAppSettings.js';
+import { useAppSettings } from '@/hooks/useAppSettings.js';
 import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher = () => {

@@ -37,7 +37,7 @@ const client = {
       url:
         `/users/${email}/calendarView?` +
         `startDateTime=${startDate}&endDateTime=${endDate}&` +
-        `$select=start,end,locations`,
+        `$select=id,start,end,locations`,
     }));
 
     const { responses = [] } = await graphClient
@@ -53,6 +53,7 @@ const client = {
 
       return events.map(event => ({
         roomEmail,
+        id: event.id,
         startTime: dayjs.utc(event.start.dateTime).toDate(),
         endTime: dayjs.utc(event.end.dateTime).toDate(),
       }));

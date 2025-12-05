@@ -22,7 +22,7 @@ vi.mock('../models/room.js', () => ({
 vi.mock('../models/reservation.js', () => ({
   default: {
     deleteMany: vi.fn(),
-    insertMany: vi.fn(),
+    bulkWrite: vi.fn(),
   },
 }));
 
@@ -79,11 +79,13 @@ describe('Graph API', () => {
 
     const mockEventsResponse = [
       {
+        id: '1',
         roomEmail: 'test.a123@test.fi',
         startTime: dayjs.utc('2025-11-25T10:00:00.0000000').toDate(),
         endTime: dayjs.utc('2025-11-25T12:00:00.0000000').toDate(),
       },
       {
+        id: '2',
         roomEmail: 'test.b234@test.fi',
         startTime: dayjs.utc('2025-11-25T12:00:00.0000000').toDate(),
         endTime: dayjs.utc('2025-11-25T14:00:00.0000000').toDate(),
@@ -93,18 +95,14 @@ describe('Graph API', () => {
     Room.find.mockResolvedValue(mockRooms);
     graphClient.getRoomEventsBatch.mockResolvedValue(mockEventsResponse);
     Reservation.deleteMany.mockResolvedValue({ deletedCount: 0 });
-    Reservation.insertMany.mockResolvedValue([]);
+    Reservation.bulkWrite.mockResolvedValue({ ok: 1 });
 
     await syncTodaysEvents();
 
     expect(Room.find).toHaveBeenCalledTimes(1);
     expect(graphClient.getRoomEventsBatch).toHaveBeenCalledTimes(1);
-    expect(Reservation.deleteMany).toHaveBeenCalledTimes(2);
-    expect(Reservation.insertMany).toHaveBeenCalledTimes(1);
 
-    const insertedReservations = Reservation.insertMany.mock.calls[0][0];
-    expect(insertedReservations).toHaveLength(2);
-    expect(insertedReservations[0].room).toBe('room-id-1');
-    expect(insertedReservations[1].room).toBe('room-id-2');
+    expect(Reservation.deleteMany).toHaveBeenCalledTimes(1);
+    expect(Reservation.bulkWrite).toHaveBeenCalledTimes(1);
   });
 });

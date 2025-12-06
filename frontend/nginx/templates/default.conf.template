@@ -1,3 +1,7 @@
+types {
+  text/javascript js mjs;
+}
+
 server {
     listen ${NGINX_PORT};
     root /usr/share/nginx/html;

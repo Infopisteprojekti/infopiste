@@ -73,7 +73,7 @@ These tests are used to test the end-to-end functionality of the application, wh
 The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed.
 
 > [!NOTE]
-> All of the below commands have to be run in in the backend directory.
+> All of the below commands have to be run in in the frontend directory.
 
 The unit tests can be run locally with
 

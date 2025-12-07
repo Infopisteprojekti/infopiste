@@ -19,6 +19,7 @@ The configuration for the OpenShift staging server deployment can be found in [m
 - `Imagestream`s for the frontend and backend deployments to poll DockerHub for new images
 - `PersistentVolumeClaim` for the database and Redis cache
     - These can be found in the [manifests/volumeclaim.yaml](../manifests/volumeclaim.yaml) file.
+- The necessary environment variables can be set in a `Secret` or a `ConfigMap`.
 
 The `frontend-imagestream.yaml` and `backend-imagestream.yaml` files located in [manifests](../manifests/) ensure that the OpenShift deployment uses the updated images. They poll DockerHub every 15 minutes.
 

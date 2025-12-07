@@ -83,8 +83,6 @@ const client = {
         const obj = {};
         headers.forEach((header, i) => {
           const value = row[i] ?? null;
-
-          // Get items that are active and have a valid date range
           if (dateColumns.includes(header) && typeof value === 'number') {
             const isEndDate = header === 'Lopetuspvm';
             obj[header] = excelDateToDayjs(value, isEndDate).toISOString();
@@ -96,12 +94,7 @@ const client = {
         return obj;
       });
 
-      const now = dayjs();
-      return parsed.filter(
-        row =>
-          isValidSubmissionDateRange(row.Aloituspvm, row.Lopetuspvm) &&
-          now.isBetween(row.Aloituspvm, row.Lopetuspvm, 'day', '[]')
-      );
+      return parsed;
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
       throw error;
@@ -149,6 +142,17 @@ const client = {
     } catch (error) {
       logger.error('Error fetching drive items:', error);
       throw error;
+    }
+  },
+
+  async deleteDriveItem(fileId) {
+    try {
+      await graphClient
+        .api(`/groups/${GROUP_ID}/drive/items/${fileId}`)
+        .delete();
+    } catch (err) {
+      console.error(`Failed to delete file`, err);
+      throw err;
     }
   },
 

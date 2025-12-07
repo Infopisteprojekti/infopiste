@@ -128,32 +128,11 @@ export const syncFormSubmissions = async () => {
 
   // FIX: If a file has been deleted and a new file is uploaded with the same name, microsoft will give it
   // the same webUrl and therefore the current solution will delete the new file.
-  // Should probably use file id here
-  const fileMap = new Map();
-  files.forEach(file => {
-    if (file.webUrl && file.downloadUrl && file.id) {
-      fileMap.set(file.webUrl, file);
-    }
-  });
+  // Should probably use file id for matching.
+  const fileMap = createFileMap(files);
 
-  // Match the two results by the webUrl.
-  // Not ideal but seems to be the only shared value.
-  const deletionMap = new Map();
-  deletionRequests.forEach(req => {
-    if (!req.email || !req.deletedAt) return;
-    const prev = deletionMap.get(req.email);
-    const deletedAt = dayjs(req.deletedAt);
-    if (!prev || deletedAt.isAfter(prev)) {
-      deletionMap.set(req.email, deletedAt);
-    }
-  });
-
-  const submissionsToDelete = submissions.filter(submission => {
-    const email = submission['Email'];
-    const completionTime = excelDateToDayjs(submission['Completion time']);
-    const deletionTime = deletionMap.get(email);
-    return deletionTime && completionTime.isBefore(deletionTime);
-  });
+  const deletionMap = createDeletionMap(deletionRequests);
+  const submissionsToDelete = getSubmissionsToDelete(submissions, deletionMap);
 
   await Promise.all(
     submissionsToDelete.map(async submission => {
@@ -188,6 +167,7 @@ export const syncFormSubmissions = async () => {
       const completionTime = excelDateToDayjs(row['Completion time']);
       const deletionTime = deletionMap.get(email);
 
+      // TODO: Check what happens if this is removed
       if (deletionTime && completionTime.isBefore(deletionTime)) return null;
 
       const excelUrl = row['Ilmoitus pdf-muodossa'];
@@ -216,4 +196,36 @@ export const syncFormSubmissions = async () => {
     .filter(Boolean);
 
   return result;
+};
+
+const createFileMap = files => {
+  const fileMap = new Map();
+  files.forEach(file => {
+    if (file.webUrl && file.downloadUrl && file.id) {
+      fileMap.set(file.webUrl, file);
+    }
+  });
+  return fileMap;
+};
+
+const createDeletionMap = deletionRequests => {
+  const deletionMap = new Map();
+  deletionRequests.forEach(req => {
+    if (!req.email || !req.deletedAt) return;
+    const prev = deletionMap.get(req.email);
+    const deletedAt = dayjs(req.deletedAt);
+    if (!prev || deletedAt.isAfter(prev)) {
+      deletionMap.set(req.email, deletedAt);
+    }
+  });
+  return deletionMap;
+};
+
+const getSubmissionsToDelete = (submissions, deletionMap) => {
+  return submissions.filter(submission => {
+    const email = submission['Email'];
+    const completionTime = excelDateToDayjs(submission['Completion time']);
+    const deletionTime = deletionMap.get(email);
+    return deletionTime && completionTime.isBefore(deletionTime);
+  });
 };

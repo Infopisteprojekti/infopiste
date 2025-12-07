@@ -20,9 +20,7 @@ export const syncExactumRooms = async () => {
     const operations = rooms.map(room => {
       // extract displayId (e.g. A123b or DK123) from displayName using regex
       const displayId = room.displayName
-        ? room.displayName
-            .match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1]
-            ?.toUpperCase()
+        ? room.displayName.match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1]
         : null;
 
       return {

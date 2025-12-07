@@ -70,8 +70,8 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
         </button>
       </div>
       <p>
-        {new Date(currentForm.startDate).toLocaleDateString()} –{' '}
-        {new Date(currentForm.endDate).toLocaleDateString()}
+        {new Date(currentForm.startDate).toLocaleDateString('fi-FI')} –{' '}
+        {new Date(currentForm.endDate).toLocaleDateString('fi-FI')}
       </p>
 
       <div className="pdf-wrapper-with-buttons">

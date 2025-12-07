@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import Form from '../models/form.js';
 import redis from '../utils/redisClient.js';
-import { TTL_SECONDS } from '../utils/config.js';
 import fetch from 'node-fetch';
 
+import graphClient from '../utils/graphClient.js';
+
 const router = Router();
+
+const SUBMISSIONS_TTL_SECONDS = 30 * 60;
+const MAX_ACTIVE_PER_EMAIL = 3;
 
 router.get('/', async (request, response) => {
   const cacheKey = 'forms:all';
@@ -18,26 +21,65 @@ router.get('/', async (request, response) => {
       });
     }
 
-    const forms = await Form.find({});
+    const [submissions, files] = await Promise.all([
+      graphClient.getFormSubmissions(),
+      graphClient.getDriveItems(),
+    ]);
 
-    if (forms.length > 0) {
-      await redis.set(cacheKey, JSON.stringify(forms));
-      await redis.expire(cacheKey, TTL_SECONDS);
+    // Match the two results by the webUrl.
+    // Not ideal but seems to be the only shared value.
+    const fileMap = new Map();
+    files.forEach(file => {
+      if (file.webUrl && file.downloadUrl) {
+        fileMap.set(file.webUrl, file.downloadUrl);
+      }
+    });
+
+    const countByEmail = new Map();
+
+    // TODO: Should probably be refactored. Too much logic in one place.
+    const result = submissions
+      .sort((a, b) => new Date(a['Aloituspvm']) - new Date(b['Aloituspvm']))
+      .map(row => {
+        const excelUrl = row['Ilmoitus pdf-muodossa'];
+        if (!excelUrl) return null;
+
+        const downloadUrl = fileMap.get(excelUrl);
+        if (!downloadUrl) return null;
+
+        const email = row['Email'];
+        if (!email) return null;
+
+        // Max active check
+        const current = countByEmail.get(email) || 0;
+        if (current >= MAX_ACTIVE_PER_EMAIL) return null;
+        countByEmail.set(email, current + 1);
+
+        const proxyUrl = downloadUrl.startsWith('http')
+          ? `/api/forms/proxy-pdf?url=${encodeURIComponent(downloadUrl)}`
+          : null;
+
+        return {
+          id: row['Id'],
+          title: row['Ilmoituksen otsikko'] || null,
+          fileUrl: proxyUrl,
+          startDate: row['Aloituspvm'] || null,
+          endDate: row['Lopetuspvm'] || null,
+        };
+      })
+      .filter(Boolean);
+
+    if (result.length > 0) {
+      await redis.set(cacheKey, JSON.stringify(result));
+      await redis.expire(cacheKey, SUBMISSIONS_TTL_SECONDS);
     }
 
-    const proxiedForms = forms.map(data => ({
-      ...data._doc,
-      fileUrl: data.fileUrl.startsWith('http')
-        ? `/api/forms/proxy-pdf?url=${encodeURIComponent(data.fileUrl)}`
-        : data.fileUrl,
-    }));
-
     response.status(200).json({
-      source: 'database',
-      data: proxiedForms,
+      source: 'graph',
+      data: result,
     });
   } catch (err) {
-    response.status(500).json({ error: err });
+    response.status(500).json({ error: err.message });
   }
 });
 

@@ -46,6 +46,26 @@ spec:
                 configMapKeyRef:
                   name: infopiste-config
                   key: CLIENT_SECRET
+            - name: GROUP_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: GROUP_ID
+            - name: FILE_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: FILE_ID
+            - name: SHEET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: SHEET_NAME
+            - name: FOLDER_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: infopiste-config
+                  key: FOLDER_ID                                                                    
           resources:
             limits:
               memory: "256Mi"

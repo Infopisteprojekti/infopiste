@@ -61,25 +61,76 @@ const initialReservations = [
   },
 ];
 
-const initialForms = [
+const mockSubmissions = [
   {
-    _id: '1',
-    title: 'Form 1',
-    startDate: '2025-01-01',
-    endDate: '2025-01-31',
-    fileUrl: '/form1.pdf',
+    Id: '1',
+    'Ilmoituksen otsikko': 'Form 1',
+    Email: 'test1@example.com',
+    Aloituspvm: '2025-12-02T00:00:00.000Z',
+    Lopetuspvm: '2025-12-05T23:59:59.999Z',
+    'Ilmoitus pdf-muodossa': 'https://example.com/doc1',
   },
   {
-    _id: '2',
-    title: 'Form 2',
-    startDate: '2025-02-01',
-    endDate: '2025-02-28',
-    fileUrl: '/form2.pdf',
+    Id: '2',
+    'Ilmoituksen otsikko': 'Form 2',
+    Email: 'test2@example.com',
+    Aloituspvm: '2025-12-04T00:00:00.000Z',
+    Lopetuspvm: '2025-12-10T23:59:59.999Z',
+    'Ilmoitus pdf-muodossa': 'https://example.com/doc2',
+  },
+  {
+    Id: '3',
+    'Ilmoituksen otsikko': 'Form 3',
+    Email: 'test3@example.com',
+    Aloituspvm: '2025-12-04T00:00:00.000Z',
+    Lopetuspvm: '2025-12-11T23:59:59.999Z',
+    'Ilmoitus pdf-muodossa': 'https://example.com/doc3',
+  },
+  {
+    Id: '4',
+    'Ilmoituksen otsikko': 'Form 4',
+    Email: 'test4@example.com',
+    Aloituspvm: '2025-12-06T00:00:00.000Z',
+    Lopetuspvm: '2025-12-18T23:59:59.999Z',
+    'Ilmoitus pdf-muodossa': 'https://example.com/doc4',
+  },
+];
+
+const mockFiles = [
+  {
+    id: '11',
+    webUrl: 'https://example.com/doc1',
+    downloadUrl: 'https://example.com/download/doc1',
+  },
+  {
+    id: '12',
+    webUrl: 'https://example.com/doc2',
+    downloadUrl: 'https://example.com/download/doc2',
+  },
+  {
+    id: '13',
+    webUrl: 'https://example.com/doc3',
+    downloadUrl: 'https://example.com/download/doc3',
+  },
+  {
+    id: '14',
+    webUrl: 'https://example.com/doc4',
+    downloadUrl: 'https://example.com/download/doc4',
+  },
+];
+
+const mockCachedForms = [
+  {
+    id: 1,
+    title: 'Form 1',
+    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc1.pdf',
   },
 ];
 
 export default {
   intitialRooms,
   initialReservations,
-  initialForms,
+  mockSubmissions,
+  mockFiles,
+  mockCachedForms,
 };

@@ -12,6 +12,7 @@ import {
   TENANT_ID,
   GROUP_ID,
   FILE_ID,
+  DELETION_FILE_ID,
   SHEET_NAME,
   FOLDER_ID,
 } from './config.js';
@@ -103,6 +104,27 @@ const client = {
       );
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
+      throw error;
+    }
+  },
+
+  async getDeletionRequests() {
+    const api_url = `groups/${GROUP_ID}/drive/items/${DELETION_FILE_ID}/workbook/worksheets/${SHEET_NAME}/range/usedRange`;
+    try {
+      const response = await graphClient.api(api_url).get();
+      const [headers, ...rows] = response.values;
+
+      const idIndex = headers.indexOf('Id');
+      const emailIndex = headers.indexOf('Email');
+      const dateIndex = headers.indexOf('Completion time');
+
+      return rows.map(row => ({
+        id: row[idIndex],
+        email: row[emailIndex],
+        deletedAt: excelDateToDayjs(row[dateIndex], false).toISOString(),
+      }));
+    } catch (error) {
+      logger.error('Error fetching Excel deletion data:', error);
       throw error;
     }
   },

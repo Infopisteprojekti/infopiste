@@ -12,6 +12,8 @@ export const GROUP_ID = process.env.GROUP_ID;
 
 export const FILE_ID = process.env.FILE_ID;
 
+export const DELETION_FILE_ID = process.env.DELETION_FILE_ID;
+
 export const SHEET_NAME = process.env.SHEET_NAME;
 
 export const FOLDER_ID = process.env.FOLDER_ID;

@@ -161,7 +161,12 @@ const Floorplan = () => {
 
             <TransformComponent
               wrapperStyle={{ width: '100%', height: '100%' }}
-              contentStyle={{ width: '100%', height: '100%' }}
+              contentStyle={{
+                width: 'auto',
+                height: 'auto',
+                display: 'inline-block',
+                padding: '100px',
+              }}
             >
               <FloorDisplay
                 floor={floor}

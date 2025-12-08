@@ -31,7 +31,6 @@ const LanguageSwitcher = () => {
         }),
         menu: base => ({
           ...base,
-          background: 'transparent',
           borderRadius: '0.5rem',
           boxShadow: 'none',
           border: '1px solid #dddddd',

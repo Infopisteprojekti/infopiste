@@ -24,12 +24,12 @@ const LanguageSwitcher = () => {
       className="nav-button button language-select"
       classNamePrefix="lang"
       styles={{
-        menuPortal: (base) => ({
+        menuPortal: base => ({
           ...base,
           zIndex: 999999,
           display: 'flex',
         }),
-        menu: (base) => ({
+        menu: base => ({
           ...base,
           background: 'transparent',
           borderRadius: '0.5rem',
@@ -38,7 +38,7 @@ const LanguageSwitcher = () => {
           padding: '0.5rem',
           width: 'auto',
           left: 'auto',
-          right: '0'
+          right: '0',
         }),
         option: (base, state) => ({
           ...base,
@@ -51,7 +51,7 @@ const LanguageSwitcher = () => {
           gap: '0.5rem',
           width: '100%',
           height: '100%',
-          paddingRight: '1rem'
+          paddingRight: '1rem',
         }),
       }}
       formatOptionLabel={(option, { context }) => (

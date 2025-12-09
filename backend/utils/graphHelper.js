@@ -126,11 +126,7 @@ export const syncFormSubmissions = async () => {
     graphClient.getDeletionRequests(),
   ]);
 
-  // FIX: If a file has been deleted and a new file is uploaded with the same name, microsoft will give it
-  // the same webUrl and therefore the current solution will delete the new file.
-  // Should probably use file id for matching.
   const fileMap = createFileMap(files);
-
   const deletionMap = createDeletionMap(deletionRequests);
   const submissionsToDelete = getSubmissionsToDelete(submissions, deletionMap);
 

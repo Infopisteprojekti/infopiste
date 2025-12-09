@@ -79,10 +79,23 @@ const client = {
       const response = await graphClient.api(api_url).get();
       const [headers, ...rows] = response.values;
 
-      const parsed = rows.map(row => {
+      const webUrls = [];
+      // Assumes rows order from oldest to newest
+      // Maybe change reverse to sort?
+      const parsed = rows.reverse().map(row => {
         const obj = {};
         headers.forEach((header, i) => {
           const value = row[i] ?? null;
+          // Filter duplicate web urls (newest is kept).
+          // Related to a bug where new files are deleted
+          //  if they have the same filename as older already deleted ones.
+          if (header == 'Ilmoitus pdf-muodossa') {
+            if (webUrls.includes(value)) {
+              return (obj[header] = null);
+            } else {
+              webUrls.push(value);
+            }
+          }
           if (dateColumns.includes(header) && typeof value === 'number') {
             const isEndDate = header === 'Lopetuspvm';
             obj[header] = excelDateToDayjs(value, isEndDate).toISOString();
@@ -90,11 +103,10 @@ const client = {
             obj[header] = value;
           }
         });
-
         return obj;
       });
 
-      return parsed;
+      return parsed.filter(item => item['Ilmoitus pdf-muodossa']).reverse();
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
       throw error;

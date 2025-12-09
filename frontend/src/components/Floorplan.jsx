@@ -25,6 +25,7 @@ const Floorplan = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const transformRef = useRef(null);
   const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
@@ -96,9 +97,20 @@ const Floorplan = () => {
   );
 
   const handleFloorChange = newFloor => {
-    setFloor(newFloor);
+    if (newFloor === floor) return;
+
+    setIsTransitioning(true);
     setSelectedRoom(null);
-    setSettings({ ...settings, floor: newFloor });
+
+    setTimeout(() => {
+      setFloor(newFloor);
+      setSettings({ ...settings, floor: newFloor });
+      transformRef.current?.resetTransform();
+
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 200);
   };
 
   return (
@@ -108,6 +120,8 @@ const Floorplan = () => {
         initialScale={1}
         minScale={0.5}
         maxScale={5}
+        centerOnInit={true}
+        centerZoomedOut={true}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
@@ -128,7 +142,17 @@ const Floorplan = () => {
               </button>
               <button
                 className="zoom-button"
-                onClick={() => resetTransform()}
+                onClick={() => {
+                  const marker = document.getElementById('active-marker');
+                  if (marker)
+                    transformRef.current?.zoomToElement(
+                      'active-marker',
+                      2,
+                      500,
+                      'easeOut'
+                    );
+                  else resetTransform();
+                }}
                 data-testid="zoom-reset-button"
               >
                 <RotateCcw size={16} />
@@ -153,6 +177,7 @@ const Floorplan = () => {
                   key={id}
                   onClick={() => handleFloorChange(id)}
                   className={`floor-button ${id === floor ? 'active' : ''}`}
+                  disabled={isTransitioning}
                 >
                   {t('floorplan-toolbar.floor-label', { label })}
                 </button>
@@ -160,8 +185,18 @@ const Floorplan = () => {
             </div>
 
             <TransformComponent
-              wrapperStyle={{ width: '100%', height: '100%' }}
-              contentStyle={{ width: '100%', height: '100%' }}
+              wrapperStyle={{
+                width: '100%',
+                height: '100%',
+                opacity: isTransitioning ? 0 : 1,
+                transition: 'opacity 200ms ease-in-out',
+              }}
+              contentStyle={{
+                width: 'auto',
+                height: 'auto',
+                // display: 'inline-block',
+                padding: '100px',
+              }}
             >
               <FloorDisplay
                 floor={floor}

@@ -23,9 +23,7 @@ export const syncExactumRooms = async () => {
     const operations = rooms.map(room => {
       // extract displayId (e.g. A123b or DK123) from displayName using regex
       const displayId = room.displayName
-        ? room.displayName
-            .match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1]
-            ?.toUpperCase()
+        ? room.displayName.match(/\b([A-Za-z]{1,2}\d{3}[A-Za-z]?)\b/)?.[1]
         : null;
 
       return {
@@ -78,43 +76,62 @@ export const syncTodaysEvents = async () => {
 
     // use Promise.all to run chunks concurrently for speed
     const chunkPromises = roomEmailChunks.map(group =>
-      graphClient.getRoomEventsBatch(
-        group,
-        startOfDay.toISOString(),
-        endOfDay.toISOString()
-      )
+      graphClient
+        .getRoomEventsBatch(
+          group,
+          startOfDay.toISOString(),
+          endOfDay.toISOString()
+        )
+        .catch(err => {
+          logger.error(`chunk failed: ${err.message}`);
+          return [];
+        })
     );
+
     const results = await Promise.all(chunkPromises);
     const allEvents = results.flat();
 
     logger.info(`Found ${allEvents.length} events`);
 
-    // delete old reservations
-    await Reservation.deleteMany({
-      end: { $lt: startOfDay.toDate() },
-    });
-
-    // delete todays reservations to remove cancelled events
-    await Reservation.deleteMany({
-      start: { $gte: startOfDay.toDate() },
-      end: { $lte: endOfDay.toDate() },
-    });
-
-    if (!allEvents.length) return;
-
-    const newReservations = allEvents
+    const operations = allEvents
       .filter(event => roomMap.has(event.roomEmail))
       .map(event => ({
-        room: roomMap.get(event.roomEmail),
-        start: event.startTime,
-        end: event.endTime,
+        updateOne: {
+          filter: { eventId: event.id },
+          update: {
+            $set: {
+              room: roomMap.get(event.roomEmail),
+              start: event.startTime,
+              end: event.endTime,
+              eventId: event.id,
+            },
+          },
+          upsert: true,
+        },
       }));
 
-    if (newReservations.length > 0) {
-      await Reservation.insertMany(newReservations);
+    if (operations.length > 0) {
+      await Reservation.bulkWrite(operations);
     }
+
+    const validEventIds = new Set(allEvents.map(e => e.id));
+
+    await Reservation.deleteMany({
+      $or: [
+        // delete reservations that ended before today
+        { end: { $lt: startOfDay.toDate() } },
+
+        // delete reservations starting today that were deleted
+        {
+          start: { $gte: startOfDay.toDate(), $lte: endOfDay.toDate() },
+          end: { $gte: startOfDay.toDate() },
+          eventId: { $nin: Array.from(validEventIds) },
+        },
+      ],
+      room: { $in: Array.from(roomMap.values()) },
+    });
   } catch (error) {
-    throw new Error(`Event sync failed: ${error.message}`);
+    logger.error(`Event sync failed: ${error.message}`);
   }
 };
 

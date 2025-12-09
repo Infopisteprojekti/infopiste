@@ -37,6 +37,7 @@
   width: fit-content;
   margin: 0 auto;
   gap: 0rem;
+  flex-shrink: 0;
 }
 
 .pdf-nav-button {
@@ -44,10 +45,6 @@
   top: 50%;
   flex-shrink: 0;
   white-space: nowrap;
-}
-
-.pdf-wrapper-with-buttons .pdf-button {
-  flex-shrink: 0;
 }
 
 .pdf-error-wrapper {

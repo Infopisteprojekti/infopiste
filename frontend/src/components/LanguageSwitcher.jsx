@@ -27,7 +27,6 @@ const LanguageSwitcher = () => {
         menuPortal: base => ({
           ...base,
           zIndex: 999999,
-          display: 'flex',
         }),
         menu: base => ({
           ...base,
@@ -47,9 +46,6 @@ const LanguageSwitcher = () => {
           border: '1px solid #dddddd',
           borderRadius: '8px',
           display: 'flex',
-          gap: '0.5rem',
-          width: '100%',
-          height: '100%',
           paddingRight: '1rem',
         }),
       }}

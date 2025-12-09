@@ -2,6 +2,8 @@
 
 `Node` version 24 is used to build the frontend image. `npm` is also required.
 
+The dependencies required by the application can be installed by running `npm install` in the [frontend/](../frontend) directory.
+
 # Frontend technologies used
 
 The frontend of the application is built with React. Styling is done with base CSS, which can be found in the [css](../frontend/src/css/) directory under [src/](../frontend/src/).
@@ -16,44 +18,62 @@ It also includes both development environment and production `Dockerfile`s.
 
 The actual functionality can be found in [src/](../frontend/src/).
 
-[assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the QR code for uploading forms.
+[assets/](../frontend/src/assets/) contains the SVG files of the floorplans for each floor, and the QR code for uploading forms. The flags used in the language switcher are stored in [/assets/flags/](../frontend/src/assets/flags/).
 
 [components/](../frontend/src/components/) contains the following React components:
 
 `BulletinBoard` contains the logic for letting users upload notices, and viewing uploaded notices as a grid, or in an expanded view for the selected notice.
 
-`PDFDisplay` contains the logic for displaying a notice, either as a preview or in an expanded view.
-
-`QRCode` is used to display the QR code to upload files in the relevant components.
+`Feedback` implements a popup with information on how to give feedback.
 
 `FloorDisplay` iterates through all rooms in the given floor, and assigns the correct data (reservation status and click handler, as well as polling) to each room.
 
 `Floorplan` is used to specify which floor to display, and includes the logic and buttons for zooming and switching rooms. 
 
-`App` implements a navigation bar at the bottom of the page. The application is a single-page application using React Router.
+`LanguageSwitcher` implements a menu to switch the display language of the application.
 
-`main.jsx` is used in [index.html](../frontend/index.html) to render the components.
+`Navbar` implements the navigation bar at the bottom of the application.
 
-The styling for each component is defined in [css/](../frontend/src/css/).
+`PDFDisplay` contains the logic for displaying a notice when one is clicked.
+
+`PDFImage` uses `react-pdf` to render a pdf as an image, either as a preview or with multiple pages in the expanded view.
+
+`QRCode` is used to display the QR code to upload files in the relevant components.
+
+`RoomPopup` implements a popup for when a room is clicked, displaying relevant information.
+
+`UnicafeMenu` uses data from Unicafe to display the meals in Exactum and Chemicum for the day.
+
+The styling for each component is defined in [css/](../frontend/src/styles/components/).
+
+[frontend/src/constants](../frontend/src/constants/) contains files that define constants used across the application.
+
+[frontend/src/context](../frontend/src/context) contains the `AppSettingsContext.jsx` file, which defines some global behavior.
+
+[frontend/src/services](../frontend/src/services/) contains the files for fetching data from the backend for the frontend to display.
+
+[frontend/src/utils](../frontend/src/utils/) defines translations for the application.
+
+[frontend/src/App.jsx](../frontend/src/App.jsx) and [frontend/src/main.jsx](../frontend/src/main.jsx) are wrapped around the components.
 
 # Testing
 
 The unit tests can be found in the [tests](../frontend/tests/) directory.
 
-[testSetup.js](../frontend/tests/testSetup.js) simply ensures that each test starts with a clean slate.
+[testSetup.js](../frontend/tests/testSetup.js) ensures that each test uses the English version of the frontend, and also ensures a clean slate for each test.
 
-[Floorplan.test.jsx](../frontend/tests/Floorplan.test.jsx) tests the functionality of the `Floorplan` component. These tests use mocks in place of using the actual component, due to the complexity of creating unit tests for a component that fetches data from the backend.
-
-The file also includes tests for the `BulletinBoard` component.
+The files ending in `unit.test.jsx` mostly test that the components are rendered correctly. `BulletinBoard.interactions.test.jsx` tests that the navigation and other buttons in the Bulletin Board view function correctly.
 
 End-to-end tests can be found in the [e2e](../frontend/e2e/) directory.
+
+[testUtils.js](../frontend/e2e/testUtils.js) defines mock data used in the end-to-end tests, and also mocks the relevant backend routes.
 
 These tests are used to test the end-to-end functionality of the application, which includes the communication between the frontend and backend.
 
 The tests, as well as linting are included in the CI/CD pipeline. Whenever new content is pushed to the `main` branch, the tests are executed.
 
 > [!NOTE]
-> All of the below commands have to be run in in the backend directory.
+> All of the below commands have to be run in in the frontend directory.
 
 The unit tests can be run locally with
 

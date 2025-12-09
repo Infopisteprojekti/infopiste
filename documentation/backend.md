@@ -14,6 +14,8 @@ The backend can be found at the [backend/](../backend/) directory.
 
 It includes both development environment and production `Dockerfile`s.
 
+Various connections and configurations are defined in the [backend/utils](../backend/utils/) directory.
+
 The server is started in [server.js](../backend/server.js).
 
 The express app is built in [app.js](../backend/app.js).
@@ -24,44 +26,52 @@ The connection to the database is formed in [dbConnection.js](../backend/utils/d
 
 `/api/health` responds with status 200 and message `ok`.
 
-Endpoints for fetching room data are defined in [controllers/rooms.js](../backend/controllers/rooms.js).
+The endpoint for fetching room data is defined in [controllers/rooms.js](../backend/controllers/rooms.js).
 
-`/api/rooms` returns all the rooms.
+A `Room` is a [mongoose model](../backend/models/room.js) containing:
 
-`/api/rooms/:id/reservations` returns all reservations for the room with the given `id`.
+- `roomEmail`: the university email address associated with the room
+- `displayId`: the room's display ID
+- `displayName`: the room's display name
+- `capacity`: the room's capacity as a number
+- `floorNumber`: the floor the room is in
+- `isWheelChairAccessible`: boolean that describes if the room is wheelchair accessible
+- `tags`: an array of tags associated with the room.
 
-A `room` is an object containing:
+The endpoint for fetching reservations is defined in [controllers/reservations.js](../backend/controllers/reservations.js).
 
-- `id`: the room's unique identifier
-- `type`: the type of the room, which can be `meeting_room`, `office`, or `classroom`.
-- `capacity`: the capacity of the room
-- `reservations`: an array of `reservation` objects describing the reservations for the room.
+A `Reservation` is a [mongoose model](../backend/models/reservation.js) containing:
 
-A `reservation` is an object containing:
+- `room`: the room the reservation takes place in
+- `start`: the start `Date` for the reservation
+- `end`: the end `Date` for the reservation.
 
-- `id`: the reservation's unique identifier
-- `start`: start time for the reservation
-- `end`: end time for the reservation
-- `location`: the `displayName` and `locationType` of the `room` where the reservation takes place.
+`/api/forms` returns all user-uploaded Forms. The forms live in an Excel sheet.
 
-`/api/forms` returns all user-uploaded Forms.
-
- A `Form` is a mongoose model containing:
+ A `Form` is a [mongoose model](../backend/models/form.js) containing:
  
 - `title`: title string
 - `startDate`: the start time for the notice
 - `endDate`: the end time for the notice
 - `fileUrl`: URL for the uploaded PDF file.
 
+The endpoint for fetching Unicafe data is defined in [controllers/unicafe.js](../backend/controllers/unicafe.js).
+
+The endpoint uses the data received in [services/unicafe.js](../backend/controllers/unicafe.js).
+
 # Testing
 
 The tests can be found in the [tests](../backend/tests) directory.
 
-There are tests for all the api endpoints, with mock database and redis clients:
+There are tests for all the API endpoints, with mock database and redis clients:
 
 [forms_api.test.js](../backend/tests/forms_api.test.js)
 [rooms_api.test.js](../backend/tests/rooms_api.test.js)
 [reservations_api.test.js](../backend/tests/reservations_api.test.js)
+
+Additionally, the Microsoft Graph API is tested in the [graph_client.test.js](../backend/tests/graph_client.test.js) file.
+
+[test_helper.js](../backend/tests/test_helper.js) sets some initial data that the tests use.
 
 The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
 

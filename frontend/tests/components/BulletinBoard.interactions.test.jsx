@@ -75,11 +75,13 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
-    const nextButton = screen.getByText('← Previous');
-    const prevButton = screen.getByText('Next →');
+    const nextButton = await screen.findByText('Previous');
+    const prevButton = await screen.findByText('Next');
 
     await user.click(nextButton);
     await waitFor(() => screen.getByText('Form 2'));
@@ -96,7 +98,9 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
     const backButton = screen.getByText(/View all notices/i);
@@ -110,11 +114,15 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
     const scrollButton = screen.getByText(/Pause automatic scrolling/i);
     await user.click(scrollButton);
-    expect(screen.getByText(/Continue automatic scrolling/i)).toBeInTheDocument();
-  })
+    expect(
+      screen.getByText(/Continue automatic scrolling/i)
+    ).toBeInTheDocument();
+  });
 });

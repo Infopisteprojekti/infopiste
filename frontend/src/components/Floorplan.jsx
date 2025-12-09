@@ -120,6 +120,8 @@ const Floorplan = () => {
         initialScale={1}
         minScale={0.5}
         maxScale={5}
+        centerOnInit={true}
+        centerZoomedOut={true}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
@@ -140,7 +142,17 @@ const Floorplan = () => {
               </button>
               <button
                 className="zoom-button"
-                onClick={() => resetTransform()}
+                onClick={() => {
+                  const marker = document.getElementById('active-marker');
+                  if (marker)
+                    transformRef.current?.zoomToElement(
+                      'active-marker',
+                      2,
+                      500,
+                      'easeOut'
+                    );
+                  else resetTransform();
+                }}
                 data-testid="zoom-reset-button"
               >
                 <RotateCcw size={16} />
@@ -182,7 +194,7 @@ const Floorplan = () => {
               contentStyle={{
                 width: 'auto',
                 height: 'auto',
-                display: 'inline-block',
+                // display: 'inline-block',
                 padding: '100px',
               }}
             >

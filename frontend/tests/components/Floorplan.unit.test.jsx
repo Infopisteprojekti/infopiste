@@ -129,7 +129,9 @@ describe('Floorplan', () => {
     const floor4Button = screen.getByText('floorplan-toolbar.floor-label-4');
     fireEvent.click(floor4Button);
 
-    expect(screen.getByTestId('floor-display')).toHaveAttribute('data-floor', '4');
+    await waitFor(() => {
+      expect(screen.getByTestId('floor-display')).toHaveAttribute('data-floor', '4');
+    })
   });
 
   it('displays room popup when room is clicked', async () => {

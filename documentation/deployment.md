@@ -13,10 +13,13 @@ Additionally, the end to end tests in [frontend/e2e](../frontend/e2e/) are run i
 The configuration for the OpenShift staging server deployment can be found in [manifests](../manifests/). It includes the following:
 
 - `Deployment`s for the frontend, backend, database, and Redis
-- `Service`s to create permanent IP addresses for the frontend, backend, database, and Redis
-- `Route` to expose the application to the Internet
+    - The deployment files also include the respective `Service`s.
+- `Route` to expose the application to the internet
+    - The route specifically exposes the frontend, not the backend.
 - `Imagestream`s for the frontend and backend deployments to poll DockerHub for new images
-- `PersistentVolumeClaim` for the database and cache
+- `PersistentVolumeClaim` for the database and Redis cache
+    - These can be found in the [manifests/volumeclaim.yaml](../manifests/volumeclaim.yaml) file.
+- The necessary environment variables can be set in a `Secret` or a `ConfigMap`.
 
 The `frontend-imagestream.yaml` and `backend-imagestream.yaml` files located in [manifests](../manifests/) ensure that the OpenShift deployment uses the updated images. They poll DockerHub every 15 minutes.
 

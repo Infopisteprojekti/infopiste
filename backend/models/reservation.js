@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 const reservationSchema = mongoose.Schema({
+  eventId: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+  },
   room: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room',
@@ -15,6 +21,8 @@ const reservationSchema = mongoose.Schema({
     required: true,
   },
 });
+
+reservationSchema.index({ room: 1, start: 1, end: 1 });
 
 reservationSchema.set('toJSON', {
   transform: (document, returnedObject) => {

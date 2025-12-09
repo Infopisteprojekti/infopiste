@@ -1,7 +1,6 @@
 import Select from 'react-select';
 import LANGUAGE_OPTIONS from '@/constants/languageOptions';
 import { useAppSettings } from '@/hooks/useAppSettings.js';
-import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher = () => {
   const { settings, setSettings } = useAppSettings();
@@ -18,11 +17,38 @@ const LanguageSwitcher = () => {
       options={LANGUAGE_OPTIONS}
       isSearchable={false}
       menuPlacement="top"
+      menuPortalTarget={document.body}
       components={{
         IndicatorSeparator: () => null,
       }}
       className="nav-button button language-select"
       classNamePrefix="lang"
+      styles={{
+        menuPortal: base => ({
+          ...base,
+          zIndex: 999999,
+        }),
+        menu: base => ({
+          ...base,
+          borderRadius: '0.5rem',
+          boxShadow: 'none',
+          border: '1px solid #dddddd',
+          padding: '0.5rem',
+          width: 'auto',
+          left: 'auto',
+          right: '0',
+        }),
+        option: (base, state) => ({
+          ...base,
+          padding: '0.5rem',
+          fontSize: '0.8rem',
+          cursor: 'pointer',
+          border: '1px solid #dddddd',
+          borderRadius: '8px',
+          display: 'flex',
+          paddingRight: '1rem',
+        }),
+      }}
       formatOptionLabel={(option, { context }) => (
         <div className="lang__option-content">
           <div className="lang__option-content-inner">

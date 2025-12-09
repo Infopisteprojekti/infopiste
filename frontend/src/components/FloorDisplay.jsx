@@ -24,7 +24,7 @@ const FloorDisplay = ({
 
     rooms.forEach(room => {
       const roomReservations = reservations.filter(
-        r => r.room.displayId === room.displayId
+        r => r.room.displayId.toLowerCase() === room.displayId.toLowerCase()
       );
 
       const currentReservation = roomReservations.find(
@@ -52,7 +52,9 @@ const FloorDisplay = ({
 
     roomElements.forEach(element => {
       const roomId = element.id;
-      const room = rooms.find(r => r.displayId === roomId);
+      const room = rooms.find(
+        r => r.displayId.toLowerCase() === roomId.toLowerCase()
+      );
       const statusInfo = roomStatusMap.get(roomId) || {
         status: STATUSES.UNAVAILABLE,
         currentReservation: {},

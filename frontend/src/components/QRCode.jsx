@@ -28,7 +28,7 @@ const QRCode = ({
         type="submit"
         id={buttonId}
         className="button qr-button"
-        data-testid="qr-button"
+        data-testid={`qr-button-${id}`}
         onClick={toggleQr}
       >
         {isOpen ? closeText : openText}

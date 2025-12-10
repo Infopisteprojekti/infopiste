@@ -61,6 +61,37 @@ const initialReservations = [
   },
 ];
 
+const mockSyncResults = [
+  {
+    id: 1,
+    title: 'Form 1',
+    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc1.pdf',
+    startDate: '2025-12-04T00:00:00.000Z',
+    endDate: '2025-12-10T23:59:59.999Z',
+  },
+  {
+    id: 2,
+    title: 'Form 2',
+    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc2.pdf',
+    startDate: '2025-12-03T00:00:00.000Z',
+    endDate: '2025-12-10T23:59:59.999Z',
+  },
+  {
+    id: 3,
+    title: 'Form 3',
+    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc3.pdf',
+    startDate: '2025-12-02T00:00:00.000Z',
+    endDate: '2025-12-09T23:59:59.999Z',
+  },
+  {
+    id: 4,
+    title: 'Form 4',
+    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc2.pdf',
+    startDate: '2025-12-10T00:00:00.000Z',
+    endDate: '2025-12-14T23:59:59.999Z',
+  },
+];
+
 const mockSubmissions = [
   {
     Id: '1',
@@ -119,18 +150,10 @@ const mockFiles = [
   },
 ];
 
-const mockCachedForms = [
-  {
-    id: 1,
-    title: 'Form 1',
-    fileUrl: '/api/forms/proxy-pdf?url=https%3A%2F%2example.com%2Fdoc1.pdf',
-  },
-];
-
 export default {
   intitialRooms,
   initialReservations,
   mockSubmissions,
   mockFiles,
-  mockCachedForms,
+  mockSyncResults,
 };

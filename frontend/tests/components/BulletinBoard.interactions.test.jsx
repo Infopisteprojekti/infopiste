@@ -50,7 +50,7 @@ describe('BulletinBoard - Interactions', () => {
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
 
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup-add');
     expect(popup.classList.contains('hidden')).toBe(false);
   });
 
@@ -62,10 +62,10 @@ describe('BulletinBoard - Interactions', () => {
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
 
-    const closeButton = document.getElementById('qrButton');
+    const closeButton = document.getElementById('qrButton-add');
     await user.click(closeButton);
 
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup-add');
     expect(popup.classList.contains('hidden')).toBe(true);
   });
 
@@ -75,7 +75,9 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
     const nextButton = screen.getByText('← Previous');
@@ -96,7 +98,9 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
     const backButton = screen.getByText(/View all notices/i);
@@ -110,11 +114,15 @@ describe('BulletinBoard - Interactions', () => {
     setup();
 
     const form1 = await screen.findByText('Form 1');
-    await waitFor(() => expect(screen.queryByText(/Loading/)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+    );
     await user.click(form1);
 
     const scrollButton = screen.getByText(/Pause automatic scrolling/i);
     await user.click(scrollButton);
-    expect(screen.getByText(/Continue automatic scrolling/i)).toBeInTheDocument();
-  })
+    expect(
+      screen.getByText(/Continue automatic scrolling/i)
+    ).toBeInTheDocument();
+  });
 });

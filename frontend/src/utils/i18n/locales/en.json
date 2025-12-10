@@ -17,9 +17,16 @@
     "unknown": "Unknown"
   },
   "bulletinboard": {
-    "qr-add-file": "Add file",
-    "qr-close": "Close",
-    "qr-description": "Scan QR code to add",
+    "add": {
+      "qr-add-file": "Add file",
+      "qr-close": "Close",
+      "qr-description": "Scan QR code to add"
+    },
+    "delete": {
+      "qr-add-file": "Delete files",
+      "qr-close": "Close",
+      "qr-description": "Scan QR code to delete all your uploaded files from being visible"
+    },
     "stop-rotation": "Pause automatic scrolling",
     "continue-rotation": "Continue automatic scrolling",
     "available-notices": "Available notices",

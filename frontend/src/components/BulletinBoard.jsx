@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import PDFDisplay from './PDFDisplay';
 import QRCode from './QRCode';
+import qrcode from '../assets/form.svg';
 import formService from '@/services/forms.js';
 import PDFImage from './PDFImage';
 
@@ -62,7 +63,14 @@ const BulletinBoard = () => {
         }}
       >
         <p>{t('bulletinboard.no-notices')}</p>
-        {!loading && <QRCode />}
+        {!loading && (
+          <QRCode
+            svg={qrcode}
+            openText="bulletinboard.qr-add-file"
+            closeText="bulletinboard.qr-close"
+            descText="bulletinboard.qr-description"
+          />
+        )}
       </div>
     );
   }
@@ -70,7 +78,12 @@ const BulletinBoard = () => {
   if (!selectedForm) {
     return (
       <div>
-        <QRCode />
+        <QRCode
+          svg={qrcode}
+          openText={t('bulletinboard.qr-add-file')}
+          closeText={t('bulletinboard.qr-close')}
+          descText={t('bulletinboard.qr-description')}
+        />
         <p
           style={{
             textAlign: 'center',
@@ -129,7 +142,12 @@ const BulletinBoard = () => {
   const currentIndex = index;
   return (
     <div>
-      <QRCode />
+      <QRCode
+        svg={qrcode}
+        openText={t('bulletinboard.qr-add-file')}
+        closeText={t('bulletinboard.qr-close')}
+        descText={t('bulletinboard.qr-description')}
+      />
       <PDFDisplay
         currentIndex={currentIndex}
         forms={forms}

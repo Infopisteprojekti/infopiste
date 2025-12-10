@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import PDFDisplay from './PDFDisplay';
 import QRCode from './QRCode';
 import qrcode from '../assets/form.svg';
+import deletionQRCode from '../assets/deletion-form.svg';
 import formService from '@/services/forms.js';
 import PDFImage from './PDFImage';
 
@@ -16,6 +17,7 @@ const BulletinBoard = () => {
   const [loading, setLoading] = useState(true);
   const [previewLoading, setPreviewLoading] = useState(true);
   const [loadCount, setLoadCount] = useState(0);
+  const [openQr, setOpenQr] = useState(null);
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -64,12 +66,26 @@ const BulletinBoard = () => {
       >
         <p>{t('bulletinboard.no-notices')}</p>
         {!loading && (
-          <QRCode
-            svg={qrcode}
-            openText="bulletinboard.qr-add-file"
-            closeText="bulletinboard.qr-close"
-            descText="bulletinboard.qr-description"
-          />
+          <div>
+            <QRCode
+              id="del"
+              svg={deletionQRCode}
+              openText={t('bulletinboard.delete.qr-add-file')}
+              closeText={t('bulletinboard.delete.qr-close')}
+              descText={t('bulletinboard.delete.qr-description')}
+              openQr={openQr}
+              setOpenQr={setOpenQr}
+            />
+            <QRCode
+              id="add"
+              svg={qrcode}
+              openText={t('bulletinboard.add.qr-add-file')}
+              closeText={t('bulletinboard.add.qr-close')}
+              descText={t('bulletinboard.add.qr-description')}
+              openQr={openQr}
+              setOpenQr={setOpenQr}
+            />
+          </div>
         )}
       </div>
     );
@@ -79,10 +95,22 @@ const BulletinBoard = () => {
     return (
       <div>
         <QRCode
+          id="del"
+          svg={deletionQRCode}
+          openText={t('bulletinboard.delete.qr-add-file')}
+          closeText={t('bulletinboard.delete.qr-close')}
+          descText={t('bulletinboard.delete.qr-description')}
+          openQr={openQr}
+          setOpenQr={setOpenQr}
+        />
+        <QRCode
+          id="add"
           svg={qrcode}
-          openText={t('bulletinboard.qr-add-file')}
-          closeText={t('bulletinboard.qr-close')}
-          descText={t('bulletinboard.qr-description')}
+          openText={t('bulletinboard.add.qr-add-file')}
+          closeText={t('bulletinboard.add.qr-close')}
+          descText={t('bulletinboard.add.qr-description')}
+          openQr={openQr}
+          setOpenQr={setOpenQr}
         />
         <p
           style={{
@@ -143,10 +171,22 @@ const BulletinBoard = () => {
   return (
     <div>
       <QRCode
+        id="del"
+        svg={deletionQRCode}
+        openText={t('bulletinboard.delete.qr-add-file')}
+        closeText={t('bulletinboard.delete.qr-close')}
+        descText={t('bulletinboard.delete.qr-description')}
+        openQr={openQr}
+        setOpenQr={setOpenQr}
+      />
+      <QRCode
+        id="add"
         svg={qrcode}
-        openText={t('bulletinboard.qr-add-file')}
-        closeText={t('bulletinboard.qr-close')}
-        descText={t('bulletinboard.qr-description')}
+        openText={t('bulletinboard.add.qr-add-file')}
+        closeText={t('bulletinboard.add.qr-close')}
+        descText={t('bulletinboard.add.qr-description')}
+        openQr={openQr}
+        setOpenQr={setOpenQr}
       />
       <PDFDisplay
         currentIndex={currentIndex}

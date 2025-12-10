@@ -1,35 +1,42 @@
-import { useState } from 'react';
 import '@/styles/components/RoomPopup.css';
 import '@/styles/components/Button.css';
 
-const QRCode = ({ svg, openText, closeText, descText }) => {
-  const [qrState, setQrState] = useState(false);
+const QRCode = ({
+  id,
+  svg,
+  openText,
+  closeText,
+  descText,
+  openQr,
+  setOpenQr,
+}) => {
+  const popupId = `popup-${id}`;
+  const buttonId = `qrButton-${id}`;
 
+  const isOpen = openQr === id;
   const toggleQr = () => {
-    const newState = !qrState;
-    if (newState) {
-      document.getElementById('popup').classList.remove('hidden');
+    if (isOpen) {
+      setOpenQr(null);
     } else {
-      document.getElementById('popup').classList.add('hidden');
+      setOpenQr(id);
     }
-    setQrState(newState);
   };
 
   return (
     <div>
       <button
         type="submit"
-        id="qrButton"
+        id={buttonId}
         className="button qr-button"
         data-testid="qr-button"
         onClick={toggleQr}
       >
-        {qrState ? closeText : openText}
+        {isOpen ? closeText : openText}
       </button>
 
       <div
-        id="popup"
-        className="room-popup hidden"
+        id={popupId}
+        className={`room-popup ${isOpen ? '' : 'hidden'}`}
         style={{
           top: '50%',
           left: '50%',

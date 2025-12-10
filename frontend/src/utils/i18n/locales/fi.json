@@ -18,9 +18,16 @@
     "unknown": "Ei tiedossa"
   },
   "bulletinboard": {
-    "qr-add-file": "Lisää ilmoitus",
-    "qr-close": "Sulje",
-    "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa",
+    "add": {
+      "qr-add-file": "Lisää ilmoitus",
+      "qr-close": "Sulje",
+      "qr-description": "Lue qr-koodi lisätäksesi ilmoituksen pdf-muodossa"
+    },
+    "delete": {
+      "qr-add-file": "Poista ilmoitukset",
+      "qr-close": "Sulje",
+      "qr-description": "Lue qr-koodi poistaaksesi kaikki lataamasi ilmoitukset näkyvistä"
+    },
     "stop-rotation": "Pysäytä automaattinen kelaus",
     "continue-rotation": "Jatka automaattista kelausta",
     "available-notices": "Lisätyt ilmoitukset",

@@ -90,7 +90,7 @@ const client = {
           // Filter duplicate web urls (newest is kept).
           // Related to a bug where new files are deleted
           //  if they have the same filename as older already deleted ones.
-          if (header == 'Ilmoitus pdf-muodossa') {
+          if (header === 'Ilmoitus pdf-muodossa') {
             if (webUrls.includes(value)) {
               return (obj[header] = null);
             } else {

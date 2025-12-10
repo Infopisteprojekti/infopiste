@@ -153,12 +153,8 @@ export const syncFormSubmissions = async () => {
       const file = fileMap.get(excelUrl);
       // Assumes that if file id does not exist it has been already deleted
       if (file?.id) {
-        try {
-          await graphClient.deleteDriveItem(file.id);
-          logger.info(`Deleted file: ${file.name}`);
-        } catch (err) {
-          throw err;
-        }
+        await graphClient.deleteDriveItem(file.id);
+        logger.info(`Deleted file: ${file.name}`);
       }
     })
   );

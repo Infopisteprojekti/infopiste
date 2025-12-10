@@ -1,5 +1,5 @@
 types {
-  text/javascript js mjs;
+  application/javascript js mjs;
 }
 
 server {

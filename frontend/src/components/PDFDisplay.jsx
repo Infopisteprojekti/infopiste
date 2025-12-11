@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft, ArrowRight, ArrowUpCircle } from 'lucide-react';
 import '../styles/components/PDFDisplay.css';
 import PDFImage from './PDFImage';
 
@@ -76,7 +77,7 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
 
       <div className="pdf-wrapper-with-buttons">
         <button className="button pdf-nav-button" onClick={prevForm}>
-          ← {t('pdfdisplay.previous')}
+          <ArrowLeft /> {t('pdfdisplay.previous')}
         </button>
         <div className="pdf-wrapper">
           {groupedForms.map(f => (
@@ -86,11 +87,12 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
           ))}
         </div>
         <button className="button pdf-nav-button" onClick={nextForm}>
-          {t('pdfdisplay.next')} →
+          {t('pdfdisplay.next')} <ArrowRight />
         </button>
+
         <div className="scroll-top-wrapper">
           <button className="button scroll-top-button" onClick={toTop}>
-            ⬆️
+            <ArrowUpCircle />
           </button>
         </div>
       </div>

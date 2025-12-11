@@ -87,3 +87,16 @@
   padding: 20px;
   text-align: center;
 }
+
+.scroll-top-button {
+  position: sticky;
+  top: 80vh;
+}
+
+.scroll-top-wrapper {
+  position: absolute;
+  bottom: 80px;
+  top: 110vh;
+  z-index: 1;
+  transition: transform 0.15s, opacity 0.2s;
+}

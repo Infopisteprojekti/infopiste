@@ -88,11 +88,11 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
         <button className="button pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} →
         </button>
-      </div>
-      <div>
-        <button className="button" onClick={toTop}>
-          ⬆️
-        </button>
+        <div className="scroll-top-wrapper">
+          <button className="button scroll-top-button" onClick={toTop}>
+            ⬆️
+          </button>
+        </div>
       </div>
     </div>
   );

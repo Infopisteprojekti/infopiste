@@ -10,7 +10,6 @@
     "reset": "Palauta",
     "floor-label": "Kerros {{label}}"
   },
-  "room-status-message": "Huone {{roomId}}\nTila: {{status}}",
   "room-status": {
     "unavailable": "Ei käytettävissä",
     "available": "Käytettävissä",

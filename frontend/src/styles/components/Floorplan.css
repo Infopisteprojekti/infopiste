@@ -110,9 +110,8 @@ g text {
   }
 
   .media-floor-button {
-    width: 100px;
+    width: 110px;
     top: 24px;
-    left: 24px;
     display: flex;
     padding: 12px 20px;
     border: none;

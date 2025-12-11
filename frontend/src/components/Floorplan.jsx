@@ -180,7 +180,7 @@ const Floorplan = () => {
               className={`media-floor-button ${floorMenuStatus ? 'active' : ''}`}
               onClick={() => handleFloorsMenu()}
             >
-              Kerrokset
+              ☰ {t('floorplan-toolbar.floor-menu')}
             </button>
             <div
               className={`floor-selector ${floorMenuStatus ? 'active' : ''}`}

@@ -8,7 +8,8 @@
     "zoom-in": "Zoom In",
     "zoom-out": "Zoom Out",
     "reset": "Reset",
-    "floor-label": "Floor {{label}}"
+    "floor-label": "Floor {{label}}",
+    "floor-menu": "Floors"
   },
   "room-status": {
     "unavailable": "Unavailable",

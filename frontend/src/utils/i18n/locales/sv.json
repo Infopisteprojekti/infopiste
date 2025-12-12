@@ -8,7 +8,8 @@
     "zoom-in": "Zooma in",
     "zoom-out": "Zooma ut",
     "reset": "Återställ",
-    "floor-label": "Våning {{label}}"
+    "floor-label": "Våning {{label}}",
+    "floor-menu": "Våningar"
   },
   "room-status": {
     "unavailable": "Ej tillgänglig",

@@ -98,6 +98,43 @@ g text {
   white-space: nowrap;
 }
 
+.media-floor-button {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .floor-selector {
+    display: none;
+    flex-direction: column;
+    top: 45px;
+  }
+
+  .media-floor-button {
+    width: 110px;
+    top: 24px;
+    display: flex;
+    padding: 12px 20px;
+    border: none;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .media-floor-button:active {
+    transform: translateY(0);
+  }
+
+  .floor-selector.active {
+    display: flex;
+  }
+}
+
 .floor-button:hover {
   background: #f0f0f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);

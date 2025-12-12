@@ -89,11 +89,12 @@ const PDFDisplay = ({ currentIndex, forms, backCallBack }) => {
         <button className="button pdf-nav-button" onClick={nextForm}>
           {t('pdfdisplay.next')} <ArrowRight />
         </button>
-      </div>
-      <div>
-        <button className="button" onClick={toTop}>
-          <ArrowUpCircle />
-        </button>
+
+        <div className="scroll-top-wrapper">
+          <button className="button scroll-top-button" onClick={toTop}>
+            <ArrowUpCircle />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ const Floorplan = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [popUpPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [floorMenuStatus, setfloorMenuStatus] = useState(false);
 
   const transformRef = useRef(null);
   const currentFloorSVG = FLOORS.find(f => f.id === floor).svg;
@@ -113,6 +114,10 @@ const Floorplan = () => {
     }, 200);
   };
 
+  const handleFloorsMenu = () => {
+    setfloorMenuStatus(!floorMenuStatus);
+  };
+
   return (
     <div className="floorplan-container">
       <TransformWrapper
@@ -171,7 +176,15 @@ const Floorplan = () => {
               </span>
             </div>
 
-            <div className="floor-selector">
+            <button
+              className={`media-floor-button ${floorMenuStatus ? 'active' : ''}`}
+              onClick={() => handleFloorsMenu()}
+            >
+              ☰ {t('floorplan-toolbar.floor-menu')}
+            </button>
+            <div
+              className={`floor-selector ${floorMenuStatus ? 'active' : ''}`}
+            >
               {FLOORS.map(({ id, label }) => (
                 <button
                   key={id}

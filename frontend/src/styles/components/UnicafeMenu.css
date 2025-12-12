@@ -18,6 +18,12 @@
   margin: 0 auto;
 }
 
+@media (max-width: 750px) {
+  .three-grid {
+    grid-template-columns: repeat(auto-fit, minmax(175px, auto));
+  }
+}
+
 .menu-card {
   position: relative;
   display: flex;

@@ -12,6 +12,7 @@ import {
   TENANT_ID,
   GROUP_ID,
   FILE_ID,
+  DELETION_FILE_ID,
   SHEET_NAME,
   FOLDER_ID,
 } from './config.js';
@@ -79,12 +80,23 @@ const client = {
       const response = await graphClient.api(api_url).get();
       const [headers, ...rows] = response.values;
 
-      const parsed = rows.map(row => {
+      const webUrls = [];
+      // Assumes rows order from oldest to newest
+      // Maybe change reverse to sort?
+      const parsed = rows.reverse().map(row => {
         const obj = {};
         headers.forEach((header, i) => {
           const value = row[i] ?? null;
-
-          // Get items that are active and have a valid date range
+          // Filter duplicate web urls (newest is kept).
+          // Related to a bug where new files are deleted
+          //  if they have the same filename as older already deleted ones.
+          if (header === 'Ilmoitus pdf-muodossa') {
+            if (webUrls.includes(value)) {
+              return (obj[header] = null);
+            } else {
+              webUrls.push(value);
+            }
+          }
           if (dateColumns.includes(header) && typeof value === 'number') {
             const isEndDate = header === 'Lopetuspvm';
             obj[header] = excelDateToDayjs(value, isEndDate).toISOString();
@@ -92,18 +104,33 @@ const client = {
             obj[header] = value;
           }
         });
-
         return obj;
       });
 
-      const now = dayjs();
-      return parsed.filter(
-        row =>
-          isValidSubmissionDateRange(row.Aloituspvm, row.Lopetuspvm) &&
-          now.isBetween(row.Aloituspvm, row.Lopetuspvm, 'day', '[]')
-      );
+      return parsed.filter(item => item['Ilmoitus pdf-muodossa']).reverse();
     } catch (error) {
       logger.error('Error fetching Excel data:', error);
+      throw error;
+    }
+  },
+
+  async getDeletionRequests() {
+    const api_url = `groups/${GROUP_ID}/drive/items/${DELETION_FILE_ID}/workbook/worksheets/${SHEET_NAME}/range/usedRange`;
+    try {
+      const response = await graphClient.api(api_url).get();
+      const [headers, ...rows] = response.values;
+
+      const idIndex = headers.indexOf('Id');
+      const emailIndex = headers.indexOf('Email');
+      const dateIndex = headers.indexOf('Completion time');
+
+      return rows.map(row => ({
+        id: row[idIndex],
+        email: row[emailIndex],
+        deletedAt: excelDateToDayjs(row[dateIndex], false).toISOString(),
+      }));
+    } catch (error) {
+      logger.error('Error fetching Excel deletion data:', error);
       throw error;
     }
   },
@@ -128,6 +155,17 @@ const client = {
     } catch (error) {
       logger.error('Error fetching drive items:', error);
       throw error;
+    }
+  },
+
+  async deleteDriveItem(fileId) {
+    try {
+      await graphClient
+        .api(`/groups/${GROUP_ID}/drive/items/${fileId}`)
+        .delete();
+    } catch (err) {
+      console.error(`Failed to delete file`, err);
+      throw err;
     }
   },
 

@@ -17,6 +17,7 @@ services:
       LOAD_MOCK_DATA: ${LOAD_MOCK_DATA}
       GROUP_ID: ${GROUP_ID}
       FILE_ID: ${FILE_ID}
+      DELETION_FILE_ID: ${DELETION_FILE_ID}
       SHEET_NAME: ${SHEET_NAME}
       FOLDER_ID: ${FOLDER_ID}
     depends_on:

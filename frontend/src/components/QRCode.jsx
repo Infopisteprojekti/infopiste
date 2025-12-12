@@ -1,38 +1,42 @@
-import qrcode from '../assets/form.svg';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import '@/styles/components/RoomPopup.css';
 import '@/styles/components/Button.css';
 
-const QRCode = () => {
-  const { t } = useTranslation();
-  const [qrState, setQrState] = useState(false);
+const QRCode = ({
+  id,
+  svg,
+  openText,
+  closeText,
+  descText,
+  openQr,
+  setOpenQr,
+}) => {
+  const popupId = `popup-${id}`;
+  const buttonId = `qrButton-${id}`;
 
+  const isOpen = openQr === id;
   const toggleQr = () => {
-    const newState = !qrState;
-    if (newState) {
-      document.getElementById('popup').classList.remove('hidden');
+    if (isOpen) {
+      setOpenQr(null);
     } else {
-      document.getElementById('popup').classList.add('hidden');
+      setOpenQr(id);
     }
-    setQrState(newState);
   };
 
   return (
     <div>
       <button
         type="submit"
-        id="qrButton"
+        id={buttonId}
         className="button qr-button"
-        data-testid="qr-button"
+        data-testid={`qr-button-${id}`}
         onClick={toggleQr}
       >
-        {qrState ? t('bulletinboard.qr-close') : t('bulletinboard.qr-add-file')}
+        {isOpen ? closeText : openText}
       </button>
 
       <div
-        id="popup"
-        className="room-popup hidden"
+        id={popupId}
+        className={`room-popup ${isOpen ? '' : 'hidden'}`}
         style={{
           top: '50%',
           left: '50%',
@@ -40,14 +44,14 @@ const QRCode = () => {
         }}
       >
         <div className="popup-header">
-          <h3 className="popup-title">{t('bulletinboard.qr-description')}</h3>
+          <h3 className="popup-title">{descText}</h3>
           <button className="button" onClick={toggleQr}>
-            {t('bulletinboard.qr-close')}
+            {closeText}
           </button>
         </div>
 
         <div className="popup-content">
-          <img src={qrcode} className="qr" />
+          <img src={svg} className="qr" />
         </div>
       </div>
     </div>

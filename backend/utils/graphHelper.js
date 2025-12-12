@@ -1,11 +1,14 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
+import isBetween from 'dayjs/plugin/isBetween.js';
 import graphClient from './graphClient.js';
 import logger from './logger.js';
 import Room from '../models/room.js';
 import Reservation from '../models/reservation.js';
+import { excelDateToDayjs, isValidSubmissionDateRange } from './date.js';
 
 dayjs.extend(utc);
+dayjs.extend(isBetween);
 
 export const syncExactumRooms = async () => {
   try {
@@ -130,4 +133,108 @@ export const syncTodaysEvents = async () => {
   } catch (error) {
     logger.error(`Event sync failed: ${error.message}`);
   }
+};
+
+export const syncFormSubmissions = async () => {
+  const MAX_ACTIVE_PER_EMAIL = 3;
+  const [submissions, files, deletionRequests] = await Promise.all([
+    graphClient.getFormSubmissions(),
+    graphClient.getDriveItems(),
+    graphClient.getDeletionRequests(),
+  ]);
+
+  const fileMap = createFileMap(files);
+  const deletionMap = createDeletionMap(deletionRequests);
+  const submissionsToDelete = getSubmissionsToDelete(submissions, deletionMap);
+
+  await Promise.all(
+    submissionsToDelete.map(async submission => {
+      const excelUrl = submission['Ilmoitus pdf-muodossa'];
+      const file = fileMap.get(excelUrl);
+      // Assumes that if file id does not exist it has been already deleted
+      if (file?.id) {
+        await graphClient.deleteDriveItem(file.id);
+        logger.info(`Deleted file: ${file.name}`);
+      }
+    })
+  );
+
+  const now = dayjs();
+  const validAndActiveSubmssions = submissions.filter(
+    row =>
+      isValidSubmissionDateRange(row.Aloituspvm, row.Lopetuspvm) &&
+      now.isBetween(row.Aloituspvm, row.Lopetuspvm, 'day', '[]')
+  );
+
+  const countByEmail = new Map();
+  const result = validAndActiveSubmssions
+    .sort((a, b) => new Date(a['Aloituspvm']) - new Date(b['Aloituspvm']))
+    .map(row => {
+      const email = row['Email'];
+      if (!email) return null;
+
+      const completionTime = excelDateToDayjs(row['Completion time']);
+      const deletionTime = deletionMap.get(email);
+
+      // TODO: Check what happens if this is removed
+      if (deletionTime && completionTime.isBefore(deletionTime)) return null;
+
+      const excelUrl = row['Ilmoitus pdf-muodossa'];
+      if (!excelUrl) return null;
+
+      const file = fileMap.get(excelUrl);
+      if (!file?.downloadUrl) return null;
+
+      // Max active submissions check
+      const current = countByEmail.get(email) || 0;
+      if (current >= MAX_ACTIVE_PER_EMAIL) return null;
+      countByEmail.set(email, current + 1);
+
+      const proxyUrl = file.downloadUrl.startsWith('http')
+        ? `/api/forms/proxy-pdf?url=${encodeURIComponent(file.downloadUrl)}`
+        : null;
+
+      return {
+        id: row['Id'],
+        title: row['Ilmoituksen otsikko'] || null,
+        fileUrl: proxyUrl,
+        startDate: row['Aloituspvm'] || null,
+        endDate: row['Lopetuspvm'] || null,
+      };
+    })
+    .filter(Boolean);
+
+  return result;
+};
+
+const createFileMap = files => {
+  const fileMap = new Map();
+  files.forEach(file => {
+    if (file.webUrl && file.downloadUrl && file.id) {
+      fileMap.set(file.webUrl, file);
+    }
+  });
+  return fileMap;
+};
+
+const createDeletionMap = deletionRequests => {
+  const deletionMap = new Map();
+  deletionRequests.forEach(req => {
+    if (!req.email || !req.deletedAt) return;
+    const prev = deletionMap.get(req.email);
+    const deletedAt = dayjs(req.deletedAt);
+    if (!prev || deletedAt.isAfter(prev)) {
+      deletionMap.set(req.email, deletedAt);
+    }
+  });
+  return deletionMap;
+};
+
+const getSubmissionsToDelete = (submissions, deletionMap) => {
+  return submissions.filter(submission => {
+    const email = submission['Email'];
+    const completionTime = excelDateToDayjs(submission['Completion time']);
+    const deletionTime = deletionMap.get(email);
+    return deletionTime && completionTime.isBefore(deletionTime);
+  });
 };

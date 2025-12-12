@@ -50,7 +50,7 @@ describe('BulletinBoard - Interactions', () => {
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
 
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup-add');
     expect(popup.classList.contains('hidden')).toBe(false);
   });
 
@@ -62,10 +62,10 @@ describe('BulletinBoard - Interactions', () => {
     const addFileButton = await screen.findByText('Add file');
     await user.click(addFileButton);
 
-    const closeButton = document.getElementById('qrButton');
+    const closeButton = document.getElementById('qrButton-add');
     await user.click(closeButton);
 
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('popup-add');
     expect(popup.classList.contains('hidden')).toBe(true);
   });
 

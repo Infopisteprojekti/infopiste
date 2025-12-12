@@ -17,9 +17,16 @@
     "unknown": "Information saknas"
   },
   "bulletinboard": {
-    "qr-add-file": "Lägg till ett meddelande på anslagstavlan",
-    "qr-close": "Stäng",
-    "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format",
+    "add": {
+      "qr-add-file": "Lägg till ett meddelande på anslagstavlan",
+      "qr-close": "Stäng",
+      "qr-description": "Skanna qr-koden för att lägga till ett meddelande i pdf-format"
+    },
+    "delete": {
+      "qr-add-file": "Ta bort mina meddelanden på anslagstavlan",
+      "qr-close": "Stäng",
+      "qr-description": "Skanna qr-koden för att ta bort alla dina meddelanden på anslagstavlan"
+    },
     "stop-rotation": "Pausa bildspel",
     "continue-rotation": "Fortsätt bildspel",
     "available-notices": "Meddelanden",

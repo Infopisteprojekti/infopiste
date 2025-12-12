@@ -82,7 +82,7 @@ test.describe('Infopiste app', () => {
     await page.getByText('Add file').click();
     await expect(page.getByText('Scan QR code to add')).toBeVisible();
 
-    await page.getByTestId('qr-button').click();
+    await page.getByTestId('qr-button-add').click();
     await expect(page.getByText('Scan QR code to add')).not.toBeVisible();
   });
 

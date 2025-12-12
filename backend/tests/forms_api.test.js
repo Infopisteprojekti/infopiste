@@ -1,5 +1,7 @@
 import supertest from 'supertest';
 import { vi, test, describe, beforeEach, afterEach, assert } from 'vitest';
+import { syncFormSubmissions } from '../utils/graphHelper.js';
+import redisClient from '../utils/redisClient.js';
 
 import app from '../app.js';
 const api = supertest(app);
@@ -14,15 +16,9 @@ vi.mock('../utils/redisClient.js', () => ({
   },
 }));
 
-vi.mock('../utils/graphClient.js', () => ({
-  default: {
-    getFormSubmissions: vi.fn(),
-    getDriveItems: vi.fn(),
-  },
+vi.mock('../utils/graphHelper.js', () => ({
+  syncFormSubmissions: vi.fn(),
 }));
-
-import redisClient from '../utils/redisClient.js';
-import graphClient from '../utils/graphClient.js';
 
 describe('forms api', () => {
   beforeEach(() => {
@@ -35,9 +31,7 @@ describe('forms api', () => {
 
   test('returns forms from graph if cache is empty', async () => {
     redisClient.get.mockResolvedValue(null);
-
-    graphClient.getFormSubmissions.mockResolvedValue(helper.mockSubmissions);
-    graphClient.getDriveItems.mockResolvedValue(helper.mockFiles);
+    syncFormSubmissions.mockResolvedValue(helper.mockSyncResults);
 
     redisClient.set.mockResolvedValue('OK');
     redisClient.expire.mockResolvedValue(1);
@@ -48,18 +42,16 @@ describe('forms api', () => {
       .expect('Content-Type', /application\/json/);
 
     assert.strictEqual(response.body.source, 'graph');
-    assert.ok(Array.isArray(response.body.data));
+    assert.deepStrictEqual(response.body.data, helper.mockSyncResults);
 
     assert.strictEqual(redisClient.get.mock.calls.length, 1);
-    assert.strictEqual(graphClient.getFormSubmissions.mock.calls.length, 1);
-    assert.strictEqual(graphClient.getDriveItems.mock.calls.length, 1);
-
+    assert.strictEqual(syncFormSubmissions.mock.calls.length, 1);
     assert.strictEqual(redisClient.set.mock.calls.length, 1);
     assert.strictEqual(redisClient.expire.mock.calls.length, 1);
   });
 
   test('returns forms from cache when available', async () => {
-    redisClient.get.mockResolvedValue(JSON.stringify(helper.mockCachedForms));
+    redisClient.get.mockResolvedValue(JSON.stringify(helper.mockSyncResults));
 
     const response = await api
       .get('/api/forms')
@@ -67,28 +59,23 @@ describe('forms api', () => {
       .expect('Content-Type', /application\/json/);
 
     assert.strictEqual(response.body.source, 'cache');
-    assert.strictEqual(
-      response.body.data.length,
-      helper.mockCachedForms.length
-    );
+    assert.deepStrictEqual(response.body.data, helper.mockSyncResults);
 
     assert.strictEqual(redisClient.get.mock.calls.length, 1);
-
-    assert.strictEqual(graphClient.getFormSubmissions.mock.calls.length, 0);
-    assert.strictEqual(graphClient.getDriveItems.mock.calls.length, 0);
-
+    assert.strictEqual(syncFormSubmissions.mock.calls.length, 0);
     assert.strictEqual(redisClient.set.mock.calls.length, 0);
+    assert.strictEqual(redisClient.expire.mock.calls.length, 0);
   });
 
   test('returns empty array if no forms exist', async () => {
     redisClient.get.mockResolvedValue(null);
-
-    graphClient.getFormSubmissions.mockResolvedValue([]);
-    graphClient.getDriveItems.mockResolvedValue([]);
+    syncFormSubmissions.mockResolvedValue([]);
 
     const response = await api.get('/api/forms').expect(200);
 
     assert.strictEqual(response.body.source, 'graph');
     assert.deepStrictEqual(response.body.data, []);
+
+    assert.strictEqual(syncFormSubmissions.mock.calls.length, 1);
   });
 });

@@ -52,6 +52,8 @@
   "unknown": "Okänt",
   "current-reservation": "Nuvarande reservation",
   "upcoming-reservations": "Följande reservationer",
+  "persons": "Personer",
+  "free-until-next-booking": "Ingen bokning nu",
   "unicafe": {
     "loading-menus": "Laddar matlistor...",
     "no-menus": "Ingen matlista tillgänglig",

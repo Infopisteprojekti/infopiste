@@ -1,6 +1,10 @@
 import dayjs from 'dayjs';
 import { MAX_PDF_DAYS } from './config.js';
 
+export const getTimestamp = () => {
+  return dayjs().format('YYYY-MM-DD HH:mm:ss');
+};
+
 export const getSecondsUntilTomorrow = () => {
   const now = new Date();
   const tomorrow = new Date(

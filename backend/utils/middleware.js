@@ -2,9 +2,7 @@ import rateLimit from 'express-rate-limit';
 import logger from './logger.js';
 
 export const requestLogger = (request, response, next) => {
-  logger.info(
-    `${new Date().toISOString()} - ${request.method} ${request.path}`
-  );
+  logger.info(`${request.method} ${request.path}`);
   next();
 };
 

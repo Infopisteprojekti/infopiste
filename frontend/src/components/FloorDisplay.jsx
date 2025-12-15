@@ -31,7 +31,7 @@ const FloorDisplay = ({
         r => dayjs.utc(r.start).isBefore(now) && dayjs.utc(r.end).isAfter(now)
       );
 
-      statusMap.set(room.displayId, {
+      statusMap.set(room.displayId.toLowerCase(), {
         status: currentReservation ? STATUSES.RESERVED : STATUSES.AVAILABLE,
         currentReservation: currentReservation || {},
         roomReservations: roomReservations,
@@ -55,7 +55,7 @@ const FloorDisplay = ({
       const room = rooms.find(
         r => r.displayId.toLowerCase() === roomId.toLowerCase()
       );
-      const statusInfo = roomStatusMap.get(roomId) || {
+      const statusInfo = roomStatusMap.get(roomId.toLowerCase()) || {
         status: STATUSES.UNAVAILABLE,
         currentReservation: {},
         roomReservations: [],

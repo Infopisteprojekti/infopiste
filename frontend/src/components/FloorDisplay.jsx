@@ -77,7 +77,7 @@ const FloorDisplay = ({
           currentReservation: statusInfo.currentReservation,
           roomReservations: statusInfo.roomReservations,
           position: {
-            x: rectBounds.left + rectBounds.width / 2,
+            x: rectBounds.left,
             y: rectBounds.top,
           },
         });

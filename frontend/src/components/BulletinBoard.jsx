@@ -52,18 +52,7 @@ const BulletinBoard = () => {
 
   if (!loading && forms.length === 0) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          gap: '1rem',
-        }}
-      >
+      <div className="no-pdfs">
         <p>{t('bulletinboard.no-notices')}</p>
         {!loading && (
           <div>

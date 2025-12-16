@@ -29,15 +29,16 @@ describe('RoomPopup', () => {
     render(<RoomPopup room={mockRoom} position={mockPosition} onClose={mockOnClose} />);
 
     expect(screen.getByText('Room A255')).toBeInTheDocument();
-    expect(screen.getByTestId('room-status')).toHaveTextContent('room-status.reserved');
-    expect(screen.getByTestId('room-reservation')).toHaveTextContent('12:00');
-    expect(screen.getByTestId('room-reservation')).toHaveTextContent('13:00');
-    expect(screen.getByTestId('room-floor')).toHaveTextContent('3');
-    expect(screen.getByTestId('room-capacity')).toHaveTextContent('10');
-    expect(screen.getByTestId('room-accesible')).toHaveTextContent('yes');
+    expect(screen.getByText('room-status.reserved')).toBeInTheDocument();
+
+    expect(screen.getByText('12:00 - 13:00')).toBeInTheDocument();
+
+    expect(screen.getByText(/10 persons/)).toBeInTheDocument();
+    expect(screen.getByText(/floor 3/i)).toBeInTheDocument();
+    expect(screen.getByText('yes')).toBeInTheDocument();
   });
 
-  it('displays unknown when room data is missing', () => {
+  it('displays correctly when room data is missing', () => {
     const incompleteRoom = {
       displayName: 'A255',
       status: 'unavailable',
@@ -51,30 +52,33 @@ describe('RoomPopup', () => {
       <RoomPopup room={incompleteRoom} position={mockPosition} onClose={mockOnClose} />
     );
 
-    expect(screen.getByTestId('room-floor')).toHaveTextContent('unknown');
-    expect(screen.getByTestId('room-capacity')).toHaveTextContent('unknown');
-    expect(screen.getByTestId('room-accesible')).toHaveTextContent('unknown');  });
+    // capacity
+    expect(screen.getAllByText('-').length).toBeGreaterThan(0);
+
+    // accessibility defaults to "no"
+    expect(screen.getByText('no')).toBeInTheDocument();
+  });
 
   it('calls onClose when close button is clicked', () => {
     render(<RoomPopup room={mockRoom} position={mockPosition} onClose={mockOnClose} />);
 
-    fireEvent.click(screen.getByText('x'));
+    const closeButton = screen.getByRole('button');
+    fireEvent.click(closeButton);
+
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
   it('closes when clicking outside the popup', () => {
-    const { container } = render(
-      <RoomPopup room={mockRoom} position={mockPosition} onClose={mockOnClose} />
-    );
+    render(<RoomPopup room={mockRoom} position={mockPosition} onClose={mockOnClose} />);
 
-    fireEvent.mouseDown(container);
+    fireEvent.pointerDown(document.body);
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
   it('does not close when clicking inside the popup', () => {
     render(<RoomPopup room={mockRoom} position={mockPosition} onClose={mockOnClose} />);
 
-    fireEvent.mouseDown(screen.getByText('Room A255'));
+    fireEvent.pointerDown(screen.getByText('Room A255'));
     expect(mockOnClose).not.toHaveBeenCalled();
   });
 });

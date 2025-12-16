@@ -5,7 +5,6 @@ import { X } from 'lucide-react';
 import '@/styles/components/RoomPopup.css';
 import '@/styles/components/FeedbackPopup.css';
 
-
 const Feedback = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);

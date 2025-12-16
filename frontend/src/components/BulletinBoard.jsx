@@ -101,13 +101,7 @@ const BulletinBoard = () => {
           openQr={openQr}
           setOpenQr={setOpenQr}
         />
-        <p
-          style={{
-            textAlign: 'center',
-            margin: '1rem 0',
-            fontWeight: 'bold',
-          }}
-        >
+        <p className="bulletin-board-title">
           {t('bulletinboard.available-notices')}
         </p>
         {previewLoading && (

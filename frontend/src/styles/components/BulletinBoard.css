@@ -70,3 +70,9 @@
   font-weight: bold;
   gap: 1rem;
 }
+
+.bulletin-board-title {
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: bold;
+}

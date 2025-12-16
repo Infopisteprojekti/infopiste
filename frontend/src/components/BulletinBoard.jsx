@@ -105,18 +105,7 @@ const BulletinBoard = () => {
           {t('bulletinboard.available-notices')}
         </p>
         {previewLoading && (
-          <div
-            style={{
-              display: 'flex',
-              width: '100%',
-              height: '77vh',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              gap: '1rem',
-            }}
-          >
+          <div className="loader-wrapper">
             <span className="loader"></span>
             <p>{t('bulletinboard.loading-notices')}</p>
           </div>

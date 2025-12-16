@@ -52,6 +52,8 @@
   "unknown": "Unknown",
   "current-reservation": "Current reservation",
   "upcoming-reservations": "Upcoming reservations",
+  "persons": "Persons",
+  "free-until-next-booking": "No current reservation",
   "unicafe": {
     "loading-menus": "Loading menus...",
     "no-menus": "No menus available",

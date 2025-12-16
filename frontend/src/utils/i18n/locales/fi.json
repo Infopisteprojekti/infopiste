@@ -52,6 +52,8 @@
   "unknown": "Ei tiedossa",
   "current-reservation": "Tämänhetkinen varaus",
   "upcoming-reservations": "Tulevat varaukset",
+  "persons": "Henkilöä",
+  "free-until-next-booking": "Ei varausta nyt",
   "unicafe": {
     "loading-menus": "Ladataan ruokalistoja...",
     "no-menus": "Ruokalistoja ei ole saatavilla",

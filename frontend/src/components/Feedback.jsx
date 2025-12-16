@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import '@/styles/components/RoomPopup.css';
 import '@/styles/components/RoomPopup.css';
+import '@/styles/components/FeedbackPopup.css';
 import { useState } from 'react';
 
 const Feedback = () => {
@@ -29,12 +30,10 @@ const Feedback = () => {
 
       <div
         id="feedback-popup"
-        className="room-popup hidden"
-        style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translateX(-50%) translateY(-50%)',
-        }}
+        className="
+        room-popup 
+        hidden 
+        feedback-popup"
       >
         <div className="popup-header">
           <h3 className="popup-title">{t('feedback.description')}</h3>

@@ -1,35 +1,43 @@
+# Backend Documentation
 # Requirements
 
-`Node` version 24 is used to build the backend image. `npm` is also required.
+- `Node.js`: Version 24
+- `npm`
 
 The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
 
-# Backend technologies used
+# Technologies Used
 
-The backend of the application is built with Express. The database of choice is MongoDB. `Mongoose` is used to interface with the database in the backend.
+The backend is build with the following technologies:
 
-# Backend structure
+- Express - HTTP server and routing
+- MongoDB - Database
+- Redis - Cache
+- Docker - Containerization for development and production environments
 
-The backend can be found at the [backend/](../backend/) directory.
+# Structure
 
-It includes both development environment and production `Dockerfile`s.
+The backend code lives in the [backend/](../backend/) directory and includes separate development environment and production `Dockerfile`s.
 
-Various connections and configurations are defined in the [backend/utils](../backend/utils/) directory.
+Key files and directories:
+- `server.js` - Application entrypoint
+- `app.js` - Express application setup (routes, middleware)
+- `controllers/`
+- `utils/` - Various connections, configurations and helpers
+  - `dbConnetion.js` - Mongo connection logic
+  - `redisClient.js`
+  - `graphClient.js` - Microsoft Graph API initialization and integrations
+  - `graphHelper.js` - Helper functions for `graphClient.js`
+- `models/` - Mongoose models
 
-The server is started in [server.js](../backend/server.js).
+## Health Check
+`/api/health` responds with status 200 and message ok.
 
-The express app is built in [app.js](../backend/app.js).
+## Rooms
+- **Controller:** `controllers/rooms.js`
+- **Model:** `models/rooms.js`
 
-The connection to the database is formed in [dbConnection.js](../backend/utils/dbConnection.js). 
-
-`app.js` offers an endpoint for health checks:
-
-`/api/health` responds with status 200 and message `ok`.
-
-The endpoint for fetching room data is defined in [controllers/rooms.js](../backend/controllers/rooms.js).
-
-A `Room` is a [mongoose model](../backend/models/room.js) containing:
-
+`Room` document contains:
 - `roomEmail`: the university email address associated with the room
 - `displayId`: the room's display ID
 - `displayName`: the room's display name
@@ -38,64 +46,72 @@ A `Room` is a [mongoose model](../backend/models/room.js) containing:
 - `isWheelChairAccessible`: boolean that describes if the room is wheelchair accessible
 - `tags`: an array of tags associated with the room.
 
-The endpoint for fetching reservations is defined in [controllers/reservations.js](../backend/controllers/reservations.js).
 
-A `Reservation` is a [mongoose model](../backend/models/reservation.js) containing:
+## Reservations
+- **Controller:** `controllers/reservations.js`
+- **Model:** `models/reservation.js`
 
+`Reservation` document contains:
 - `room`: the room the reservation takes place in
 - `start`: the start `Date` for the reservation
 - `end`: the end `Date` for the reservation.
 
-`/api/forms` returns all user-uploaded Forms. The forms live in an Excel sheet.
+## Forms
+- **Controller:** `controllers/forms.js`
+- **Model:** `models/form.js`
 
- A `Form` is a [mongoose model](../backend/models/form.js) containing:
- 
+`/api/forms` returns all valid and active user-uploaded Forms.
+`/api/forms/proxy-pdf` proxy address for PDF-files.
+
+Submissions are synced by `syncFormSubmissions`-function which also handles the deletetion of submissions.
+
+**Currently, forms are only stored in Redis, not in the database.**
+
+`Form` document contains:
 - `title`: title string
 - `startDate`: the start time for the notice
 - `endDate`: the end time for the notice
-- `fileUrl`: URL for the uploaded PDF file.
+- `fileUrl`: Proxied URL for the uploaded PDF file
 
-The endpoint for fetching Unicafe data is defined in [controllers/unicafe.js](../backend/controllers/unicafe.js).
+## Unicafe
+- **Controller:** `controllers/unicafe.js`
 
-The endpoint uses the data received in [services/unicafe.js](../backend/controllers/unicafe.js).
+`/api/unicafe/menus` returns Exactum's and Chemicum's menus for the current day. Accepts `lang` query parameter with a value of `fi`, `en` or `sv`, if no value was passed returns menus in all three languages.
+
+The endpoint's fetching logic is located in `services/unicafe.js`.
 
 # Testing
 
-The tests can be found in the [tests](../backend/tests) directory.
+The tests are located in the [tests](../backend/tests) directory.
 
-There are tests for all the API endpoints, with mock database and redis clients:
+Test files:
+- `forms_api.test.js`
+- `rooms_api.test.js`
+- `reservations_api.test.js`
+- `graph_client.test.js` - Tests for Microsoft Graph API integration
+- `test_helper.js` - Sets up test data and helpers
 
-[forms_api.test.js](../backend/tests/forms_api.test.js)
-[rooms_api.test.js](../backend/tests/rooms_api.test.js)
-[reservations_api.test.js](../backend/tests/reservations_api.test.js)
-
-Additionally, the Microsoft Graph API is tested in the [graph_client.test.js](../backend/tests/graph_client.test.js) file.
-
-[test_helper.js](../backend/tests/test_helper.js) sets some initial data that the tests use.
-
-The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
+Tests and linting are executed as a part of the CI/CD pipeline, whenever changes are pushed to the `main` branch.
 
 > [!NOTE]
 > All of the below commands have to be run in in the backend directory.
 
-The app can also be tested locally by running
-
+## Running Tests Locally
 ```bash
 $ npm run test
 ```
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run`.
 
-Coverage in CLI can be viewed with
 
+## Viewing Test Coverage
 ```bash
 $ npm run coverage
 ```
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run --coverage`.
 
-ESLint is used for linting. The linting can be checked with
-
+## Linting
 ```bash
 $ npm run lint
 ```

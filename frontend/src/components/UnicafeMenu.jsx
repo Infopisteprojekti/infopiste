@@ -27,18 +27,7 @@ const UnicafeMenu = () => {
 
   if (loading || error || !menus) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          gap: '1rem',
-        }}
-      >
+      <div className="loading-menu">
         {loading && <span className="loader"></span>}
         <p>
           {loading

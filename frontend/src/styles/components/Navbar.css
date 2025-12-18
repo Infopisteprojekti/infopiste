@@ -40,11 +40,6 @@
     line-height: 1;
   }
 
-  .lang__input {
-    margin: 0;
-    padding: 0;
-  }
-
   .lang__dropdown-indicator {
     display: flex;
     align-items: center;
@@ -57,65 +52,11 @@
     transform: rotate(360deg);
   }
 
-  .lang__dropdown-indicator:hover {
-    color: var(--buttonText);
-  }
-
-  .lang__menu {
-    backdrop-filter: blur(12px);
-    box-shadow: none;
-    border: 1px solid var(--buttonBorder);
-    border-radius: 0.5rem;
-    width: auto;
-    background-color: transparent;
-    padding: 0.5rem;
-    left: auto;
-    right: 0;
-    cursor: default;
-  }
-
-  .lang__menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    padding: 0;
-    border: none;
-    background: transparent;
-  }
-
-  .lang__option {
-    font-size: 0.8rem;
-    width: 100%;
-    padding-right: 1rem;
-    border: 1px solid var(--buttonBorder);
-    border-radius: var(--buttonBorderRadius);
-    cursor: pointer;
-    transition: var(--buttonTransition);
-  }
-
-  .lang__option:hover,
-  .lang__option--is-focused {
-    background-color: var(--buttonHover);
-  }
-
-  .lang__option--is-selected {
-    background-color: var(--buttonActive) !important;
-    color: var(--buttonBackground) !important;
-  }
-
   .lang__option-content-inner {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     height: 100%;
-  }
-
-  .lang__option-content-inner .label {
-    text-transform: uppercase;
-  }
-
-  .lang__flag {
-    filter: saturate(1.2);
   }
 }
 

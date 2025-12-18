@@ -52,18 +52,7 @@ const BulletinBoard = () => {
 
   if (!loading && forms.length === 0) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          gap: '1rem',
-        }}
-      >
+      <div className="no-pdfs">
         <p>{t('bulletinboard.no-notices')}</p>
         {!loading && (
           <div>
@@ -112,28 +101,11 @@ const BulletinBoard = () => {
           openQr={openQr}
           setOpenQr={setOpenQr}
         />
-        <p
-          style={{
-            textAlign: 'center',
-            margin: '1rem 0',
-            fontWeight: 'bold',
-          }}
-        >
+        <p className="bulletin-board-title">
           {t('bulletinboard.available-notices')}
         </p>
         {previewLoading && (
-          <div
-            style={{
-              display: 'flex',
-              width: '100%',
-              height: '77vh',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              gap: '1rem',
-            }}
-          >
+          <div className="loader-wrapper">
             <span className="loader"></span>
             <p>{t('bulletinboard.loading-notices')}</p>
           </div>

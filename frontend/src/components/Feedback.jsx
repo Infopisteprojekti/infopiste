@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 import '@/styles/components/RoomPopup.css';
+import '@/styles/components/FeedbackPopup.css';
 
 const Feedback = () => {
   const { t } = useTranslation();
@@ -50,12 +51,7 @@ const Feedback = () => {
         <div
           ref={popupRef}
           id="feedback-popup"
-          className="room-popup"
-          style={{
-            top: '50%',
-            left: '50%',
-            transform: 'translateX(-50%) translateY(-50%)',
-          }}
+          className="room-popup feedback-popup"
         >
           <div className="popup-header">
             <h3 className="popup-title">{t('feedback.description')}</h3>

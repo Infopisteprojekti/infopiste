@@ -80,6 +80,44 @@ Submissions are synced by `syncFormSubmissions`-function which also handles the 
 
 The endpoint's fetching logic is located in `services/unicafe.js`.
 
+# Microsoft Graph API
+The backend integrates with the Microsoft Graph API to synchronize room data, reservations and user-submitted forms stored in Microsoft services.
+
+## Overview
+
+The Microsoft API integration is implemented in two parts:
+- Graph client (`graphClient.js`) – Authentication, requests and API-sepecific logic
+- Graph helpers (`graphHelper.js`) – Syncronization logic
+
+## Authentication & Configuration
+
+The Graph client is initialized using the following credentials:
+- `TENANT_ID`
+- `CLIENT_ID`
+- `CLIENT_SECRET`
+
+## Forms (Excel) Syncronization
+
+Form data is synchronized dynamically from Microsoft Graph. The sync process combines Excel form submissions, Drive file data and deletion requests.
+
+`syncFormSubmissions()` api calls:
+- `graphClient.getFormSubmissions()` - Fetches valid and active submissions from a Excel file
+- `graphClient.getDriveItems()` - Fetches `downloadUrl` for uploaded files
+- `graphClient.getDeletionRequests()` - Fetches deletion requests from a Excel file
+- `graphClient.deleteDriveItem(<fileId>)` - Deletes a file
+
+**High-level overview**
+1. Fetch current data from Microsoft Graph:
+   - Form submissions
+   - Submitted files (`downloadUrl`)
+   - Deletetion requests
+2. Build loopup maps for files and deletion requests
+3. Delete Drive files that are marked for removal
+4. Filter submissions to only active and valid
+5. Normalize submissions and enforce submission limits (`MAX_ACTIVE_PER_EMAIL`)
+6. Return valid entries
+
+
 # Testing
 
 The tests are located in the [tests](../backend/tests) directory.
@@ -93,10 +131,10 @@ Test files:
 
 Tests and linting are executed as a part of the CI/CD pipeline, whenever changes are pushed to the `main` branch.
 
-> [!NOTE]
-> All of the below commands have to be run in in the backend directory.
-
 ## Running Tests Locally
+> [!NOTE]
+> All of the commands below have to be run in in the backend directory.
+
 ```bash
 $ npm run test
 ```

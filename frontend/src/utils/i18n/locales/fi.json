@@ -67,7 +67,6 @@
   },
   "feedback": {
     "open": "Anna palautetta",
-    "description": "Anna palautetta sähköpostilla osoitteeseen ashwin.rao@helsinki.fi",
-    "close": "Sulje"
+    "description": "Anna palautetta sähköpostilla osoitteeseen ashwin.rao@helsinki.fi"
   }
 }

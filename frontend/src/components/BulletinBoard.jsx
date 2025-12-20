@@ -50,37 +50,7 @@ const BulletinBoard = () => {
     });
   };
 
-  if (!loading && forms.length === 0) {
-    return (
-      <div className="no-pdfs">
-        <p>{t('bulletinboard.no-notices')}</p>
-        {!loading && (
-          <div>
-            <QRCode
-              id="del"
-              svg={deletionQRCode}
-              openText={t('bulletinboard.delete.qr-add-file')}
-              closeText={t('bulletinboard.delete.qr-close')}
-              descText={t('bulletinboard.delete.qr-description')}
-              openQr={openQr}
-              setOpenQr={setOpenQr}
-            />
-            <QRCode
-              id="add"
-              svg={qrcode}
-              openText={t('bulletinboard.add.qr-add-file')}
-              closeText={t('bulletinboard.add.qr-close')}
-              descText={t('bulletinboard.add.qr-description')}
-              openQr={openQr}
-              setOpenQr={setOpenQr}
-            />
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  if (!selectedForm) {
+  const qrCodes = () => {
     return (
       <div>
         <QRCode
@@ -101,6 +71,23 @@ const BulletinBoard = () => {
           openQr={openQr}
           setOpenQr={setOpenQr}
         />
+      </div>
+    );
+  };
+
+  if (!loading && forms.length === 0) {
+    return (
+      <div className="no-pdfs">
+        <p>{t('bulletinboard.no-notices')}</p>
+        {!loading && <div>{qrCodes()}</div>}
+      </div>
+    );
+  }
+
+  if (!selectedForm) {
+    return (
+      <div>
+        {qrCodes()}
         <p className="bulletin-board-title">
           {t('bulletinboard.available-notices')}
         </p>
@@ -142,24 +129,7 @@ const BulletinBoard = () => {
   const currentIndex = index;
   return (
     <div>
-      <QRCode
-        id="del"
-        svg={deletionQRCode}
-        openText={t('bulletinboard.delete.qr-add-file')}
-        closeText={t('bulletinboard.delete.qr-close')}
-        descText={t('bulletinboard.delete.qr-description')}
-        openQr={openQr}
-        setOpenQr={setOpenQr}
-      />
-      <QRCode
-        id="add"
-        svg={qrcode}
-        openText={t('bulletinboard.add.qr-add-file')}
-        closeText={t('bulletinboard.add.qr-close')}
-        descText={t('bulletinboard.add.qr-description')}
-        openQr={openQr}
-        setOpenQr={setOpenQr}
-      />
+      {qrCodes()}
       <PDFDisplay
         currentIndex={currentIndex}
         forms={forms}

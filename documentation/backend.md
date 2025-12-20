@@ -27,7 +27,7 @@ Key files and directories:
   - `dbConnetion.js` - Mongo connection logic
   - `redisClient.js`
   - `graphClient.js` - Microsoft Graph API initialization and integrations
-  - `graphHelper.js` - Helper functions for `graphClient.js`
+  - `graphHelper.js` - Sync functions that use `graphClient.js`
 - `models/` - Mongoose models
 
 ## Health Check

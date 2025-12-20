@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import redis from '../utils/redisClient.js';
 import fetch from 'node-fetch';
+import Form from '../models/form.js';
 
 import { syncFormSubmissions } from '../utils/graphHelper.js';
+import { LOAD_MOCK_DATA, TTL_SECONDS } from '../utils/config.js';
 
 const router = Router();
 
@@ -20,17 +22,38 @@ router.get('/', async (request, response) => {
       });
     }
 
-    const submissions = await syncFormSubmissions();
+    if (!LOAD_MOCK_DATA) {
+      const submissions = await syncFormSubmissions();
 
-    if (submissions.length > 0) {
-      await redis.set(cacheKey, JSON.stringify(submissions));
-      await redis.expire(cacheKey, SUBMISSIONS_TTL_SECONDS);
+      if (submissions.length > 0) {
+        await redis.set(cacheKey, JSON.stringify(submissions));
+        await redis.expire(cacheKey, SUBMISSIONS_TTL_SECONDS);
+      }
+
+      response.status(200).json({
+        source: 'graph',
+        data: submissions,
+      });
+    } else {
+      const forms = await Form.find({});
+
+      if (forms.length > 0) {
+        await redis.set(cacheKey, JSON.stringify(forms));
+        await redis.expire(cacheKey, TTL_SECONDS);
+      }
+
+      const proxiedForms = forms.map(data => ({
+        ...data._doc,
+        fileUrl: data.fileUrl.startsWith('http')
+          ? `/api/forms/proxy-pdf?url=${encodeURIComponent(data.fileUrl)}`
+          : data.fileUrl,
+      }));
+
+      response.status(200).json({
+        source: 'database',
+        data: proxiedForms,
+      });
     }
-
-    response.status(200).json({
-      source: 'graph',
-      data: submissions,
-    });
   } catch (err) {
     response.status(500).json({ error: err.message });
   }

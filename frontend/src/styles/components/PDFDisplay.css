@@ -96,7 +96,7 @@
 .scroll-top-wrapper {
   position: absolute;
   bottom: 80px;
-  top: 110vh;
+  top: 90vh;
   z-index: 1;
   transition: transform 0.15s, opacity 0.2s;
 }

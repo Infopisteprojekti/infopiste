@@ -1,12 +1,13 @@
-# Backend Documentation
-# Requirements
+# Backend
 
-- `Node.js`: Version 24
-- `npm`
+## Requirements
+
+- `Node.js` version 24
+- `npm` that comes included with Node
 
 The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
 
-# Technologies Used
+## Technologies
 
 The backend is build with the following technologies:
 
@@ -15,25 +16,30 @@ The backend is build with the following technologies:
 - Redis - Cache
 - Docker - Containerization for development and production environments
 
-# Structure
+## Structure
 
-The backend code lives in the [backend/](../backend/) directory and includes separate development environment and production `Dockerfile`s.
+The backend code lives in the [backend/](../backend/) directory and includes separate development and production environment `Dockerfile`s.
 
 Key files and directories:
 - `server.js` - Application entrypoint
 - `app.js` - Express application setup (routes, middleware)
-- `controllers/`
+- `controllers/` - Manages different routes
 - `utils/` - Various connections, configurations and helpers
-  - `dbConnetion.js` - Mongo connection logic
-  - `redisClient.js`
+  - `dbConnetion.js` - MongoDB connection logic
+  - `redisClient.js` - Redis connection logic
   - `graphClient.js` - Microsoft Graph API initialization and integrations
   - `graphHelper.js` - Sync functions that use `graphClient.js`
+  - `cron.js` - Manages cron jobs
 - `models/` - Mongoose models
 
-## Health Check
-`/api/health` responds with status 200 and message ok.
+## Features
 
-## Rooms
+### Health Check
+
+`/api/health` responds with status 200 and message ok (given that the app works at all).
+
+### Rooms
+
 - **Controller:** `controllers/rooms.js`
 - **Model:** `models/rooms.js`
 
@@ -46,8 +52,8 @@ Key files and directories:
 - `isWheelChairAccessible`: boolean that describes if the room is wheelchair accessible
 - `tags`: an array of tags associated with the room.
 
+### Reservations
 
-## Reservations
 - **Controller:** `controllers/reservations.js`
 - **Model:** `models/reservation.js`
 
@@ -56,16 +62,16 @@ Key files and directories:
 - `start`: the start `Date` for the reservation
 - `end`: the end `Date` for the reservation.
 
-## Forms
+### Forms
+
 - **Controller:** `controllers/forms.js`
 - **Model:** `models/form.js`
 
-`/api/forms` returns all valid and active user-uploaded Forms.
-`/api/forms/proxy-pdf` proxy address for PDF-files.
+`/api/forms` returns all valid and active user-uploaded Forms. `/api/forms/proxy-pdf` is a proxy address for PDF files.
 
-Submissions are synced by `syncFormSubmissions`-function which also handles the deletetion of submissions.
+Submissions are synced by the `syncFormSubmissions` function which also handles the deletetion of submissions.
 
-**Currently, forms are only stored in Redis, not in the database.**
+**Currently, forms are only (temporarily) stored in Redis, not in the database.** Instead permanent storage is managed by Microsoft Forms (in reality an Excel worksheet...).
 
 `Form` document contains:
 - `title`: title string
@@ -73,40 +79,54 @@ Submissions are synced by `syncFormSubmissions`-function which also handles the 
 - `endDate`: the end time for the notice
 - `fileUrl`: Proxied URL for the uploaded PDF file
 
-## Unicafe
+### Unicafe
+
 - **Controller:** `controllers/unicafe.js`
 
 `/api/unicafe/menus` returns Exactum's and Chemicum's menus for the current day. Accepts `lang` query parameter with a value of `fi`, `en` or `sv`, if no value was passed returns menus in all three languages.
 
 The endpoint's fetching logic is located in `services/unicafe.js`.
 
-# Microsoft Graph API
-The backend integrates with the Microsoft Graph API to synchronize room data, reservations and user-submitted forms stored in Microsoft services.
+## Microsoft Graph API
 
-## Overview
+The backend integrates with the Microsoft Graph API to synchronize room data, reservations and user-submitted forms, stored in Microsoft's services.
+
+### Overview
 
 The Microsoft API integration is implemented in two parts:
+
 - Graph client (`graphClient.js`) – Authentication, requests and API-sepecific logic
 - Graph helpers (`graphHelper.js`) – Syncronization logic
 
-## Authentication & Configuration
+### Authentication & Configuration
 
 The Graph client is initialized using the following credentials:
+
 - `TENANT_ID`
 - `CLIENT_ID`
 - `CLIENT_SECRET`
 
-## Forms (Excel) Syncronization
+They are passed through `.env`. Also make sure to set IDs required by the Forms integration:
 
-Form data is synchronized dynamically from Microsoft Graph. The sync process combines Excel form submissions, Drive file data and deletion requests.
+- `GROUP_ID`
+- `FILE_ID`
+- `DELETION_FILE_ID`
+- `SHEET_NAME`
+- `FOLDER_ID`
 
-`syncFormSubmissions()` api calls:
+### Forms (Excel) Syncronization
+
+Form data is synchronized dynamically from Microsoft Graph. The sync process combines Excel form submissions, Drive file data and deletion requests in another Excel file.
+
+`syncFormSubmissions()` API calls:
+
 - `graphClient.getFormSubmissions()` - Fetches valid and active submissions from a Excel file
 - `graphClient.getDriveItems()` - Fetches `downloadUrl` for uploaded files
 - `graphClient.getDeletionRequests()` - Fetches deletion requests from a Excel file
 - `graphClient.deleteDriveItem(<fileId>)` - Deletes a file
 
-**High-level overview**
+#### High-level overview
+
 1. Fetch current data from Microsoft Graph:
    - Form submissions
    - Submitted files (`downloadUrl`)
@@ -117,8 +137,18 @@ Form data is synchronized dynamically from Microsoft Graph. The sync process com
 5. Normalize submissions and enforce submission limits (`MAX_ACTIVE_PER_EMAIL`)
 6. Return valid entries
 
+## Cron jobs
 
-# Testing
+Some data is periodically fetched from Microsoft's services and saved in the database to decrease the amount of API requests sent to Ms Graph. This currently applies to:
+
+* Rooms (synced once every day at 3 in the morning)
+* Reservations (synced every 30 min)
+
+Cron jobs are scheduled when the backend is started. All above mentioned tasks will also run at that point, regardless of the time.
+
+When the frontend fetches rooms or reservations, the data will be served from MongoDB (or Redis). A frontend request initiates the Redis cache – so a new request made within the TTL period (`utils/config.js`, 1 min) will serve the same response from Redis.
+
+## Testing
 
 The tests are located in the [tests](../backend/tests) directory.
 
@@ -129,9 +159,10 @@ Test files:
 - `graph_client.test.js` - Tests for Microsoft Graph API integration
 - `test_helper.js` - Sets up test data and helpers
 
-Tests and linting are executed as a part of the CI/CD pipeline, whenever changes are pushed to the `main` branch.
+Tests and linting are executed as a part of the CI/CD pipeline, whenever changes are pushed to the `main` branch. Pull requests are also tested.
 
-## Running Tests Locally
+### Running Tests Locally
+
 > [!NOTE]
 > All of the commands below have to be run in in the backend directory.
 
@@ -141,24 +172,25 @@ $ npm run test
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run`.
 
+### Viewing Test Coverage
 
-## Viewing Test Coverage
 ```bash
 $ npm run coverage
 ```
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run --coverage`.
 
-## Linting
+### Linting
+
 ```bash
 $ npm run lint
 ```
 
-This is equivalent to running `npx eslint .`
+This is equivalent to running `npx eslint .`.
 
-# Mock data
+## Mock data
+
 > [!CAUTION]  
 > Loading mock data will delete all items from the database.
 
 Mock bulletin board submissions can be loaded by setting `LOAD_MOCK_DATA=true` in `.env`, while using the application in **development mode**.
-

@@ -47,7 +47,6 @@ export const AppSettingsProvider = ({
   }, [settings.lang]);
 
   const restoreDefaults = useCallback(() => {
-    // console.log('Restoring default settings due to inactivity');
     setSettings({
       ...defaultSettings.current,
       loading: false,

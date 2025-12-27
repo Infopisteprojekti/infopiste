@@ -1,35 +1,49 @@
-# Requirements
+# Backend
 
-`Node` version 24 is used to build the backend image. `npm` is also required.
+## Requirements
+
+- `Node.js` version 24
+- `npm` that comes included with Node
 
 The dependencies required by the application can be installed by running `npm install` in the [backend/](../backend) directory.
 
-# Backend technologies used
+## Technologies
 
-The backend of the application is built with Express. The database of choice is MongoDB. `Mongoose` is used to interface with the database in the backend.
+The backend is build with the following technologies:
 
-# Backend structure
+- Express - HTTP server and routing
+- MongoDB - Database
+- Redis - Cache
+- Docker - Containerization for development and production environments
 
-The backend can be found at the [backend/](../backend/) directory.
+## Structure
 
-It includes both development environment and production `Dockerfile`s.
+The backend code lives in the [backend/](../backend/) directory and includes separate development and production environment `Dockerfile`s.
 
-Various connections and configurations are defined in the [backend/utils](../backend/utils/) directory.
+Key files and directories:
+- `server.js` - Application entrypoint
+- `app.js` - Express application setup (routes, middleware)
+- `controllers/` - Manages different routes
+- `utils/` - Various connections, configurations and helpers
+  - `dbConnetion.js` - MongoDB connection logic
+  - `redisClient.js` - Redis connection logic
+  - `graphClient.js` - Microsoft Graph API initialization and integrations
+  - `graphHelper.js` - Sync functions that use `graphClient.js`
+  - `cron.js` - Manages cron jobs
+- `models/` - Mongoose models
 
-The server is started in [server.js](../backend/server.js).
+## Features
 
-The express app is built in [app.js](../backend/app.js).
+### Health Check
 
-The connection to the database is formed in [dbConnection.js](../backend/utils/dbConnection.js). 
+`/api/health` responds with status 200 and message ok (given that the app works at all).
 
-`app.js` offers an endpoint for health checks:
+### Rooms
 
-`/api/health` responds with status 200 and message `ok`.
+- **Controller:** `controllers/rooms.js`
+- **Model:** `models/rooms.js`
 
-The endpoint for fetching room data is defined in [controllers/rooms.js](../backend/controllers/rooms.js).
-
-A `Room` is a [mongoose model](../backend/models/room.js) containing:
-
+`Room` document contains:
 - `roomEmail`: the university email address associated with the room
 - `displayId`: the room's display ID
 - `displayName`: the room's display name
@@ -38,47 +52,119 @@ A `Room` is a [mongoose model](../backend/models/room.js) containing:
 - `isWheelChairAccessible`: boolean that describes if the room is wheelchair accessible
 - `tags`: an array of tags associated with the room.
 
-The endpoint for fetching reservations is defined in [controllers/reservations.js](../backend/controllers/reservations.js).
+### Reservations
 
-A `Reservation` is a [mongoose model](../backend/models/reservation.js) containing:
+- **Controller:** `controllers/reservations.js`
+- **Model:** `models/reservation.js`
 
+`Reservation` document contains:
 - `room`: the room the reservation takes place in
 - `start`: the start `Date` for the reservation
 - `end`: the end `Date` for the reservation.
 
-`/api/forms` returns all user-uploaded Forms. The forms live in an Excel sheet.
+### Forms
 
- A `Form` is a [mongoose model](../backend/models/form.js) containing:
- 
+- **Controller:** `controllers/forms.js`
+- **Model:** `models/form.js`
+
+`/api/forms` returns all valid and active user-uploaded Forms. `/api/forms/proxy-pdf` is a proxy address for PDF files.
+
+Submissions are synced by the `syncFormSubmissions` function which also handles the deletetion of submissions.
+
+**Currently, forms are only (temporarily) stored in Redis, not in the database.** Instead permanent storage is managed by Microsoft Forms (in reality an Excel worksheet...).
+
+`Form` document contains:
 - `title`: title string
 - `startDate`: the start time for the notice
 - `endDate`: the end time for the notice
-- `fileUrl`: URL for the uploaded PDF file.
+- `fileUrl`: Proxied URL for the uploaded PDF file
 
-The endpoint for fetching Unicafe data is defined in [controllers/unicafe.js](../backend/controllers/unicafe.js).
+### Unicafe
 
-The endpoint uses the data received in [services/unicafe.js](../backend/controllers/unicafe.js).
+- **Controller:** `controllers/unicafe.js`
 
-# Testing
+`/api/unicafe/menus` returns Exactum's and Chemicum's menus for the current day. Accepts `lang` query parameter with a value of `fi`, `en` or `sv`, if no value was passed returns menus in all three languages.
 
-The tests can be found in the [tests](../backend/tests) directory.
+The endpoint's fetching logic is located in `services/unicafe.js`.
 
-There are tests for all the API endpoints, with mock database and redis clients:
+## Microsoft Graph API
 
-[forms_api.test.js](../backend/tests/forms_api.test.js)
-[rooms_api.test.js](../backend/tests/rooms_api.test.js)
-[reservations_api.test.js](../backend/tests/reservations_api.test.js)
+The backend integrates with the Microsoft Graph API to synchronize room data, reservations and user-submitted forms, stored in Microsoft's services.
 
-Additionally, the Microsoft Graph API is tested in the [graph_client.test.js](../backend/tests/graph_client.test.js) file.
+### Overview
 
-[test_helper.js](../backend/tests/test_helper.js) sets some initial data that the tests use.
+The Microsoft API integration is implemented in two parts:
 
-The tests, as well as linting, are included in the CI/CD pipeline. Whenever new content is pushed to the main branch, the tests and lint are executed.
+- Graph client (`graphClient.js`) – Authentication, requests and API-sepecific logic
+- Graph helpers (`graphHelper.js`) – Syncronization logic
+
+### Authentication & Configuration
+
+The Graph client is initialized using the following credentials:
+
+- `TENANT_ID`
+- `CLIENT_ID`
+- `CLIENT_SECRET`
+
+They are passed through `.env`. Also make sure to set IDs required by the Forms integration:
+
+- `GROUP_ID`
+- `FILE_ID`
+- `DELETION_FILE_ID`
+- `SHEET_NAME`
+- `FOLDER_ID`
+
+### Forms (Excel) Syncronization
+
+Form data is synchronized dynamically from Microsoft Graph. The sync process combines Excel form submissions, Drive file data and deletion requests in another Excel file.
+
+`syncFormSubmissions()` API calls:
+
+- `graphClient.getFormSubmissions()` - Fetches valid and active submissions from a Excel file
+- `graphClient.getDriveItems()` - Fetches `downloadUrl` for uploaded files
+- `graphClient.getDeletionRequests()` - Fetches deletion requests from a Excel file
+- `graphClient.deleteDriveItem(<fileId>)` - Deletes a file
+
+#### High-level overview
+
+1. Fetch current data from Microsoft Graph:
+   - Form submissions
+   - Submitted files (`downloadUrl`)
+   - Deletetion requests
+2. Build loopup maps for files and deletion requests
+3. Delete Drive files that are marked for removal
+4. Filter submissions to only active and valid
+5. Normalize submissions and enforce submission limits (`MAX_ACTIVE_PER_EMAIL`)
+6. Return valid entries
+
+## Cron jobs
+
+Some data is periodically fetched from Microsoft's services and saved in the database to decrease the amount of API requests sent to Ms Graph. This currently applies to:
+
+* Rooms (synced once every day at 3 in the morning)
+* Reservations (synced every 30 min)
+
+Cron jobs are scheduled when the backend is started. All above mentioned tasks will also run at that point, regardless of the time.
+
+When the frontend fetches rooms or reservations, the data will be served from MongoDB (or Redis). A frontend request initiates the Redis cache – so a new request made within the TTL period (`utils/config.js`, 1 min) will serve the same response from Redis.
+
+## Testing
+
+The tests are located in the [tests](../backend/tests) directory.
+
+Test files:
+- `forms_api.test.js`
+- `rooms_api.test.js`
+- `reservations_api.test.js`
+- `graph_client.test.js` - Tests for Microsoft Graph API integration
+- `test_helper.js` - Sets up test data and helpers
+
+Tests and linting are executed as a part of the CI/CD pipeline, whenever changes are pushed to the `main` branch. Pull requests are also tested.
+
+### Running Tests Locally
 
 > [!NOTE]
-> All of the below commands have to be run in in the backend directory.
-
-The app can also be tested locally by running
+> All of the commands below have to be run in in the backend directory.
 
 ```bash
 $ npm run test
@@ -86,7 +172,7 @@ $ npm run test
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run`.
 
-Coverage in CLI can be viewed with
+### Viewing Test Coverage
 
 ```bash
 $ npm run coverage
@@ -94,17 +180,17 @@ $ npm run coverage
 
 This is equivalent to running `npx cross-env NODE_ENV=test TEST=true vitest run --coverage`.
 
-ESLint is used for linting. The linting can be checked with
+### Linting
 
 ```bash
 $ npm run lint
 ```
 
-This is equivalent to running `npx eslint .`
+This is equivalent to running `npx eslint .`.
 
-# Mock data
+## Mock data
+
 > [!CAUTION]  
 > Loading mock data will delete all items from the database.
 
 Mock bulletin board submissions can be loaded by setting `LOAD_MOCK_DATA=true` in `.env`, while using the application in **development mode**.
-

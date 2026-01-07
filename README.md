@@ -93,7 +93,7 @@ You can also set multiple parameters by separating them with an ampersand:
 
     service ms(internet)[Graph API] in microsoft
     service calendar(internet)[Outlook Calendar] in microsoft
-    service forms(internet)[Forms (using Worksheets and Files)] in microsoft
+    service forms(internet)[Forms using Worksheets and Files] in microsoft
 
     db:L -- R:server
     server:B -- T:redis
